@@ -16,6 +16,11 @@ from sklearn.model_selection import train_test_split  # Split train/test
 from sklearn.preprocessing import LabelEncoder  # Encodage des labels catégoriels
 import time  # Mesure du temps d'exécution
 import numpy as np  # Calcul scientifique
+import sys
+import os
+
+# Ajout pour rendre le module trainedml accessible sur Streamlit Cloud
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src')))
 
 # --- Personnalisation CSS ---
 # Ajoute du style pour moderniser l'interface (fond, encadrés, couleurs)
