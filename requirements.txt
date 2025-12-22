@@ -1,4 +1,4 @@
--e src/
+-e .
 setuptools
 streamlit
 scikit-learn
