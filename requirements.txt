@@ -1,3 +1,11 @@
+-e src/
+setuptools
+streamlit
+scikit-learn
+matplotlib
+pandas
+numpy
+# Ajoutez ici les autres dépendances nécessaires
 pandas
 scikit-learn
 matplotlib
