@@ -1,5 +1,3 @@
----
-
 ## Gestion des branches Git et déploiement
 
 ### Workflow recommandé
@@ -43,5 +41,3 @@ git push
 #### Automatisation avec GitHub Actions
 - Ajoute un fichier `.github/workflows/ci.yml` pour automatiser les tests et le déploiement.
 - Exemple de workflow : installation des dépendances, exécution des tests, déploiement automatique.
-
----
