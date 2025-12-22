@@ -39,7 +39,7 @@
 
 ## Installation des dépendances supplémentaires (pooch et tqdm)
 
-Pour bénéficier du téléchargement et du cache automatique des datasets, trainedml utilise la bibliothèque `pooch`. Pour afficher une barre de progression lors du téléchargement, pooch utilise aussi la bibliothèque `tqdm`.
+Pour bénéficier du téléchargement et du cache automatique des datasets ou jeu de données, trainedml utilise la bibliothèque `pooch`. Pour afficher une barre de progression lors du téléchargement, pooch utilise aussi la bibliothèque `tqdm`.
 
 **Commandes à exécuter :**
 
