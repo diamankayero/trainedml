@@ -1,0 +1,13 @@
+-e .
+setuptools
+streamlit
+scikit-learn
+matplotlib
+pandas
+numpy
+seaborn
+requests
+plotly
+pooch
+tqdm
+# Ajoutez ici les autres dépendances nécessaires
