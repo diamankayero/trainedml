@@ -18,7 +18,7 @@
 
 #### Commandes utiles
 ```bash
-git checkout dev                # Passe sur la branche de développement
+git checkout dev                # Passe sur la branche de développement et apres faire
 git checkout -b feature/ma-fonctionnalite  # Crée une branche de fonctionnalité
 git add . && git commit -m "Ajout fonctionnalité"
 git push -u origin feature/ma-fonctionnalite
