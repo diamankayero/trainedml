@@ -1,8 +1,0 @@
-pandas
-scikit-learn
-matplotlib
-seaborn
-requests
-
-[:extra == "plotly"]
-plotly

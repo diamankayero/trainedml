@@ -1,7 +1,6 @@
 LICENCE
 README.md
 pyproject.toml
-setup.py
 src/trainedml/__init__.py
 src/trainedml/benchmark.py
 src/trainedml/cli.py
@@ -11,8 +10,6 @@ src/trainedml/visualization.py
 src/trainedml.egg-info/PKG-INFO
 src/trainedml.egg-info/SOURCES.txt
 src/trainedml.egg-info/dependency_links.txt
-src/trainedml.egg-info/entry_points.txt
-src/trainedml.egg-info/requires.txt
 src/trainedml.egg-info/top_level.txt
 src/trainedml/data/__init__.py
 src/trainedml/data/loader.py
