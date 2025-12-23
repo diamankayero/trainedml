@@ -18,7 +18,7 @@
 
 #### Commandes utiles
 ```bash
-git checkout dev                # Passe sur la branche de développement et apres faire
+git checkout dev                # Passe sur la branche de développement et après faire
 git checkout -b feature/ma-fonctionnalite  # Crée une branche de fonctionnalité
 git add . && git commit -m "Ajout fonctionnalité"
 git push -u origin feature/ma-fonctionnalite
@@ -39,5 +39,5 @@ git push
 - Lance l'app (exemple : `trainedml_webapp/src/app.py`).
 
 #### Automatisation avec GitHub Actions
-- Ajoute un fichier `.github/workflows/ci.yml` pour automatiser les tests et le déploiement.
+- Ajoute un fichier `.github/workflows/ci.yml` pour automatiser les tests et le déploiement qui est normalement fait juste tu peux copier le fichier qui est dans ce projet.
 - Exemple de workflow : installation des dépendances, exécution des tests, déploiement automatique.
