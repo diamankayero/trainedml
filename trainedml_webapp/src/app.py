@@ -16,9 +16,9 @@ from sklearn.model_selection import train_test_split  # Split train/test
 from sklearn.preprocessing import LabelEncoder  # Encodage des labels catégoriels
 import time  # Mesure du temps d'exécution
 import numpy as np  # Calcul scientifique
-
-# --- Personnalisation CSS ---
-# Ajoute du style pour moderniser l'interface (fond, encadrés, couleurs)
+import sys
+## Import direct du package trainedml (après installation en mode editable)
+# ...existing code...
 st.markdown(
     """
     <style>

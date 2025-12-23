@@ -1,0 +1,7 @@
+LICENSE
+pyproject.toml
+src/trainedml/__init__.py
+src/trainedml.egg-info/PKG-INFO
+src/trainedml.egg-info/SOURCES.txt
+src/trainedml.egg-info/dependency_links.txt
+src/trainedml.egg-info/top_level.txt
