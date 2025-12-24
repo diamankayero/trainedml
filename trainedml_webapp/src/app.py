@@ -46,7 +46,7 @@ st.markdown(
 
 # --- Logo fictif ---
 # Affiche un logo en haut de page pour donner une identité visuelle à l'app
-st.image("https://img.icons8.com/color/96/000000/artificial-intelligence.png", width=80)
+st.image("https://upload.wikimedia.org/wikipedia/fr/2/2d/Logo_universit%C3%A9_montpellier.png", width=80)
 
 # --- Titre et sous-titre ---
 # Présente l'objectif de l'application
@@ -65,7 +65,7 @@ st.sidebar.markdown(
     """
     <div style='background:#e0e7ff;padding:0.7em 1em;border-radius:0.5em;margin-bottom:1em;'>
     <b>trainedml webapp</b><br>
-    <span style='font-size:0.95em;'>Démonstrateur interactif ML<br>by <a href='https://github.com/' target='_blank'>VotreNom</a></span>
+    <span style='font-size:0.95em;'>Démonstrateur interactif ML<br>by <a href='https://github.com/diamankayero/' target='_blank'>diamankayero</a></span>
     </div>
     """,
     unsafe_allow_html=True
@@ -246,7 +246,7 @@ with col2:
 
 # --- Footer sidebar : contact et aide GitHub Raw ---
 st.sidebar.markdown("---")
-st.sidebar.info("Contact : https://github.com/diamankayero/trainedml")
+st.sidebar.info("Dépot du projet : https://github.com/diamankayero/trainedml")
 
 # Encadré d'aide pour bien utiliser les liens GitHub Raw
 st.sidebar.markdown("""
