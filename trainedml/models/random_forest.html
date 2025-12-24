@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random Forest &mdash; Documentation trainedml 0.01</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=e42f2b11"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=e6b791cb"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" />
+    <link rel="prev" title="Régression logistique" href="logistic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            trainedml
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistic.html">Régression logistique</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Random Forest</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#principe-random-forest">Principe (Random Forest)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#illustration-random-forest">Illustration (Random Forest)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exemple-illustre-random-forest">Exemple illustré (Random Forest)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pour-aller-plus-loin-random-forest">Pour aller plus loin (Random Forest)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.Trainer"><code class="docutils literal notranslate"><span class="pre">Trainer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.data.loader.DataLoader"><code class="docutils literal notranslate"><span class="pre">DataLoader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.models.base.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.models.knn.KNNModel"><code class="docutils literal notranslate"><span class="pre">KNNModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.models.logistic.LogisticModel"><code class="docutils literal notranslate"><span class="pre">LogisticModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.models.random_forest.RandomForestModel"><code class="docutils literal notranslate"><span class="pre">RandomForestModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.viz.heatmap.HeatmapViz"><code class="docutils literal notranslate"><span class="pre">HeatmapViz</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.viz.histogram.HistogramViz"><code class="docutils literal notranslate"><span class="pre">HistogramViz</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.viz.line.LineViz"><code class="docutils literal notranslate"><span class="pre">LineViz</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.viz.vizs.Vizs"><code class="docutils literal notranslate"><span class="pre">Vizs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.benchmark.Benchmark"><code class="docutils literal notranslate"><span class="pre">Benchmark</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.evaluation.Evaluator"><code class="docutils literal notranslate"><span class="pre">Evaluator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.figure.Figure"><code class="docutils literal notranslate"><span class="pre">Figure</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.visualization.Visualizer"><code class="docutils literal notranslate"><span class="pre">Visualizer</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">trainedml</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../modules.html">trainedml - API détaillée</a></li>
+      <li class="breadcrumb-item active">Random Forest</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/trainedml/models/random_forest.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="random-forest">
+<h1>Random Forest<a class="headerlink" href="#random-forest" title="Lien vers cette rubrique"></a></h1>
+<section id="principe-random-forest">
+<h2>Principe (Random Forest)<a class="headerlink" href="#principe-random-forest" title="Lien vers cette rubrique"></a></h2>
+<p>La méthode Random Forest est un ensemble d’arbres de décision construits sur des sous-échantillons aléatoires des données et des variables.</p>
+<p>Chaque arbre vote, et la classe majoritaire est prédite :</p>
+<div class="math notranslate nohighlight">
+\[\hat{y} = \operatorname{mode}\left(\{T_b(x)\}_{b=1}^B\right)\]</div>
+<div class="math notranslate nohighlight">
+\[T_b \text{ est le } b\text{-ième arbre de la forêt.}\]</div>
+<p>L’agrégation réduit la variance et améliore la robustesse.</p>
+<p><strong>Avantages</strong> : robuste, gère les variables catégorielles, peu sensible au surapprentissage.</p>
+<p><strong>Limites</strong> : moins interprétable, plus lent qu’un arbre de décision unique.</p>
+</section>
+<section id="illustration-random-forest">
+<h2>Illustration (Random Forest)<a class="headerlink" href="#illustration-random-forest" title="Lien vers cette rubrique"></a></h2>
+<a class="reference internal image-reference" href="../../_images/random-forest-2-768x492.png"><img alt="Schéma Random Forest" class="align-center" src="../../_images/random-forest-2-768x492.png" style="width: 400px;" />
+</a>
+</section>
+<section id="exemple-illustre-random-forest">
+<h2>Exemple illustré (Random Forest)<a class="headerlink" href="#exemple-illustre-random-forest" title="Lien vers cette rubrique"></a></h2>
+<p>Imaginons un ensemble de 3 arbres de décision, chacun construit sur un sous-échantillon différent des données. Pour une nouvelle observation, chaque arbre prédit une classe (par exemple 0, 1, 1). La classe finale prédite par la forêt est la classe majoritaire, ici 1.</p>
+</section>
+<section id="pour-aller-plus-loin-random-forest">
+<h2>Pour aller plus loin (Random Forest)<a class="headerlink" href="#pour-aller-plus-loin-random-forest" title="Lien vers cette rubrique"></a></h2>
+<ul class="simple">
+<li><p>Documentation scikit-learn : <a class="reference external" href="https://scikit-learn.org/stable/modules/ensemble.html#random-forests">https://scikit-learn.org/stable/modules/ensemble.html#random-forests</a></p></li>
+<li><p>Article Wikipedia : <a class="reference external" href="https://fr.wikipedia.org/wiki/For%C3%AAt_d%27arbres_d%C3%A9cision">https://fr.wikipedia.org/wiki/For%C3%AAt_d%27arbres_d%C3%A9cision</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="logistic.html" class="btn btn-neutral float-left" title="Régression logistique" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, Yéro Diamanka.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

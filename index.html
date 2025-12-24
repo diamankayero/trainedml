@@ -1,0 +1,245 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trainedml &mdash; Documentation trainedml 0.01</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e42f2b11"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=e6b791cb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="trainedml - API détaillée" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            trainedml
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">trainedml - API détaillée</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">trainedml</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">trainedml</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="trainedml">
+<h1>trainedml<a class="headerlink" href="#trainedml" title="Lien vers cette rubrique"></a></h1>
+<a class="reference external image-reference" href="https://www.python.org/"><img alt="Python Version" src="https://img.shields.io/badge/python-3.8+-blue.svg" />
+</a>
+<p><strong>trainedml</strong> est une bibliothèque Python modulaire pour l’apprentissage automatique supervisé, conçue pour l’enseignement, la recherche et le prototypage rapide.</p>
+<ul class="simple">
+<li><p>Chargement flexible de jeux de données publics ou personnalisés</p></li>
+<li><p>Modèles classiques (Random Forest, KNN, Régression Logistique)</p></li>
+<li><p>Visualisations intégrées (heatmap, histogramme, courbe)</p></li>
+<li><p>API simple pour l’intégration web/applications</p></li>
+<li><p>Documentation API complète et tests unitaires</p></li>
+</ul>
+</section>
+<section id="guide-de-demarrage-rapide">
+<h1>Guide de démarrage rapide<a class="headerlink" href="#guide-de-demarrage-rapide" title="Lien vers cette rubrique"></a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trainer</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;random_forest&quot;</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]])</span>
+</pre></div>
+</div>
+</section>
+<section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Lien vers cette rubrique"></a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+pip<span class="w"> </span>install<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="utilisation-en-ligne-de-commande">
+<h1>Utilisation en ligne de commande<a class="headerlink" href="#utilisation-en-ligne-de-commande" title="Lien vers cette rubrique"></a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>trainedml<span class="w"> </span>--dataset<span class="w"> </span>iris<span class="w"> </span>--model<span class="w"> </span>random_forest<span class="w"> </span>--show
+</pre></div>
+</div>
+</section>
+<section id="sections-de-la-documentation">
+<h1>Sections de la documentation<a class="headerlink" href="#sections-de-la-documentation" title="Lien vers cette rubrique"></a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">trainedml - API détaillée</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainedml/models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainedml/models/random_forest.html">Random Forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.Trainer"><code class="docutils literal notranslate"><span class="pre">Trainer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.data.loader.DataLoader"><code class="docutils literal notranslate"><span class="pre">DataLoader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.models.base.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.models.knn.KNNModel"><code class="docutils literal notranslate"><span class="pre">KNNModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.models.logistic.LogisticModel"><code class="docutils literal notranslate"><span class="pre">LogisticModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.models.random_forest.RandomForestModel"><code class="docutils literal notranslate"><span class="pre">RandomForestModel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.viz.heatmap.HeatmapViz"><code class="docutils literal notranslate"><span class="pre">HeatmapViz</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.viz.histogram.HistogramViz"><code class="docutils literal notranslate"><span class="pre">HistogramViz</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.viz.line.LineViz"><code class="docutils literal notranslate"><span class="pre">LineViz</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.viz.vizs.Vizs"><code class="docutils literal notranslate"><span class="pre">Vizs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.benchmark.Benchmark"><code class="docutils literal notranslate"><span class="pre">Benchmark</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.evaluation.Evaluator"><code class="docutils literal notranslate"><span class="pre">Evaluator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.figure.Figure"><code class="docutils literal notranslate"><span class="pre">Figure</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#trainedml.visualization.Visualizer"><code class="docutils literal notranslate"><span class="pre">Visualizer</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="explications-mathematiques-des-methodes">
+<h1>Explications mathématiques des méthodes<a class="headerlink" href="#explications-mathematiques-des-methodes" title="Lien vers cette rubrique"></a></h1>
+<p class="rubric">Explications mathématiques des méthodes</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les explications mathématiques détaillées pour chaque méthode sont disponibles dans la section API détaillée :</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="trainedml/models/knn.html"><span class="doc">k-Nearest Neighbors (kNN)</span></a></p></li>
+<li><p><a class="reference internal" href="trainedml/models/logistic.html"><span class="doc">Régression Logistique</span></a></p></li>
+<li><p><a class="reference internal" href="trainedml/models/random_forest.html"><span class="doc">Random Forest</span></a></p></li>
+</ul>
+<p>(voir aussi « modules » dans le menu de gauche)</p>
+</div>
+<section id="faq">
+<h2>FAQ<a class="headerlink" href="#faq" title="Lien vers cette rubrique"></a></h2>
+<p><strong>Q : Comment ajouter un nouveau dataset ?</strong></p>
+<p>R : Utilisez la classe DataLoader avec l’URL de votre CSV et le nom de la colonne cible.</p>
+<p><strong>Q : Puis-je utiliser mes propres modèles ?</strong></p>
+<p>R : Oui, il suffit d’implémenter la classe BaseModel et de l’ajouter à MODEL_MAP.</p>
+</section>
+<section id="contribuer">
+<h2>Contribuer<a class="headerlink" href="#contribuer" title="Lien vers cette rubrique"></a></h2>
+<p>Les contributions sont les bienvenues ! Merci de soumettre vos issues et pull requests sur GitHub.</p>
+</section>
+<section id="licence">
+<h2>Licence<a class="headerlink" href="#licence" title="Lien vers cette rubrique"></a></h2>
+<p>Ce projet est distribué sous licence MIT.</p>
+</section>
+</section>
+<section id="partie-2-industrialisation-et-documentation-avancee">
+<h1>Partie 2 : Industrialisation et documentation avancée<a class="headerlink" href="#partie-2-industrialisation-et-documentation-avancee" title="Lien vers cette rubrique"></a></h1>
+<p>Cette section détaille les étapes d’industrialisation et d’amélioration de la documentation du projet trainedml, réalisées avec Sphinx.</p>
+<section id="refactorisation-et-flexibilite">
+<h2>Refactorisation et flexibilité<a class="headerlink" href="#refactorisation-et-flexibilite" title="Lien vers cette rubrique"></a></h2>
+<ul class="simple">
+<li><p>Refactorisation du code pour permettre le chargement de n’importe quel dataset (pas seulement iris).</p></li>
+<li><p>Ajout d’une classe Trainer centralisant le workflow ML (chargement, split, fit, évaluation, prédiction).</p></li>
+<li><p>Intégration de pooch pour le cache et le téléchargement des datasets distants.</p></li>
+<li><p>Séparation claire entre les modules : data, models, viz, tests, etc.</p></li>
+</ul>
+</section>
+<section id="tests-et-robustesse">
+<h2>Tests et robustesse<a class="headerlink" href="#tests-et-robustesse" title="Lien vers cette rubrique"></a></h2>
+<ul class="simple">
+<li><p>Correction et harmonisation de tous les tests unitaires pour la nouvelle API.</p></li>
+<li><p>Prise en charge des datasets personnalisés dans les tests.</p></li>
+<li><p>Ajout de tests pour la visualisation (heatmap, histogramme, courbe).</p></li>
+</ul>
+</section>
+<section id="documentation-sphinx-professionnelle">
+<h2>Documentation Sphinx professionnelle<a class="headerlink" href="#documentation-sphinx-professionnelle" title="Lien vers cette rubrique"></a></h2>
+<ul class="simple">
+<li><p>Initialisation de la doc Sphinx dans <cite>doc/source</cite>.</p></li>
+<li><p>Activation des extensions autodoc et napoleon pour générer la doc API à partir des docstrings.</p></li>
+<li><p>Ajout d’un sommaire API (toctree) incluant tous les modules : data, models, viz, etc.</p></li>
+<li><p>Passage au thème sphinx_rtd_theme pour un rendu moderne et professionnel.</p></li>
+<li><p>Correction des titres et soulignements pour éliminer tous les warnings Sphinx.</p></li>
+<li><p>Structuration de la page d’accueil : badge, résumé, guide rapide, installation, CLI, FAQ, contribution, licence.</p></li>
+</ul>
+</section>
+<section id="conseils-pour-une-doc-parfaite">
+<h2>Conseils pour une doc parfaite<a class="headerlink" href="#conseils-pour-une-doc-parfaite" title="Lien vers cette rubrique"></a></h2>
+<ul class="simple">
+<li><p>Utiliser le style Google ou NumPy pour les docstrings (meilleure lisibilité dans Sphinx).</p></li>
+<li><p>Ajouter des exemples d’utilisation dans chaque module.</p></li>
+<li><p>Générer la doc avec : <cite>make.bat html</cite> puis ouvrir <cite>build/html/index.html</cite>.</p></li>
+<li><p>Pour publier en ligne : utiliser ReadTheDocs ou GitHub Pages.</p></li>
+</ul>
+</section>
+<section id="resume">
+<h2>Résumé<a class="headerlink" href="#resume" title="Lien vers cette rubrique"></a></h2>
+<p>Le projet trainedml est maintenant industrialisé, modulaire, testé et documenté comme un vrai projet open source professionnel. La documentation Sphinx est complète, moderne et extensible.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="modules.html" class="btn btn-neutral float-right" title="trainedml - API détaillée" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, Yéro Diamanka.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
