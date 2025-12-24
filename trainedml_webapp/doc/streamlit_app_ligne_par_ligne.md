@@ -1,7 +1,13 @@
-import matplotlib.pyplot as plt
-# -*- coding: utf-8 -*-
+# Explication ligne par ligne du code app.py
 
-import streamlit as st  # Framework web interactif pour data science
+---
+
+## 1. Imports et configuration
+
+```python
+import matplotlib.pyplot as plt  # Pour les graphiques matplotlib
+# -*- coding: utf-8 -*-  # Encodage du fichier (UTF-8)
+import streamlit as st  # Framework web interactif
 import pandas as pd  # Manipulation de données tabulaires
 from trainedml.data.loader import DataLoader  # Chargement de jeux de données intégrés
 from trainedml.models.knn import KNNModel  # Modèle K plus proches voisins
@@ -13,98 +19,86 @@ from sklearn.model_selection import train_test_split  # Split train/test
 from sklearn.preprocessing import LabelEncoder  # Encodage des labels catégoriels
 import time  # Mesure du temps d'exécution
 import numpy as np  # Calcul scientifique
-
-## Import direct du package trainedml (après installation en mode editable)
-import sys
-import os
+import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src')))
-# ...existing code...
-st.markdown(
-    """
-    <style>
-    .main {
-        background-color: #f7f9fa;
-    }
-    .sidebar .sidebar-content {
-        background: linear-gradient(135deg, #e0e7ff 0%, #f0fdfa 100%);
-    }
-    .block-container {
-        padding-top: 2rem;
-    }
-    .score-box {
-        background: #e0e7ff;
-        border-radius: 0.5rem;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        border: 1px solid #c7d2fe;
-        font-size: 1.1rem;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+```
+- Ces lignes importent toutes les librairies nécessaires pour l'app, y compris les modules internes du package trainedml.
+- `sys.path.insert...` permet d'importer le package trainedml en mode développement (src/).
 
-# --- Logo fictif ---
-# Affiche un logo en haut de page pour donner une identité visuelle à l'app
+---
+
+## 2. Mise en forme et logo
+
+```python
+st.markdown("""<style>...</style>""", unsafe_allow_html=True)
+```
+- Ajoute du CSS personnalisé pour le style de l'app.
+
+```python
 st.image("https://img.icons8.com/color/96/000000/artificial-intelligence.png", width=80)
+```
+- Affiche un logo en haut de la page.
 
-# --- Titre et sous-titre ---
-# Présente l'objectif de l'application
+```python
 st.title("Démo trainedml : Comparaison de modèles ML")
-st.markdown(
-    """
-    <span style='font-size:1.2rem;'>Comparez facilement plusieurs modèles de machine learning sur des jeux de données classiques.</span>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown("""<span style='font-size:1.2rem;'>Comparez facilement plusieurs modèles de machine learning sur des jeux de données classiques.</span>""", unsafe_allow_html=True)
+```
+- Affiche le titre et un sous-titre explicatif.
 
-# --- Sidebar : configuration et aide ---
-# Zone de configuration à gauche (choix dataset, modèle, params, upload...)
+---
+
+## 3. Sidebar : configuration utilisateur
+
+```python
 st.sidebar.header("Configuration")
-st.sidebar.markdown(
-    """
-    <div style='background:#e0e7ff;padding:0.7em 1em;border-radius:0.5em;margin-bottom:1em;'>
-    <b>trainedml webapp</b><br>
-    <span style='font-size:0.95em;'>Démonstrateur interactif ML<br>by <a href='https://github.com/' target='_blank'>VotreNom</a></span>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+st.sidebar.markdown("""<div style='background:#e0e7ff;...'>...</div>""", unsafe_allow_html=True)
+```
+- Affiche un encadré d'identité dans la sidebar.
 
-# --- Sélection du dataset de démonstration ---
-# Propose des datasets intégrés (iris, wine)
+```python
 dataset_name = st.sidebar.selectbox("Choisir un dataset", ("iris", "wine"))
+```
+- Permet de choisir un dataset intégré (iris ou wine).
 
-# --- Upload ou chargement par URL ---
-# Permet à l'utilisateur de charger un CSV local ou distant (GitHub, UCI, etc.)
+```python
 st.sidebar.markdown("<b>Ou charger un CSV par URL :</b>", unsafe_allow_html=True)
 user_url = st.sidebar.text_input("URL d'un CSV (optionnel)")
-sep = st.sidebar.selectbox("Séparateur CSV", [",", ";", "\t"], format_func=lambda x: {',': 'Virgule (,)', ';': 'Point-virgule (;)', '\t': 'Tabulation (\\t)'}[x])
+sep = st.sidebar.selectbox("Séparateur CSV", [",", ";", "\t"], ...)
 user_file = st.sidebar.file_uploader("Uploader un CSV (optionnel)", type=["csv"])
+```
+- Permet de charger un CSV distant (URL) ou local (upload), et de choisir le séparateur.
+
+---
+
+## 4. Chargement des données
+
+```python
 df_user = None
 if user_url:
     try:
-        # Lecture du CSV distant avec le séparateur choisi
         df_user = pd.read_csv(user_url, sep=sep)
         st.sidebar.success(f"Données chargées depuis l'URL !")
     except Exception as e:
-        st.sidebar.error(f"Erreur de chargement : {e}\nVérifiez que l'URL pointe bien vers un fichier CSV brut (ex : bouton 'Raw' sur GitHub).")
+        st.sidebar.error(f"Erreur de chargement : {e}...)
 elif user_file is not None:
-    # Lecture du CSV uploadé
     df_user = pd.read_csv(user_file, sep=sep)
     st.sidebar.success(f"Fichier chargé : {user_file.name}")
 if df_user is not None:
-    # On suppose que la dernière colonne est la cible (y)
-    X = df_user.iloc[:, :-1]  # Toutes les colonnes sauf la dernière = features
-    y = df_user.iloc[:, -1]   # Dernière colonne = cible
+    X = df_user.iloc[:, :-1]
+    y = df_user.iloc[:, -1]
     dataset_name = f"Upload: {user_file.name if user_file else user_url}"
 else:
-    # Chargement d'un dataset intégré (iris, wine)
     loader = DataLoader()
     X, y = loader.load_dataset(name=dataset_name)
+```
+- Si un CSV est fourni, on le charge (la dernière colonne est la cible y, le reste X).
+- Sinon, on charge un dataset intégré via DataLoader.
 
-# --- Encodage automatique des labels cibles (y) si besoin ---
-# Si la cible est catégorielle ou float (mais discrète), on encode pour la classification
+---
+
+## 5. Encodage des labels
+
+```python
 le = None
 if y.dtype == object or y.dtype.name == "category" or (hasattr(y, 'dtype') and str(y.dtype).startswith('float')):
     le = LabelEncoder()
@@ -112,44 +106,55 @@ if y.dtype == object or y.dtype.name == "category" or (hasattr(y, 'dtype') and s
     class_names = [str(c) for c in le.classes_]
 else:
     class_names = [str(c) for c in np.unique(y)]
+```
+- Si la cible est catégorielle, on encode les labels (LabelEncoder) pour scikit-learn.
+- On garde la correspondance pour l'affichage ultérieur.
 
-# --- Sélection du modèle ML ---
-# Propose 3 modèles classiques de classification
+---
+
+## 6. Sélection des modèles et split
+
+```python
 from trainedml.utils.factory import get_model
-# Sélection multiple de modèles
-models_selected = st.sidebar.multiselect(
-    "Choisir les modèles",
-    ["KNN", "Logistic Regression", "Random Forest"],
-    default=["KNN"]
-)
-
-# --- Paramètres de split train/test ---
-seed = st.sidebar.number_input("Seed", value=42)  # Seed pour reproductibilité
-# Taille du jeu de test (slider)
+models_selected = st.sidebar.multiselect("Choisir les modèles", ["KNN", "Logistic Regression", "Random Forest"], default=["KNN"])
+seed = st.sidebar.number_input("Seed", value=42)
 test_size = st.sidebar.slider("Test size", 0.1, 0.5, 0.3)
-# Split des données en train/test
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=seed)
+```
+- Permet de choisir un ou plusieurs modèles à comparer.
+- Paramètres de split train/test.
+- Split effectif des données.
 
-# --- Layout principal : deux colonnes ---
+---
+
+## 7. Layout principal (2 colonnes)
+
+```python
 col1, col2 = st.columns([1, 2])
+```
+- Crée deux colonnes pour l'affichage principal.
 
-# --- Colonne 1 : infos dataset ---
+### Colonne 1 : infos dataset
+
+```python
 with col1:
     st.markdown("<b>Infos dataset :</b>", unsafe_allow_html=True)
     st.write(f"Nombre d'échantillons : {X.shape[0]}")
     st.write(f"Nombre de variables : {X.shape[1]}")
     st.write(f"Classes : {', '.join(class_names)}")
-    st.dataframe(X.head())  # Affiche les premières lignes du dataset
+    st.dataframe(X.head())
+```
+- Affiche les infos principales du dataset (shape, classes, preview).
 
-# --- Colonne 2 : entraînement, scores, visualisations ---
+### Colonne 2 : benchmark, prédiction, visualisations
+
+#### a) Entraînement et benchmark
+
+```python
 with col2:
-    # Stockage des modèles entraînés pour la prédiction manuelle
-
-    # Initialisation du stockage des modèles entraînés si besoin
     if 'trained_models' not in st.session_state:
         st.session_state['trained_models'] = {}
     trained_models = st.session_state['trained_models']
-
 
     if st.sidebar.button("Entraîner et comparer"):
         results = []
@@ -160,22 +165,11 @@ with col2:
                 t0 = time.time()
                 model.fit(X_train, y_train)
                 train_time = time.time() - t0
-
                 t1 = time.time()
                 y_pred = model.predict(X_test)
                 pred_time = time.time() - t1
-
                 scores = Evaluator.evaluate_all(y_test, y_pred)
-
-                results.append({
-                    "Modèle": model_name,
-                    "Accuracy": scores["accuracy"],
-                    "Precision": scores["precision"],
-                    "Recall": scores["recall"],
-                    "F1": scores["f1"],
-                    "Train time (s)": train_time,
-                    "Predict time (s)": pred_time,
-                })
+                results.append({...})
                 new_trained_models[model_name] = model
         st.session_state['trained_models'] = new_trained_models
         trained_models = new_trained_models
@@ -183,7 +177,6 @@ with col2:
         df_results = pd.DataFrame(results)
         st.markdown("<div class='score-box'><b>Comparaison des modèles :</b></div>", unsafe_allow_html=True)
         st.dataframe(df_results)
-
         # Barplot Accuracy avec matplotlib
         fig_acc, ax_acc = plt.subplots()
         df_results.plot(x="Modèle", y="Accuracy", kind="bar", legend=False, ax=ax_acc, color="#2563eb")
@@ -191,7 +184,6 @@ with col2:
         ax_acc.set_xlabel("Modèle")
         ax_acc.set_title("Comparaison des Accuracy")
         st.pyplot(fig_acc)
-
         # Barplot Train time avec matplotlib
         fig_time, ax_time = plt.subplots()
         df_results.plot(x="Modèle", y="Train time (s)", kind="bar", legend=False, ax=ax_time, color="#16a34a")
@@ -199,8 +191,15 @@ with col2:
         ax_time.set_xlabel("Modèle")
         ax_time.set_title("Temps d'entraînement par modèle")
         st.pyplot(fig_time)
+```
+- Initialise le stockage des modèles entraînés dans la session.
+- Si l'utilisateur clique sur "Entraîner et comparer" :
+  - Boucle sur chaque modèle sélectionné, entraîne, prédit, mesure le temps, calcule les scores, stocke les résultats.
+  - Affiche les résultats dans un tableau et sous forme de barplots.
 
-    # --- Section Prédiction manuelle ---
+#### b) Prédiction manuelle
+
+```python
     st.subheader("Prédiction manuelle")
     st.markdown("<i>Testez une prédiction sur un échantillon personnalisé :</i>", unsafe_allow_html=True)
     input_features = list(X.columns)
@@ -216,7 +215,6 @@ with col2:
             arr = np.array([list(user_inputs.values())]).reshape(1, -1)
             try:
                 pred = model_pred.predict(arr)
-                # Affichage générique : si LabelEncoder utilisé, on reconvertit l'encodage en valeur originale
                 if le is not None:
                     label = le.inverse_transform([pred[0]])[0]
                 else:
@@ -226,8 +224,14 @@ with col2:
                 st.error(f"Erreur lors de la prédiction : {e}")
         else:
             st.warning("Veuillez d'abord entraîner et comparer les modèles.")
+```
+- Affiche un formulaire dynamique pour saisir les features d'un échantillon.
+- L'utilisateur choisit le modèle pour la prédiction.
+- Si "Prédire" est cliqué, on effectue la prédiction et on affiche le label original.
 
-        # --- Visualisation : heatmap de corrélation ---
+#### c) Visualisations
+
+```python
         viz = Visualizer(pd.concat([X, pd.Series(y, name='target')], axis=1))
         st.subheader("Heatmap de corrélation")
         fig = viz.heatmap(features=list(X.columns))
@@ -235,26 +239,26 @@ with col2:
             st.pyplot(fig.figure)
         else:
             st.pyplot(fig)
-
-        # --- Visualisation : histogramme des variables numériques ---
         st.subheader("Histogramme des variables numériques")
         fig2 = viz.histogram(columns=list(X.columns), legend=True)
         if hasattr(fig2, 'figure'):
             st.pyplot(fig2.figure)
         else:
             st.pyplot(fig2)
+```
+- Affiche la heatmap de corrélation et les histogrammes des variables numériques.
 
-# --- Footer sidebar : contact et aide GitHub Raw ---
+---
+
+## 8. Footer et aide
+
+```python
 st.sidebar.markdown("---")
 st.sidebar.info("Contact : https://github.com/diamankayero/trainedml")
+st.sidebar.markdown("""<div style='background:#fef9c3;...'>...</div>""", unsafe_allow_html=True)
+```
+- Affiche un encadré d'aide pour l'utilisateur (ex : comment récupérer un lien GitHub Raw).
 
-# Encadré d'aide pour bien utiliser les liens GitHub Raw
-st.sidebar.markdown("""
-<div style='background:#fef9c3;padding:0.7em 1em;border-radius:0.5em;margin-bottom:1em;font-size:0.95em;'>
-<b>Astuce :</b> Pour charger un CSV depuis GitHub, <br>
-1. Copiez l'URL de la page du fichier (exemple visible dans le navigateur) :<br>
-<code>https://github.com/diamankayero/projets/blob/main/trees.csv</code><br>
-2. Cliquez sur le bouton <b>Raw</b> du fichier sur GitHub, puis copiez l'URL affichée dans la barre d'adresse (c'est ce lien qu'il faut coller ici) :<br>
-<code>https://raw.githubusercontent.com/diamankayero/projets/main/trees.csv</code>
-</div>
-""", unsafe_allow_html=True)
+---
+
+**Chaque ligne et bloc du code principal est expliqué ci-dessus. Si tu veux le détail d'une ligne précise, indique-la et je t'expliquerai encore plus en profondeur !**
