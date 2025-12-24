@@ -259,6 +259,3 @@ st.sidebar.markdown("""<div style='background:#fef9c3;...'>...</div>""", unsafe_
 ```
 - Affiche un encadré d'aide pour l'utilisateur (ex : comment récupérer un lien GitHub Raw).
 
----
-
-**Chaque ligne et bloc du code principal est expliqué ci-dessus. Si tu veux le détail d'une ligne précise, indique-la et je t'expliquerai encore plus en profondeur !**

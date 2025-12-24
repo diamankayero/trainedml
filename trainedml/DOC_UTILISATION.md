@@ -245,11 +245,24 @@ L'objectif est de rendre le projet utilisable, maintenable, partageable et compr
   .\venv\Scripts\activate
   # Activation sous Linux/Mac
   source venv/bin/activate
+  # oubien si ça marche pas tu fais les commandes suivantes pour activer venv
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+  .\venv\Scripts\Activate.ps1 #pour le cas de ma machine
+  # pour desactiver le venv on fait
+  deactivate
+  # pour suprimer le venv
+  Remove-Item -Recurse -Force venv
+  # Et pour installer en fontion de la version python on utilise la commande suivante
+  py -3.11 -m venv venv
   ```
 - **Installation des dépendances :**
   ```bash
   pip install -r requirements.txt
   pip install .
+  # ou bien tu fais la commande suivant
+  pip install -e .
+  #pour desinstaller le module trainedml tu peux juste faire
+  pip uninstall -y trainedml
   ```
 
 ### Génération de la documentation API avec Sphinx
