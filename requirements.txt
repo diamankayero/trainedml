@@ -11,3 +11,4 @@ plotly
 pooch
 tqdm
 # Ajoutez ici les autres dépendances nécessaires
+sphinx_rtd_theme
