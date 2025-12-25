@@ -28,6 +28,7 @@ dependencies = [
     "requests",
     "streamlit",
     "pooch",
+    "statsmodels",
     "sphinx_rtd_theme"
 ]
 

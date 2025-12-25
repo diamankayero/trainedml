@@ -4,7 +4,8 @@ Contient la classe Trainer pour l'entraînement, l'évaluation et la prédiction
 et la fonction main pour l'entrée CLI.
 """
 
-# Ce fichier permet de charger le package trainedml
+# Ce fichier permet d'importer le package trainedml
+
 # Classe Trainer pour usage API et webapp
 from .data.loader import DataLoader
 from .models.knn import KNNModel

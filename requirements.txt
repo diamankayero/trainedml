@@ -10,5 +10,6 @@ requests
 plotly
 pooch
 tqdm
+statsmodels
 # Ajoutez ici les autres dépendances nécessaires
 sphinx_rtd_theme

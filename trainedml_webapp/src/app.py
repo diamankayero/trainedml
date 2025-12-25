@@ -103,6 +103,43 @@ else:
     loader = DataLoader()
     X, y = loader.load_dataset(name=dataset_name)
 
+
+# --- Filtrage interactif des données ---
+st.markdown("<b>🔎 Filtrer et explorer les données</b>", unsafe_allow_html=True)
+columns = X.columns.tolist()
+selected_columns = st.multiselect("Colonnes à afficher", columns, default=columns)
+filter_col = st.selectbox("Filtrer par colonne", ["Aucun"] + columns)
+if filter_col != "Aucun":
+    unique_vals = X[filter_col].unique()
+    selected_val = st.selectbox(f"Valeur de {filter_col}", unique_vals)
+    filtered_X = X[X[filter_col] == selected_val]
+    filtered_y = y[X[filter_col] == selected_val] if len(y) == len(X) else y
+else:
+    filtered_X = X
+    filtered_y = y
+
+
+export_df = filtered_X[selected_columns]
+if st.button("Voir toutes les données"):
+    export_df = X[selected_columns]
+    st.dataframe(export_df)
+else:
+    st.dataframe(export_df)
+
+
+# --- Export CSV ---
+csv = export_df.to_csv(index=False).encode('utf-8')
+st.download_button(
+    label="📥 Télécharger les données affichées (CSV)",
+    data=csv,
+    file_name="donnees_filtrees.csv",
+    mime="text/csv"
+)
+
+# --- Résumé statistique (describe) ---
+st.markdown("<b>Résumé statistique des données affichées :</b>", unsafe_allow_html=True)
+st.dataframe(export_df.describe(include='all').transpose())
+
 # --- Encodage automatique des labels cibles (y) si besoin ---
 # Si la cible est catégorielle ou float (mais discrète), on encode pour la classification
 le = None
@@ -227,22 +264,67 @@ with col2:
         else:
             st.warning("Veuillez d'abord entraîner et comparer les modèles.")
 
-        # --- Visualisation : heatmap de corrélation ---
-        viz = Visualizer(pd.concat([X, pd.Series(y, name='target')], axis=1))
-        st.subheader("Heatmap de corrélation")
-        fig = viz.heatmap(features=list(X.columns))
-        if hasattr(fig, 'figure'):
-            st.pyplot(fig.figure)
-        else:
-            st.pyplot(fig)
 
-        # --- Visualisation : histogramme des variables numériques ---
-        st.subheader("Histogramme des variables numériques")
-        fig2 = viz.histogram(columns=list(X.columns), legend=True)
-        if hasattr(fig2, 'figure'):
-            st.pyplot(fig2.figure)
+        # --- Analyse exploratoire avancée ---
+        st.markdown("---")
+        st.header("🔬 Analyse exploratoire des données")
+        viz = Visualizer(pd.concat([X, pd.Series(y, name='target')], axis=1))
+
+        # Valeurs manquantes
+        st.subheader("Valeurs manquantes")
+        fig_missing = viz.missing()
+        if hasattr(fig_missing, 'figure'):
+            st.pyplot(fig_missing.figure)
         else:
-            st.pyplot(fig2)
+            st.pyplot(fig_missing)
+
+        # Distribution des variables
+        st.subheader("Distribution des variables")
+        fig_dist = viz.distribution(columns=list(X.columns))
+        if hasattr(fig_dist, 'figure'):
+            st.pyplot(fig_dist.figure)
+        else:
+            st.pyplot(fig_dist)
+
+        # Boxplots
+        st.subheader("Boxplots par variable")
+        fig_box = viz.boxplot(columns=list(X.columns))
+        if hasattr(fig_box, 'figure'):
+            st.pyplot(fig_box.figure)
+        else:
+            st.pyplot(fig_box)
+
+        # Heatmap de corrélation
+        st.subheader("Heatmap de corrélation")
+        fig_corr = viz.correlation(features=list(X.columns))
+        if hasattr(fig_corr, 'figure'):
+            st.pyplot(fig_corr.figure)
+        else:
+            st.pyplot(fig_corr)
+
+        # Analyse de la normalité
+        st.subheader("Analyse de la normalité (QQ-plots)")
+        fig_norm = viz.normality(columns=list(X.columns))
+        if hasattr(fig_norm, 'figure'):
+            st.pyplot(fig_norm.figure)
+        else:
+            st.pyplot(fig_norm)
+
+        # Multicolinéarité
+        st.subheader("Analyse de la multicolinéarité (VIF)")
+        fig_vif = viz.multicollinearity()
+        if hasattr(fig_vif, 'figure'):
+            st.pyplot(fig_vif.figure)
+        else:
+            st.pyplot(fig_vif)
+
+        # Profiling automatique
+        st.subheader("Profiling automatique (statistiques globales)")
+        profiling = viz.profiling()
+        if hasattr(profiling, 'figure'):
+            st.dataframe(profiling.figure)
+        else:
+            st.dataframe(profiling)
 
 # --- Footer sidebar : dépôt et aide GitHub Raw ---
 st.sidebar.markdown("---")
