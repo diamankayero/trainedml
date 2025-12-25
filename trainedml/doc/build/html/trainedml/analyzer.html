@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataAnalyzer &mdash; Documentation trainedml 0.01</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=e42f2b11"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Vizs (visualisations de base)" href="vizs.html" />
+    <link rel="prev" title="Visualizer" href="visualization.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            trainedml
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">trainedml - API détaillée</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/random_forest.html">Random Forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html">Visualizer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">DataAnalyzer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.bivariate"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.bivariate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.boxplot"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.boxplot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.correlation"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.correlation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.distribution"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.distribution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.missing"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.missing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.multicollinearity"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.multicollinearity()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.normality"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.normality()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.outliers"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.outliers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.profiling"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.profiling()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.target"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.target()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="histogram.html">Histogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distribution.html">Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="correlation.html">Correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="missing.html">Missing Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outliers.html">Outliers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="target.html">Target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boxplot.html">Boxplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bivariate.html">Bivariate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normality.html">Normality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">trainedml - API détaillée</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/random_forest.html">Random Forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html">Visualizer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">DataAnalyzer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.bivariate"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.bivariate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.boxplot"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.boxplot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.correlation"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.correlation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.distribution"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.distribution()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.missing"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.missing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.multicollinearity"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.multicollinearity()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.normality"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.normality()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.outliers"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.outliers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.profiling"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.profiling()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.target"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.target()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="histogram.html">Histogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distribution.html">Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="correlation.html">Correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="missing.html">Missing Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outliers.html">Outliers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="target.html">Target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boxplot.html">Boxplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bivariate.html">Bivariate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normality.html">Normality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">trainedml</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">trainedml - API détaillée</a></li>
+      <li class="breadcrumb-item active">DataAnalyzer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/trainedml/analyzer.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-trainedml.analyzer">
+<span id="dataanalyzer"></span><h1>DataAnalyzer<a class="headerlink" href="#module-trainedml.analyzer" title="Lien vers cette rubrique"></a></h1>
+<p>Module d’analyse exploratoire des données pour trainedml.
+Fournit une interface centralisée pour les analyses classiques :
+- Distribution des variables
+- Matrice de corrélation
+- Analyse des valeurs manquantes
+- Analyse des outliers
+- Analyse de la cible
+- Boxplots par variable
+- Analyse bivariée
+- Analyse de la normalité
+- Analyse de la multicolinéarité
+- Profiling automatique</p>
+<p>Chaque analyse est implémentée dans une classe dédiée dans le dossier viz/ et accessible via DataAnalyzer.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="trainedml.analyzer.DataAnalyzer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trainedml.analyzer.</span></span><span class="sig-name descname"><span class="pre">DataAnalyzer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe centrale pour l’analyse exploratoire des données.
+Permet d’accéder à toutes les analyses via une interface unique.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.analyzer.DataAnalyzer.bivariate">
+<span class="sig-name descname"><span class="pre">bivariate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer.bivariate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer.bivariate" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyse bivariée (scatter, etc.).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.analyzer.DataAnalyzer.boxplot">
+<span class="sig-name descname"><span class="pre">boxplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer.boxplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer.boxplot" title="Lien vers cette définition"></a></dt>
+<dd><p>Boxplots par variable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.analyzer.DataAnalyzer.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pearson'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer.correlation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer.correlation" title="Lien vers cette définition"></a></dt>
+<dd><p>Matrice de corrélation (heatmap).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.analyzer.DataAnalyzer.distribution">
+<span class="sig-name descname"><span class="pre">distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer.distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer.distribution" title="Lien vers cette définition"></a></dt>
+<dd><p>Distribution des variables (histogrammes).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.analyzer.DataAnalyzer.missing">
+<span class="sig-name descname"><span class="pre">missing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer.missing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer.missing" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyse des valeurs manquantes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.analyzer.DataAnalyzer.multicollinearity">
+<span class="sig-name descname"><span class="pre">multicollinearity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer.multicollinearity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer.multicollinearity" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyse de la multicolinéarité (VIF, etc.).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.analyzer.DataAnalyzer.normality">
+<span class="sig-name descname"><span class="pre">normality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer.normality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer.normality" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyse de la normalité (tests, QQ-plots, etc.).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.analyzer.DataAnalyzer.outliers">
+<span class="sig-name descname"><span class="pre">outliers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer.outliers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer.outliers" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyse des outliers (valeurs aberrantes).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.analyzer.DataAnalyzer.profiling">
+<span class="sig-name descname"><span class="pre">profiling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer.profiling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer.profiling" title="Lien vers cette définition"></a></dt>
+<dd><p>Profiling automatique (rapport global).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.analyzer.DataAnalyzer.target">
+<span class="sig-name descname"><span class="pre">target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_column</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer.target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer.target" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyse de la variable cible.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="visualization.html" class="btn btn-neutral float-left" title="Visualizer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="vizs.html" class="btn btn-neutral float-right" title="Vizs (visualisations de base)" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, Yéro Diamanka.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

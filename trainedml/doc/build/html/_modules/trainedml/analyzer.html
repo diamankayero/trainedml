@@ -1,0 +1,234 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trainedml.analyzer &mdash; Documentation trainedml 0.01</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=e42f2b11"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=e6b791cb"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            trainedml
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">trainedml</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Code du module</a></li>
+          <li class="breadcrumb-item"><a href="../trainedml.html">trainedml</a></li>
+      <li class="breadcrumb-item active">trainedml.analyzer</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de trainedml.analyzer</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module d&#39;analyse exploratoire des données pour trainedml.</span>
+<span class="sd">Fournit une interface centralisée pour les analyses classiques :</span>
+<span class="sd">- Distribution des variables</span>
+<span class="sd">- Matrice de corrélation</span>
+<span class="sd">- Analyse des valeurs manquantes</span>
+<span class="sd">- Analyse des outliers</span>
+<span class="sd">- Analyse de la cible</span>
+<span class="sd">- Boxplots par variable</span>
+<span class="sd">- Analyse bivariée</span>
+<span class="sd">- Analyse de la normalité</span>
+<span class="sd">- Analyse de la multicolinéarité</span>
+<span class="sd">- Profiling automatique</span>
+
+<span class="sd">Chaque analyse est implémentée dans une classe dédiée dans le dossier viz/ et accessible via DataAnalyzer.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.distribution</span><span class="w"> </span><span class="kn">import</span> <span class="n">DistributionViz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.correlation</span><span class="w"> </span><span class="kn">import</span> <span class="n">CorrelationViz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.missing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MissingValuesViz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.outliers</span><span class="w"> </span><span class="kn">import</span> <span class="n">OutliersViz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.target</span><span class="w"> </span><span class="kn">import</span> <span class="n">TargetViz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.boxplot</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoxplotViz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.bivariate</span><span class="w"> </span><span class="kn">import</span> <span class="n">BivariateViz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.normality</span><span class="w"> </span><span class="kn">import</span> <span class="n">NormalityViz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.multicollinearity</span><span class="w"> </span><span class="kn">import</span> <span class="n">MulticollinearityViz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.profiling</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProfilingViz</span>
+
+<div class="viewcode-block" id="DataAnalyzer">
+<a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataAnalyzer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe centrale pour l&#39;analyse exploratoire des données.</span>
+<span class="sd">    Permet d&#39;accéder à toutes les analyses via une interface unique.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;data doit être un DataFrame pandas&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+
+<div class="viewcode-block" id="DataAnalyzer.distribution">
+<a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.distribution">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Distribution des variables (histogrammes).&quot;&quot;&quot;</span>
+        <span class="n">viz</span> <span class="o">=</span> <span class="n">DistributionViz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">viz</span><span class="o">.</span><span class="n">figure</span></div>
+
+
+<div class="viewcode-block" id="DataAnalyzer.correlation">
+<a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.correlation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">correlation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Matrice de corrélation (heatmap).&quot;&quot;&quot;</span>
+        <span class="n">viz</span> <span class="o">=</span> <span class="n">CorrelationViz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">viz</span><span class="o">.</span><span class="n">figure</span></div>
+
+
+<div class="viewcode-block" id="DataAnalyzer.missing">
+<a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.missing">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">missing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyse des valeurs manquantes.&quot;&quot;&quot;</span>
+        <span class="n">viz</span> <span class="o">=</span> <span class="n">MissingValuesViz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">viz</span><span class="o">.</span><span class="n">figure</span></div>
+
+
+<div class="viewcode-block" id="DataAnalyzer.outliers">
+<a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.outliers">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">outliers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyse des outliers (valeurs aberrantes).&quot;&quot;&quot;</span>
+        <span class="n">viz</span> <span class="o">=</span> <span class="n">OutliersViz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">viz</span><span class="o">.</span><span class="n">figure</span></div>
+
+
+<div class="viewcode-block" id="DataAnalyzer.target">
+<a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.target">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_column</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyse de la variable cible.&quot;&quot;&quot;</span>
+        <span class="n">viz</span> <span class="o">=</span> <span class="n">TargetViz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">target_column</span><span class="o">=</span><span class="n">target_column</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">viz</span><span class="o">.</span><span class="n">figure</span></div>
+
+
+<div class="viewcode-block" id="DataAnalyzer.boxplot">
+<a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.boxplot">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">boxplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Boxplots par variable.&quot;&quot;&quot;</span>
+        <span class="n">viz</span> <span class="o">=</span> <span class="n">BoxplotViz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="n">by</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">viz</span><span class="o">.</span><span class="n">figure</span></div>
+
+
+<div class="viewcode-block" id="DataAnalyzer.bivariate">
+<a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.bivariate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bivariate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyse bivariée (scatter, etc.).&quot;&quot;&quot;</span>
+        <span class="n">viz</span> <span class="o">=</span> <span class="n">BivariateViz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">viz</span><span class="o">.</span><span class="n">figure</span></div>
+
+
+<div class="viewcode-block" id="DataAnalyzer.normality">
+<a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.normality">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">normality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyse de la normalité (tests, QQ-plots, etc.).&quot;&quot;&quot;</span>
+        <span class="n">viz</span> <span class="o">=</span> <span class="n">NormalityViz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">viz</span><span class="o">.</span><span class="n">figure</span></div>
+
+
+<div class="viewcode-block" id="DataAnalyzer.multicollinearity">
+<a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.multicollinearity">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">multicollinearity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyse de la multicolinéarité (VIF, etc.).&quot;&quot;&quot;</span>
+        <span class="n">viz</span> <span class="o">=</span> <span class="n">MulticollinearityViz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">viz</span><span class="o">.</span><span class="n">figure</span></div>
+
+
+<div class="viewcode-block" id="DataAnalyzer.profiling">
+<a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.profiling">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">profiling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Profiling automatique (rapport global).&quot;&quot;&quot;</span>
+        <span class="n">viz</span> <span class="o">=</span> <span class="n">ProfilingViz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">viz</span><span class="o">.</span><span class="n">figure</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, Yéro Diamanka.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
