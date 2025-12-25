@@ -320,5 +320,3 @@ La factory (`get_model`) permet d'instancier dynamiquement un modèle à partir 
 ---
 
 **Ce document explique chaque bloc, boucle et fonction clé du code Streamlit. Pour toute question sur une ligne précise, consultez le fichier streamlit_app_ligne_par_ligne.md !**
-
----

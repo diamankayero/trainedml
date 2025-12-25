@@ -244,9 +244,9 @@ with col2:
         else:
             st.pyplot(fig2)
 
-# --- Footer sidebar : contact et aide GitHub Raw ---
+# --- Footer sidebar : dépôt et aide GitHub Raw ---
 st.sidebar.markdown("---")
-st.sidebar.info("Dépot du projet : https://github.com/diamankayero/trainedml")
+st.sidebar.info("Dépôt du projet : https://github.com/diamankayero/trainedml")
 
 # Encadré d'aide pour bien utiliser les liens GitHub Raw
 st.sidebar.markdown("""

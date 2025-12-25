@@ -40,10 +40,16 @@
 
 2. **Créer un environnement virtuel** (recommandé)
    ```bash
-   python -m venv venv
-   
+   py -3.11 -m venv venv
    # Windows :
    venv\Scripts\activate
+   # oubien si ça marche pas tu fais les commandes suivantes pour activer venv
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+   .\venv\Scripts\Activate.ps1 # pour le cas de ma machine
+   # pour desactiver le venv on fait 
+   deactivate
+   # pour suprimer le venv
+   Remove-Item -Recurse -Force venv
    
    # Linux/Mac :
    source venv/bin/activate
@@ -77,7 +83,7 @@ Entraîner un modèle KNN sur le dataset Wine :
 python src/trainedml/cli.py --model knn --dataset wine
 ```
 
-### Application web Streamlit
+### [Application web Streamlit](https://trainedml.streamlit.app)
 
 Lancer l'interface interactive :
 ```bash
