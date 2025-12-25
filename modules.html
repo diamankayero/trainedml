@@ -119,10 +119,20 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#trainedml.visualization.Visualizer"><code class="docutils literal notranslate"><span class="pre">Visualizer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.bivariate"><code class="docutils literal notranslate"><span class="pre">Visualizer.bivariate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.boxplot"><code class="docutils literal notranslate"><span class="pre">Visualizer.boxplot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.correlation"><code class="docutils literal notranslate"><span class="pre">Visualizer.correlation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.distribution"><code class="docutils literal notranslate"><span class="pre">Visualizer.distribution()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.get_features"><code class="docutils literal notranslate"><span class="pre">Visualizer.get_features()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.heatmap"><code class="docutils literal notranslate"><span class="pre">Visualizer.heatmap()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.histogram"><code class="docutils literal notranslate"><span class="pre">Visualizer.histogram()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.line"><code class="docutils literal notranslate"><span class="pre">Visualizer.line()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.missing"><code class="docutils literal notranslate"><span class="pre">Visualizer.missing()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.multicollinearity"><code class="docutils literal notranslate"><span class="pre">Visualizer.multicollinearity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.normality"><code class="docutils literal notranslate"><span class="pre">Visualizer.normality()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.outliers"><code class="docutils literal notranslate"><span class="pre">Visualizer.outliers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.profiling"><code class="docutils literal notranslate"><span class="pre">Visualizer.profiling()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.visualization.Visualizer.target"><code class="docutils literal notranslate"><span class="pre">Visualizer.target()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -527,12 +537,40 @@ Encapsule une figure matplotlib, plotly, etc. Permet l’affichage, la sauvegard
 
 </dd></dl>
 
-<p id="module-trainedml.visualization">Module central de visualisation pour trainedml.
-Permet de générer différents types de graphiques à partir d’un DataFrame pandas.</p>
+<p id="module-trainedml.visualization">Module central de visualisation et d’analyse exploratoire pour trainedml.
+Permet de générer différents types de graphiques et d’analyses à partir d’un DataFrame pandas :
+- Visualisations (heatmap, histogramme, courbe)
+- Analyses exploratoires (distribution, corrélation, valeurs manquantes, outliers, cible, boxplots, bivariée, normalité, multicolinéarité, profiling)</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="trainedml.visualization.Visualizer">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trainedml.visualization.</span></span><span class="sig-name descname"><span class="pre">Visualizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe centrale pour la visualisation et l’analyse exploratoire.
+Permet d’accéder à toutes les visualisations et analyses via une interface unique.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.bivariate">
+<span class="sig-name descname"><span class="pre">bivariate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer.bivariate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.bivariate" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyse bivariée (scatter, etc.).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.boxplot">
+<span class="sig-name descname"><span class="pre">boxplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer.boxplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.boxplot" title="Lien vers cette définition"></a></dt>
+<dd><p>Boxplots par variable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.correlation">
+<span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pearson'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer.correlation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.correlation" title="Lien vers cette définition"></a></dt>
+<dd><p>Matrice de corrélation (heatmap).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.distribution">
+<span class="sig-name descname"><span class="pre">distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer.distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.distribution" title="Lien vers cette définition"></a></dt>
+<dd><p>Distribution des variables (histogrammes).</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.visualization.Visualizer.get_features">
 <span class="sig-name descname"><span class="pre">get_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer.get_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.get_features" title="Lien vers cette définition"></a></dt>
@@ -555,6 +593,42 @@ Permet de générer différents types de graphiques à partir d’un DataFrame p
 <dt class="sig sig-object py" id="trainedml.visualization.Visualizer.line">
 <span class="sig-name descname"><span class="pre">line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_column</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer.line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.line" title="Lien vers cette définition"></a></dt>
 <dd><p>Génère une courbe (line plot) entre deux colonnes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.missing">
+<span class="sig-name descname"><span class="pre">missing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer.missing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.missing" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyse des valeurs manquantes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.multicollinearity">
+<span class="sig-name descname"><span class="pre">multicollinearity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer.multicollinearity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.multicollinearity" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyse de la multicolinéarité (VIF, etc.).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.normality">
+<span class="sig-name descname"><span class="pre">normality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer.normality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.normality" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyse de la normalité (tests, QQ-plots, etc.).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.outliers">
+<span class="sig-name descname"><span class="pre">outliers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer.outliers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.outliers" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyse des outliers (valeurs aberrantes).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.profiling">
+<span class="sig-name descname"><span class="pre">profiling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer.profiling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.profiling" title="Lien vers cette définition"></a></dt>
+<dd><p>Profiling automatique (rapport global).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.target">
+<span class="sig-name descname"><span class="pre">target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_column</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trainedml/visualization.html#Visualizer.target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.target" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyse de la variable cible.</p>
 </dd></dl>
 
 </dd></dl>
