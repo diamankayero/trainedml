@@ -6,6 +6,14 @@
    <a href="https://diamankayero.github.io/trainedml/"><img src="https://img.shields.io/badge/Documentation-GitHub%20Pages-blue?logo=github" alt="Documentation"></a>
    <a href="https://trainedml.streamlit.app"><img src="https://img.shields.io/badge/Webapp-Streamlit-ff4b4b?logo=streamlit" alt="Webapp"></a>
    <a href="https://github.com/diamankayero/trainedml"><img src="https://img.shields.io/badge/GitHub-Repo-333?logo=github" alt="GitHub"></a>
+
+</p>
+
+<p align="center">
+   <img src="public/matric_corre.png" alt="Matrice de corrélation" width="260"/>
+   <img src="public/histogram.png" alt="Histogramme" width="260"/>
+   <img src="public/line.png" alt="Courbe" width="260"/>
+   <img src="public/comparaison_de_model.jpeg" alt="Comparaison de modèles" width="260"/>
 </p>
 
 ---
@@ -27,7 +35,7 @@
 ## 🚀 Installation
 
 ### Prérequis
-- Python 3.8 ou supérieur
+- Python 3.9 ou supérieur
 - pip
 
 ### Étapes d'installation

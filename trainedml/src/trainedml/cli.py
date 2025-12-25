@@ -25,6 +25,7 @@ def main():
     parser.add_argument('--show', action='store_true', help='Afficher la heatmap après entraînement')
     parser.add_argument('--histogram', action='store_true', help='Afficher un histogramme des colonnes numériques')
     parser.add_argument('--benchmark', action='store_true', help='Comparer tous les modèles et afficher scores et temps')
+    parser.add_argument('--line', nargs=2, metavar=('X', 'Y'), help='Tracer une courbe (line plot) entre deux colonnes')
     args = parser.parse_args()
 
     print(f"Chargement du dataset {args.dataset if args.url is None else args.url} ...")
@@ -65,7 +66,16 @@ def main():
         for metric, value in scores.items():
             print(f"{metric}: {value:.3f}")
 
-    if args.histogram:
+    if args.line:
+        x_col, y_col = args.line
+        print(f"Génération de la courbe {y_col} en fonction de {x_col}...")
+        fig = viz.line(x_column=x_col, y_column=y_col)
+        if args.show:
+            import matplotlib.pyplot as plt
+            plt.show()
+        else:
+            print("Utilisez --show pour afficher la courbe.")
+    elif args.histogram:
         print("Génération de l'histogramme des colonnes numériques...")
         fig = viz.histogram(columns=numeric_cols, legend=True)
         if args.show:

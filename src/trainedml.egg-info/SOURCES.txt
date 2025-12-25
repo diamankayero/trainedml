@@ -1,4 +1,5 @@
 LICENSE
+README.md
 pyproject.toml
 src/trainedml/__init__.py
 src/trainedml/benchmark.py
@@ -9,6 +10,7 @@ src/trainedml/visualization.py
 src/trainedml.egg-info/PKG-INFO
 src/trainedml.egg-info/SOURCES.txt
 src/trainedml.egg-info/dependency_links.txt
+src/trainedml.egg-info/requires.txt
 src/trainedml.egg-info/top_level.txt
 src/trainedml/data/__init__.py
 src/trainedml/data/loader.py
@@ -17,6 +19,7 @@ src/trainedml/models/base.py
 src/trainedml/models/knn.py
 src/trainedml/models/logistic.py
 src/trainedml/models/random_forest.py
+src/trainedml/utils/factory.py
 src/trainedml/viz/__init__.py
 src/trainedml/viz/heatmap.py
 src/trainedml/viz/histogram.py
