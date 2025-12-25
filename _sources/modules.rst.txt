@@ -1,4 +1,3 @@
-
 trainedml - API détaillée
 =========================
 
@@ -8,78 +7,21 @@ trainedml - API détaillée
    trainedml/models/knn
    trainedml/models/logistic
    trainedml/models/random_forest
+   trainedml/visualization
+   trainedml/analyzer
+   trainedml/vizs
+   trainedml/heatmap
+   trainedml/histogram
+   trainedml/line
+   trainedml/distribution
+   trainedml/correlation
+   trainedml/missing
+   trainedml/outliers
+   trainedml/target
+   trainedml/boxplot
+   trainedml/bivariate
+   trainedml/normality
+   trainedml/multicollinearity
+   trainedml/profiling
 
-.. automodule:: trainedml
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.data.loader
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.models.base
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.models.knn
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.models.logistic
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.models.random_forest
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.viz.heatmap
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.viz.histogram
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.viz.line
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.viz.vizs
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.benchmark
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.cli
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.evaluation
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.figure
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-.. automodule:: trainedml.visualization
-   :members:
-   :undoc-members:
-   :show-inheritance:
+# Les automodule détaillés sont retirés pour éviter les doublons

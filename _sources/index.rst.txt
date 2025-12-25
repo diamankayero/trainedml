@@ -58,6 +58,7 @@ Sections de la documentation
 
    modules
 
+
 Explications mathématiques des méthodes
 =======================================
 
@@ -74,7 +75,7 @@ Explications mathématiques des méthodes
 
    (voir aussi "modules" dans le menu de gauche)
 
-.. comment:: Les blocs mathématiques sont désormais déplacés dans les pages dédiées de l'API.
+.. Les blocs mathématiques sont désormais déplacés dans les pages dédiées de l'API.
 
 
 FAQ
