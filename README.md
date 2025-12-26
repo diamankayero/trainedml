@@ -367,7 +367,7 @@ Pour toute question, suggestion ou problème :
 
 ## 🌟 Remerciements
 
-Projet réalisé individuellement sur la base d'un cahier des charges fourni par Bilel Bensaid.
+Projet réalisé individuellement sur la base d'un cahier des charges fourni par [Bilel Bensaid](https://www.linkedin.com/in/bilel-bensaid-286219181/).
 
 [Cahier des charges](https://bbensaid30.github.io/Course-Software-Development-HAX712X/Projects/2025-2026/README.html)
 
