@@ -1,0 +1,895 @@
+\documentclass[8pt]{beamer}
+
+% -------------------------------------------------
+% PACKAGES
+% -------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb}
+\usepackage{dsfont}
+\usepackage{xcolor}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+% -------------------------------------------------
+% COULEURS ET THEME
+% -------------------------------------------------
+\definecolor{astral}{RGB}{46,116,181}
+\definecolor{darkgreen}{RGB}{0,128,0}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{title}{fg=astral}
+\setbeamercolor{frametitle}{fg=astral}
+\setbeamercolor{structure}{fg=astral}
+\setbeamercolor{section in toc}{fg=astral}
+\setbeamercolor{subsection in toc}{fg=black}
+
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+
+% Logo en haut à droite
+\logo{\includegraphics[height=0.8cm]{logo_um.png}\hspace{0.2cm}}
+
+% Configuration du pied de page
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1ex,left]{author in head/foot}%
+    \hspace*{2ex}trainedml - Framework ML Pédagogique
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1ex,right]{title in head/foot}%
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% -------------------------------------------------
+% COMMANDES MATHS
+% -------------------------------------------------
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+% -------------------------------------------------
+% INFORMATIONS
+% -------------------------------------------------
+\title{\textbf{trainedml}}
+\subtitle{Framework pédagogique et modulaire de Machine Learning}
+\author{Yéro Diamanka}
+\institute{
+Master SSD - Statistique et Sciences des Données\\
+Université de Montpellier\\
+\vspace{0.2cm}
+Encadrant : Bilel Bensaid
+}
+\date{\today}
+
+% =================================================
+\begin{document}
+% =================================================
+
+% -------------------------------------------------
+% PAGE DE TITRE
+% -------------------------------------------------
+\begin{frame}[plain]
+\begin{center}
+{\color{astral}\LARGE\textbf{trainedml}}
+
+\vspace{0.4cm}
+
+{\color{astral}\Large Framework pédagogique et modulaire\\de Machine Learning en Python}
+
+\vspace{0.8cm}
+
+\textbf{Yéro Diamanka}
+
+\vspace{0.4cm}
+
+Master SSD - Statistique et Sciences des Données\\
+Université de Montpellier
+
+\vspace{0.4cm}
+
+Encadrant : \textbf{Bilel Bensaid}
+
+\vspace{0.3cm}
+
+{\small Projet HAX712X - Software Development for Data Science}
+
+\vspace{0.3cm}
+
+\today
+
+\vspace{0.4cm}
+
+\small
+\href{https://github.com/diamankayero/trainedml}{\textcolor{astral}{github.com/diamankayero/trainedml}}
+\end{center}
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}{Plan de la présentation}
+\tableofcontents
+\end{frame}
+
+
+% =================================================
+\section{Introduction}
+% =================================================
+
+\begin{frame}{Plan de la présentation}
+\tableofcontents[currentsection]
+\end{frame}
+
+% -------------------------------------------------
+\subsection{Contexte et motivation}
+% -------------------------------------------------
+\begin{frame}{Contexte du projet}
+
+\textbf{Contexte académique}
+
+Projet réalisé dans le cadre du cours HAX712X (Software Development for Data Science) du Master SSD à l'Université de Montpellier.
+
+\vspace{0.3cm}
+
+\textbf{Motivation du choix}
+
+Au-delà des projets de visualisation de données typiques, création d'un outil réutilisable pour :
+\begin{itemize}
+\item Faciliter l'apprentissage pratique du Machine Learning
+\item Appliquer les bonnes pratiques de développement logiciel
+\item Créer un package Python complet et professionnel
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Problématique}
+
+Comment construire un framework ML qui soit à la fois :
+\begin{itemize}
+\item Pédagogique (code clair, bien documenté)
+\item Modulaire et extensible (architecture robuste)
+\item Accessible (interfaces CLI, Web et API)
+\end{itemize}
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}{Objectifs du projet}
+
+\textbf{Objectifs principaux}
+
+\begin{enumerate}
+\item \textbf{Développement logiciel} : Créer un package Python professionnel
+  \begin{itemize}
+  \item Architecture orientée objet (classes, héritage, abstraction)
+  \item Tests unitaires avec pytest
+  \item Documentation avec Sphinx
+  \item Intégration continue (CI/CD)
+  \end{itemize}
+
+\item \textbf{Machine Learning} : Implémenter des algorithmes de classification
+  \begin{itemize}
+  \item KNN, Régression Logistique, Random Forest
+  \item Système de benchmark automatique
+  \end{itemize}
+
+\item \textbf{Visualisation} : Interface interactive
+  \begin{itemize}
+  \item Application web Streamlit
+  \item Graphiques interactifs (Plotly, Matplotlib)
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Public cible :} Étudiants en data science, enseignants
+\end{frame}
+
+% =================================================
+\section{Architecture du framework}
+% =================================================
+
+\begin{frame}{Plan de la présentation}
+\tableofcontents[currentsection]
+\end{frame}
+
+% -------------------------------------------------
+\subsection{Structure modulaire}
+% -------------------------------------------------
+\begin{frame}{Architecture globale}
+
+\textbf{Structure du projet}
+
+\begin{itemize}
+\item \textbf{src/trainedml/} : Package principal
+  \begin{itemize}
+  \item \texttt{models/} : Algorithmes ML (base.py, knn.py, logistic.py, random\_forest.py)
+  \item \texttt{data/} : Gestion des datasets (loaders.py)
+  \item \texttt{viz/} : Visualisations (visualization.py)
+  \item \texttt{utils/} : Utilitaires (factory pattern)
+  \item \texttt{benchmark.py} : Comparaison de modèles
+  \item \texttt{cli.py} : Interface en ligne de commande
+  \end{itemize}
+
+\item \textbf{trainedml\_webapp/} : Application Streamlit
+\item \textbf{tests/} : Tests unitaires (couverture > 80\%)
+\item \textbf{doc/} : Documentation Sphinx
+\item \textbf{slides/} : Présentation Beamer (cette présentation)
+\end{itemize}
+
+\vspace{0.2cm}
+
+\textbf{Conformité HAX712X :} Respect de toutes les exigences du cahier des charges
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}[fragile]{Hiérarchie des modèles : Pattern Template Method}
+
+\textbf{Programmation orientée objet}
+
+\begin{minted}[fontsize=\small, bgcolor=lightgray!10]{python}
+"""
+Définit l'interface commune à tous les modèles supervisés.
+"""
+from abc import ABC, abstractmethod
+
+class BaseModel(ABC):
+    """
+    Classe abstraite pour les modèles de classification.
+    Toutes les classes de modèles doivent hériter de 
+    cette classe et implémenter ses méthodes.
+    """
+    def __init__(self):
+        self.model = None  # L'objet du modèle sous-
+        jacent (scikit-learn, etc.)
+
+    @abstractmethod
+    def fit(self, X, y):
+        """Entraîne le modèle sur les données X et la 
+        cible y."""
+        pass
+
+    @abstractmethod
+    def predict(self, X):
+        pass
+
+    @abstractmethod
+    def evaluate(self, X, y):
+        pass
+\end{minted}
+
+\textbf{Avantages :} Abstraction, réutilisabilité, extensibilité
+\end{frame}
+
+% -------------------------------------------------
+\subsection{Modèles implémentés}
+% -------------------------------------------------
+\begin{frame}{Modèles disponibles}
+
+\textbf{Trois algorithmes de classification}
+
+\begin{enumerate}
+\item \textbf{K-Nearest Neighbors (KNN)}
+  \begin{itemize}
+  \item Algorithme basé sur la proximité
+  \item Paramètres : nombre de voisins $k$, métrique de distance
+  \end{itemize}
+
+\item \textbf{Régression Logistique}
+  \begin{itemize}
+  \item Modèle linéaire probabiliste
+  \item Paramètres : régularisation, solveur
+  \end{itemize}
+
+\item \textbf{Random Forest}
+  \begin{itemize}
+  \item Ensemble d'arbres de décision
+  \item Paramètres : nombre d'arbres, profondeur max
+  \end{itemize}
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\textbf{Tous les modèles héritent de} \texttt{BaseModel} et implémentent l'interface commune
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}[fragile]{Exemple : Implémentation KNN}
+
+\begin{minted}[fontsize=\footnotesize, bgcolor=lightgray!10]{python}
+from .base import BaseModel
+from sklearn.neighbors import KNeighborsClassifier
+
+class KNNModel(BaseModel):
+    """Modèle K-Nearest Neighbors."""
+    
+    def __init__(self, n_neighbors=5, metric='euclidean'):
+        super().__init__()
+        self.n_neighbors = n_neighbors
+        self.model = KNeighborsClassifier(
+            n_neighbors=n_neighbors,
+            metric=metric
+        )
+
+    def fit(self, X, y):
+        """Entraîne le modèle KNN."""
+        self.model.fit(X, y)
+        self.is_fitted = True
+        return self
+
+    def predict(self, X):
+        """Prédit les classes."""
+        if not self.is_fitted:
+            raise ValueError("Le modèle n'est pas entraîné")
+        return self.model.predict(X)
+
+    def evaluate(self, X, y):
+        """Retourne l'accuracy."""
+        return self.model.score(X, y)
+\end{minted}
+\end{frame}
+
+% =================================================
+\section{Interfaces et utilisation}
+% =================================================
+
+\begin{frame}{Plan de la présentation}
+\tableofcontents[currentsection]
+\end{frame}
+
+% -------------------------------------------------
+\subsection{Interface en ligne de commande (CLI)}
+% -------------------------------------------------
+\begin{frame}[fragile]{Utilisation du CLI}
+
+\textbf{Interface en ligne de commande avec argparse}
+
+\begin{minted}[fontsize=\small, bgcolor=lightgray!10]{bash}
+# Afficher l'aide complète
+python -m trainedml.cli --help
+
+# Benchmark automatique sur Iris
+python -m trainedml.cli --benchmark --dataset iris
+
+# Entraîner un modèle spécifique
+python -m trainedml.cli --model knn --dataset wine \
+    --n_neighbors 7
+
+# Entraîner avec visualisation
+python -m trainedml.cli --model random_forest \
+    --dataset iris --visualize --n_estimators 200
+\end{minted}
+
+\textbf{Fonctionnalités :}
+\begin{itemize}
+\item Entraînement simple ou comparaison multiple
+\item Sauvegarde des résultats (JSON, CSV)
+\item Génération de rapports automatiques
+\end{itemize}
+\end{frame}
+
+% -------------------------------------------------
+\subsection{Application web Streamlit}
+% -------------------------------------------------
+\begin{frame}[fragile]{Application web interactive}
+
+\textbf{Interface graphique avec Streamlit}
+
+\begin{minted}[fontsize=\small, bgcolor=lightgray!10]{bash}
+# Installation
+pip install -e .
+
+# Lancer l'application
+streamlit run trainedml_webapp/src/app.py
+\end{minted}
+
+\vspace{0.3cm}
+
+\textbf{Fonctionnalités de l'application :}
+\begin{enumerate}
+\item \textbf{Chargement} : Datasets intégrés (Iris, Wine, Breast Cancer) ou CSV
+\item \textbf{Exploration} : Statistiques descriptives, distributions, corrélations
+\item \textbf{Entraînement} : Configuration des modèles et hyperparamètres
+\item \textbf{Évaluation} : Métriques (accuracy, precision, recall, F1)
+\item \textbf{Visualisation} : Matrices de confusion, courbes ROC
+\item \textbf{Prédiction} : Interface pour tester sur nouvelles données
+\end{enumerate}
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}{Captures d'écran de l'application}
+
+\textbf{Interface Streamlit}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{interface_streamlit.jpeg}
+\end{center}
+
+\vspace{0.2cm}
+
+\textbf{Widgets interactifs :} Sliders, selectbox, file uploader, boutons
+\end{frame}
+
+% -------------------------------------------------
+\subsection{API Python}
+% -------------------------------------------------
+\begin{frame}[fragile]{Utilisation programmatique}
+
+\textbf{API Python simple et intuitive}
+
+\begin{minted}[fontsize=\small, bgcolor=lightgray!10]{python}
+from trainedml import Trainer
+from trainedml.data import load_dataset
+
+# Charger les données
+X_train, X_test, y_train, y_test = load_dataset("iris")
+
+# Créer et entraîner un modèle
+trainer = Trainer(model="random_forest", n_estimators=100)
+trainer.fit(X_train, y_train)
+
+# Évaluer les performances
+results = trainer.evaluate(X_test, y_test)
+print(f"Accuracy: {results['accuracy']:.3f}")
+
+# Faire des prédictions
+predictions = trainer.predict(X_test)
+
+# Sauvegarder le modèle
+trainer.save("my_model.pkl")
+\end{minted}
+
+\textbf{Intégration facile} dans notebooks Jupyter ou scripts
+\end{frame}
+
+% =================================================
+\section{Fonctionnalités avancées}
+% =================================================
+
+\begin{frame}{Plan de la présentation}
+\tableofcontents[currentsection]
+\end{frame}
+
+% -------------------------------------------------
+\subsection{Système de benchmark}
+% -------------------------------------------------
+\begin{frame}{Comparaison automatique de modèles}
+
+\textbf{Module benchmark.py}
+
+Fonctionnalité clé pour comparer les performances :
+
+\begin{itemize}
+\item \textbf{Entraînement automatique} : Tous les modèles disponibles
+\item \textbf{Validation croisée} : 5-fold CV pour robustesse
+\item \textbf{Métriques multiples} :
+  \begin{itemize}
+  \item Accuracy, Precision, Recall, F1-Score
+  \item Temps d'entraînement et de prédiction
+  \item Utilisation mémoire
+  \end{itemize}
+\item \textbf{Visualisations} :
+  \begin{itemize}
+  \item Tableau comparatif
+  \item Graphiques de performances
+  \item Matrices de confusion côte à côte
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.2cm}
+
+\textbf{Objectif :} Identifier le meilleur modèle pour un problème donné
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}[fragile]{Exemple de benchmark}
+
+\begin{minted}[fontsize=\footnotesize, bgcolor=lightgray!10]{python}
+from .evaluation import Evaluator
+import time
+
+class Benchmark:
+    def __init__(self, models):
+    
+        self.models = models
+
+    def run(self, X_train, y_train, X_test, y_test):
+        results = {}
+        for name, model in self.models.items():
+            # Mesure du temps d'entraînement
+            start_fit = time.time()
+            model.fit(X_train, y_train)
+            fit_time = time.time() - start_fit
+
+            # Mesure du temps de prédiction
+            start_pred = time.time()
+            y_pred = model.predict(X_test)
+            predict_time = time.time() - start_pred
+
+            scores = Evaluator.evaluate_all(y_test, y_pred)
+            results[name] = {
+                'scores': scores,
+                'fit_time': fit_time,
+                'predict_time': predict_time
+            }
+        return results
+
+\end{minted}
+
+\textbf{Sortie :} DataFrame pandas + graphiques + rapport JSON
+\end{frame}
+
+% -------------------------------------------------
+\subsection{Visualisation des données}
+% -------------------------------------------------
+\begin{frame}{Outils de visualisation}
+
+\textbf{Module visualization.py}
+
+Fonctions de visualisation pour l'analyse exploratoire :
+
+\begin{itemize}
+\item \textbf{Distributions} : Histogrammes, boxplots, violin plots
+\item \textbf{Relations} : Scatter plots, heatmap de corrélation
+\item \textbf{Performances} :
+  \begin{itemize}
+  \item Matrices de confusion
+  \item Courbes ROC et AUC
+  \item Courbes d'apprentissage (learning curves)
+  \item Feature importance (pour Random Forest)
+  \end{itemize}
+\item \textbf{Interactivité} : Support Plotly pour graphiques interactifs
+\end{itemize}
+
+\vspace{0.2cm}
+
+\textbf{Architecture :} Classes abstraites pour supporter différents backends (Matplotlib, Plotly, Seaborn)
+\end{frame}
+
+% =================================================
+\section{Aspects logiciels (HAX712X)}
+% =================================================
+
+\begin{frame}{Plan de la présentation}
+\tableofcontents[currentsection]
+\end{frame}
+
+% -------------------------------------------------
+\subsection{Tests et qualité du code}
+% -------------------------------------------------
+\begin{frame}[fragile]{Tests unitaires et intégration continue}
+
+\textbf{Tests avec pytest (couverture > 80\%)}
+
+\begin{minted}[fontsize=\small, bgcolor=lightgray!10]{python}
+# tests/test_models/test_knn.py
+import unittest
+from trainedml.data.loader import DataLoader
+from trainedml.models.knn import KNNModel
+from sklearn.model_selection import train_test_split
+
+class TestKNNModel(unittest.TestCase):
+    def setUp(self):
+        # Chargement du dataset Iris depuis une URL publique
+        X, y = DataLoader().load_dataset(name="iris")
+        self.X_train, self.X_test, self.y_train, self.y_test =
+        train_test_split(X, y, test_size=0.3, random_state=42)
+
+    def test_fit_predict(self):
+        #Teste l'entraînement et la prédiction du modèle KNN sur Iris.
+        model = KNNModel(n_neighbors=3)
+        model.fit(self.X_train, self.y_train)
+        preds = model.predict(self.X_test)
+        self.assertEqual(len(preds), len(self.y_test))
+
+    def test_evaluate(self):
+        model = KNNModel(n_neighbors=3)
+        model.fit(self.X_train, self.y_train)
+        score = model.evaluate(self.X_test, self.y_test)
+        self.assertTrue(0.0 <= score <= 1.0)
+
+if __name__ == '__main__':
+    unittest.main()
+\end{minted}
+
+\textbf{CI/CD :} GitHub Actions pour tests automatiques à chaque commit
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}{Qualité du code et bonnes pratiques}
+
+\textbf{Respect des standards Python}
+
+\begin{itemize}
+\item \textbf{PEP 8} : Style de code conforme
+\item \textbf{Type hints} : Annotations de types pour clarté
+\item \textbf{Docstrings} : Google style pour toutes les fonctions/classes
+\item \textbf{Linting} : Vérification avec pylint, flake8
+\item \textbf{Formatting} : Code formaté avec black
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Gestion de version}
+
+\begin{itemize}
+\item \textbf{Git} : Branches multiples (main, dev, feature/*)
+\item \textbf{.gitignore} : Exclusion fichiers inutiles (\texttt{\_\_pycache\_\_}, \texttt{.pytest\_cache}, etc.)
+\item \textbf{Commits} : Messages clairs et descriptifs
+\item \textbf{Merge} : Pull requests avec revue de code
+\end{itemize}
+\end{frame}
+
+% -------------------------------------------------
+\subsection{Documentation}
+% -------------------------------------------------
+\begin{frame}{Documentation complète}
+
+\textbf{Documentation multi-niveaux}
+
+\begin{enumerate}
+\item \textbf{README.md principal}
+  \begin{itemize}
+  \item Description du projet
+  \item Installation (\texttt{pip install -e .})
+  \item Exemples d'utilisation
+  \item Structure du projet
+  \item Licence (MIT)
+  \end{itemize}
+
+\item \textbf{Documentation API (Sphinx)}
+  \begin{itemize}
+  \item API complète générée automatiquement
+  \item Tutoriels et guides
+  \item Déployée sur GitHub Pages
+  \end{itemize}
+
+\item \textbf{Docstrings dans le code}
+  \begin{itemize}
+  \item Format Google style
+  \item Descriptions, paramètres, retours, exemples
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+% -------------------------------------------------
+\subsection{Performance et optimisation}
+% -------------------------------------------------
+\begin{frame}[fragile]{Évaluation temps/mémoire}
+
+\textbf{Profiling et optimisation}
+
+\begin{minted}[fontsize=\small, bgcolor=lightgray!10]{python}
+"""
+Module d'évaluation des modèles de classification pour trainedml.
+"""
+from sklearn.metrics import accuracy_score,
+precision_score, recall_score, f1_score
+
+class Evaluator:
+    """
+    Classe utilitaire pour évaluer les performances d'un 
+    modèle de classification.
+    """
+    @staticmethod
+    def evaluate_all(y_true, y_pred):
+        
+        return {
+            'accuracy': accuracy_score(y_true, y_pred),
+            'precision': precision_score(y_true, y_pred, 
+            average='weighted', zero_division=0),
+            'recall': recall_score(y_true, y_pred, 
+            average='weighted', zero_division=0),
+            'f1': f1_score(y_true, y_pred, 
+            average='weighted', zero_division=0)
+        }
+
+\end{minted}
+
+\end{frame}
+
+% =================================================
+\section{Démonstration}
+% =================================================
+
+\begin{frame}{Plan de la présentation}
+\tableofcontents[currentsection]
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}{Démonstration pratique}
+
+\textbf{Scénario : Classification du dataset Iris}
+
+\begin{enumerate}
+\item \textbf{Chargement et exploration}
+  \begin{itemize}
+  \item 150 échantillons, 3 espèces, 4 features
+  \item Visualisation des distributions
+  \item Matrice de corrélation
+  \end{itemize}
+
+\item \textbf{Benchmark des modèles}
+  \begin{itemize}
+  \item Comparaison KNN, Logistic, Random Forest
+  \item Métriques de performance
+  \item Temps d'exécution
+  \end{itemize}
+
+\item \textbf{Entraînement du meilleur modèle}
+  \begin{itemize}
+  \item Configuration des hyperparamètres
+  \item Visualisation de la matrice de confusion
+  \end{itemize}
+
+\item \textbf{Prédictions interactives}
+  \begin{itemize}
+  \item Test sur nouvelles observations
+  \end{itemize}
+\end{enumerate}
+
+\vspace{0.2cm}
+
+\textbf{Démonstration live de l'application Streamlit}
+\end{frame}
+
+% =================================================
+\section{Conclusion et perspectives}
+% =================================================
+
+\begin{frame}{Plan de la présentation}
+\tableofcontents[currentsection]
+\end{frame}
+
+% -------------------------------------------------
+\subsection{Bilan}
+% -------------------------------------------------
+\begin{frame}{Réalisations}
+
+\textbf{Conformité avec le cahier des charges HAX712X}
+
+\begin{itemize}
+\item \textcolor{darkgreen}{\checkmark} \textbf{Programmation objet} : Classes, héritage, abstraction
+\item \textcolor{darkgreen}{\checkmark} \textbf{Tests unitaires} : Pytest, couverture > 80\%
+\item \textcolor{darkgreen}{\checkmark} \textbf{Documentation} : Sphinx + docstrings + README
+\item \textcolor{darkgreen}{\checkmark} \textbf{CI/CD} : GitHub Actions
+\item \textcolor{darkgreen}{\checkmark} \textbf{Git} : Branches multiples, .gitignore
+\item \textcolor{darkgreen}{\checkmark} \textbf{Profiling} : Temps/mémoire évalués
+\item \textcolor{darkgreen}{\checkmark} \textbf{Interface interactive} : Application Streamlit
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Points bonus obtenus :}
+\begin{itemize}
+\item Architecture fortement orientée objet
+\item Chargement automatique des datasets (pooch)
+\item Évaluation performances temps/mémoire
+\item Originalité : framework ML complet
+\end{itemize}
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}{Retour d'expérience}
+
+\textbf{Difficultés rencontrées}
+
+\begin{itemize}
+\item Conception d'une architecture modulaire et extensible
+\item Gestion des dépendances et compatibilité des versions
+\item Déploiement de l'application Streamlit
+\item Tests de tous les cas limites (edge cases)
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Compétences acquises}
+
+\begin{itemize}
+\item Développement d'un package Python professionnel
+\item Maîtrise de Git et GitHub (branches, merges, CI/CD)
+\item Tests unitaires et intégration continue
+\item Documentation technique (Sphinx)
+\item Création d'interfaces utilisateur (CLI, Web)
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Impact pédagogique :} Outil réutilisable pour l'enseignement du ML
+\end{frame}
+
+% -------------------------------------------------
+\subsection{Perspectives}
+% -------------------------------------------------
+\begin{frame}{Évolutions futures}
+
+\textbf{Améliorations à court terme}
+
+\begin{enumerate}
+\item \textbf{Nouveaux algorithmes}
+  \begin{itemize}
+  \item SVM (Support Vector Machines)
+  \item Naive Bayes
+  \item Gradient Boosting (XGBoost, LightGBM)
+  \end{itemize}
+
+\item \textbf{Fonctionnalités avancées}
+  \begin{itemize}
+  \item GridSearchCV pour optimisation automatique
+  \item Feature selection et engineering
+  \item Cross-validation stratifiée
+  \end{itemize}
+
+\item \textbf{Extensions}
+  \begin{itemize}
+  \item Support de la régression (en plus de la classification)
+  \item Clustering (K-means, DBSCAN, Hierarchical)
+  \item Réduction de dimensionnalité (PCA, t-SNE, UMAP)
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}{Perspectives à long terme}
+
+\textbf{Vision future du projet}
+
+\begin{itemize}
+\item \textbf{Deep Learning} : Intégration de réseaux de neurones (PyTorch/TensorFlow)
+\item \textbf{AutoML} : Sélection automatique du meilleur modèle
+\item \textbf{Explainability} : SHAP values, LIME pour interpréter les modèles
+\item \textbf{Production} : API REST pour déploiement en production
+\item \textbf{Scalabilité} : Support de gros datasets (Dask, PySpark)
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Communauté}
+
+\begin{itemize}
+\item Publication sur PyPI pour installation via \texttt{pip install trainedml}
+\item Contributions open source bienvenues
+\item Création d'une documentation utilisateur complète
+\item Tutoriels vidéo et exemples d'utilisation
+\end{itemize}
+\end{frame}
+
+% -------------------------------------------------
+\begin{frame}[plain]
+\begin{center}
+{\color{astral}\LARGE\textbf{Merci de votre attention !}}
+
+\vspace{0.8cm}
+
+{\Large Questions ?}
+
+\vspace{1cm}
+
+\textbf{Liens et ressources}
+
+\vspace{0.3cm}
+
+\href{https://github.com/diamankayero/trainedml}{\textcolor{astral}{github.com/diamankayero/trainedml}}
+
+\vspace{0.2cm}
+
+{\small Documentation, code source, exemples}
+
+\vspace{0.5cm}
+
+\href{https://bbensaid30.github.io/Course-Software-Development-HAX712X/}{\textcolor{astral}{HAX712X Course Page}}
+
+\vspace{0.2cm}
+
+{\small Cours Software Development for Data Science}
+
+\vspace{0.8cm}
+
+\textit{Contributions et feedback bienvenus !}
+
+\vspace{0.2cm}
+
+\end{center}
+\end{frame}
+
+\end{document}
