@@ -123,7 +123,6 @@ trainedml/
 │   ├── random_forest.py
 │   └── __init__.py
 ├── utils/                # Fonctions utilitaires
-│   ├── factory.py
 │   └── __init__.py
 ├── viz/                  # Visualisations avancées
 │   ├── bivariate.py
