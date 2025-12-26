@@ -18,6 +18,7 @@
 
 ---
 
+
 ## 📋 Présentation
 
 **trainedml** est un framework Python conçu pour l'apprentissage et la comparaison de modèles de machine learning sur des jeux de données classiques ou personnalisés. 
@@ -31,6 +32,118 @@
 - **Documentation complète** : Documentation Sphinx et tests unitaires
 
 ---
+
+## 🗂️ Diagramme de Gantt
+
+
+<p align="center">
+   <img src="public/TrainedML_7days_diagram_gantt.png" alt="Diagramme de Gantt du projet" width="600"/>
+</p>
+
+---
+
+## 🏗️ Architecture finale du projet
+
+Le projet est organisé en plusieurs dossiers principaux :
+
+```
+trainedml/
+│
+├── src/trainedml/              # Package principal (API, CLI, modèles, visualisation)
+│   ├── __init__.py             # Point d'entrée du package (Trainer)
+│   ├── analyzer.py             # Analyse exploratoire
+│   ├── benchmark.py            # Comparaison de modèles
+│   ├── cli.py                  # Interface ligne de commande
+│   ├── evaluation.py           # Métriques d'évaluation
+│   ├── figure.py               # Génération de figures
+│   ├── visualization.py        # Outils de visualisation
+│   ├── data/                   # Chargement et gestion des données
+│   │   ├── loader.py
+│   │   └── __init__.py
+│   ├── models/                 # Implémentations des modèles ML
+│   │   ├── base.py
+│   │   ├── factory.py
+│   │   ├── knn.py
+│   │   ├── logistic.py
+│   │   ├── random_forest.py
+│   │   └── __init__.py
+│   ├── utils/                  # Fonctions utilitaires
+│   │   ├── factory.py
+│   │   └── __init__.py
+│   ├── viz/                    # Visualisations spécialisées
+│   │   ├── bivariate.py
+│   │   ├── boxplot.py
+│   │   ├── correlation.py
+│   │   ├── distribution.py
+│   │   ├── heatmap.py
+│   │   ├── histogram.py
+│   │   ├── line.py
+│   │   ├── missing.py
+│   │   ├── multicollinearity.py
+│   │   ├── normality.py
+│   │   ├── outliers.py
+│   │   ├── profiling.py
+│   │   ├── target.py
+│   │   ├── vizs.py
+│   │   └── __init__.py
+│
+├── tests/                      # Tests unitaires
+├── trainedml_webapp/           # Application Streamlit
+│   ├── src/app.py
+│   └── doc/
+├── doc/                        # Documentation Sphinx
+├── requirements.txt            # Dépendances Python
+├── pyproject.toml              # Configuration du projet
+└── README.md                   # Ce fichier
+```
+
+---
+
+## 📦 Structure du package trainedml
+
+Le package Python se trouve dans `trainedml/src/trainedml/` et contient :
+
+```
+trainedml/
+├── __init__.py           # API principale (Trainer)
+├── analyzer.py           # Analyse exploratoire
+├── benchmark.py          # Benchmark des modèles
+├── cli.py                # Interface CLI
+├── evaluation.py         # Métriques d'évaluation
+├── figure.py             # Génération de figures
+├── visualization.py      # Outils de visualisation
+├── data/                 # Chargement des données
+│   ├── loader.py
+│   └── __init__.py
+├── models/               # Modèles ML
+│   ├── base.py
+│   ├── factory.py
+│   ├── knn.py
+│   ├── logistic.py
+│   ├── random_forest.py
+│   └── __init__.py
+├── utils/                # Fonctions utilitaires
+│   ├── factory.py
+│   └── __init__.py
+├── viz/                  # Visualisations avancées
+│   ├── bivariate.py
+│   ├── boxplot.py
+│   ├── correlation.py
+│   ├── distribution.py
+│   ├── heatmap.py
+│   ├── histogram.py
+│   ├── line.py
+│   ├── missing.py
+│   ├── multicollinearity.py
+│   ├── normality.py
+│   ├── outliers.py
+│   ├── profiling.py
+│   ├── target.py
+│   ├── vizs.py
+│   └── __init__.py
+```
+
+Chaque module est documenté et organisé pour faciliter l’extension et la maintenance.
 
 ## 🚀 Installation
 
