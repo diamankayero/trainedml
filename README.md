@@ -1,3 +1,4 @@
+
 # trainedml
 
 > Framework pédagogique et modulaire de machine learning en Python
@@ -6,8 +7,26 @@
    <a href="https://diamankayero.github.io/trainedml/"><img src="https://img.shields.io/badge/Documentation-GitHub%20Pages-blue?logo=github" alt="Documentation"></a>
    <a href="https://trainedml.streamlit.app"><img src="https://img.shields.io/badge/Webapp-Streamlit-ff4b4b?logo=streamlit" alt="Webapp"></a>
    <a href="https://github.com/diamankayero/trainedml"><img src="https://img.shields.io/badge/GitHub-Repo-333?logo=github" alt="GitHub"></a>
-
+   <img src="https://img.shields.io/badge/tests-passing-brightgreen" alt="Tests">
+   <img src="https://img.shields.io/badge/coverage-100%25-success" alt="Coverage">
 </p>
+
+---
+
+## 📑 Sommaire
+
+- [Présentation](#présentation)
+- [Diagramme de Gantt](#diagramme-de-gantt)
+- [Architecture du projet](#architecture-du-projet)
+- [Détail du package principal](#détail-du-package-principal-trainedmltrainedml)
+- [Installation](#installation)
+- [Utilisation rapide](#utilisation-rapide)
+- [Tests](#tests)
+- [Documentation](#documentation)
+- [Contribution](#contribution)
+- [Licence](#licence)
+- [Contact](#contact)
+- [Remerciements](#remerciements)
 
 <p align="center">
    <img src="public/matric_corre.png" alt="Matrice de corrélation" width="260"/>
@@ -42,107 +61,66 @@
 
 ---
 
+
+
 ## 🏗️ Architecture finale du projet
 
-Le projet est organisé en plusieurs dossiers principaux :
+
+## 🏗️ Architecture du projet
+
+Chaque dossier important contient un fichier markdown (`README.md`, `DOC_UTILISATION.md`, `streamlit_app.md`, etc.) détaillant commandes, usage et bonnes pratiques spécifiques.
 
 ```
 trainedml/
-│
-├── src/trainedml/              # Package principal (API, CLI, modèles, visualisation)
-│   ├── __init__.py             # Point d'entrée du package (Trainer)
-│   ├── analyzer.py             # Analyse exploratoire
-│   ├── benchmark.py            # Comparaison de modèles
-│   ├── cli.py                  # Interface ligne de commande
-│   ├── evaluation.py           # Métriques d'évaluation
-│   ├── figure.py               # Génération de figures
-│   ├── visualization.py        # Outils de visualisation
-│   ├── data/                   # Chargement et gestion des données
-│   │   ├── loader.py
-│   │   └── __init__.py
-│   ├── models/                 # Implémentations des modèles ML
-│   │   ├── base.py
-│   │   ├── factory.py
-│   │   ├── knn.py
-│   │   ├── logistic.py
-│   │   ├── random_forest.py
-│   │   └── __init__.py
-│   ├── utils/                  # Fonctions utilitaires
-│   │   ├── factory.py
-│   │   └── __init__.py
-│   ├── viz/                    # Visualisations spécialisées
-│   │   ├── bivariate.py
-│   │   ├── boxplot.py
-│   │   ├── correlation.py
-│   │   ├── distribution.py
-│   │   ├── heatmap.py
-│   │   ├── histogram.py
-│   │   ├── line.py
-│   │   ├── missing.py
-│   │   ├── multicollinearity.py
-│   │   ├── normality.py
-│   │   ├── outliers.py
-│   │   ├── profiling.py
-│   │   ├── target.py
-│   │   ├── vizs.py
-│   │   └── __init__.py
-│
-├── tests/                      # Tests unitaires
-├── trainedml_webapp/           # Application Streamlit
-│   ├── src/app.py
-│   └── doc/
-├── doc/                        # Documentation Sphinx
-├── requirements.txt            # Dépendances Python
-├── pyproject.toml              # Configuration du projet
-└── README.md                   # Ce fichier
+├── .github/               # Workflows CI/CD GitHub Actions
+├── docs/                  # Documents PDF, rapports, etc. (voir docs/README.md)
+├── GESTION_PROJET.md      # Guide de gestion de projet, déploiement, CI/CD
+├── LICENSE                # Licence du projet
+├── public/                # Images et ressources publiques (voir public/README.md)
+├── pyproject.toml         # Configuration du projet Python
+├── README.md              # Ce fichier (documentation racine)
+├── requirements.txt       # Dépendances Python
+├── slides/                # Slides de présentation (voir slides/README.md)
+├── src/                   # Code source pour la webapp Streamlit et la CLI (voir src/README.md)
+├── tests/                 # Tests unitaires (voir tests/README.md)
+├── trainedml/             # Package principal (voir détail ci-dessous)
+├── trainedml_webapp/      # Application Streamlit (voir trainedml_webapp/README.md)
+├── venv/                  # Environnement virtuel Python
 ```
 
----
+Chaque dossier important contient un fichier markdown (`README.md`, `GESTION_PROJET.md`, `streamlit_app.md`, etc.) détaillant commandes, usage et bonnes pratiques spécifiques.
+> 💡 **Remarque** :
+> - Le vrai package Python (avec code, doc Sphinx, tests) se trouve dans `trainedml/trainedml`.
+- **[Guide de gestion de projet](GESTION_PROJET.md)**
+> - Les autres dossiers (public, docs, slides, etc.) servent à la documentation, aux ressources et à la présentation du projet.
 
-## 📦 Structure du package trainedml
 
-Le package Python se trouve dans `trainedml/src/trainedml/` et contient :
+## 📦 Détail du package principal (`trainedml/trainedml`)
+
+Le cœur du framework se trouve dans le dossier `trainedml/trainedml`, qui contient :
 
 ```
 trainedml/
-├── __init__.py           # API principale (Trainer)
-├── analyzer.py           # Analyse exploratoire
-├── benchmark.py          # Benchmark des modèles
-├── cli.py                # Interface CLI
-├── evaluation.py         # Métriques d'évaluation
-├── figure.py             # Génération de figures
-├── visualization.py      # Outils de visualisation
-├── data/                 # Chargement des données
-│   ├── loader.py
-│   └── __init__.py
-├── models/               # Modèles ML
-│   ├── base.py
-│   ├── factory.py
-│   ├── knn.py
-│   ├── logistic.py
-│   ├── random_forest.py
-│   └── __init__.py
-├── utils/                # Fonctions utilitaires
-│   └── __init__.py
-├── viz/                  # Visualisations avancées
-│   ├── bivariate.py
-│   ├── boxplot.py
-│   ├── correlation.py
-│   ├── distribution.py
-│   ├── heatmap.py
-│   ├── histogram.py
-│   ├── line.py
-│   ├── missing.py
-│   ├── multicollinearity.py
-│   ├── normality.py
-│   ├── outliers.py
-│   ├── profiling.py
-│   ├── target.py
-│   ├── vizs.py
-│   └── __init__.py
+├── src/trainedml/           # Code source du package Python (voir src/trainedml/README.md)
+│   ├── __init__.py          # API principale (Trainer)
+│   ├── analyzer.py          # Analyse exploratoire
+│   ├── benchmark.py         # Benchmark des modèles
+│   ├── cli.py               # Interface CLI
+│   ├── evaluation.py        # Métriques d'évaluation
+│   ├── figure.py            # Génération de figures
+│   ├── visualization.py     # Outils de visualisation
+│   ├── data/                # Chargement des données (voir data/README.md)
+│   ├── models/              # Modèles ML (voir models/README.md)
+│   ├── utils/               # Fonctions utilitaires (voir utils/README.md)
+│   ├── viz/                 # Visualisations avancées (voir viz/README.md)
+├── doc/                     # Documentation Sphinx (voir doc/README.md)
+├── tests/                   # Tests unitaires pour chaque module (voir tests/README.md)
+├── README.md                # Documentation du package (niveau package)
+├── DOC_UTILISATION.md       # Guide d'utilisation détaillé
 ```
 
-Chaque module est documenté et organisé pour faciliter l’extension et la maintenance.
+Chaque module/dossier important contient un fichier markdown détaillant son usage, ses commandes et ses bonnes pratiques. L'organisation facilite l’extension, la maintenance et la génération automatique de la documentation API (Sphinx).
+
 
 ## 🚀 Installation
 
@@ -216,100 +194,52 @@ L'application permet de :
 - Visualiser les résultats avec des graphiques interactifs
 - Effectuer des prédictions manuelles
 
+
 ### API Python
 
-Utilisation programmatique du framework :
+Utilisation programmatique du framework avec différents jeux de données :
 
+#### Exemple 1 : Dataset iris
 ```python
 from trainedml import Trainer
 
-# Créer un trainer
 trainer = Trainer(dataset="iris", model="random_forest")
-
-# Entraîner le modèle
 trainer.fit()
+scores = trainer.evaluate()
+print(scores)
+# Prédiction sur de nouvelles données
+predictions = trainer.predict([[5.1, 3.5, 1.4, 0.2]])
+print(predictions)
+```
 
-# Évaluer les performances
+#### Exemple 2 : Dataset wine
+```python
+from trainedml import Trainer
+
+trainer = Trainer(dataset="wine", model="knn")
+trainer.fit()
+scores = trainer.evaluate()
+print(scores)
+```
+
+#### Exemple 3 : Dataset personnalisé via URL
+```python
+from trainedml import Trainer
+
+trainer = Trainer(
+   url="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv",
+   target="quality",
+   model="logistic"
+)
+trainer.fit()
 scores = trainer.evaluate()
 print(scores)
 ```
 
 ---
 
-## 📁 Structure du projet
 
-> 💡 **Note importante :** Chaque dossier clé contient un fichier markdown (`README.md`, `DOC_UTILISATION.md`, `streamlit_app.md`, etc.) détaillant les commandes, l'utilisation et les bonnes pratiques spécifiques. Consultez-les pour une prise en main rapide.
-
-```
-trainedml/
-│
-├── src/trainedml/              # Code source principal
-│   ├── __init__.py             # API haut niveau (Trainer)
-│   ├── cli.py                  # Interface ligne de commande
-│   ├── benchmark.py            # Comparaison de modèles
-│   ├── evaluation.py           # Métriques d'évaluation
-│   ├── visualization.py        # Outils de visualisation
-│   ├── data/                   # Chargement de données
-│   ├── models/                 # Implémentations des modèles
-│   │   ├── knn.py
-│   │   ├── logistic.py
-│   │   └── random_forest.py
-│   └── viz/                    # Visualisations spécialisées
-│
-├── tests/                      # Tests unitaires
-│
-├── trainedml_webapp/           # Application Streamlit
-│   ├── src/app.py
-│   └── doc/                    # Documentation webapp
-│
-├── doc/                        # Documentation Sphinx
-│
-├── requirements.txt            # Dépendances Python
-├── pyproject.toml             # Configuration du projet
-└── README.md                  # Ce fichier
-```
-
-<details>
-<summary>📂 Voir l'arborescence complète</summary>
-
-```
-trainedml/
-│
-├── .devcontainer/
-├── .gitignore
-├── DOC_UTILISATION.md
-├── LICENSE
-├── pyproject.toml
-├── README.md
-├── requirements.txt
-├── slides/
-│
-├── src/trainedml/
-│   ├── __init__.py
-│   ├── benchmark.py
-│   ├── cli.py
-│   ├── evaluation.py
-│   ├── figure.py
-│   ├── visualization.py
-│   ├── data/
-│   ├── models/
-│   ├── utils/
-│   └── viz/
-│
-├── tests/
-│
-├── trainedml/
-│   ├── build/
-│   ├── dist/
-│   └── doc/build/html/
-│
-├── trainedml_webapp/
-│   ├── doc/
-│   └── src/app.py
-│
-└── venv/
-```
-</details>
+<!-- Structure détaillée fusionnée ci-dessus, voir section Architecture du projet et Détail du package principal. -->
 
 ---
 

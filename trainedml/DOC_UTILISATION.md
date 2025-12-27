@@ -157,22 +157,58 @@ python -m trainedml.cli --url https://mon-site.fr/mon-dataset.csv --target class
 
 Le module téléchargera le fichier (une seule fois grâce à pooch), le lira, et utilisera la colonne `classe` comme cible pour l’entraînement et la prédiction.
 
+
 ### Utilisation avancée en Python
 
-Tu peux aussi utiliser l’API Trainer directement :
+Tu peux utiliser l’API Trainer directement avec différents jeux de données :
 
+#### Exemple 1 : Dataset iris
+```python
+from trainedml import Trainer
+
+trainer = Trainer(dataset="iris", model="random_forest")
+trainer.fit()
+print(trainer.evaluate())
+print(trainer.predict([[5.1, 3.5, 1.4, 0.2]]))
+```
+
+#### Exemple 2 : Dataset wine
+```python
+from trainedml import Trainer
+
+trainer = Trainer(dataset="wine", model="knn")
+trainer.fit()
+print(trainer.evaluate())
+```
+
+#### Exemple 3 : Dataset personnalisé via URL
 ```python
 from trainedml import Trainer
 
 trainer = Trainer(
-  url="https://mon-site.fr/mon-dataset.csv",
-  target="classe",
-  model="logistic"
+    url="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv",
+    target="quality",
+    model="logistic"
 )
 trainer.fit()
 print(trainer.evaluate())
-print(trainer.predict([[1.2, 3.4, 5.6, 7.8]]))
 ```
+
+#### Exemple 4 : Visualisation avancée (heatmap)
+```python
+import pandas as pd
+from trainedml.viz.heatmap import plot_heatmap
+
+# Exemple avec le dataset iris
+from sklearn.datasets import load_iris
+data = load_iris(as_frame=True)
+df = data['frame']
+
+# Afficher la heatmap de corrélation
+plot_heatmap(df)
+```
+
+> Remarque : Les modules de `trainedml.viz` acceptent généralement un DataFrame pandas en entrée et affichent directement la figure avec matplotlib/seaborn.
 
 ### Remarque
 
