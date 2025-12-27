@@ -13,12 +13,13 @@
 
 ---
 
-## 📑 Sommaire
+
+## Sommaire
 
 - [Présentation](#présentation)
 - [Diagramme de Gantt](#diagramme-de-gantt)
 - [Architecture du projet](#architecture-du-projet)
-- [Détail du package principal](#détail-du-package-principal-trainedmltrainedml)
+- [Détail du package principal](#détail-du-package-principal)
 - [Installation](#installation)
 - [Utilisation rapide](#utilisation-rapide)
 - [Tests](#tests)
@@ -38,7 +39,7 @@
 ---
 
 
-## 📋 Présentation
+## Présentation
 
 **trainedml** est un framework Python conçu pour l'apprentissage et la comparaison de modèles de machine learning sur des jeux de données classiques ou personnalisés. 
 
@@ -52,7 +53,7 @@
 
 ---
 
-## 🗂️ Diagramme de Gantt
+## Diagramme de Gantt
 
 
 <p align="center">
@@ -63,10 +64,7 @@
 
 
 
-## 🏗️ Architecture finale du projet
-
-
-## 🏗️ Architecture du projet
+## Architecture du projet
 
 Chaque dossier important contient un fichier markdown (`README.md`, `DOC_UTILISATION.md`, `streamlit_app.md`, etc.) détaillant commandes, usage et bonnes pratiques spécifiques.
 
@@ -95,7 +93,7 @@ Chaque dossier important contient un fichier markdown (`README.md`, `GESTION_PRO
 > - Les autres dossiers (public, docs, slides, etc.) servent à la documentation, aux ressources et à la présentation du projet.
 
 
-## 📦 Détail du package principal (`trainedml/trainedml`)
+## Détail du package principal
 
 Le cœur du framework se trouve dans le dossier `trainedml/trainedml`, qui contient :
 
@@ -122,7 +120,7 @@ trainedml/
 Chaque module/dossier important contient un fichier markdown détaillant son usage, ses commandes et ses bonnes pratiques. L'organisation facilite l’extension, la maintenance et la génération automatique de la documentation API (Sphinx).
 
 
-## 🚀 Installation
+## Installation
 
 ### Prérequis
 - Python 3.9 ou supérieur
@@ -160,7 +158,7 @@ Chaque module/dossier important contient un fichier markdown détaillant son usa
 
 ---
 
-## 💻 Utilisation rapide
+## Utilisation rapide
 
 ### Interface en ligne de commande (CLI)
 
@@ -243,7 +241,7 @@ print(scores)
 
 ---
 
-## 🧪 Tests
+## Tests
 
 Exécuter les tests unitaires :
 ```bash
@@ -258,7 +256,7 @@ python -m unittest discover tests/
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 La documentation complète est disponible à plusieurs endroits :
 
@@ -269,7 +267,7 @@ La documentation complète est disponible à plusieurs endroits :
 
 ---
 
-## 🤝 Contribution
+## Contribution
 
 Les contributions sont les bienvenues ! Pour contribuer :
 
@@ -281,13 +279,13 @@ Les contributions sont les bienvenues ! Pour contribuer :
 
 ---
 
-## 📝 Licence
+## Licence
 
 Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
 ---
 
-## 📧 Contact
+## Contact
 
 Pour toute question, suggestion ou problème :
 - Ouvrez une [issue](https://github.com/diamankayero/trainedml/issues) sur GitHub
@@ -295,7 +293,7 @@ Pour toute question, suggestion ou problème :
 
 ---
 
-## 🌟 Remerciements
+## Remerciements
 
 Projet réalisé individuellement sur la base d'un cahier des charges fourni par [Bilel Bensaid](https://www.linkedin.com/in/bilel-bensaid-286219181/).
 
