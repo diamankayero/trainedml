@@ -180,6 +180,26 @@ print(trainer.predict([[1.2, 3.4, 5.6, 7.8]]))
 - Pour tout autre dataset, utilise `--url` et `--target`.
 
 ---
+
+## Exécution des tests unitaires
+
+Pour vérifier le bon fonctionnement de toutes les briques du projet, tu peux exécuter les tests unitaires avec les commandes suivantes (à lancer depuis la racine du projet) :
+
+### Avec unittest (inclus dans Python)
+```bash
+python -m unittest discover -s /trainedml/tests
+```
+
+### Avec pytest (plus lisible, nécessite installation)
+```bash
+pip install pytest
+pytest trainedml/trainedml/tests
+```
+
+Tous les fichiers test_*.py seront exécutés automatiquement. Les résultats s'affichent dans le terminal (succès, échecs, erreurs).
+
+---
+
 ## Architecture du code
 
 - `src/trainedml/data/loader.py` : Chargement des jeux de données publics (ex : Iris).
