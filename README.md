@@ -32,7 +32,7 @@
 
 ## Overview
 
-**trainedml** is a modular Python package for training, benchmarking, and visualizing machine learning models on classic or custom datasets. Inspired by the clarity of `numpy`, `pandas`, and `matplotlib`, it provides a unified API, a command-line interface, and an interactive Streamlit web app for end-to-end ML workflows.
+**trainedml** is a modular Python package for training, benchmarking, and visualizing machine learning models on classic or custom datasets. Inspired by the clarity of numpy, pandas, and matplotlib, it provides a unified API, a command-line interface, and an interactive Streamlit web app for end-to-end ML workflows.
 
 ---
 
