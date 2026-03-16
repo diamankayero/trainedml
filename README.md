@@ -34,6 +34,7 @@
    <img src="public/line.png" alt="Courbe" width="260"/>
    <img src="public/comparaison_de_model.jpeg" alt="Comparaison de modèles" width="260"/>
 </p>
+
 ---
 
 ## Overview
