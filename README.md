@@ -28,6 +28,12 @@
 - [Contributing](#contributing)
 - [License](#license)
 
+<p align="center">
+   <img src="public/matric_corre.png" alt="Matrice de corrélation" width="260"/>
+   <img src="public/histogram.png" alt="Histogramme" width="260"/>
+   <img src="public/line.png" alt="Courbe" width="260"/>
+   <img src="public/comparaison_de_model.jpeg" alt="Comparaison de modèles" width="260"/>
+</p>
 ---
 
 ## Overview
@@ -240,4 +246,4 @@ For bugs or suggestions, open an [issue](https://github.com/diamankayero/trained
 
 ## License
 
-MIT — see [LICENSE](LICENSE) for details.
+MIT — see [LICENSE](LICENCE) for details.
