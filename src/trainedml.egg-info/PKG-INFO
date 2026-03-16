@@ -1,13 +1,12 @@
 Metadata-Version: 2.4
 Name: trainedml
-Version: 0.1.0
+Version: 0.1.1
 Summary: Simple ML training framework
 Author-email: diamankayero <diamanka.tck@gmail.com>
-License: MIT
+License-Expression: MIT
 Project-URL: Homepage, https://github.com/diamankayero/trainedml
 Project-URL: Issues, https://github.com/diamankayero/trainedml
 Classifier: Programming Language :: Python :: 3
-Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.9
 Description-Content-Type: text/markdown
@@ -20,13 +19,17 @@ Requires-Dist: seaborn
 Requires-Dist: plotly
 Requires-Dist: tqdm
 Requires-Dist: requests
-Requires-Dist: streamlit
 Requires-Dist: pooch
 Requires-Dist: statsmodels
-Requires-Dist: sphinx_rtd_theme
+Requires-Dist: joblib
+Requires-Dist: scipy
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: streamlit; extra == "dev"
+Provides-Extra: doc
+Requires-Dist: sphinx; extra == "doc"
+Requires-Dist: sphinx_rtd_theme; extra == "doc"
 Dynamic: license-file
-
-
 
 # trainedml
 
@@ -69,15 +72,22 @@ pip install -r requirements.txt
 * Chargement de jeux de données publics (ex : **Iris**)
 * Modèles implémentés :
 
-  * KNN
+  * KNN (classification et régression)
   * Régression logistique
-  * Random Forest
+  * Random Forest (classification et régression)
+  * Régression linéaire, Ridge, Lasso
 * Visualisations :
 
   * Heatmap
   * Histogrammes
   * Courbes
+  * Boxplots, bivarié, valeurs manquantes, outliers, normalité, multicolinéarité, profiling
 * API simple pour :
+* Exemples avancés :
+
+  * Benchmark de modèles de régression
+  * Analyse exploratoire complète (profiling, multicolinéarité, normalité)
+  * Visualisation de la distribution de la cible (régression)
 
   * l’entraînement
   * l’évaluation
@@ -117,6 +127,13 @@ Pour exécuter les tests unitaires :
 ```bash
 python -m unittest discover tests
 ```
+
+---
+
+## 🆕 Nouveauté 2026
+
+- Ajout du workflow GitHub Actions pour tests automatiques et publication sur TestPyPI.
+- Amélioration de la documentation et de la structure du projet.
 
 ---
 

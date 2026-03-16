@@ -1,4 +1,4 @@
-"""
+r"""
 Analyse des outliers (valeurs aberrantes) pour trainedml.
 Affiche les boxplots pour détecter les outliers par variable numérique.
 
@@ -34,13 +34,13 @@ class OutliersViz(Vizs):
         if len(cols) == 1:
             axes = [axes]
         for ax, col in zip(axes, cols):
-            ax.boxplot(self._data[col].dropna(), vert=False)
+            ax.boxplot(self._data[col].dropna(), orientation='horizontal')
             ax.set_title(f"Boxplot de {col}")
         plt.tight_layout()
         self._figure = fig
 
 def outlier_summary(data, method='iqr', threshold=1.5):
-    """
+    r"""
     Detect outliers in the dataset using IQR or Z-score.
 
     Parameters

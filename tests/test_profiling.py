@@ -22,7 +22,7 @@ class TestProfilingViz(unittest.TestCase):
     def test_profiling_report(self):
         report = profiling_report(self.df)
         self.assertIsInstance(report, dict)
-        self.assertIn('summary', report)
+        self.assertIn('describe', report)
 
 if __name__ == '__main__':
     unittest.main()

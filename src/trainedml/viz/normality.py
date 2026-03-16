@@ -39,11 +39,14 @@ def normality_tests(data, columns='all'):
     results = {}
     for col in cols:
         x = data[col].dropna()
-        results[col] = {
-            'shapiro': stats.shapiro(x),
-            'dagostino': stats.normaltest(x),
-            'anderson': stats.anderson(x)
-        }
+        result = {'shapiro': stats.shapiro(x)}
+        # D'Agostino requires n >= 8
+        if len(x) >= 8:
+            result['dagostino'] = stats.normaltest(x)
+        else:
+            result['dagostino'] = None
+        result['anderson'] = stats.anderson(x, dist='norm', method='interpolate')
+        results[col] = result
     return results
 
 """

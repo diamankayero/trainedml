@@ -12,7 +12,9 @@ Examples
 """
 
 import pandas as pd
+import numpy as np
 from .vizs import Vizs
+from .outliers import outlier_summary
 
 class ProfilingViz(Vizs):
     """
@@ -47,10 +49,11 @@ def profiling_report(data):
     >>> report = profiling_report(df)
     >>> print(report)
     """
+    numeric_data = data.select_dtypes(include=[np.number])
     summary = {
         'describe': data.describe(),
         'missing': data.isnull().sum(),
-        'outliers': None,  # Placeholder for outlier summary
-        'correlation': data.corr()
+        'outliers': outlier_summary(data) if not numeric_data.empty else {},
+        'correlation': numeric_data.corr() if not numeric_data.empty else pd.DataFrame(),
     }
     return summary

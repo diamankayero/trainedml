@@ -12,6 +12,7 @@ Examples
 >>> viz.figure.show()
 """
 
+import pandas as pd
 import matplotlib.pyplot as plt
 from typing import Optional
 from .vizs import Vizs
@@ -47,9 +48,9 @@ class LineViz(Vizs):
             The generated line plot figure.
         """
         plt.figure(figsize=(8, 6))
-        self._figure = plt.plot(self._data[self.x_column], self._data[self.y_column], marker='o')
-        plt.title(f"Courbe {self.y_column} en fonction de {self.x_column}")
-        plt.xlabel(self.x_column)
-        plt.ylabel(self.y_column)
+        self._figure = plt.plot(self._data[self._x_column], self._data[self._y_column], marker='o')
+        plt.title(f"Courbe {self._y_column} en fonction de {self._x_column}")
+        plt.xlabel(self._x_column)
+        plt.ylabel(self._y_column)
         plt.tight_layout()
         self._auto_save()

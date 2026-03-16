@@ -6,7 +6,15 @@ seaborn
 plotly
 tqdm
 requests
-streamlit
 pooch
 statsmodels
+joblib
+scipy
+
+[dev]
+pytest
+streamlit
+
+[doc]
+sphinx
 sphinx_rtd_theme

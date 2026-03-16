@@ -1,11 +1,13 @@
 """
-Evaluation utilities for classification models in trainedml.
+Evaluation utilities for classification and regression models in trainedml.
 
-This module provides standard metrics for evaluating classification models, such as accuracy,
-precision, recall, and F1-score, using scikit-learn metrics.
+This module provides standard metrics for evaluating classification models (accuracy,
+precision, recall, F1-score) and regression models (R², MSE, RMSE, MAE), using scikit-learn.
 
 Mathematical Formulation
 ------------------------
+**Classification:**
+
 Let $y_i$ be the true label and $\hat{y}_i$ the predicted label for sample $i$.
 
 - **Accuracy**:
@@ -28,7 +30,27 @@ Let $y_i$ be the true label and $\hat{y}_i$ the predicted label for sample $i$.
   .. math::
       \mathrm{F1}_k = 2 \cdot \frac{\mathrm{precision}_k \cdot \mathrm{recall}_k}{\mathrm{precision}_k + \mathrm{recall}_k}
 
-where $TP_k$, $FP_k$, $FN_k$ are the true positives, false positives, and false negatives for class $k$.
+**Regression:**
+
+- **Mean Squared Error (MSE)**:
+
+  .. math::
+      \mathrm{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2
+
+- **Root Mean Squared Error (RMSE)**:
+
+  .. math::
+      \mathrm{RMSE} = \sqrt{\mathrm{MSE}}
+
+- **Mean Absolute Error (MAE)**:
+
+  .. math::
+      \mathrm{MAE} = \frac{1}{n} \sum_{i=1}^n |y_i - \hat{y}_i|
+
+- **R² (coefficient of determination)**:
+
+  .. math::
+      R^2 = 1 - \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{\sum_{i=1}^n (y_i - \bar{y})^2}
 
 Examples
 --------
@@ -37,16 +59,27 @@ Examples
 >>> y_pred = [0, 1, 0, 0]
 >>> scores = Evaluator.evaluate_all(y_true, y_pred)
 >>> print(scores)
+
+>>> y_true_reg = [3.0, -0.5, 2.0, 7.0]
+>>> y_pred_reg = [2.5, 0.0, 2.0, 8.0]
+>>> scores_reg = Evaluator.evaluate_regression(y_true_reg, y_pred_reg)
+>>> print(scores_reg)
 """
 
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+import numpy as np
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score, f1_score,
+    mean_squared_error, mean_absolute_error, r2_score
+)
+
 
 class Evaluator:
     r"""
-    Utility class for evaluating classification models.
+    Utility class for evaluating classification and regression models.
 
-    Provides static methods to compute standard classification metrics.
+    Provides static methods to compute standard classification and regression metrics.
     """
+
     @staticmethod
     def evaluate_all(y_true, y_pred):
         """
@@ -75,3 +108,65 @@ class Evaluator:
             'recall': recall_score(y_true, y_pred, average='weighted', zero_division=0),
             'f1': f1_score(y_true, y_pred, average='weighted', zero_division=0)
         }
+
+    @staticmethod
+    def evaluate_regression(y_true, y_pred):
+        """
+        Compute R², MSE, RMSE, and MAE for regression.
+
+        Parameters
+        ----------
+        y_true : array-like
+            True continuous values.
+        y_pred : array-like
+            Predicted continuous values.
+
+        Returns
+        -------
+        dict
+            Dictionary with keys 'r2', 'mse', 'rmse', 'mae'.
+
+        Examples
+        --------
+        >>> Evaluator.evaluate_regression([3.0, -0.5, 2.0, 7.0], [2.5, 0.0, 2.0, 8.0])
+        {'r2': 0.948..., 'mse': 0.375, 'rmse': 0.612..., 'mae': 0.5}
+        """
+        mse = mean_squared_error(y_true, y_pred)
+        return {
+            'r2': r2_score(y_true, y_pred),
+            'mse': mse,
+            'rmse': float(np.sqrt(mse)),
+            'mae': mean_absolute_error(y_true, y_pred),
+        }
+
+    @staticmethod
+    def auto_evaluate(y_true, y_pred):
+        """
+        Automatically detect classification vs regression and compute the appropriate metrics.
+
+        Parameters
+        ----------
+        y_true : array-like
+            True values.
+        y_pred : array-like
+            Predicted values.
+
+        Returns
+        -------
+        dict
+            Classification or regression metrics (auto-detected).
+
+        Examples
+        --------
+        >>> Evaluator.auto_evaluate([0, 1, 1], [0, 1, 0])  # classification
+        {'accuracy': ..., 'precision': ..., 'recall': ..., 'f1': ...}
+        >>> Evaluator.auto_evaluate([3.0, 2.5, 7.1], [3.1, 2.4, 7.0])  # regression
+        {'r2': ..., 'mse': ..., 'rmse': ..., 'mae': ...}
+        """
+        y_true = np.asarray(y_true)
+        # Heuristic: if dtype is object/str or few unique values -> classification
+        if y_true.dtype.kind in ('U', 'S', 'O'):
+            return Evaluator.evaluate_all(y_true, y_pred)
+        if len(np.unique(y_true)) <= 20 and np.issubdtype(y_true.dtype, np.integer):
+            return Evaluator.evaluate_all(y_true, y_pred)
+        return Evaluator.evaluate_regression(y_true, y_pred)

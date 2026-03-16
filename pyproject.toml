@@ -13,10 +13,9 @@ readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-license = { text = "MIT" }
+license = "MIT"
 dependencies = [
     "numpy",
     "pandas",
@@ -26,11 +25,18 @@ dependencies = [
     "plotly",
     "tqdm",
     "requests",
-    "streamlit",
     "pooch",
     "statsmodels",
-    "sphinx_rtd_theme"
+    "joblib",
+    "scipy"
 ]
+
+[project.optional-dependencies]
+dev = ["pytest", "streamlit"]
+doc = ["sphinx", "sphinx_rtd_theme"]
+
+[project.scripts]
+trainedml = "trainedml.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/diamankayero/trainedml"
