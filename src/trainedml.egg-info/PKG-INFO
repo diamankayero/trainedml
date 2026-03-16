@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: trainedml
-Version: 0.1.1
+Version: 0.1.2
 Summary: Simple ML training framework
 Author-email: diamankayero <diamanka.tck@gmail.com>
 License-Expression: MIT
@@ -33,113 +33,251 @@ Dynamic: license-file
 
 # trainedml
 
-`trainedml` est un package Python qui fournit des outils simples pour **charger des jeux de données publics**, **entraîner et comparer des modèles de machine learning**, et **visualiser les résultats** de manière intuitive.
+> Modular machine learning framework for Python — train, benchmark, and visualize ML models with a unified API, CLI, and web interface.
+
+<p align="left">
+  <a href="https://pypi.org/project/trainedml/"><img src="https://img.shields.io/pypi/v/trainedml" alt="PyPI version"></a>
+  <a href="https://pypi.org/project/trainedml/"><img src="https://img.shields.io/pypi/pyversions/trainedml" alt="Python versions"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://diamankayero.github.io/trainedml/"><img src="https://img.shields.io/badge/Documentation-GitHub%20Pages-blue?logo=github" alt="Documentation"></a>
+  <a href="https://trainedml.streamlit.app"><img src="https://img.shields.io/badge/Webapp-Streamlit-ff4b4b?logo=streamlit" alt="Webapp"></a>
+  <img src="https://img.shields.io/badge/tests-passing-brightgreen" alt="Tests">
+  <img src="https://img.shields.io/badge/coverage-100%25-success" alt="Coverage">
+</p>
 
 ---
 
-## 📦 Installation
+## Table of Contents
 
-### 🔹 Installation depuis **TestPyPI** (recommandé pour les tests)
+- [Overview](#overview)
+- [Installation](#installation)
+- [Quickstart](#quickstart)
+- [Features](#features)
+- [API Reference](#api-reference)
+- [CLI Usage](#cli-usage)
+- [Architecture](#architecture)
+- [Testing](#testing)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+- [License](#license)
 
-```bash
-python -m pip install --index-url https://test.pypi.org/simple/ trainedml --upgrade
-# oubien
-pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple trainedml
-```
-
-> ⚠️ L’option `--no-deps` est nécessaire car TestPyPI ne contient pas toujours toutes les dépendances.
-
-Si besoin, installe ensuite les dépendances séparément :
-
-```bash
-pip install -r requirements.txt
-```
+<p align="center">
+   <img src="public/matric_corre.png" alt="Matrice de corrélation" width="260"/>
+   <img src="public/histogram.png" alt="Histogramme" width="260"/>
+   <img src="public/line.png" alt="Courbe" width="260"/>
+   <img src="public/comparaison_de_model.jpeg" alt="Comparaison de modèles" width="260"/>
+</p>
 
 ---
 
-### 🔹 Installation classique (depuis les sources)
+## Overview
+
+**trainedml** est un package Python modulaire pour entraîner, comparer et visualiser des modèles de machine learning sur des jeux de données classiques ou personnalisés. Il offre une API unifiée, une interface en ligne de commande et une application web interactive Streamlit pour des workflows ML complets.
+
+---
+
+## Installation
+
+```bash
+pip install trainedml
+```
+
+Or install from source:
 
 ```bash
 git clone https://github.com/diamankayero/trainedml.git
 cd trainedml
-pip install -r requirements.txt
+pip install -e .
+```
+
+**Requirements:** Python 3.9+
+
+---
+
+## Quickstart
+
+```python
+from trainedml import Trainer
+
+# Train on a built-in dataset
+trainer = Trainer(dataset="iris", model="random_forest")
+trainer.fit()
+
+# Evaluate
+scores = trainer.evaluate()
+print(scores)
+
+# Predict
+predictions = trainer.predict([[5.1, 3.5, 1.4, 0.2]])
+print(predictions)
 ```
 
 ---
 
-## 🚀 Fonctionnalités principales
+## Features
 
-* Chargement de jeux de données publics (ex : **Iris**)
-* Modèles implémentés :
-
-  * KNN (classification et régression)
-  * Régression logistique
-  * Random Forest (classification et régression)
-  * Régression linéaire, Ridge, Lasso
-* Visualisations :
-
-  * Heatmap
-  * Histogrammes
-  * Courbes
-  * Boxplots, bivarié, valeurs manquantes, outliers, normalité, multicolinéarité, profiling
-* API simple pour :
-* Exemples avancés :
-
-  * Benchmark de modèles de régression
-  * Analyse exploratoire complète (profiling, multicolinéarité, normalité)
-  * Visualisation de la distribution de la cible (régression)
-
-  * l’entraînement
-  * l’évaluation
-  * la comparaison de modèles
+- **Unified API** — train, evaluate, and predict with a single `Trainer` class
+- **Built-in datasets** — Iris, Wine, and any remote CSV via URL
+- **Modular models** — KNN, Logistic Regression, Random Forest, and more
+- **Standard metrics** — accuracy, precision, recall, F1, R², MSE, RMSE, MAE
+- **Benchmarking** — compare models side-by-side with timing and parallelization
+- **Exploratory analysis** — correlations, distributions, missing values, outliers, multicollinearity
+- **Visualization** — heatmaps, histograms, line plots, boxplots, bivariate charts
+- **CLI** — automate ML pipelines from the terminal
+- **Streamlit webapp** — interactive web interface for exploration and prediction
+- **Full test coverage** — 100% coverage with Sphinx documentation
 
 ---
 
-## 🧪 Exemple d’utilisation
+## API Reference
+
+### `Trainer`
+
+The main entry point for the framework.
+
+```python
+from trainedml import Trainer
+
+trainer = Trainer(dataset="iris", model="knn")
+trainer.fit()
+scores = trainer.evaluate()
+predictions = trainer.predict([[5.1, 3.5, 1.4, 0.2]])
+```
+
+Train on a custom remote dataset:
+
+```python
+trainer = Trainer(
+    url="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv",
+    target="quality",
+    model="logistic"
+)
+trainer.fit()
+```
+
+### `DataLoader`
 
 ```python
 from trainedml.data.loader import DataLoader
+
+X, y = DataLoader().load_dataset(name="wine")
+```
+
+### `KNNModel` (and other models)
+
+```python
 from trainedml.models.knn import KNNModel
+
+model = KNNModel(n_neighbors=3)
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+```
+
+### `Benchmark`
+
+```python
+from trainedml.benchmark import Benchmark
+from trainedml.models.knn import KNNModel
+from trainedml.models.random_forest import RandomForestModel
+
+models = {"knn": KNNModel(), "rf": RandomForestModel()}
+bench = Benchmark(models)
+results = bench.run(X_train, y_train, X_test, y_test)
+print(results)
+```
+
+### `Visualizer`
+
+```python
 from trainedml.visualization import Visualizer
 
-# Chargement des données
-iris = DataLoader().load_iris()
-
-# Entraînement d'un modèle
-X = iris.drop(columns=['species'])
-y = iris['species']
-
-model = KNNModel()
-model.fit(X, y)
-
-# Visualisation
-viz = Visualizer(iris)
+viz = Visualizer(X)
 fig = viz.heatmap()
 fig.show()
 ```
 
 ---
 
-## ✅ Tests
-
-Pour exécuter les tests unitaires :
+## CLI Usage
 
 ```bash
-python -m unittest discover tests
+# Show help
+python -m trainedml --help
+
+# Benchmark all models on Iris
+python -m trainedml --benchmark --dataset iris
+
+# Train KNN on Wine
+python -m trainedml --model knn --dataset wine
+
+# Visualize correlation heatmap
+python -m trainedml --dataset iris --show
+```
+
+### Interactive Webapp
+
+```bash
+streamlit run trainedml_webapp/src/app.py
+```
+
+Or visit the hosted version: [trainedml.streamlit.app](https://trainedml.streamlit.app)
+
+---
+
+## Architecture
+
+```
+trainedml/
+├── src/trainedml/
+│   ├── __init__.py        # Trainer API
+│   ├── analyzer.py        # Exploratory data analysis
+│   ├── benchmark.py       # Model benchmarking
+│   ├── cli.py             # CLI interface
+│   ├── evaluation.py      # Evaluation metrics
+│   ├── figure.py          # Figure generation
+│   ├── visualization.py   # Visualization tools
+│   ├── data/              # Data loading
+│   ├── models/            # ML models (KNN, LR, RF, ...)
+│   ├── utils/             # Utility functions
+│   └── viz/               # Advanced visualizations
+├── doc/                   # Sphinx documentation
+├── tests/                 # Unit tests
+├── trainedml_webapp/      # Streamlit webapp
+└── requirements.txt
 ```
 
 ---
 
-## 🆕 Nouveauté 2026
+## Testing
 
-- Ajout du workflow GitHub Actions pour tests automatiques et publication sur TestPyPI.
-- Amélioration de la documentation et de la structure du projet.
+```bash
+pytest tests/
+```
 
 ---
 
-## 📌 Statut du projet
+## Documentation
 
-* ✔️ Version de test publiée sur **TestPyPI**
-* 🔄 En développement actif
-* 🚀 Publication sur PyPI prévue après validation
-# trainedml_module
+- [Online docs (GitHub Pages)](https://diamankayero.github.io/trainedml/)
+- [Usage guide](DOC_UTILISATION.md)
+- [Webapp docs](trainedml_webapp/doc/streamlit_app.md)
+
+---
+
+## Contributing
+
+Contributions are welcome!
+
+1. Fork the project
+2. Create your feature branch: `git checkout -b feature/my-feature`
+3. Commit your changes: `git commit -m 'Add my feature'`
+4. Push to the branch: `git push origin feature/my-feature`
+5. Open a Pull Request
+
+For bugs or suggestions, open an [issue](https://github.com/diamankayero/trainedml/issues).
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENCE) for details.
