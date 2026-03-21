@@ -39,4 +39,11 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: trainedml/doc/build/html
+          publish_dir: doc/build/html  # Corrected path
+          publish_branch: gh-pages
+          allow_empty_commit: false
+          keep_files: false
+          enable_jekyll: false
+          exclude_assets: .github
+
+# Note: Update actions to versions compatible with Node.js 24 before June 2026.
