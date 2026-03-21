@@ -8,14 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Line &mdash; Documentation trainedml 0.01</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=e42f2b11"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/translations.js?v=e6b791cb"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -74,37 +74,6 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">API</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">trainedml - API détaillée</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="models/knn.html">k-Nearest Neighbors (kNN)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="models/logistic.html">Régression logistique</a></li>
-<li class="toctree-l2"><a class="reference internal" href="models/random_forest.html">Random Forest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="visualization.html">Visualizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="analyzer.html">DataAnalyzer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vizs.html">Vizs (visualisations de base)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
-<li class="toctree-l2"><a class="reference internal" href="histogram.html">Histogram</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Line</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#trainedml.viz.line.LineViz"><code class="docutils literal notranslate"><span class="pre">LineViz</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#trainedml.viz.line.LineViz.vizs"><code class="docutils literal notranslate"><span class="pre">LineViz.vizs()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="distribution.html">Distribution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="correlation.html">Correlation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="missing.html">Missing Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="outliers.html">Outliers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="target.html">Target</a></li>
-<li class="toctree-l2"><a class="reference internal" href="boxplot.html">Boxplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bivariate.html">Bivariate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="normality.html">Normality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling</a></li>
-</ul>
-</li>
-</ul>
 
         </div>
       </div>
@@ -133,18 +102,48 @@
              
   <section id="module-trainedml.viz.line">
 <span id="line"></span><h1>Line<a class="headerlink" href="#module-trainedml.viz.line" title="Lien vers cette rubrique"></a></h1>
-<p>Visualisation d’une courbe (line plot) pour trainedml.</p>
+<p>Line plot visualization for trainedml.</p>
+<p>This module provides the LineViz class, which generates line plots between two columns
+using matplotlib, supporting custom styling and axis labeling.</p>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.line</span><span class="w"> </span><span class="kn">import</span> <span class="n">LineViz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span> <span class="o">=</span> <span class="n">LineViz</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x_column</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">y_column</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="trainedml.viz.line.LineViz">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trainedml.viz.line.</span></span><span class="sig-name descname"><span class="pre">LineViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/line.html#LineViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.line.LineViz" title="Lien vers cette définition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.line.</span></span><span class="sig-name descname"><span class="pre">LineViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/line.html#LineViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.line.LineViz" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <a class="reference internal" href="vizs.html#trainedml.viz.vizs.Vizs" title="trainedml.viz.vizs.Vizs"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vizs</span></code></a></p>
-<p>Classe pour générer une courbe à partir de deux colonnes de données.</p>
+<p>Visualisation de courbe entre deux colonnes.</p>
+<section id="parametres">
+<h2>Paramètres<a class="headerlink" href="#parametres" title="Lien vers cette rubrique"></a></h2>
+<dl class="simple">
+<dt>data<span class="classifier">pandas.DataFrame</span></dt><dd><p>Le jeu de données.</p>
+</dd>
+<dt>x_column<span class="classifier">str</span></dt><dd><p>Colonne pour l’axe des x.</p>
+</dd>
+<dt>y_column<span class="classifier">str</span></dt><dd><p>Colonne pour l’axe des y.</p>
+</dd>
+<dt>save_path<span class="classifier">str ou None</span></dt><dd><p>Chemin de sauvegarde optionnel.</p>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.viz.line.LineViz.vizs">
 <span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/line.html#LineViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.line.LineViz.vizs" title="Lien vers cette définition"></a></dt>
-<dd><p>Affiche une courbe (line plot) entre deux colonnes.</p>
+<dd><p>Generate the line plot figure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The generated line plot figure.</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
 </dd></dl>
 
+</section>
 </dd></dl>
 
 </section>
@@ -160,7 +159,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Droits d'auteur 2025, Yéro Diamanka.</p>
+    <p>&#169; Droits d'auteur 2026, Yéro Diamanka.</p>
   </div>
 
   Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un

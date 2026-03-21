@@ -7,14 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>trainedml.viz.distribution &mdash; Documentation trainedml 0.01</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=e42f2b11"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/translations.js?v=e6b791cb"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -60,7 +60,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Code du module</a></li>
-          <li class="breadcrumb-item"><a href="../../trainedml.html">trainedml</a></li>
       <li class="breadcrumb-item active">trainedml.viz.distribution</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -72,12 +71,48 @@
              
   <h1>Code source de trainedml.viz.distribution</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Distribution des variables (histogrammes) pour trainedml.</span>
-<span class="sd">Permet de visualiser la distribution de chaque variable numérique.</span>
+<span class="sd">Distribution analysis utilities for trainedml.</span>
+
+<span class="sd">This module provides functions and classes for analyzing and visualizing the distribution</span>
+<span class="sd">of variables, including histograms and summary statistics.</span>
+
+<span class="sd">Examples</span>
+<span class="sd">--------</span>
+<span class="sd">&gt;&gt;&gt; from trainedml.viz.distribution import distribution_summary</span>
+<span class="sd">&gt;&gt;&gt; summary = distribution_summary(df)</span>
+<span class="sd">&gt;&gt;&gt; print(summary)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.vizs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Vizs</span>
+
+<div class="viewcode-block" id="distribution_summary">
+<a class="viewcode-back" href="../../../trainedml/distribution.html#trainedml.viz.distribution.distribution_summary">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">distribution_summary</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute summary statistics for selected columns.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : pandas.DataFrame</span>
+<span class="sd">        The dataset.</span>
+<span class="sd">    columns : &#39;all&#39; or list, default=&#39;all&#39;</span>
+<span class="sd">        Columns to summarize.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        Summary statistics (mean, std, min, max, etc.).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; summary = distribution_summary(df, columns=[&#39;A&#39;, &#39;B&#39;])</span>
+<span class="sd">    &gt;&gt;&gt; print(summary)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="n">columns</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span> <span class="k">else</span> <span class="n">columns</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span></div>
+
 
 <div class="viewcode-block" id="DistributionViz">
 <a class="viewcode-back" href="../../../trainedml/distribution.html#trainedml.viz.distribution.DistributionViz">[docs]</a>

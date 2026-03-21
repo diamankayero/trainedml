@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'trainedml'
-copyright = '2025, Yéro Diamanka'
+copyright = '2026, Yéro Diamanka'
 author = 'Yéro Diamanka'
 release = '0.01'
 
