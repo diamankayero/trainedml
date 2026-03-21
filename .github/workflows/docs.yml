@@ -46,4 +46,7 @@ jobs:
           enable_jekyll: false
           exclude_assets: .github
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 # Note: Update actions to versions compatible with Node.js 24 before June 2026.
