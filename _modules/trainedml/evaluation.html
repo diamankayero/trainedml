@@ -1,0 +1,213 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trainedml.evaluation &mdash; Documentation trainedml 0.01</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=e42f2b11"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=e6b791cb"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            trainedml
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.Trainer"><code class="docutils literal notranslate"><span class="pre">Trainer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.Trainer.evaluate"><code class="docutils literal notranslate"><span class="pre">Trainer.evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.Trainer.fit"><code class="docutils literal notranslate"><span class="pre">Trainer.fit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.Trainer.load_data"><code class="docutils literal notranslate"><span class="pre">Trainer.load_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.Trainer.predict"><code class="docutils literal notranslate"><span class="pre">Trainer.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.data.loader.DataLoader"><code class="docutils literal notranslate"><span class="pre">DataLoader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.data.loader.DataLoader.load_csv_from_url"><code class="docutils literal notranslate"><span class="pre">DataLoader.load_csv_from_url()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.data.loader.DataLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">DataLoader.load_dataset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.models.base.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.base.BaseModel.evaluate"><code class="docutils literal notranslate"><span class="pre">BaseModel.evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.base.BaseModel.fit"><code class="docutils literal notranslate"><span class="pre">BaseModel.fit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.base.BaseModel.predict"><code class="docutils literal notranslate"><span class="pre">BaseModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.models.knn.KNNModel"><code class="docutils literal notranslate"><span class="pre">KNNModel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.knn.KNNModel.evaluate"><code class="docutils literal notranslate"><span class="pre">KNNModel.evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.knn.KNNModel.fit"><code class="docutils literal notranslate"><span class="pre">KNNModel.fit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.knn.KNNModel.predict"><code class="docutils literal notranslate"><span class="pre">KNNModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.models.logistic.LogisticModel"><code class="docutils literal notranslate"><span class="pre">LogisticModel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.logistic.LogisticModel.evaluate"><code class="docutils literal notranslate"><span class="pre">LogisticModel.evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.logistic.LogisticModel.fit"><code class="docutils literal notranslate"><span class="pre">LogisticModel.fit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.logistic.LogisticModel.predict"><code class="docutils literal notranslate"><span class="pre">LogisticModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.models.random_forest.RandomForestModel"><code class="docutils literal notranslate"><span class="pre">RandomForestModel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.random_forest.RandomForestModel.evaluate"><code class="docutils literal notranslate"><span class="pre">RandomForestModel.evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.random_forest.RandomForestModel.fit"><code class="docutils literal notranslate"><span class="pre">RandomForestModel.fit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.random_forest.RandomForestModel.predict"><code class="docutils literal notranslate"><span class="pre">RandomForestModel.predict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.viz.heatmap.HeatmapViz"><code class="docutils literal notranslate"><span class="pre">HeatmapViz</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.viz.heatmap.HeatmapViz.vizs"><code class="docutils literal notranslate"><span class="pre">HeatmapViz.vizs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.viz.histogram.HistogramViz"><code class="docutils literal notranslate"><span class="pre">HistogramViz</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.viz.histogram.HistogramViz.vizs"><code class="docutils literal notranslate"><span class="pre">HistogramViz.vizs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.viz.line.LineViz"><code class="docutils literal notranslate"><span class="pre">LineViz</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.viz.line.LineViz.vizs"><code class="docutils literal notranslate"><span class="pre">LineViz.vizs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.viz.vizs.Vizs"><code class="docutils literal notranslate"><span class="pre">Vizs</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.viz.vizs.Vizs.figure"><code class="docutils literal notranslate"><span class="pre">Vizs.figure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.viz.vizs.Vizs.vizs"><code class="docutils literal notranslate"><span class="pre">Vizs.vizs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.benchmark.Benchmark"><code class="docutils literal notranslate"><span class="pre">Benchmark</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.benchmark.Benchmark.run"><code class="docutils literal notranslate"><span class="pre">Benchmark.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.evaluation.Evaluator"><code class="docutils literal notranslate"><span class="pre">Evaluator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.evaluation.Evaluator.evaluate_all"><code class="docutils literal notranslate"><span class="pre">Evaluator.evaluate_all()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.figure.Figure"><code class="docutils literal notranslate"><span class="pre">Figure</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.figure.Figure.annotate"><code class="docutils literal notranslate"><span class="pre">Figure.annotate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.figure.Figure.save"><code class="docutils literal notranslate"><span class="pre">Figure.save()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.figure.Figure.show"><code class="docutils literal notranslate"><span class="pre">Figure.show()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.visualization.Visualizer"><code class="docutils literal notranslate"><span class="pre">Visualizer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.visualization.Visualizer.get_features"><code class="docutils literal notranslate"><span class="pre">Visualizer.get_features()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.visualization.Visualizer.heatmap"><code class="docutils literal notranslate"><span class="pre">Visualizer.heatmap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.visualization.Visualizer.histogram"><code class="docutils literal notranslate"><span class="pre">Visualizer.histogram()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.visualization.Visualizer.line"><code class="docutils literal notranslate"><span class="pre">Visualizer.line()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">trainedml</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Code du module</a></li>
+          <li class="breadcrumb-item"><a href="../trainedml.html">trainedml</a></li>
+      <li class="breadcrumb-item active">trainedml.evaluation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de trainedml.evaluation</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module d&#39;évaluation des modèles de classification pour trainedml.</span>
+<span class="sd">Calcule les métriques standards de classification.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span>
+
+<div class="viewcode-block" id="Evaluator">
+<a class="viewcode-back" href="../../modules.html#trainedml.evaluation.Evaluator">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Evaluator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classe utilitaire pour évaluer les performances d&#39;un modèle de classification.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Evaluator.evaluate_all">
+<a class="viewcode-back" href="../../modules.html#trainedml.evaluation.Evaluator.evaluate_all">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_all</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calcule plusieurs métriques de classification.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            y_true: vraies classes</span>
+<span class="sd">            y_pred: classes prédites</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: dictionnaire des métriques</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+            <span class="s1">&#39;precision&#39;</span><span class="p">:</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+            <span class="s1">&#39;recall&#39;</span><span class="p">:</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+            <span class="s1">&#39;f1&#39;</span><span class="p">:</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="p">}</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, Yéro Diamanka.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
