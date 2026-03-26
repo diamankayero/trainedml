@@ -33,7 +33,7 @@ htmlcov/
 .tox/
 
 # Sphinx documentation
-doc/build/
+#doc/build/
 
 # OS
 .DS_Store
