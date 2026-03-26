@@ -51,7 +51,7 @@
 <li class="toctree-l2"><a class="reference internal" href="models/random_forest.html">Random Forest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization.html">Visualizer</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">DataAnalyzer</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#mathematical-context">Mathematical context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#math-context">Math context</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.data"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.data</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#trainedml.analyzer.DataAnalyzer.bivariate"><code class="docutils literal notranslate"><span class="pre">DataAnalyzer.bivariate()</span></code></a></li>
@@ -117,8 +117,8 @@
 <p>This module provides the DataAnalyzer class, which offers a suite of methods for
 descriptive statistics, distribution analysis, correlation, missing values, outliers,
 target analysis, boxplots, bivariate analysis, normality, multicollinearity, and profiling.</p>
-<section id="mathematical-context">
-<h2>Mathematical context<a class="headerlink" href="#mathematical-context" title="Lien vers cette rubrique"></a></h2>
+<section id="math-context">
+<h2>Math context<a class="headerlink" href="#math-context" title="Lien vers cette rubrique"></a></h2>
 <ul class="simple">
 <li><p>Correlation: Pearson, Spearman, Kendall</p></li>
 <li><p>Outlier detection: IQR, Z-score</p></li>
@@ -311,23 +311,25 @@ $r_{xy} = frac{sum (x_i - bar{x})(y_i - bar{y})}{sqrt{sum (x_i - bar{x})^2 sum (
 
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.analyzer.DataAnalyzer.multicollinearity">
-<span class="sig-name descname"><span class="pre">multicollinearity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer.multicollinearity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer.multicollinearity" title="Lien vers cette définition"></a></dt>
-<dd><blockquote>
-<div><p>Analyze multicollinearity using Variance Inflation Factor (VIF).</p>
-<dl class="simple">
-<dt>pandas.DataFrame</dt><dd><p>VIF per feature with columns “feature” and “VIF”.</p>
+<span class="sig-name descname"><span class="pre">multicollinearity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/analyzer.html#DataAnalyzer.multicollinearity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.analyzer.DataAnalyzer.multicollinearity" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyze multicollinearity in the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Variance Inflation Factor (VIF) for each feature.</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
 </dd>
 </dl>
-<p>$VIF_j =</p>
-</div></blockquote>
-<dl>
-<dt>rac{1}{1 - R_j^2}$</dt><dd><p>where $R_j^2$ is the $R^2$ of regressing feature $j$ on all others.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vif</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">multicollinearity</span><span class="p">()</span>
+<p class="rubric">Notes</p>
+<p>Multicollinearity occurs when independent variables are highly correlated.
+This method calculates the VIF to detect multicollinearity.</p>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">analyzer</span> <span class="o">=</span> <span class="n">DataAnalyzer</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vif</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">multicollinearity</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">vif</span><span class="p">)</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">

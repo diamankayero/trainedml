@@ -137,26 +137,23 @@ Appelle automatiquement save() si un save_path a été défini.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.viz.multicollinearity.vif_summary">
 <span class="sig-prename descclassname"><span class="pre">trainedml.viz.multicollinearity.</span></span><span class="sig-name descname"><span class="pre">vif_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/multicollinearity.html#vif_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.multicollinearity.vif_summary" title="Lien vers cette définition"></a></dt>
-<dd><blockquote>
-<div><p>Compute the Variance Inflation Factor (VIF) for each feature.</p>
-<dl class="simple">
-<dt>data<span class="classifier">pandas.DataFrame</span></dt><dd><p>The dataset (numeric features only).</p>
+<dd><p>Compute the Variance Inflation Factor (VIF) for each feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pandas.DataFrame</em>) – The dataset (numeric features only).</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>VIF per feature.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.Series</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>pandas.Series</dt><dd><p>VIF per feature.</p>
-</dd>
-</dl>
-<p>$VIF_j =</p>
-</div></blockquote>
-<dl>
-<dt>rac{1}{1 - R_j^2}$</dt><dd><p>where $R_j^2$ is the $R^2$ of regressing feature $j$ on all others.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vif</span> <span class="o">=</span> <span class="n">vif_summary</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vif</span> <span class="o">=</span> <span class="n">vif_summary</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">vif</span><span class="p">)</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </dd></dl>
 
 </section>

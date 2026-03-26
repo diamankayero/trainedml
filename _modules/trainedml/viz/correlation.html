@@ -95,26 +95,25 @@
 <a class="viewcode-back" href="../../../trainedml/correlation.html#trainedml.viz.correlation.correlation_matrix">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">correlation_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calcule la matrice de corrélation pour les variables sélectionnées.</span>
+<span class="sd">    Calculate the correlation matrix for selected variables.</span>
 
-<span class="sd">    Paramètres</span>
+<span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    data : pandas.DataFrame</span>
-<span class="sd">        Le jeu de données.</span>
-<span class="sd">    features : &#39;all&#39; ou list, default=&#39;all&#39;</span>
-<span class="sd">        Variables à inclure.</span>
+<span class="sd">        The dataset.</span>
+<span class="sd">    features : &#39;all&#39; or list, default=&#39;all&#39;</span>
+<span class="sd">        Variables to include.</span>
 <span class="sd">    method : str, default=&#39;pearson&#39;</span>
-<span class="sd">        Méthode de corrélation (&#39;pearson&#39;, &#39;spearman&#39;, &#39;kendall&#39;).</span>
+<span class="sd">        Correlation method (&#39;pearson&#39;, &#39;spearman&#39;, &#39;kendall&#39;).</span>
 
-<span class="sd">    Retourne</span>
+<span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    pandas.DataFrame</span>
-<span class="sd">        Matrice de corrélation.</span>
+<span class="sd">        Correlation matrix.</span>
 
-<span class="sd">    Exemples</span>
+<span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; corr = correlation_matrix(df, features=[&#39;A&#39;, &#39;B&#39;], method=&#39;spearman&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; print(corr)</span>
+<span class="sd">    &gt;&gt;&gt; correlation_matrix(data=df, features=[&#39;col1&#39;, &#39;col2&#39;], method=&#39;spearman&#39;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;data doit être un DataFrame pandas&quot;</span><span class="p">)</span>
@@ -136,18 +135,17 @@
 <a class="viewcode-back" href="../../../trainedml/correlation.html#trainedml.viz.correlation.CorrelationViz">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">CorrelationViz</span><span class="p">(</span><span class="n">Vizs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe pour générer une heatmap de corrélation.</span>
+<span class="sd">    Visualization class for correlation matrices.</span>
 
-<span class="sd">    Paramètres</span>
+<span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    data : pandas.DataFrame</span>
-<span class="sd">        Le jeu de données.</span>
-<span class="sd">    features : &#39;all&#39; ou list, default=&#39;all&#39;</span>
-<span class="sd">        Variables à inclure.</span>
-<span class="sd">    method : str, default=&#39;pearson&#39;</span>
-<span class="sd">        Méthode de corrélation (&#39;pearson&#39;, &#39;spearman&#39;, &#39;kendall&#39;).</span>
-<span class="sd">    mask : bool, default=True</span>
-<span class="sd">        Masquer la partie supérieure de la matrice.</span>
+<span class="sd">        The dataset to visualize.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; viz = CorrelationViz(data)</span>
+<span class="sd">    &gt;&gt;&gt; viz.plot()</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="s1">&#39;list[str]&#39;</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;pearson&#39;</span><span class="p">,</span> <span class="n">mask</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>

@@ -77,8 +77,8 @@
 <span class="sd">descriptive statistics, distribution analysis, correlation, missing values, outliers,</span>
 <span class="sd">target analysis, boxplots, bivariate analysis, normality, multicollinearity, and profiling.</span>
 
-<span class="sd">Mathematical context</span>
-<span class="sd">--------------------</span>
+<span class="sd">Math context</span>
+<span class="sd">------------</span>
 <span class="sd">- Correlation: Pearson, Spearman, Kendall</span>
 <span class="sd">- Outlier detection: IQR, Z-score</span>
 <span class="sd">- Normality: Shapiro-Wilk, D&#39;Agostino, Anderson-Darling</span>
@@ -526,22 +526,23 @@
 
 <div class="viewcode-block" id="DataAnalyzer.multicollinearity">
 <a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.multicollinearity">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">multicollinearity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">multicollinearity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Analyze multicollinearity using Variance Inflation Factor (VIF).</span>
+<span class="sd">        Analyze multicollinearity in the dataset.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        pandas.DataFrame</span>
-<span class="sd">            VIF per feature with columns &#39;feature&#39; and &#39;VIF&#39;.</span>
+<span class="sd">            Variance Inflation Factor (VIF) for each feature.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
-<span class="sd">        $VIF_j = \frac{1}{1 - R_j^2}$</span>
-<span class="sd">        where $R_j^2$ is the $R^2$ of regressing feature $j$ on all others.</span>
+<span class="sd">        Multicollinearity occurs when independent variables are highly correlated.</span>
+<span class="sd">        This method calculates the VIF to detect multicollinearity.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; analyzer = DataAnalyzer(df)</span>
 <span class="sd">        &gt;&gt;&gt; vif = analyzer.multicollinearity()</span>
 <span class="sd">        &gt;&gt;&gt; print(vif)</span>
 <span class="sd">        &quot;&quot;&quot;</span>

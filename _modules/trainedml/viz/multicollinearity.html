@@ -108,14 +108,9 @@
 <span class="sd">    pandas.Series</span>
 <span class="sd">        VIF per feature.</span>
 
-<span class="sd">    Notes</span>
-<span class="sd">    -----</span>
-<span class="sd">    $VIF_j = \frac{1}{1 - R_j^2}$</span>
-<span class="sd">    where $R_j^2$ is the $R^2$ of regressing feature $j$ on all others.</span>
-
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; vif = vif_summary(df)</span>
+<span class="sd">    &gt;&gt;&gt; vif = vif_summary(data=df)</span>
 <span class="sd">    &gt;&gt;&gt; print(vif)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span>

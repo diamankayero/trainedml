@@ -107,19 +107,17 @@
 <dt class="sig sig-object py" id="trainedml.viz.correlation.CorrelationViz">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.correlation.</span></span><span class="sig-name descname"><span class="pre">CorrelationViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pd.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'list[str]'</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pearson'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/correlation.html#CorrelationViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.correlation.CorrelationViz" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <a class="reference internal" href="vizs.html#trainedml.viz.vizs.Vizs" title="trainedml.viz.vizs.Vizs"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vizs</span></code></a></p>
-<p>Classe pour générer une heatmap de corrélation.</p>
-<section id="parametres">
-<h2>Paramètres<a class="headerlink" href="#parametres" title="Lien vers cette rubrique"></a></h2>
-<dl class="simple">
-<dt>data<span class="classifier">pandas.DataFrame</span></dt><dd><p>Le jeu de données.</p>
-</dd>
-<dt>features<span class="classifier">“all” ou list, default=”all”</span></dt><dd><p>Variables à inclure.</p>
-</dd>
-<dt>method<span class="classifier">str, default=”pearson”</span></dt><dd><p>Méthode de corrélation (“pearson”, “spearman”, “kendall”).</p>
-</dd>
-<dt>mask<span class="classifier">bool, default=True</span></dt><dd><p>Masquer la partie supérieure de la matrice.</p>
+<p>Visualization class for correlation matrices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pandas.DataFrame</em>) – The dataset to visualize.</p>
 </dd>
 </dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span> <span class="o">=</span> <span class="n">CorrelationViz</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.viz.correlation.CorrelationViz.vizs">
 <span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/correlation.html#CorrelationViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.correlation.CorrelationViz.vizs" title="Lien vers cette définition"></a></dt>
@@ -127,38 +125,31 @@
 Appelle automatiquement save() si un save_path a été défini.</p>
 </dd></dl>
 
-</section>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.viz.correlation.correlation_matrix">
 <span class="sig-prename descclassname"><span class="pre">trainedml.viz.correlation.</span></span><span class="sig-name descname"><span class="pre">correlation_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pearson'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/correlation.html#correlation_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.correlation.correlation_matrix" title="Lien vers cette définition"></a></dt>
-<dd><p>Calcule la matrice de corrélation pour les variables sélectionnées.</p>
-<section id="id1">
-<h2>Paramètres<a class="headerlink" href="#id1" title="Lien vers cette rubrique"></a></h2>
-<dl class="simple">
-<dt>data<span class="classifier">pandas.DataFrame</span></dt><dd><p>Le jeu de données.</p>
+<dd><p>Calculate the correlation matrix for selected variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pandas.DataFrame</em>) – The dataset.</p></li>
+<li><p><strong>features</strong> (<em>'all'</em><em> or </em><em>list</em><em>, </em><em>default='all'</em>) – Variables to include.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>default='pearson'</em>) – Correlation method (“pearson”, “spearman”, “kendall”).</p></li>
+</ul>
 </dd>
-<dt>features<span class="classifier">“all” ou list, default=”all”</span></dt><dd><p>Variables à inclure.</p>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Correlation matrix.</p>
 </dd>
-<dt>method<span class="classifier">str, default=”pearson”</span></dt><dd><p>Méthode de corrélation (“pearson”, “spearman”, “kendall”).</p>
-</dd>
-</dl>
-</section>
-<section id="retourne">
-<h2>Retourne<a class="headerlink" href="#retourne" title="Lien vers cette rubrique"></a></h2>
-<dl class="simple">
-<dt>pandas.DataFrame</dt><dd><p>Matrice de corrélation.</p>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
-</section>
-<section id="exemples">
-<h2>Exemples<a class="headerlink" href="#exemples" title="Lien vers cette rubrique"></a></h2>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">correlation_matrix</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">correlation_matrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;col1&#39;</span><span class="p">,</span> <span class="s1">&#39;col2&#39;</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
 </dd></dl>
 
 </section>
