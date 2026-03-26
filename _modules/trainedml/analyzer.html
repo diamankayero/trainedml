@@ -88,8 +88,16 @@
 <span class="sd">--------</span>
 <span class="sd">&gt;&gt;&gt; from trainedml.analyzer import DataAnalyzer</span>
 <span class="sd">&gt;&gt;&gt; analyzer = DataAnalyzer(df)</span>
-<span class="sd">&gt;&gt;&gt; analyzer.correlation()</span>
-<span class="sd">&gt;&gt;&gt; analyzer.outliers()</span>
+<span class="sd">&gt;&gt;&gt; stats = analyzer.distribution()</span>
+<span class="sd">&gt;&gt;&gt; print(stats)</span>
+<span class="sd">&gt;&gt;&gt; corr = analyzer.correlation(method=&#39;spearman&#39;)</span>
+<span class="sd">&gt;&gt;&gt; print(corr)</span>
+<span class="sd">&gt;&gt;&gt; out = analyzer.outliers(method=&#39;zscore&#39;, threshold=3)</span>
+<span class="sd">&gt;&gt;&gt; print(out)</span>
+<span class="sd">&gt;&gt;&gt; norm = analyzer.normality()</span>
+<span class="sd">&gt;&gt;&gt; print(norm)</span>
+<span class="sd">&gt;&gt;&gt; report = analyzer.profiling()</span>
+<span class="sd">&gt;&gt;&gt; print(report[&#39;describe&#39;])</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -121,25 +129,20 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Basic usage:</span>
 <span class="sd">    &gt;&gt;&gt; from trainedml.analyzer import DataAnalyzer</span>
 <span class="sd">    &gt;&gt;&gt; analyzer = DataAnalyzer(df)</span>
 <span class="sd">    &gt;&gt;&gt; stats = analyzer.distribution()</span>
 <span class="sd">    &gt;&gt;&gt; print(stats)</span>
 
-<span class="sd">    Correlation matrix:</span>
 <span class="sd">    &gt;&gt;&gt; corr = analyzer.correlation(method=&#39;spearman&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; print(corr)</span>
 
-<span class="sd">    Outlier detection:</span>
 <span class="sd">    &gt;&gt;&gt; out = analyzer.outliers(method=&#39;zscore&#39;, threshold=3)</span>
 <span class="sd">    &gt;&gt;&gt; print(out)</span>
 
-<span class="sd">    Normality tests:</span>
 <span class="sd">    &gt;&gt;&gt; norm = analyzer.normality()</span>
 <span class="sd">    &gt;&gt;&gt; print(norm)</span>
 
-<span class="sd">    Profiling report:</span>
 <span class="sd">    &gt;&gt;&gt; report = analyzer.profiling()</span>
 <span class="sd">    &gt;&gt;&gt; print(report[&#39;describe&#39;])</span>
 
