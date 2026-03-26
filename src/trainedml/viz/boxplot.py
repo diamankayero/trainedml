@@ -15,14 +15,15 @@ Examples
 """
 
 import matplotlib.pyplot as plt
+import pandas as pd
 from .vizs import Vizs
 
 class BoxplotViz(Vizs):
     r"""
     Visualisation de boxplots pour une ou plusieurs colonnes.
 
-    Paramètres
-    ----------
+    Paramètres du boxplot
+    ---------------------
     data : pandas.DataFrame
         Le jeu de données.
     columns : 'all' ou list, default='all'

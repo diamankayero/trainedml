@@ -4,8 +4,8 @@ Central visualization and exploratory analysis module for trainedml.
 This module provides the Visualizer class, which offers a unified interface for generating
 various types of plots and exploratory data analyses from a pandas DataFrame.
 
-Features
---------
+Visualization Features
+-----------------------
 - Correlation heatmaps
 - Histograms
 - Line plots

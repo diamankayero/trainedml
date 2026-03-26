@@ -21,26 +21,25 @@ from .vizs import Vizs
 
 def correlation_matrix(data, features='all', method='pearson'):
     """
-    Calcule la matrice de corrélation pour les variables sélectionnées.
+    Calculate the correlation matrix for selected variables.
 
-    Paramètres
+    Parameters
     ----------
     data : pandas.DataFrame
-        Le jeu de données.
-    features : 'all' ou list, default='all'
-        Variables à inclure.
+        The dataset.
+    features : 'all' or list, default='all'
+        Variables to include.
     method : str, default='pearson'
-        Méthode de corrélation ('pearson', 'spearman', 'kendall').
+        Correlation method ('pearson', 'spearman', 'kendall').
 
-    Retourne
+    Returns
     -------
     pandas.DataFrame
-        Matrice de corrélation.
+        Correlation matrix.
 
-    Exemples
+    Examples
     --------
-    >>> corr = correlation_matrix(df, features=['A', 'B'], method='spearman')
-    >>> print(corr)
+    >>> correlation_matrix(data=df, features=['col1', 'col2'], method='spearman')
     """
     if not isinstance(data, pd.DataFrame):
         raise TypeError("data doit être un DataFrame pandas")
@@ -59,18 +58,17 @@ def correlation_matrix(data, features='all', method='pearson'):
 
 class CorrelationViz(Vizs):
     """
-    Classe pour générer une heatmap de corrélation.
+    Visualization class for correlation matrices.
 
-    Paramètres
+    Parameters
     ----------
     data : pandas.DataFrame
-        Le jeu de données.
-    features : 'all' ou list, default='all'
-        Variables à inclure.
-    method : str, default='pearson'
-        Méthode de corrélation ('pearson', 'spearman', 'kendall').
-    mask : bool, default=True
-        Masquer la partie supérieure de la matrice.
+        The dataset to visualize.
+
+    Examples
+    --------
+    >>> viz = CorrelationViz(data)
+    >>> viz.plot()
     """
     def __init__(self, data: pd.DataFrame, features: 'list[str]' | str = 'all', method: str = 'pearson', mask: bool = True):
         super().__init__(data)

@@ -34,14 +34,9 @@ def vif_summary(data):
     pandas.Series
         VIF per feature.
 
-    Notes
-    -----
-    $VIF_j = \frac{1}{1 - R_j^2}$
-    where $R_j^2$ is the $R^2$ of regressing feature $j$ on all others.
-
     Examples
     --------
-    >>> vif = vif_summary(df)
+    >>> vif = vif_summary(data=df)
     >>> print(vif)
     """
     X = data.select_dtypes(include=[float, int])

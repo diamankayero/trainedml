@@ -5,8 +5,8 @@ This module provides the DataAnalyzer class, which offers a suite of methods for
 descriptive statistics, distribution analysis, correlation, missing values, outliers,
 target analysis, boxplots, bivariate analysis, normality, multicollinearity, and profiling.
 
-Mathematical context
---------------------
+Math context
+------------
 - Correlation: Pearson, Spearman, Kendall
 - Outlier detection: IQR, Z-score
 - Normality: Shapiro-Wilk, D'Agostino, Anderson-Darling
@@ -426,22 +426,23 @@ class DataAnalyzer:
 
         return results
 
-    def multicollinearity(self, **kwargs):
+    def multicollinearity(self):
         """
-        Analyze multicollinearity using Variance Inflation Factor (VIF).
+        Analyze multicollinearity in the dataset.
 
         Returns
         -------
         pandas.DataFrame
-            VIF per feature with columns 'feature' and 'VIF'.
+            Variance Inflation Factor (VIF) for each feature.
 
         Notes
         -----
-        $VIF_j = \frac{1}{1 - R_j^2}$
-        where $R_j^2$ is the $R^2$ of regressing feature $j$ on all others.
+        Multicollinearity occurs when independent variables are highly correlated.
+        This method calculates the VIF to detect multicollinearity.
 
         Examples
         --------
+        >>> analyzer = DataAnalyzer(df)
         >>> vif = analyzer.multicollinearity()
         >>> print(vif)
         """
