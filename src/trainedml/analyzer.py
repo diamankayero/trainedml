@@ -16,8 +16,16 @@ Examples
 --------
 >>> from trainedml.analyzer import DataAnalyzer
 >>> analyzer = DataAnalyzer(df)
->>> analyzer.correlation()
->>> analyzer.outliers()
+>>> stats = analyzer.distribution()
+>>> print(stats)
+>>> corr = analyzer.correlation(method='spearman')
+>>> print(corr)
+>>> out = analyzer.outliers(method='zscore', threshold=3)
+>>> print(out)
+>>> norm = analyzer.normality()
+>>> print(norm)
+>>> report = analyzer.profiling()
+>>> print(report['describe'])
 """
 
 import pandas as pd
@@ -47,25 +55,20 @@ class DataAnalyzer:
 
     Examples
     --------
-    Basic usage:
     >>> from trainedml.analyzer import DataAnalyzer
     >>> analyzer = DataAnalyzer(df)
     >>> stats = analyzer.distribution()
     >>> print(stats)
 
-    Correlation matrix:
     >>> corr = analyzer.correlation(method='spearman')
     >>> print(corr)
 
-    Outlier detection:
     >>> out = analyzer.outliers(method='zscore', threshold=3)
     >>> print(out)
 
-    Normality tests:
     >>> norm = analyzer.normality()
     >>> print(norm)
 
-    Profiling report:
     >>> report = analyzer.profiling()
     >>> print(report['describe'])
 

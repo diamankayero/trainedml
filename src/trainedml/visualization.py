@@ -57,40 +57,33 @@ class Visualizer:
 
     Examples
     --------
-    # Basic usage
     >>> from trainedml.visualization import Visualizer
     >>> viz = Visualizer(df)
     >>> fig = viz.heatmap()
     >>> fig.show()
 
-    # Multiple visualizations
     >>> fig1 = viz.histogram(columns=['A', 'B'], bins=20)
     >>> fig2 = viz.line(x_column='A', y_column='B')
     >>> fig1.show(); fig2.show()
 
-    # Exploratory analysis
     >>> corr = viz.correlation()
     >>> print(corr)
     >>> missing = viz.missing()
     >>> print(missing)
 
-    # Boxplot and bivariate
     >>> fig = viz.boxplot(columns=['A', 'B'])
     >>> fig.show()
     >>> fig = viz.bivariate(x='A', y='B')
     >>> fig.show()
 
-    # Profiling report
     >>> report = viz.profiling()
     >>> print(report['describe'])
 
-    # Advanced: custom heatmap, custom histogram
     >>> fig = viz.heatmap(features=['A', 'B', 'C'], method='spearman', mask=False)
     >>> fig.show()
     >>> fig = viz.histogram(columns=['A'], bins=50, legend=True)
     >>> fig.show()
 
-    # Full EDA workflow
     >>> viz = Visualizer(df)
     >>> print(viz.get_features())
     >>> print(viz.missing())
@@ -135,15 +128,12 @@ class Visualizer:
 
         Examples
         --------
-        # Basic heatmap
         >>> fig = viz.heatmap()
         >>> fig.show()
 
-        # Custom features and method
         >>> fig = viz.heatmap(features=['A', 'B', 'C'], method='spearman', mask=False)
         >>> fig.show()
 
-        # Custom colormap and figure size
         >>> fig = viz.heatmap(cmap='viridis', figsize=(12, 8))
         >>> fig.show()
         """
@@ -176,15 +166,12 @@ class Visualizer:
 
         Examples
         --------
-        # All numeric columns
         >>> fig = viz.histogram()
         >>> fig.show()
 
-        # Specific columns, more bins, with legend
         >>> fig = viz.histogram(columns=['A', 'B'], bins=30, legend=True)
         >>> fig.show()
 
-        # Custom color and transparency
         >>> fig = viz.histogram(columns=['A'], bins=20, color='red', alpha=0.5)
         >>> fig.show()
         """
@@ -215,11 +202,9 @@ class Visualizer:
 
         Examples
         --------
-        # Simple line plot
         >>> fig = viz.line(x_column='A', y_column='B')
         >>> fig.show()
 
-        # With markers and custom style
         >>> fig = viz.line(x_column='A', y_column='B', marker='o', linestyle='--')
         >>> fig.show()
         """
