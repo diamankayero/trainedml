@@ -187,34 +187,34 @@ clarity, flexibility, and extensibility.</p>
 </dd></dl>
 
 <p class="rubric">Exemples</p>
-<p># Basic usage
+<p>Basic usage
 &gt;&gt;&gt; from trainedml.visualization import Visualizer
 &gt;&gt;&gt; viz = Visualizer(df)
 &gt;&gt;&gt; fig = viz.heatmap()
 &gt;&gt;&gt; fig.show()</p>
-<p># Multiple visualizations
+<p>Multiple visualizations
 &gt;&gt;&gt; fig1 = viz.histogram(columns=[“A”, “B”], bins=20)
 &gt;&gt;&gt; fig2 = viz.line(x_column=”A”, y_column=”B”)
 &gt;&gt;&gt; fig1.show(); fig2.show()</p>
-<p># Exploratory analysis
+<p>Exploratory analysis
 &gt;&gt;&gt; corr = viz.correlation()
 &gt;&gt;&gt; print(corr)
 &gt;&gt;&gt; missing = viz.missing()
 &gt;&gt;&gt; print(missing)</p>
-<p># Boxplot and bivariate
+<p>Boxplot and bivariate
 &gt;&gt;&gt; fig = viz.boxplot(columns=[“A”, “B”])
 &gt;&gt;&gt; fig.show()
 &gt;&gt;&gt; fig = viz.bivariate(x=”A”, y=”B”)
 &gt;&gt;&gt; fig.show()</p>
-<p># Profiling report
+<p>Profiling report
 &gt;&gt;&gt; report = viz.profiling()
 &gt;&gt;&gt; print(report[“describe”])</p>
-<p># Advanced: custom heatmap, custom histogram
+<p>Advanced: custom heatmap, custom histogram
 &gt;&gt;&gt; fig = viz.heatmap(features=[“A”, “B”, “C”], method=”spearman”, mask=False)
 &gt;&gt;&gt; fig.show()
 &gt;&gt;&gt; fig = viz.histogram(columns=[“A”], bins=50, legend=True)
 &gt;&gt;&gt; fig.show()</p>
-<p># Full EDA workflow
+<p>Full EDA workflow
 &gt;&gt;&gt; viz = Visualizer(df)
 &gt;&gt;&gt; print(viz.get_features())
 &gt;&gt;&gt; print(viz.missing())

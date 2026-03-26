@@ -131,40 +131,40 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    # Basic usage</span>
+<span class="sd">    Basic usage</span>
 <span class="sd">    &gt;&gt;&gt; from trainedml.visualization import Visualizer</span>
 <span class="sd">    &gt;&gt;&gt; viz = Visualizer(df)</span>
 <span class="sd">    &gt;&gt;&gt; fig = viz.heatmap()</span>
 <span class="sd">    &gt;&gt;&gt; fig.show()</span>
 
-<span class="sd">    # Multiple visualizations</span>
+<span class="sd">    Multiple visualizations</span>
 <span class="sd">    &gt;&gt;&gt; fig1 = viz.histogram(columns=[&#39;A&#39;, &#39;B&#39;], bins=20)</span>
 <span class="sd">    &gt;&gt;&gt; fig2 = viz.line(x_column=&#39;A&#39;, y_column=&#39;B&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; fig1.show(); fig2.show()</span>
 
-<span class="sd">    # Exploratory analysis</span>
+<span class="sd">    Exploratory analysis</span>
 <span class="sd">    &gt;&gt;&gt; corr = viz.correlation()</span>
 <span class="sd">    &gt;&gt;&gt; print(corr)</span>
 <span class="sd">    &gt;&gt;&gt; missing = viz.missing()</span>
 <span class="sd">    &gt;&gt;&gt; print(missing)</span>
 
-<span class="sd">    # Boxplot and bivariate</span>
+<span class="sd">    Boxplot and bivariate</span>
 <span class="sd">    &gt;&gt;&gt; fig = viz.boxplot(columns=[&#39;A&#39;, &#39;B&#39;])</span>
 <span class="sd">    &gt;&gt;&gt; fig.show()</span>
 <span class="sd">    &gt;&gt;&gt; fig = viz.bivariate(x=&#39;A&#39;, y=&#39;B&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; fig.show()</span>
 
-<span class="sd">    # Profiling report</span>
+<span class="sd">    Profiling report</span>
 <span class="sd">    &gt;&gt;&gt; report = viz.profiling()</span>
 <span class="sd">    &gt;&gt;&gt; print(report[&#39;describe&#39;])</span>
 
-<span class="sd">    # Advanced: custom heatmap, custom histogram</span>
+<span class="sd">    Advanced: custom heatmap, custom histogram</span>
 <span class="sd">    &gt;&gt;&gt; fig = viz.heatmap(features=[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], method=&#39;spearman&#39;, mask=False)</span>
 <span class="sd">    &gt;&gt;&gt; fig.show()</span>
 <span class="sd">    &gt;&gt;&gt; fig = viz.histogram(columns=[&#39;A&#39;], bins=50, legend=True)</span>
 <span class="sd">    &gt;&gt;&gt; fig.show()</span>
 
-<span class="sd">    # Full EDA workflow</span>
+<span class="sd">    Full EDA workflow</span>
 <span class="sd">    &gt;&gt;&gt; viz = Visualizer(df)</span>
 <span class="sd">    &gt;&gt;&gt; print(viz.get_features())</span>
 <span class="sd">    &gt;&gt;&gt; print(viz.missing())</span>
@@ -611,7 +611,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Droits d'auteur 2025, Yéro Diamanka.</p>
+    <p>&#169; Droits d'auteur 2026, Yéro Diamanka.</p>
   </div>
 
   Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
