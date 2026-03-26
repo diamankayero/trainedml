@@ -39,6 +39,3 @@ extensions += [
     'sphinx.ext.autosectionlabel',
 ]
 
-# -- Napoleon settings ------------------------------------------------------
-napoleon_include_examples = True
-napoleon_include_doctest = True
