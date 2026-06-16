@@ -32,7 +32,6 @@ Exemple
 from .data.loader import DataLoader
 from .models import KNNModel, LogisticModel, RandomForestModel, MODEL_MAP, get_model
 from .evaluation import Evaluator
-from sklearn.model_selection import train_test_split
 
 
 
@@ -104,7 +103,7 @@ class Trainer:
         """
         loader = DataLoader()
         X, y = loader.load_dataset(name=self.dataset, url=self.url, target=self.target)
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
+        self.X_train, self.X_test, self.y_train, self.y_test = loader.split(
             X, y, test_size=self.test_size, random_state=self.seed)
         return self.X_train, self.X_test, self.y_train, self.y_test
 

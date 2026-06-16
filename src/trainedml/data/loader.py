@@ -22,6 +22,7 @@ Exemple
 
 import pandas as pd
 import pooch
+from sklearn.model_selection import train_test_split as _sklearn_split
 
 
 class DataLoader:
@@ -202,5 +203,33 @@ class DataLoader:
             return X, y
         else:
             raise ValueError("Spécifiez un nom de dataset connu ou une url+target.")
+
+    def split(self, X, y, test_size=0.2, random_state=42):
+        """
+        Sépare les données en ensembles d'entraînement et de test.
+
+        Parameters
+        ----------
+        X : pd.DataFrame
+            Features.
+        y : pd.Series
+            Cible.
+        test_size : float, default=0.2
+            Proportion de l'ensemble de test.
+        random_state : int, default=42
+            Graine aléatoire pour la reproductibilité.
+
+        Returns
+        -------
+        tuple
+            (X_train, X_test, y_train, y_test)
+
+        Examples
+        --------
+        >>> loader = DataLoader()
+        >>> X, y = loader.load_dataset(name="iris")
+        >>> X_train, X_test, y_train, y_test = loader.split(X, y, test_size=0.2)
+        """
+        return _sklearn_split(X, y, test_size=test_size, random_state=random_state)
 
     # TODO: Ajouter ici d'autres méthodes pour charger d'autres datasets publics (INSEE, data.gouv.fr, etc.)

@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: trainedml
-Version: 0.1.2
+Version: 0.1.3
 Summary: Simple ML training framework
 Author-email: diamankayero <diamanka.tck@gmail.com>
 License-Expression: MIT
