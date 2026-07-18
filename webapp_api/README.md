@@ -1,5 +1,9 @@
 # webapp_api : API HTTP + page de démo
 
+**En ligne : https://trainedml.onrender.com** (plan gratuit Render : la
+première visite après une période d'inactivité prend ~30 s, le temps que le
+service se réveille).
+
 Le pattern standard de l'industrie : le Python (trainedml) tourne côté
 serveur derrière une API HTTP (FastAPI) ; n'importe quel frontend (la page
 HTML/JS fournie, React, mobile...) consomme cette API. Le frontend peut

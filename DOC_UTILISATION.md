@@ -214,8 +214,10 @@ au rapport EDA en une ligne") et le rendre digne de confiance.
   Le pattern : le frontend (HTML, React...) ne fait que des appels fetch,
   le Python reste côté serveur. Extra d'installation `trainedml[web]`.
 - Déploiement préparé : render.yaml (Render, un clic depuis GitHub),
-  Dockerfile + .dockerignore (tout hébergeur Docker). Reste à faire côté
-  compte : créer le compte Render et valider le Blueprint.
+  Dockerfile + .dockerignore (tout hébergeur Docker).
+- Démo déployée et vérifiée en production : https://trainedml.onrender.com
+  (train, predict et compare testés sur l'instance en ligne). Chaque push
+  sur main redéploie automatiquement.
 
 ### Chantiers restants
 

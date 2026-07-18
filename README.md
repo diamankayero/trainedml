@@ -7,6 +7,7 @@
   <a href="https://pypi.org/project/trainedml/"><img src="https://img.shields.io/pypi/pyversions/trainedml" alt="Python versions"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
   <a href="https://diamankayero.github.io/trainedml/"><img src="https://img.shields.io/badge/Documentation-GitHub%20Pages-blue?logo=github" alt="Documentation"></a>
+  <a href="https://trainedml.onrender.com"><img src="https://img.shields.io/badge/Demo-trainedml.onrender.com-46b3e6?logo=render&logoColor=white" alt="Live demo"></a>
   <a href="https://github.com/diamankayero/trainedml/actions/workflows/workflow.yml"><img src="https://github.com/diamankayero/trainedml/actions/workflows/workflow.yml/badge.svg" alt="CI"></a>
 </p>
 
@@ -226,6 +227,8 @@ python -m trainedml --dataset iris --show
 ```
 
 ### Web API (FastAPI)
+
+**Live demo: [trainedml.onrender.com](https://trainedml.onrender.com)** (free tier: first visit after idle takes ~30 s to wake up).
 
 Serve trainedml over HTTP for any frontend (HTML/JS, React, mobile):
 
