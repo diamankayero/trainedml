@@ -94,7 +94,7 @@ print(compare(dataset="wine", cv=5))
 - **EDA report** - one self-contained HTML report: correlations, distributions, missing values, outliers, normality, VIF
 - **Visualization** - heatmaps, histograms, line plots, boxplots, bivariate charts
 - **CLI** - automate ML pipelines from the terminal
-- **Web API + demo page** - FastAPI backend (`trainedml[web]`) with an HTML/JS demo, ready for any frontend (React, mobile...) and one-click deploy (render.yaml, Dockerfile)
+- **Web demo** - [trainedml-webapp](https://github.com/diamankayero/trainedml-webapp): FastAPI API + HTML/JS front consuming this package, live at [trainedml.onrender.com](https://trainedml.onrender.com)
 
 ---
 
@@ -226,19 +226,13 @@ python -m trainedml --load model.joblib --input new_data.csv --output prediction
 python -m trainedml --dataset iris --show
 ```
 
-### Web API (FastAPI)
+### Web demo
 
 **Live demo: [trainedml.onrender.com](https://trainedml.onrender.com)** (free tier: first visit after idle takes ~30 s to wake up).
 
-Serve trainedml over HTTP for any frontend (HTML/JS, React, mobile):
-
-```bash
-pip install "trainedml[web]"
-uvicorn webapp_api.api:app --reload
-# demo page: http://localhost:8000   interactive docs: http://localhost:8000/docs
-```
-
-See [webapp_api/README.md](webapp_api/README.md) for routes, deployment (Render, Docker) and details.
+The web demo (FastAPI API + HTML/JS front) lives in its own repository,
+[trainedml-webapp](https://github.com/diamankayero/trainedml-webapp), which
+consumes this package from PyPI like any user would.
 
 ---
 
@@ -264,8 +258,9 @@ trainedml/
 ├── doc/                   # Sphinx documentation
 ├── examples/              # Runnable examples + notebooks (quickstart, compare, EDA report)
 ├── tests/                 # Unit tests
-├── webapp_api/            # HTTP API (FastAPI) + HTML/JS demo page
 └── CHANGELOG.md
+
+Web demo: separate repo, github.com/diamankayero/trainedml-webapp
 ```
 
 ---

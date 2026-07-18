@@ -17,7 +17,7 @@ le README du dossier concerné.
 | [doc/](doc/README.md) | Documentation Sphinx : build local et publication |
 | [public/](public/README.md) | Images du README |
 | [.github/workflows/](.github/workflows/README.md) | CI, publication PyPI, procédure de release |
-| [webapp_api/](webapp_api/README.md) | API HTTP (FastAPI) + page web de démo |
+| [trainedml-webapp](https://github.com/diamankayero/trainedml-webapp) | Dépôt séparé : API HTTP (FastAPI) + page web de démo |
 
 ---
 
@@ -209,15 +209,17 @@ au rapport EDA en une ligne") et le rendre digne de confiance.
 
 - Documentation par dossier : un README dans chaque dossier du projet,
   DOC_UTILISATION.md restructuré avec ce journal.
-- API HTTP (`webapp_api/`) : FastAPI expose train/predict/compare/models ;
-  page de démo HTML/JS vanilla servie à la racine, doc interactive sur /docs.
-  Le pattern : le frontend (HTML, React...) ne fait que des appels fetch,
-  le Python reste côté serveur. Extra d'installation `trainedml[web]`.
-- Déploiement préparé : render.yaml (Render, un clic depuis GitHub),
-  Dockerfile + .dockerignore (tout hébergeur Docker).
+- API HTTP : FastAPI expose train/predict/compare/models ; page de démo
+  HTML/JS vanilla servie à la racine, doc interactive sur /docs. Le pattern :
+  le frontend (HTML, React...) ne fait que des appels fetch, le Python reste
+  côté serveur.
 - Démo déployée et vérifiée en production : https://trainedml.onrender.com
-  (train, predict et compare testés sur l'instance en ligne). Chaque push
-  sur main redéploie automatiquement.
+  (train, predict et compare testés sur l'instance en ligne).
+- Séparation des dépôts : la webapp a été extraite dans son propre repo
+  https://github.com/diamankayero/trainedml-webapp qui consomme trainedml
+  depuis PyPI (test d'intégration permanent du package publié). Le repo du
+  package ne contient plus que la bibliothèque ; render.yaml, Dockerfile et
+  l'extra [web] sont partis avec la webapp.
 
 ### Chantiers restants
 

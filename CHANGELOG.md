@@ -7,15 +7,15 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
 ## [Non publié]
 
 ### Ajouté
-- API web FastAPI (`webapp_api/`) : routes /api/train, /api/predict,
-  /api/compare, /api/models, avec page de démo HTML/JS servie à la racine
-  et documentation interactive /docs. Extra d'installation : `trainedml[web]`.
-- Tests de l'API (`tests/test_api.py`), ignorés si fastapi absent.
-- Fichiers de déploiement : `render.yaml` (Render, gratuit), `Dockerfile`
-  et `.dockerignore` (tout hébergeur Docker) ; marche à suivre dans
-  webapp_api/README.md.
 - Un README de documentation dans chaque dossier du projet ;
   DOC_UTILISATION.md restructuré avec journal du projet.
+
+### Modifié
+- La démo web (API FastAPI + page HTML/JS, déployée sur
+  https://trainedml.onrender.com) vit désormais dans son propre dépôt
+  https://github.com/diamankayero/trainedml-webapp, qui consomme trainedml
+  depuis PyPI. Ce dépôt ne contient plus que le package ; l'extra
+  d'installation `[web]`, render.yaml et le Dockerfile sont partis avec elle.
 
 ## [0.2.0] - 2026-07-18
 
