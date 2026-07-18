@@ -220,6 +220,13 @@ au rapport EDA en une ligne") et le rendre digne de confiance.
   depuis PyPI (test d'intégration permanent du package publié). Le repo du
   package ne contient plus que la bibliothèque ; render.yaml, Dockerfile et
   l'extra [web] sont partis avec la webapp.
+- Version React : https://github.com/diamankayero/ModeLmL (nom choisi par
+  l'utilisateur), même interface portée en composants React (Vite), mêmes
+  jetons de design, déployée sur GitHub Pages
+  (https://diamankayero.github.io/ModeLmL/). La page HTML de
+  trainedml-webapp est conservée volontairement : c'est la version la plus
+  lisible pour apprendre ; ModeLmL est la version industrielle. Les deux
+  consomment la même API.
 
 ### Chantiers restants
 
