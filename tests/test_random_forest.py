@@ -4,13 +4,13 @@ Test unitaire du modèle Random Forest avec chargement automatique d'un dataset 
 import unittest
 from trainedml.data.loader import DataLoader
 from trainedml.models.random_forest import RandomForestModel
-from sklearn.model_selection import train_test_split
 
 class TestRandomForestModel(unittest.TestCase):
     def setUp(self):
         # Chargement du dataset Iris depuis une URL publique
-        X, y = DataLoader().load_dataset(name="iris")
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+        loader = DataLoader()
+        X, y = loader.load_dataset(name="iris")
+        self.X_train, self.X_test, self.y_train, self.y_test = loader.split(X, y, test_size=0.3, random_state=42)
 
     def test_fit_predict(self):
         """Teste l'entraînement et la prédiction du modèle Random Forest sur Iris."""

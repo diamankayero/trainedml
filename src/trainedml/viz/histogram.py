@@ -12,7 +12,6 @@ Examples
 >>> viz.figure.show()
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
 from typing import Optional
 from .vizs import Vizs

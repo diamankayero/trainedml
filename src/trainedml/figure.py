@@ -17,7 +17,7 @@ Examples
 
 import matplotlib.pyplot as plt
 try:
-    import plotly.graph_objects as go
+    import plotly.graph_objects as go  # noqa: F401 -- test de disponibilité de plotly
     _plotly_available = True
 except ImportError:
     _plotly_available = False

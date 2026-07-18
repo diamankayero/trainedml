@@ -18,7 +18,6 @@ Examples
 """
 
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from typing import Optional
@@ -83,8 +82,10 @@ class HeatmapViz(Vizs):
         Calcule la matrice de corrélation et affiche la heatmap.
         """
         # Sélection des colonnes/features à corréler
+        # (avec 'all', seules les colonnes numériques sont retenues : la
+        # corrélation n'est pas définie pour les colonnes texte/catégorielles)
         if self._features == 'all':
-            cols = self._data.columns.tolist()
+            cols = self._data.select_dtypes(include=np.number).columns.tolist()
         else:
             cols = self._features
         df = self._data[cols]

@@ -12,7 +12,6 @@ Examples
 """
 
 import matplotlib.pyplot as plt
-import pandas as pd
 from .vizs import Vizs
 
 def missing_summary(data):

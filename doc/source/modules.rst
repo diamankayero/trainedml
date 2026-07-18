@@ -4,6 +4,13 @@ trainedml - API détaillée
 .. toctree::
    :maxdepth: 1
 
+   trainedml/trainer
+   trainedml/loader
+   trainedml/preprocessing
+   trainedml/tasks
+   trainedml/benchmark
+   trainedml/evaluation
+   trainedml/report
    trainedml/models/knn
    trainedml/models/logistic
    trainedml/models/random_forest

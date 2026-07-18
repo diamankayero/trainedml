@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "trainedml"
-version = "0.1.4"
-description = "Simple ML training framework"
+version = "0.2.0"
+description = "Modular ML framework: train, benchmark, and visualize models with a unified API and CLI"
 authors = [
   { name = "diamankayero", email = "diamanka.tck@gmail.com" },
 ]
@@ -32,7 +32,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest", "streamlit"]
+dev = ["pytest", "ruff", "mypy", "streamlit"]
 doc = ["sphinx", "sphinx_rtd_theme"]
 
 [project.scripts]
@@ -41,3 +41,16 @@ trainedml = "trainedml.cli:main"
 [project.urls]
 Homepage = "https://github.com/diamankayero/trainedml"
 Issues = "https://github.com/diamankayero/trainedml"
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src/trainedml"]
+ignore_missing_imports = true
+warn_unused_ignores = true
+no_implicit_optional = true
+
+[[tool.mypy.overrides]]
+# Les modules de visualisation historiques ne sont pas encore annotés ;
+# on vérifie seulement qu'ils s'importent proprement.
+module = ["trainedml.viz.*", "trainedml.figure", "trainedml.analyzer", "trainedml.visualization"]
+ignore_errors = true

@@ -1,34 +1,39 @@
-# Exemples avancés : pipeline régression
+"""
+Pipeline de régression complet avec trainedml.
 
-```python
+Montre : données en mémoire (X, y), détection automatique de la tâche,
+métriques de régression, et comparatif de tous les régresseurs par
+validation croisée.
+
+Exécution :
+    python examples/exemple_regression.py
+"""
+
+import numpy as np
 import pandas as pd
-from trainedml.data.loader import DataLoader
-from trainedml.models.regressors import LinearRegressorModel, RandomForestRegressorModel
-from trainedml.viz.profiling import profiling_report
-from trainedml.viz.line import LineViz
 
-# Chargement d'un dataset public (exemple : Boston Housing)
-# Remplacer par un CSV ou un dataset compatible
-# X, y = DataLoader().load_dataset(name="boston")
-# Pour l'exemple, on crée un DataFrame fictif :
-X = pd.DataFrame({
-    'surface': [30, 45, 60, 80, 100],
-    'pieces': [1, 2, 3, 4, 5]
-})
-y = pd.Series([100, 150, 200, 250, 300])
+from trainedml import Trainer, compare
 
-# Profiling rapide
-desc = profiling_report(X)
-print(desc['summary'])
+# Jeu de données synthétique : prix en fonction de la surface et du nombre de pièces
+rng = np.random.default_rng(42)
+n = 200
+surface = rng.uniform(20, 150, n)
+pieces = np.clip((surface / 25).round() + rng.integers(-1, 2, n), 1, 8)
+prix = 2000 * surface + 5000 * pieces + rng.normal(0, 8000, n)
 
-# Entraînement d'un modèle de régression linéaire
-model = LinearRegressorModel()
-model.fit(X, y)
-preds = model.predict(X)
-print("Prédictions:", preds)
+X = pd.DataFrame({"surface": surface, "pieces": pieces})
+y = pd.Series(prix, name="prix")
 
-# Visualisation de la relation surface/prix
-viz = LineViz(X.assign(prix=y), x_column='surface', y_column='prix')
-viz.vizs()
-viz.figure.show()
-```
+# Régression avec le Trainer, données en mémoire.
+# La tâche est détectée automatiquement → métriques r2, mse, rmse, mae.
+trainer = Trainer(X=X, y=y, model="ridge")
+trainer.fit()
+print("Scores régression :", {k: round(v, 3) for k, v in trainer.evaluate().items()})
+
+# Prédiction sur un logement de 75 m² avec 3 pièces
+print("Prix prédit (75 m², 3 pièces) :", trainer.predict([[75, 3]]).round(0))
+
+# Comparer tous les régresseurs par validation croisée, en une ligne
+df = compare(X=X, y=y, cv=5)
+print("\n=== Comparatif des régresseurs (CV 5 plis) ===")
+print(df.round(3).to_string())

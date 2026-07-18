@@ -11,7 +11,6 @@ Examples
 >>> print(summary)
 """
 
-import pandas as pd
 import matplotlib.pyplot as plt
 from .vizs import Vizs
 

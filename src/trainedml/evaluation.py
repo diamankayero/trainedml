@@ -66,6 +66,10 @@ Examples
 >>> print(scores_reg)
 """
 
+from __future__ import annotations
+
+from typing import Any, Dict, Optional
+
 import numpy as np
 from sklearn.metrics import (
     accuracy_score, precision_score, recall_score, f1_score,
@@ -81,7 +85,7 @@ class Evaluator:
     """
 
     @staticmethod
-    def evaluate_all(y_true, y_pred):
+    def evaluate_all(y_true: Any, y_pred: Any) -> Dict[str, float]:
         """
         Compute accuracy, precision, recall, and F1-score for classification.
 
@@ -110,7 +114,7 @@ class Evaluator:
         }
 
     @staticmethod
-    def evaluate_regression(y_true, y_pred):
+    def evaluate_regression(y_true: Any, y_pred: Any) -> Dict[str, float]:
         """
         Compute R², MSE, RMSE, and MAE for regression.
 
@@ -140,7 +144,38 @@ class Evaluator:
         }
 
     @staticmethod
-    def auto_evaluate(y_true, y_pred):
+    def evaluate_for(task: Optional[str], y_true: Any, y_pred: Any) -> Dict[str, float]:
+        """
+        Compute the metrics appropriate for a given task type.
+
+        Parameters
+        ----------
+        task : str or None
+            ``'classification'``, ``'regression'``, or None (auto-detect from y_true).
+        y_true : array-like
+            True values.
+        y_pred : array-like
+            Predicted values.
+
+        Returns
+        -------
+        dict
+            Classification metrics (accuracy, precision, recall, f1) or
+            regression metrics (r2, mse, rmse, mae).
+
+        Examples
+        --------
+        >>> Evaluator.evaluate_for('regression', [3.0, 2.5], [3.1, 2.4])
+        {'r2': ..., 'mse': ..., 'rmse': ..., 'mae': ...}
+        """
+        if task == 'regression':
+            return Evaluator.evaluate_regression(y_true, y_pred)
+        if task == 'classification':
+            return Evaluator.evaluate_all(y_true, y_pred)
+        return Evaluator.auto_evaluate(y_true, y_pred)
+
+    @staticmethod
+    def auto_evaluate(y_true: Any, y_pred: Any) -> Dict[str, float]:
         """
         Automatically detect classification vs regression and compute the appropriate metrics.
 

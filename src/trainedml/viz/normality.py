@@ -11,7 +11,6 @@ Examples
 >>> print(results)
 """
 
-import pandas as pd
 from scipy import stats
 
 def normality_tests(data, columns='all'):
@@ -54,7 +53,6 @@ Analyse de la normalité pour trainedml.
 Affiche un QQ-plot pour chaque variable numérique.
 """
 
-import scipy.stats as stats
 import matplotlib.pyplot as plt
 from .vizs import Vizs
 

@@ -103,6 +103,35 @@ class Visualizer:
         self.data = data
         self.analyzer = DataAnalyzer(data)
 
+    def report(self, path=None, title="Rapport exploratoire — trainedml"):
+        """
+        Génère un rapport EDA HTML complet et auto-contenu.
+
+        Le rapport rassemble toutes les analyses du package : aperçu,
+        statistiques descriptives, valeurs manquantes, corrélations (avec
+        heatmap), distributions, outliers, normalité et VIF. Les figures
+        sont embarquées dans le HTML (aucune dépendance externe).
+
+        Parameters
+        ----------
+        path : str, optional
+            Chemin du fichier HTML de sortie. Si None, le HTML est seulement retourné.
+        title : str, optional
+            Titre du rapport.
+
+        Returns
+        -------
+        str
+            Le contenu HTML du rapport.
+
+        Examples
+        --------
+        >>> viz = Visualizer(df)
+        >>> viz.report("rapport.html")
+        """
+        from .report import generate_report
+        return generate_report(self.data, path=path, title=title)
+
     def heatmap(self, features='all', method='pearson', mask=True, **kwargs):
         """
         Generate a correlation heatmap between variables.

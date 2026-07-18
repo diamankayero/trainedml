@@ -27,11 +27,20 @@ Guide de démarrage rapide
 
 .. code-block:: python
 
-   from trainedml import Trainer
+   from trainedml import Trainer, compare
+
+   # Entraîner, évaluer, prédire
    trainer = Trainer(dataset="iris", model="random_forest")
    trainer.fit()
    print(trainer.evaluate())
    y_pred = trainer.predict([[5.1, 3.5, 1.4, 0.2]])
+
+   # Sauvegarder / recharger
+   trainer.save("model.joblib")
+   restored = Trainer.load("model.joblib")
+
+   # Comparer tous les modèles (validation croisée) en une ligne
+   print(compare(dataset="wine", cv=5))
 
 Installation
 ============

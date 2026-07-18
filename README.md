@@ -8,8 +8,7 @@
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
   <a href="https://diamankayero.github.io/trainedml/"><img src="https://img.shields.io/badge/Documentation-GitHub%20Pages-blue?logo=github" alt="Documentation"></a>
   <a href="https://trainedml.streamlit.app"><img src="https://img.shields.io/badge/Webapp-Streamlit-ff4b4b?logo=streamlit" alt="Webapp"></a>
-  <img src="https://img.shields.io/badge/tests-passing-brightgreen" alt="Tests">
-  <img src="https://img.shields.io/badge/coverage-100%25-success" alt="Coverage">
+  <a href="https://github.com/diamankayero/trainedml/actions/workflows/workflow.yml"><img src="https://github.com/diamankayero/trainedml/actions/workflows/workflow.yml/badge.svg" alt="CI"></a>
 </p>
 
 ---
@@ -64,35 +63,38 @@ pip install -e .
 ## Quickstart
 
 ```python
-from trainedml import Trainer
+from trainedml import Trainer, compare
 
-# Train on a built-in dataset
+# Train on a built-in dataset (loaded locally, no network needed)
 trainer = Trainer(dataset="iris", model="random_forest")
 trainer.fit()
 
-# Evaluate
-scores = trainer.evaluate()
-print(scores)
+# Evaluate — metrics match the task (classification or regression)
+print(trainer.evaluate())
 
 # Predict
-predictions = trainer.predict([[5.1, 3.5, 1.4, 0.2]])
-print(predictions)
+print(trainer.predict([[5.1, 3.5, 1.4, 0.2]]))
+
+# Compare every suitable model with 5-fold cross-validation, in one line
+print(compare(dataset="wine", cv=5))
 ```
 
 ---
 
 ## Features
 
-- **Unified API** — train, evaluate, and predict with a single `Trainer` class
-- **Built-in datasets** — Iris, Wine, and any remote CSV via URL
-- **Modular models** — KNN, Logistic Regression, Random Forest, and more
-- **Standard metrics** — accuracy, precision, recall, F1, R², MSE, RMSE, MAE
-- **Benchmarking** — compare models side-by-side with timing and parallelization
-- **Exploratory analysis** — correlations, distributions, missing values, outliers, multicollinearity
+- **Unified API** — train, evaluate, predict, save/load with a single `Trainer` class
+- **One-line model comparison** — `compare(dataset="wine", cv=5)` returns a sorted DataFrame with cross-validated scores and timings
+- **Automatic preprocessing** — imputation, scaling, one-hot encoding, refit per CV fold (no data leakage)
+- **Any scikit-learn estimator** — `Trainer(model=SVC())` works out of the box, plus built-in KNN, Logistic Regression, Random Forest, Linear/Ridge/Lasso
+- **Built-in datasets offline** — Iris and Wine load locally via scikit-learn; any remote CSV via URL (cached)
+- **Task auto-detection** — classification vs regression, with matching metrics (accuracy/precision/recall/F1 or R²/MSE/RMSE/MAE)
+- **Benchmarking** — single split or K-fold cross-validation, with timing and parallelization
+- **Model persistence** — `trainer.save("model.joblib")` / `Trainer.load(...)`, batch prediction from the CLI
+- **EDA report** — one self-contained HTML report: correlations, distributions, missing values, outliers, normality, VIF
 - **Visualization** — heatmaps, histograms, line plots, boxplots, bivariate charts
 - **CLI** — automate ML pipelines from the terminal
 - **Streamlit webapp** — interactive web interface for exploration and prediction
-- **Full test coverage** — 100% coverage with Sphinx documentation
 
 ---
 
@@ -111,15 +113,55 @@ scores = trainer.evaluate()
 predictions = trainer.predict([[5.1, 3.5, 1.4, 0.2]])
 ```
 
-Train on a custom remote dataset:
+The train/test split is handled internally by the package (`DataLoader.split`) — no need to call scikit-learn yourself. The splits are available as attributes, and you can re-split with a new seed without recreating the trainer:
 
 ```python
+trainer.X_train, trainer.X_test, trainer.y_train, trainer.y_test  # after fit()
+
+# Vary the seed to check model stability across splits
+for s in range(5):
+    print(trainer.fit(seed=s).evaluate())
+```
+
+Train on a custom remote dataset, in-memory data, hyperparameters, or any scikit-learn estimator:
+
+```python
+# Remote CSV
 trainer = Trainer(
     url="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv",
     target="quality",
     model="logistic"
 )
-trainer.fit()
+
+# In-memory data (X, y)
+trainer = Trainer(X=my_dataframe, y=my_target, model="ridge")
+
+# Hyperparameters
+trainer = Trainer(dataset="wine", model="knn", model_params={"n_neighbors": 7})
+
+# Any scikit-learn estimator
+from sklearn.svm import SVC
+trainer = Trainer(dataset="iris", model=SVC(kernel="rbf"))
+```
+
+Save and reload a trained model:
+
+```python
+trainer.fit().save("model.joblib")
+restored = Trainer.load("model.joblib")
+restored.predict([[5.1, 3.5, 1.4, 0.2]])
+```
+
+### `compare`
+
+Compare every suitable model (auto-detected task) with cross-validation, in one line:
+
+```python
+from trainedml import compare
+
+df = compare(dataset="wine", cv=5)      # built-in dataset
+df = compare(X=X, y=y, cv=5)            # your own data
+print(df)  # sorted DataFrame: metrics ± std, fit/predict times
 ```
 
 ### `DataLoader`
@@ -171,11 +213,14 @@ fig.show()
 # Show help
 python -m trainedml --help
 
-# Benchmark all models on Iris
-python -m trainedml --benchmark --dataset iris
+# Benchmark all models on Iris (5-fold cross-validation)
+python -m trainedml --benchmark --dataset iris --cv 5
 
-# Train KNN on Wine
-python -m trainedml --model knn --dataset wine
+# Train KNN on Wine and save the model
+python -m trainedml --model knn --dataset wine --save model.joblib
+
+# Predict on a new CSV with a saved model
+python -m trainedml --load model.joblib --input new_data.csv --output predictions.csv
 
 # Visualize correlation heatmap
 python -m trainedml --dataset iris --show
@@ -196,21 +241,24 @@ Or visit the hosted version: [trainedml.streamlit.app](https://trainedml.streaml
 ```
 trainedml/
 ├── src/trainedml/
-│   ├── __init__.py        # Trainer API
-│   ├── analyzer.py        # Exploratory data analysis
-│   ├── benchmark.py       # Model benchmarking
-│   ├── cli.py             # CLI interface
+│   ├── __init__.py        # Trainer API (train/evaluate/predict/save/load)
+│   ├── compare.py         # One-line model comparison (cross-validated DataFrame)
+│   ├── preprocessing.py   # Automatic preprocessing (impute, scale, one-hot)
+│   ├── tasks.py           # Task detection (classification vs regression)
+│   ├── benchmark.py       # Model benchmarking (single split or K-fold CV)
 │   ├── evaluation.py      # Evaluation metrics
+│   ├── report.py          # Self-contained HTML EDA report
+│   ├── analyzer.py        # Exploratory data analysis
+│   ├── cli.py             # CLI interface
 │   ├── figure.py          # Figure generation
-│   ├── visualization.py   # Visualization tools
-│   ├── data/              # Data loading
-│   ├── models/            # ML models (KNN, LR, RF, ...)
-│   ├── utils/             # Utility functions
+│   ├── visualization.py   # Visualization facade (Visualizer)
+│   ├── data/              # Data loading (offline built-ins + remote CSV)
+│   ├── models/            # ML models (KNN, LR, RF, regressors...)
 │   └── viz/               # Advanced visualizations
 ├── doc/                   # Sphinx documentation
+├── examples/              # Runnable examples + notebooks (quickstart, compare, EDA report)
 ├── tests/                 # Unit tests
-├── trainedml_webapp/      # Streamlit webapp
-└── requirements.txt
+└── CHANGELOG.md
 ```
 
 ---

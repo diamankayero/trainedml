@@ -18,7 +18,10 @@ Examples
 ...     def predict(self, X): ...
 ...     def evaluate(self, X, y): ...
 """
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
+from typing import Any, Dict, Union
 
 
 
@@ -85,13 +88,13 @@ class BaseModel(ABC):
     - The 'task' attribute is used for automatic model selection and benchmarking.
     - The evaluate method should return a scalar (score) or a dict of metrics.
     """
-    task = 'classification'  # Default: classification
+    task: str = 'classification'  # Default: classification
 
-    def __init__(self):
-        self.model = None  # Underlying estimator (e.g., scikit-learn)
+    def __init__(self) -> None:
+        self.model: Any = None  # Underlying estimator (e.g., scikit-learn)
 
     @abstractmethod
-    def fit(self, X, y):
+    def fit(self, X: Any, y: Any) -> Any:
         """
         Train the model on data X and target y.
 
@@ -112,7 +115,7 @@ class BaseModel(ABC):
         pass
 
     @abstractmethod
-    def predict(self, X):
+    def predict(self, X: Any) -> Any:
         """
         Predict the target for new data X.
 
@@ -137,7 +140,7 @@ class BaseModel(ABC):
         pass
 
     @abstractmethod
-    def evaluate(self, X, y):
+    def evaluate(self, X: Any, y: Any) -> Union[float, Dict[str, float]]:
         """
         Evaluate the model on test data and return a performance metric.
 
@@ -179,4 +182,4 @@ class BaseRegressor(BaseModel):
     ...     def predict(self, X): return [y.mean()] * len(X)
     ...     def evaluate(self, X, y): return 0.0
     """
-    task = 'regression'
+    task: str = 'regression'

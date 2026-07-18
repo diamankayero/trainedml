@@ -4,3 +4,5 @@ Permet d'importer facilement les fonctions de chargement de données.
 """
 
 from .loader import DataLoader
+
+__all__ = ["DataLoader"]

@@ -18,7 +18,6 @@ Exemples
 
 import matplotlib.pyplot as plt
 from .vizs import Vizs
-import pandas as pd
 import numpy as np
 
 class OutliersViz(Vizs):

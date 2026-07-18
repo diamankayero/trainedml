@@ -21,5 +21,14 @@ class TestHeatmapViz(unittest.TestCase):
         except Exception as e:
             self.fail(f"La génération de la heatmap a échoué : {e}")
 
+    def test_heatmap_all_with_mixed_columns(self):
+        """Avec features='all', les colonnes non numériques doivent être ignorées."""
+        import pandas as pd
+        data = self.data.copy()
+        data["species"] = pd.Series(["a", "b"] * (len(data) // 2) + ["a"] * (len(data) % 2))
+        viz = HeatmapViz(data, features='all')
+        viz.vizs()
+        self.assertIsNotNone(viz.figure)
+
 if __name__ == '__main__':
     unittest.main()

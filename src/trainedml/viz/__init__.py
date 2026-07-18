@@ -18,3 +18,10 @@ from .bivariate import BivariateViz
 from .normality import NormalityViz
 from .multicollinearity import MulticollinearityViz
 from .profiling import ProfilingViz
+
+__all__ = [
+    "Vizs", "HeatmapViz", "HistogramViz", "LineViz", "DistributionViz",
+    "CorrelationViz", "MissingValuesViz", "OutliersViz", "TargetViz",
+    "BoxplotViz", "BivariateViz", "NormalityViz", "MulticollinearityViz",
+    "ProfilingViz",
+]

@@ -7,9 +7,10 @@ ou des fichiers CSV distants, avec gestion du cache local et adaptation automati
 
 Fonctionnalités principales
 --------------------------
-- Téléchargement et cache automatique de jeux de données publics (Iris, Wine, etc.)
-- Chargement de CSV depuis une URL (avec gestion du séparateur et du hash)
+- Datasets intégrés chargés localement via scikit-learn (Iris, Wine) — aucun réseau requis
+- Chargement de CSV depuis une URL avec cache local pooch (séparateur et hash gérés)
 - Retourne X (features) et y (cible) prêts à l'emploi pour le ML
+- Séparation train/test via :meth:`DataLoader.split`
 - Peut être étendu pour supporter d'autres sources (INSEE, data.gouv.fr, etc.)
 
 Exemple
@@ -19,6 +20,10 @@ Exemple
 >>> print(X.shape, y.shape)
 """
 
+
+from __future__ import annotations
+
+from typing import Any, Optional, Tuple
 
 import pandas as pd
 import pooch
@@ -64,7 +69,7 @@ class DataLoader:
     - Pour ajouter un nouveau dataset, il suffit d'ajouter un bloc dans load_dataset.
     - Le cache local évite de re-télécharger les fichiers à chaque appel.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initialise un DataLoader.
 
@@ -77,7 +82,8 @@ class DataLoader:
         pass
 
 
-    def load_csv_from_url(self, url: str, known_hash=None, sep=",") -> pd.DataFrame:
+    def load_csv_from_url(self, url: str, known_hash: Optional[str] = None,
+                          sep: str = ",") -> pd.DataFrame:
         """
         Télécharge un fichier CSV depuis une URL (avec cache local) et le charge dans un DataFrame pandas.
 
@@ -123,7 +129,9 @@ class DataLoader:
 
 
 
-    def load_dataset(self, name=None, url=None, target=None, sep=None):
+    def load_dataset(self, name: Optional[str] = None, url: Optional[str] = None,
+                     target: Optional[str] = None,
+                     sep: Optional[str] = None) -> Tuple[pd.DataFrame, pd.Series]:
         """
         Charge un dataset par nom connu ou URL, et retourne X, y séparés.
 
@@ -174,19 +182,28 @@ class DataLoader:
         >>> print(X.info())
         """
         if name == "iris":
-            # Jeu de données Iris (fichier CSV public sur GitHub)
-            url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
-            df = self.load_csv_from_url(url)
-            X = df.drop(columns=["species"])
-            y = df["species"]
+            # Jeu de données Iris, chargé localement via scikit-learn (aucun réseau requis).
+            # Colonnes renommées au format seaborn pour rester compatible avec les
+            # anciennes versions qui téléchargeaient le CSV seaborn.
+            from sklearn.datasets import load_iris
+            bunch = load_iris(as_frame=True)
+            X = bunch.data.rename(columns={
+                "sepal length (cm)": "sepal_length",
+                "sepal width (cm)": "sepal_width",
+                "petal length (cm)": "petal_length",
+                "petal width (cm)": "petal_width",
+            })
+            y = pd.Series(
+                pd.Categorical.from_codes(bunch.target, categories=list(bunch.target_names)),
+                name="species",
+            ).astype(str)
             return X, y
         elif name == "wine":
-            # Jeu de données Wine (UCI ML repository)
-            url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"
-            cols = ["class","alcohol","malic_acid","ash","alcalinity_of_ash","magnesium","total_phenols","flavanoids","nonflavanoid_phenols","proanthocyanins","color_intensity","hue","od280/od315_of_diluted_wines","proline"]
-            df = pd.read_csv(url, header=None, names=cols)
-            X = df.drop(columns=["class"])
-            y = df["class"]
+            # Jeu de données Wine, chargé localement via scikit-learn (aucun réseau requis).
+            from sklearn.datasets import load_wine
+            bunch = load_wine(as_frame=True)
+            X = bunch.data
+            y = bunch.target.rename("class")
             return X, y
         elif url is not None and target is not None:
             # Chargement générique d'un CSV distant
@@ -204,7 +221,8 @@ class DataLoader:
         else:
             raise ValueError("Spécifiez un nom de dataset connu ou une url+target.")
 
-    def split(self, X, y, test_size=0.2, random_state=42):
+    def split(self, X: Any, y: Any, test_size: float = 0.2,
+              random_state: int = 42) -> Tuple[Any, Any, Any, Any]:
         """
         Sépare les données en ensembles d'entraînement et de test.
 

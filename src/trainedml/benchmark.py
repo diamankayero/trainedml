@@ -33,11 +33,18 @@ Examples
 >>> print(results)
 """
 
+from __future__ import annotations
+
 import time
-from typing import Dict, Any, Optional
+from typing import TYPE_CHECKING, Any, Dict, Optional
+
+if TYPE_CHECKING:
+    import pandas as pd
+
 from tqdm import tqdm
 from joblib import Parallel, delayed
 from .evaluation import Evaluator
+from .tasks import detect_model_task, detect_task
 
 
 def _train_and_evaluate(name, model, X_train, y_train, X_test, y_test):
@@ -68,7 +75,9 @@ def _train_and_evaluate(name, model, X_train, y_train, X_test, y_test):
     y_pred = model.predict(X_test)
     predict_time = time.time() - start_pred
 
-    scores = Evaluator.evaluate_all(y_test, y_pred)
+    # Métriques adaptées au type de tâche du modèle (classification ou régression)
+    task = detect_model_task(model, y_test)
+    scores = Evaluator.evaluate_for(task, y_test, y_pred)
     return name, {
         'scores': scores,
         'fit_time': fit_time,
@@ -109,13 +118,13 @@ class Benchmark:
     >>> results = bench.run(X_train, y_train, X_test, y_test)
     >>> bench.print_summary()
     """
-    def __init__(self, models: Dict[str, Any]):
+    def __init__(self, models: Dict[str, Any]) -> None:
         """
         Args:
             models (dict): dictionnaire {nom: instance_modele}
         """
         self.models = models
-        self.results = None
+        self.results: Optional[Dict[str, Dict[str, Any]]] = None
 
     def run(
         self,
@@ -170,7 +179,7 @@ class Benchmark:
                 results[name] = res
         else:
             # Exécution séquentielle avec barre de progression
-            iterator = self.models.items()
+            iterator: Any = self.models.items()
             if show_progress:
                 iterator = tqdm(
                     iterator,
@@ -193,7 +202,7 @@ class Benchmark:
                 y_pred = model.predict(X_test)
                 predict_time = time.time() - start_pred
 
-                scores = Evaluator.evaluate_all(y_test, y_pred)
+                scores = Evaluator.evaluate_for(detect_model_task(model, y_test), y_test, y_pred)
                 results[name] = {
                     'scores': scores,
                     'fit_time': fit_time,
@@ -203,6 +212,138 @@ class Benchmark:
         self.results = results
         return results
     
+    def run_cv(
+        self,
+        X,
+        y,
+        cv: int = 5,
+        show_progress: bool = True,
+        random_state: int = 42,
+    ) -> Dict[str, Dict]:
+        r"""
+        Compare les modèles par validation croisée (K-fold).
+
+        Chaque modèle est entraîné et évalué sur ``cv`` plis ; les métriques
+        retournées sont les moyennes sur les plis, avec l'écart-type dans
+        ``scores_std``. Pour la classification, les plis sont stratifiés.
+
+        Parameters
+        ----------
+        X : pandas.DataFrame or array-like
+            Features (jeu complet, non splitté).
+        y : pandas.Series or array-like
+            Cible.
+        cv : int, default=5
+            Nombre de plis.
+        show_progress : bool, default=True
+            Affiche une barre de progression.
+        random_state : int, default=42
+            Graine pour le mélange des plis.
+
+        Returns
+        -------
+        dict
+            {model_name: {'scores': moyennes, 'scores_std': écarts-types,
+            'fit_time': temps moyen, 'predict_time': temps moyen, 'cv': cv}}
+
+        Examples
+        --------
+        >>> bench = Benchmark({'knn': KNNModel(), 'rf': RandomForestModel()})
+        >>> results = bench.run_cv(X, y, cv=5)
+        >>> print(bench.to_dataframe())
+        """
+        import numpy as np
+        import pandas as pd
+        from sklearn.model_selection import KFold, StratifiedKFold
+
+        X = X if isinstance(X, pd.DataFrame) else pd.DataFrame(X)
+        y = y if isinstance(y, pd.Series) else pd.Series(y)
+
+        task = detect_task(y)
+        splitter_cls = StratifiedKFold if task == "classification" else KFold
+        splitter = splitter_cls(n_splits=cv, shuffle=True, random_state=random_state)
+
+        results = {}
+        iterator: Any = self.models.items()
+        if show_progress:
+            iterator = tqdm(iterator, total=len(self.models), desc=f"CV {cv}-fold", unit="modèle")
+
+        for name, model in iterator:
+            fold_scores, fit_times, predict_times = [], [], []
+            model_task = detect_model_task(model, y)
+            for train_idx, test_idx in splitter.split(X, y):
+                X_tr, X_te = X.iloc[train_idx], X.iloc[test_idx]
+                y_tr, y_te = y.iloc[train_idx], y.iloc[test_idx]
+
+                start = time.time()
+                model.fit(X_tr, y_tr)
+                fit_times.append(time.time() - start)
+
+                start = time.time()
+                y_pred = model.predict(X_te)
+                predict_times.append(time.time() - start)
+
+                fold_scores.append(Evaluator.evaluate_for(model_task, y_te, y_pred))
+
+            metrics = fold_scores[0].keys()
+            results[name] = {
+                'scores': {m: float(np.mean([s[m] for s in fold_scores])) for m in metrics},
+                'scores_std': {m: float(np.std([s[m] for s in fold_scores])) for m in metrics},
+                'fit_time': float(np.mean(fit_times)),
+                'predict_time': float(np.mean(predict_times)),
+                'cv': cv,
+            }
+
+        self.results = results
+        return results
+
+    def to_dataframe(self, sort: bool = True) -> Optional["pd.DataFrame"]:
+        """
+        Convertit les résultats du benchmark en DataFrame pandas.
+
+        Les colonnes sont les métriques (plus ``fit_time`` et ``predict_time``),
+        les lignes les modèles. Si les résultats proviennent de :meth:`run_cv`,
+        des colonnes ``<metric>_std`` sont ajoutées. Le tableau est trié par la
+        métrique principale (``accuracy`` ou ``r2``), du meilleur au moins bon.
+
+        Parameters
+        ----------
+        sort : bool, default=True
+            Trier par la métrique principale, décroissante.
+
+        Returns
+        -------
+        pandas.DataFrame or None
+            Tableau comparatif, ou None si run()/run_cv() n'a pas été exécuté.
+
+        Examples
+        --------
+        >>> bench.run(X_train, y_train, X_test, y_test)
+        >>> df = bench.to_dataframe()
+        >>> print(df)
+        """
+        if self.results is None:
+            return None
+        import pandas as pd
+
+        rows = {}
+        for name, res in self.results.items():
+            row = dict(res['scores'])
+            for m, v in res.get('scores_std', {}).items():
+                row[f"{m}_std"] = v
+            row['fit_time'] = res['fit_time']
+            row['predict_time'] = res['predict_time']
+            rows[name] = row
+        df = pd.DataFrame.from_dict(rows, orient='index')
+        df.index.name = 'model'
+
+        if sort:
+            for primary in ('accuracy', 'r2'):
+                if primary in df.columns:
+                    df = df.sort_values(primary, ascending=False)
+                    break
+        return df
+
     def summary(self) -> Optional[str]:
         """
         Return a formatted summary of the benchmark results.
@@ -240,7 +381,7 @@ class Benchmark:
         
         return "\n".join(lines)
     
-    def print_summary(self):
+    def print_summary(self) -> None:
         """
         Print the summary of the benchmark results.
         """

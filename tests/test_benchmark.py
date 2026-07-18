@@ -2,7 +2,6 @@
 Tests unitaires pour le module Benchmark.
 """
 import unittest
-import numpy as np
 from sklearn.datasets import make_classification
 from trainedml.benchmark import Benchmark
 from trainedml.models.knn import KNNModel

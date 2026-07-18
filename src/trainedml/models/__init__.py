@@ -1,6 +1,8 @@
 """
 Permet d'importer facilement les modèles depuis le sous-package models.
 """
+from typing import Callable, Dict
+
 from .base import BaseModel, BaseRegressor
 from .knn import KNNModel
 from .logistic import LogisticModel
@@ -14,14 +16,14 @@ from .regressors import (
 )
 
 # Registre centralisé des modèles de classification
-CLASSIFIER_MAP = {
+CLASSIFIER_MAP: Dict[str, Callable[..., BaseModel]] = {
     'knn': KNNModel,
     'logistic': LogisticModel,
     'random_forest': RandomForestModel
 }
 
 # Registre centralisé des modèles de régression
-REGRESSOR_MAP = {
+REGRESSOR_MAP: Dict[str, Callable[..., BaseModel]] = {
     'knn_regressor': KNNRegressorModel,
     'linear': LinearRegressorModel,
     'ridge': RidgeRegressorModel,
@@ -30,7 +32,16 @@ REGRESSOR_MAP = {
 }
 
 # Registre complet (classification + régression)
-MODEL_MAP = {**CLASSIFIER_MAP, **REGRESSOR_MAP}
+MODEL_MAP: Dict[str, Callable[..., BaseModel]] = {**CLASSIFIER_MAP, **REGRESSOR_MAP}
+
+__all__ = [
+    "BaseModel", "BaseRegressor",
+    "KNNModel", "LogisticModel", "RandomForestModel",
+    "RandomForestRegressorModel", "KNNRegressorModel",
+    "LinearRegressorModel", "RidgeRegressorModel", "LassoRegressorModel",
+    "CLASSIFIER_MAP", "REGRESSOR_MAP", "MODEL_MAP",
+    "get_model", "get_classifier", "get_regressor",
+]
 
 
 def get_model(name: str, **kwargs):
