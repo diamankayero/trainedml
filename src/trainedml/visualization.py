@@ -103,7 +103,7 @@ class Visualizer:
         self.data = data
         self.analyzer = DataAnalyzer(data)
 
-    def report(self, path=None, title="Rapport exploratoire — trainedml"):
+    def report(self, path=None, title="Rapport exploratoire - trainedml"):
         """
         Génère un rapport EDA HTML complet et auto-contenu.
 

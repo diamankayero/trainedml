@@ -1,6 +1,6 @@
 # trainedml
 
-> Modular machine learning framework for Python — train, benchmark, and visualize ML models with a unified API, CLI, and web interface.
+> Modular machine learning framework for Python - train, benchmark, and visualize ML models with a unified API, CLI, and web interface.
 
 <p align="left">
   <a href="https://pypi.org/project/trainedml/"><img src="https://img.shields.io/pypi/v/trainedml" alt="PyPI version"></a>
@@ -69,7 +69,7 @@ from trainedml import Trainer, compare
 trainer = Trainer(dataset="iris", model="random_forest")
 trainer.fit()
 
-# Evaluate — metrics match the task (classification or regression)
+# Evaluate - metrics match the task (classification or regression)
 print(trainer.evaluate())
 
 # Predict
@@ -83,18 +83,18 @@ print(compare(dataset="wine", cv=5))
 
 ## Features
 
-- **Unified API** — train, evaluate, predict, save/load with a single `Trainer` class
-- **One-line model comparison** — `compare(dataset="wine", cv=5)` returns a sorted DataFrame with cross-validated scores and timings
-- **Automatic preprocessing** — imputation, scaling, one-hot encoding, refit per CV fold (no data leakage)
-- **Any scikit-learn estimator** — `Trainer(model=SVC())` works out of the box, plus built-in KNN, Logistic Regression, Random Forest, Linear/Ridge/Lasso
-- **Built-in datasets offline** — Iris and Wine load locally via scikit-learn; any remote CSV via URL (cached)
-- **Task auto-detection** — classification vs regression, with matching metrics (accuracy/precision/recall/F1 or R²/MSE/RMSE/MAE)
-- **Benchmarking** — single split or K-fold cross-validation, with timing and parallelization
-- **Model persistence** — `trainer.save("model.joblib")` / `Trainer.load(...)`, batch prediction from the CLI
-- **EDA report** — one self-contained HTML report: correlations, distributions, missing values, outliers, normality, VIF
-- **Visualization** — heatmaps, histograms, line plots, boxplots, bivariate charts
-- **CLI** — automate ML pipelines from the terminal
-- **Streamlit webapp** — interactive web interface for exploration and prediction
+- **Unified API** - train, evaluate, predict, save/load with a single `Trainer` class
+- **One-line model comparison** - `compare(dataset="wine", cv=5)` returns a sorted DataFrame with cross-validated scores and timings
+- **Automatic preprocessing** - imputation, scaling, one-hot encoding, refit per CV fold (no data leakage)
+- **Any scikit-learn estimator** - `Trainer(model=SVC())` works out of the box, plus built-in KNN, Logistic Regression, Random Forest, Linear/Ridge/Lasso
+- **Built-in datasets offline** - Iris and Wine load locally via scikit-learn; any remote CSV via URL (cached)
+- **Task auto-detection** - classification vs regression, with matching metrics (accuracy/precision/recall/F1 or R²/MSE/RMSE/MAE)
+- **Benchmarking** - single split or K-fold cross-validation, with timing and parallelization
+- **Model persistence** - `trainer.save("model.joblib")` / `Trainer.load(...)`, batch prediction from the CLI
+- **EDA report** - one self-contained HTML report: correlations, distributions, missing values, outliers, normality, VIF
+- **Visualization** - heatmaps, histograms, line plots, boxplots, bivariate charts
+- **CLI** - automate ML pipelines from the terminal
+- **Streamlit webapp** - interactive web interface for exploration and prediction
 
 ---
 
@@ -113,7 +113,7 @@ scores = trainer.evaluate()
 predictions = trainer.predict([[5.1, 3.5, 1.4, 0.2]])
 ```
 
-The train/test split is handled internally by the package (`DataLoader.split`) — no need to call scikit-learn yourself. The splits are available as attributes, and you can re-split with a new seed without recreating the trainer:
+The train/test split is handled internally by the package (`DataLoader.split`) - no need to call scikit-learn yourself. The splits are available as attributes, and you can re-split with a new seed without recreating the trainer:
 
 ```python
 trainer.X_train, trainer.X_test, trainer.y_train, trainer.y_test  # after fit()
@@ -295,4 +295,4 @@ For bugs or suggestions, open an [issue](https://github.com/diamankayero/trained
 
 ## License
 
-MIT — see [LICENSE](LICENCE) for details.
+MIT - see [LICENSE](LICENCE) for details.

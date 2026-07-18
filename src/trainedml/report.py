@@ -60,7 +60,7 @@ def _safe_section(title: str, builder) -> str:
 
 
 def generate_report(data: pd.DataFrame, path: Optional[str] = None,
-                    title: str = "Rapport exploratoire — trainedml") -> str:
+                    title: str = "Rapport exploratoire - trainedml") -> str:
     """
     Génère un rapport EDA HTML complet et auto-contenu pour un DataFrame.
 
@@ -75,7 +75,7 @@ def generate_report(data: pd.DataFrame, path: Optional[str] = None,
         Le dataset à analyser.
     path : str, optional
         Chemin du fichier HTML de sortie. Si None, le HTML est seulement retourné.
-    title : str, default="Rapport exploratoire — trainedml"
+    title : str, default="Rapport exploratoire - trainedml"
         Titre du rapport.
 
     Returns
@@ -103,7 +103,7 @@ def generate_report(data: pd.DataFrame, path: Optional[str] = None,
     def overview():
         dtypes = data.dtypes.astype(str).rename("dtype").to_frame()
         return (
-            f'<p class="meta">{data.shape[0]} lignes × {data.shape[1]} colonnes — '
+            f'<p class="meta">{data.shape[0]} lignes × {data.shape[1]} colonnes - '
             f'{data.duplicated().sum()} doublon(s)</p>'
             + dtypes.to_html()
             + "<h3>Premières lignes</h3>" + data.head(10).to_html()
@@ -166,7 +166,7 @@ def generate_report(data: pd.DataFrame, path: Optional[str] = None,
         "<!DOCTYPE html><html lang='fr'><head><meta charset='utf-8'>"
         f"<title>{title}</title><style>{_CSS}</style></head><body>"
         f"<h1>{title}</h1>"
-        f'<p class="meta">Généré par trainedml — pandas {pd.__version__}</p>'
+        f'<p class="meta">Généré par trainedml - pandas {pd.__version__}</p>'
         + "\n".join(sections)
         + "</body></html>"
     )

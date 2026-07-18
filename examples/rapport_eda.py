@@ -21,5 +21,5 @@ data = pd.concat([X, y], axis=1)
 
 # Générer le rapport
 viz = Visualizer(data)
-viz.report("rapport_iris.html", title="Rapport EDA — Iris")
+viz.report("rapport_iris.html", title="Rapport EDA - Iris")
 print("Rapport écrit dans rapport_iris.html")

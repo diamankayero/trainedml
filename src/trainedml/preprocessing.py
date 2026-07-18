@@ -4,7 +4,7 @@ Prétraitement automatique des données pour trainedml.
 Ce module fournit un préprocesseur standard construit avec scikit-learn :
 
 - **colonnes numériques** : imputation par la médiane puis standardisation
-  (moyenne 0, écart-type 1) — indispensable pour KNN, la régression logistique,
+  (moyenne 0, écart-type 1) - indispensable pour KNN, la régression logistique,
   Ridge/Lasso... ;
 - **colonnes catégorielles** : imputation par le mode puis encodage one-hot
   (les catégories inconnues à la prédiction sont ignorées).

@@ -7,7 +7,7 @@ ou des fichiers CSV distants, avec gestion du cache local et adaptation automati
 
 Fonctionnalités principales
 --------------------------
-- Datasets intégrés chargés localement via scikit-learn (Iris, Wine) — aucun réseau requis
+- Datasets intégrés chargés localement via scikit-learn (Iris, Wine) - aucun réseau requis
 - Chargement de CSV depuis une URL avec cache local pooch (séparateur et hash gérés)
 - Retourne X (features) et y (cible) prêts à l'emploi pour le ML
 - Séparation train/test via :meth:`DataLoader.split`

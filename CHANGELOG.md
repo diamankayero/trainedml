@@ -4,7 +4,7 @@ Toutes les évolutions notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/) et le projet
 adhère au [versionnement sémantique](https://semver.org/lang/fr/).
 
-## [0.2.0] — 2026-07-18
+## [0.2.0] - 2026-07-18
 
 ### Ajouté
 - `trainedml.compare()` : comparaison de tous les modèles adaptés à un dataset
@@ -61,6 +61,6 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
   (utiliser `trainedml.models.get_model`).
 - Fichiers `__pycache__` retirés du suivi git.
 
-## [0.1.4] — 2026-07
+## [0.1.4] - 2026-07
 
 - Version publiée sur PyPI (correctif de déploiement).
