@@ -33,7 +33,7 @@ dependencies = [
 
 [project.optional-dependencies]
 web = ["fastapi", "uvicorn"]
-dev = ["pytest", "ruff", "mypy", "streamlit", "fastapi", "uvicorn", "httpx"]
+dev = ["pytest", "ruff", "mypy", "fastapi", "uvicorn", "httpx"]
 doc = ["sphinx", "sphinx_rtd_theme"]
 
 [project.scripts]

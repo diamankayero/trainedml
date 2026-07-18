@@ -7,7 +7,6 @@
   <a href="https://pypi.org/project/trainedml/"><img src="https://img.shields.io/pypi/pyversions/trainedml" alt="Python versions"></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
   <a href="https://diamankayero.github.io/trainedml/"><img src="https://img.shields.io/badge/Documentation-GitHub%20Pages-blue?logo=github" alt="Documentation"></a>
-  <a href="https://trainedml.streamlit.app"><img src="https://img.shields.io/badge/Webapp-Streamlit-ff4b4b?logo=streamlit" alt="Webapp"></a>
   <a href="https://github.com/diamankayero/trainedml/actions/workflows/workflow.yml"><img src="https://github.com/diamankayero/trainedml/actions/workflows/workflow.yml/badge.svg" alt="CI"></a>
 </p>
 
@@ -38,7 +37,7 @@
 
 ## Overview
 
-**trainedml** est un package Python modulaire pour entraîner, comparer et visualiser des modèles de machine learning sur des jeux de données classiques ou personnalisés. Il offre une API unifiée, une interface en ligne de commande et une application web interactive Streamlit pour des workflows ML complets.
+**trainedml** est un package Python modulaire pour entraîner, comparer et visualiser des modèles de machine learning sur des jeux de données classiques ou personnalisés : du CSV au comparatif de modèles et au rapport exploratoire, en une ligne. Il offre une API unifiée (`Trainer`, `compare()`), une interface en ligne de commande et une API web FastAPI avec page de démo.
 
 ---
 
@@ -94,7 +93,7 @@ print(compare(dataset="wine", cv=5))
 - **EDA report** - one self-contained HTML report: correlations, distributions, missing values, outliers, normality, VIF
 - **Visualization** - heatmaps, histograms, line plots, boxplots, bivariate charts
 - **CLI** - automate ML pipelines from the terminal
-- **Streamlit webapp** - interactive web interface for exploration and prediction
+- **Web API + demo page** - FastAPI backend (`trainedml[web]`) with an HTML/JS demo, ready for any frontend (React, mobile...) and one-click deploy (render.yaml, Dockerfile)
 
 ---
 
@@ -226,14 +225,6 @@ python -m trainedml --load model.joblib --input new_data.csv --output prediction
 python -m trainedml --dataset iris --show
 ```
 
-### Interactive Webapp
-
-```bash
-streamlit run trainedml_webapp/src/app.py
-```
-
-Or visit the hosted version: [trainedml.streamlit.app](https://trainedml.streamlit.app)
-
 ### Web API (FastAPI)
 
 Serve trainedml over HTTP for any frontend (HTML/JS, React, mobile):
@@ -244,7 +235,7 @@ uvicorn webapp_api.api:app --reload
 # demo page: http://localhost:8000   interactive docs: http://localhost:8000/docs
 ```
 
-See [webapp_api/README.md](webapp_api/README.md) for routes and details.
+See [webapp_api/README.md](webapp_api/README.md) for routes, deployment (Render, Docker) and details.
 
 ---
 
@@ -279,16 +270,21 @@ trainedml/
 ## Testing
 
 ```bash
+pip install -e ".[dev]"
 pytest tests/
 ```
+
+CI runs the suite on Python 3.9 to 3.13 (Ubuntu) and Windows, plus ruff and mypy.
 
 ---
 
 ## Documentation
 
 - [Online docs (GitHub Pages)](https://diamankayero.github.io/trainedml/)
-- [Usage guide](DOC_UTILISATION.md)
-- [Webapp docs](trainedml_webapp/doc/streamlit_app.md)
+- [Usage guide and project journal](DOC_UTILISATION.md)
+- [Changelog](CHANGELOG.md)
+- [Examples and notebooks](examples/README.md)
+- Every folder has its own README (architecture, conventions, how to contribute)
 
 ---
 
