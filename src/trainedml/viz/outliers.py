@@ -33,7 +33,12 @@ class OutliersViz(Vizs):
         if len(cols) == 1:
             axes = [axes]
         for ax, col in zip(axes, cols):
-            ax.boxplot(self._data[col].dropna(), orientation='horizontal')
+            values = self._data[col].dropna()
+            try:
+                ax.boxplot(values, orientation='horizontal')
+            except TypeError:
+                # matplotlib < 3.10 : le paramètre s'appelle vert
+                ax.boxplot(values, vert=False)
             ax.set_title(f"Boxplot de {col}")
         plt.tight_layout()
         self._figure = fig

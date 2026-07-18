@@ -43,7 +43,8 @@ Homepage = "https://github.com/diamankayero/trainedml"
 Issues = "https://github.com/diamankayero/trainedml"
 
 [tool.mypy]
-python_version = "3.10"
+# Pas de python_version épinglée : mypy cible la version de l'interpréteur,
+# ce qui reste cohérent avec les stubs numpy installés (PEP 695 sur 3.12+).
 files = ["src/trainedml"]
 ignore_missing_imports = true
 warn_unused_ignores = true

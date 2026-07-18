@@ -44,7 +44,11 @@ def normality_tests(data, columns='all'):
             result['dagostino'] = stats.normaltest(x)
         else:
             result['dagostino'] = None
-        result['anderson'] = stats.anderson(x, dist='norm', method='interpolate')
+        try:
+            result['anderson'] = stats.anderson(x, dist='norm', method='interpolate')
+        except TypeError:
+            # scipy ancien : pas de paramètre method (ni de p-value interpolée)
+            result['anderson'] = stats.anderson(x, dist='norm')
         results[col] = result
     return results
 

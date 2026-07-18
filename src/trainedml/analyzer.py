@@ -415,10 +415,16 @@ class DataAnalyzer:
                 col_result['dagostino'] = {'statistic': None, 'p_value': None}
 
             # Anderson-Darling
-            ad_result = stats.anderson(x, dist='norm', method='interpolate')
+            try:
+                ad_result = stats.anderson(x, dist='norm', method='interpolate')
+                ad_pvalue = float(ad_result.pvalue)
+            except TypeError:
+                # scipy ancien : pas de paramètre method, donc pas de p-value
+                ad_result = stats.anderson(x, dist='norm')
+                ad_pvalue = None
             col_result['anderson'] = {
                 'statistic': float(ad_result.statistic),
-                'p_value': float(ad_result.pvalue),
+                'p_value': ad_pvalue,
             }
 
             # Skewness & kurtosis
