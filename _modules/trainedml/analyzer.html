@@ -513,10 +513,16 @@
                 <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;dagostino&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;statistic&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
 
             <span class="c1"># Anderson-Darling</span>
-            <span class="n">ad_result</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">anderson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;norm&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;interpolate&#39;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ad_result</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">anderson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;norm&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;interpolate&#39;</span><span class="p">)</span>
+                <span class="n">ad_pvalue</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ad_result</span><span class="o">.</span><span class="n">pvalue</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="c1"># scipy ancien : pas de paramètre method, donc pas de p-value</span>
+                <span class="n">ad_result</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">anderson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;norm&#39;</span><span class="p">)</span>
+                <span class="n">ad_pvalue</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;anderson&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">&#39;statistic&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">ad_result</span><span class="o">.</span><span class="n">statistic</span><span class="p">),</span>
-                <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">ad_result</span><span class="o">.</span><span class="n">pvalue</span><span class="p">),</span>
+                <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="n">ad_pvalue</span><span class="p">,</span>
             <span class="p">}</span>
 
             <span class="c1"># Skewness &amp; kurtosis</span>
