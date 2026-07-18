@@ -16,7 +16,7 @@ le README du dossier concerné.
 | [examples/](examples/README.md) | Scripts et notebooks d'exemples |
 | [doc/](doc/README.md) | Documentation Sphinx : build local et publication |
 | [public/](public/README.md) | Images du README |
-| [.github/](.github/README.md) | CI, publication PyPI, procédure de release |
+| [.github/workflows/](.github/workflows/README.md) | CI, publication PyPI, procédure de release |
 | [webapp_api/](webapp_api/README.md) | API HTTP (FastAPI) + page web de démo |
 
 ---

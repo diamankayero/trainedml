@@ -1,4 +1,4 @@
-# .github : intégration continue et publication
+# workflows : intégration continue et publication
 
 ## workflows/workflow.yml : CI + publication PyPI
 
