@@ -1,62 +1,52 @@
-## Erreurs fréquentes et solutions
-
-### 1. Scores parfaits (1.000 partout)
-**Cause possible :** Split trop facile, fuite de données, dataset trop simple.
-**Solution :** Tester plusieurs seeds, augmenter la taille du jeu de test, essayer sur un autre dataset.
-
-### 2. Erreur "could not convert string to float"
-**Cause :** Tentative de calcul de corrélation ou d'entraînement sur une colonne non numérique (ex : 'species').
-**Solution :** Sélectionner uniquement les colonnes numériques pour les visualisations ou l'entraînement.
-
-### 3. AttributeError: 'Axes' object has no attribute 'show'
-**Cause :** Utilisation de `fig.show()` sur une figure matplotlib/seaborn (au lieu de `plt.show()`).
-**Solution :** Utiliser `import matplotlib.pyplot as plt; plt.show()` pour afficher la figure.
-
-### 4. ImportError: No module named 'trainedml...'
-**Cause :** Problème d'installation ou de chemin Python.
-**Solution :** Vérifier que le package est bien installé (`pip install .`) et que le terminal est bien dans l'environnement Python correct.
-
-### 5. Problèmes de seed ou de reproductibilité
-**Cause :** Résultats différents à chaque exécution.
-**Solution :** Fixer la seed avec l'option `--seed` pour garantir la reproductibilité.
-
-### 6. Erreur de shape ou de colonnes manquantes
-**Cause :** Mauvais nom de colonne, ou DataFrame mal préparé.
-**Solution :** Vérifier les noms de colonnes et la préparation des données avant d'appeler les modèles ou visualisations.
-
----
 # Documentation du projet trainedml
 
-## Présentation
-## Fonctionnalités principales
-- Modèles : KNN, Régression Logistique, Random Forest
-- Visualisations : heatmap, histogramme, courbe
-- API simple pour l'entraînement, l'évaluation et la comparaison
-- Interface CLI pour exécuter un pipeline complet sans écrire de code Python
+Guide d'utilisation, journal du projet et repères pour ne pas perdre
+l'équilibre du projet. La documentation détaillée de chaque dossier est dans
+le README du dossier concerné.
+
+## Documentation par dossier
+
+| Dossier | Contenu |
+|---|---|
+| [src/trainedml/](src/trainedml/README.md) | Architecture du package, rôle de chaque module, conventions |
+| [src/trainedml/data/](src/trainedml/data/README.md) | Chargement des données (datasets intégrés, CSV distants, split) |
+| [src/trainedml/models/](src/trainedml/models/README.md) | Modèles ML, registres, comment ajouter un modèle |
+| [src/trainedml/viz/](src/trainedml/viz/README.md) | Visualisations spécialisées et compatibilité |
+| [tests/](tests/README.md) | Organisation des tests et règles (pas de réseau, non-régression) |
+| [examples/](examples/README.md) | Scripts et notebooks d'exemples |
+| [doc/](doc/README.md) | Documentation Sphinx : build local et publication |
+| [public/](public/README.md) | Images du README |
+| [.github/](.github/README.md) | CI, publication PyPI, procédure de release |
 
 ---
 
+## Présentation
 
-## Installation des dépendances supplémentaires (pooch et tqdm)
+trainedml est un package Python modulaire pour entraîner, comparer et
+visualiser des modèles de machine learning : du CSV au comparatif de modèles
+et au rapport exploratoire, en une ligne.
 
-Pour bénéficier du téléchargement et du cache automatique des datasets ou jeu de données, trainedml utilise la bibliothèque `pooch`. Pour afficher une barre de progression lors du téléchargement, pooch utilise aussi la bibliothèque `tqdm`.
+## Fonctionnalités principales (v0.2.0)
 
-**Commandes à exécuter :**
+- API `Trainer` : entraînement, évaluation, prédiction, sauvegarde/rechargement
+- `compare()` : comparaison de tous les modèles adaptés, validation croisée, DataFrame trié
+- Prétraitement automatique : imputation, standardisation, encodage one-hot
+- Modèles intégrés (KNN, Logistique, Random Forest, Linear/Ridge/Lasso) et
+  n'importe quel estimateur scikit-learn
+- Détection automatique du type de tâche, métriques adaptées
+- Rapport EDA HTML auto-contenu
+- CLI complète pour exécuter un pipeline sans écrire de Python
+
+## Installation
 
 ```bash
-pip install pooch tqdm
+pip install trainedml
+# ou depuis les sources
+pip install -e .
 ```
 
-- `pooch` : gère le téléchargement, le cache local et la vérification d'intégrité des fichiers de données.
-- `tqdm` : permet d'afficher une barre de progression lors du téléchargement des fichiers (optionnelle mais recommandée pour le confort utilisateur).
-
-Si `tqdm` n'est pas installé, pooch affichera une erreur lors du téléchargement avec barre de progression.
-
-```bash
-pip install -r requirements.txt
-# ou
-pip install .
-```
+Dépendances gérées par pyproject.toml (numpy, pandas, scikit-learn,
+matplotlib, seaborn, plotly, tqdm, requests, pooch, statsmodels, joblib, scipy).
 
 ---
 
@@ -65,265 +55,253 @@ pip install .
 ### Commande de base
 
 ```bash
-python -m trainedml.cli --model random_forest --show
+python -m trainedml --model random_forest --dataset iris --show
 ```
 
 ### Options disponibles
-- `--model` : Choix du modèle (`knn`, `logistic`, `random_forest`).
-- `--seed` : Seed pour le split train/test (par défaut 42).
-- `--show` : Affiche la visualisation générée (matplotlib).
-- `--histogram` : Affiche un histogramme des colonnes numériques.
 
+- `--model` : modèle à utiliser (`knn`, `logistic`, `random_forest`, `linear`, `ridge`, `lasso`, `knn_regressor`, `random_forest_regressor`)
+- `--dataset` : dataset intégré (`iris`, `wine`)
+- `--url` / `--target` : CSV distant et nom de la colonne cible
+- `--seed` : seed du split train/test (défaut 42)
+- `--test-size` : proportion de test (défaut 0.3)
+- `--benchmark` : comparer tous les modèles adaptés à la tâche
+- `--cv N` : benchmark par validation croisée à N plis (0 = simple split)
+- `--save fichier.joblib` : sauvegarder le modèle entraîné
+- `--load fichier.joblib --input data.csv --output preds.csv` : prédire sur un CSV avec un modèle sauvegardé
+- `--show` : afficher la figure générée
+- `--histogram` : histogramme des colonnes numériques
+- `--line X Y` : courbe entre deux colonnes
 
 ### Exemples
 
-- Entraîner un modèle Random Forest et afficher la heatmap :
+- Benchmark par validation croisée 5 plis sur Wine :
   ```bash
-  python -m trainedml.cli --model random_forest --show
+  python -m trainedml --dataset wine --benchmark --cv 5
   ```
 
-- Tester la robustesse des modèles avec différentes seeds (aléas du split train/test) :
+- Tester la robustesse des modèles avec différentes seeds :
   ```bash
-  python -m trainedml.cli --benchmark --seed 1
-  python -m trainedml.cli --benchmark --seed 123
+  python -m trainedml --benchmark --seed 1
+  python -m trainedml --benchmark --seed 123
   ```
   > Cela permet de vérifier que les scores ne sont pas toujours parfaits et d'observer la variabilité selon la répartition des données.
 
-- Tester la robustesse avec une grande proportion de test (jeu d'entraînement plus petit) :
+- Tester la robustesse avec une grande proportion de test :
   ```bash
-  python -m trainedml.cli --benchmark --test-size 0.5 --seed 1
-  python -m trainedml.cli --benchmark --test-size 0.7 --seed 42
+  python -m trainedml --benchmark --test-size 0.5 --seed 1
   ```
-  > Plus la taille du jeu de test est grande, plus il est difficile pour les modèles d'obtenir des scores parfaits. Cela permet de mieux évaluer leur robustesse.
 
-- Afficher un histogramme :
+- Entraîner, sauvegarder, puis prédire sur de nouvelles données :
   ```bash
-  python -m trainedml.cli --histogram --show
+  python -m trainedml --dataset iris --model knn --save model.joblib
+  python -m trainedml --load model.joblib --input nouvelles_donnees.csv --output predictions.csv
   ```
 
 ---
 
-
-## Gestion des datasets avec pooch
-
-Depuis la version X, trainedml utilise la bibliothèque [pooch](https://www.fatiando.org/pooch/latest/) pour télécharger et mettre en cache les jeux de données publics.
-
-### Qu’est-ce que pooch ?
-
-- pooch est une bibliothèque Python qui gère le téléchargement, le cache local et la vérification d’intégrité des fichiers de données.
-- Elle évite de re-télécharger les fichiers à chaque exécution : le dataset est stocké localement et réutilisé automatiquement.
-- Elle vérifie que le fichier n’a pas été corrompu (via un hash).
-- Elle simplifie la gestion de datasets volumineux ou multiples.
-
-### Avantages pour l’utilisateur
-
-- Plus besoin de modifier le code pour utiliser un autre dataset : il suffit de passer l’URL et le nom de la colonne cible.
-- Les téléchargements sont rapides et fiables, même en cas de coupure réseau.
-- Le cache local évite de saturer la connexion ou de perdre du temps.
-
-
-### Gestion automatique des séparateurs CSV (exemple Wine Quality)
-
-Certains jeux de données publics utilisent un séparateur différent de la virgule (par exemple, le point-virgule `;`). C'est le cas du célèbre dataset Wine Quality de l'UCI.
-
-**Exemple concret :**
-
-- **URL :** https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv
-- **Colonne cible :** quality
-- **Séparateur :** `;`
-
-La commande suivante fonctionne directement (le module détecte automatiquement le séparateur pour ce dataset) :
-
-```bash
-python -m trainedml.cli --url https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv --target quality --model logistic --show
-```
-
-Le module trainedml détecte automatiquement le séparateur `;` pour les fichiers winequality. Pour d'autres jeux de données avec un séparateur particulier, une option `--sep` pourra être ajoutée si besoin.
-
-**Si tu obtiens une erreur "colonne non trouvée" ou que toutes les données semblent dans une seule colonne, vérifie le séparateur du CSV !**
-
----
-
-### Exemple d’utilisation avec un dataset personnalisé
-
-Supposons que tu veuilles utiliser ton propre CSV hébergé en ligne :
-
-```bash
-python -m trainedml.cli --url https://mon-site.fr/mon-dataset.csv --target classe
-```
-
-- `--url` : lien direct vers le fichier CSV
-- `--target` : nom de la colonne cible (celle à prédire)
-
-Le module téléchargera le fichier (une seule fois grâce à pooch), le lira, et utilisera la colonne `classe` comme cible pour l’entraînement et la prédiction.
-
-### Utilisation avancée en Python
-
-Tu peux aussi utiliser l’API Trainer directement :
+## Utilisation en Python
 
 ```python
-from trainedml import Trainer
+from trainedml import Trainer, compare
 
-trainer = Trainer(
-  url="https://mon-site.fr/mon-dataset.csv",
-  target="classe",
-  model="logistic"
-)
+# Workflow standard
+trainer = Trainer(dataset="iris", model="knn", model_params={"n_neighbors": 5})
 trainer.fit()
 print(trainer.evaluate())
-print(trainer.predict([[1.2, 3.4, 5.6, 7.8]]))
+print(trainer.predict([[5.1, 3.5, 1.4, 0.2]]))
+
+# Varier le seed sans recréer le Trainer
+for s in range(5):
+    print(trainer.fit(seed=s).evaluate())
+
+# Données personnelles en mémoire
+trainer = Trainer(X=mon_dataframe, y=ma_cible, model="ridge")
+
+# N'importe quel estimateur scikit-learn
+from sklearn.svm import SVC
+trainer = Trainer(dataset="iris", model=SVC())
+
+# Sauvegarde et rechargement
+trainer.fit().save("model.joblib")
+restored = Trainer.load("model.joblib")
+
+# Comparer tous les modèles en une ligne
+print(compare(dataset="wine", cv=5))
+
+# Rapport EDA HTML
+from trainedml.visualization import Visualizer
+Visualizer(mon_dataframe).report("rapport.html")
 ```
 
-### Remarque
-
-- Si tu utilises un dataset public connu (ex : iris, wine), il suffit de passer `--dataset iris` ou `--dataset wine`.
-- Pour tout autre dataset, utilise `--url` et `--target`.
-
----
-## Architecture du code
-
-- `src/trainedml/data/loader.py` : Chargement des jeux de données publics (ex : Iris).
-- `src/trainedml/models/` : Modèles ML (KNN, Logistic, Random Forest).
-- `src/trainedml/visualization.py` : Visualiseur central (heatmap, histogramme, courbe).
-- `src/trainedml/cli.py` : Interface en ligne de commande (pipeline complet).
-- `src/trainedml/tests/` : Tests unitaires pour chaque brique.
-
 ---
 
-## Points importants de l'évolution du projet
+## Gestion des datasets
 
-- **Début** : Le projet était composé de modules indépendants (data, modèles, visualisation) mais sans point d'entrée global.
-- **Constat** : Le projet "marche" (tests OK) mais n'est pas utilisable directement par un humain sans API ou CLI.
-- **Ajout d'un CLI** : Création d'un fichier `cli.py` pour exécuter un pipeline complet depuis le terminal.
-- **Correction heatmap** : Sélection automatique des colonnes numériques pour éviter les erreurs de conversion.
-- **Ajout histogramme** : Option `--histogram` pour générer un histogramme des colonnes numériques.
-- **Robustesse** : Ajout de l'option `--seed` pour tester la robustesse des modèles sur différents splits.
-- **Vérification** : Affichage des tailles de splits pour s'assurer de l'absence de fuite de données.
+### Datasets intégrés (hors-ligne)
+
+`iris` et `wine` sont chargés localement via scikit-learn : aucun réseau
+requis, tests et démos fonctionnent hors connexion.
+
+### CSV distants avec pooch
+
+Pour un CSV en ligne, trainedml utilise [pooch](https://www.fatiando.org/pooch/latest/) :
+téléchargement, cache local (pas de re-téléchargement) et vérification
+d'intégrité par hash.
+
+```bash
+python -m trainedml --url https://mon-site.fr/mon-dataset.csv --target classe
+```
+
+### Séparateurs CSV (exemple Wine Quality)
+
+Certains CSV utilisent `;` au lieu de `,`. Le séparateur `;` est détecté
+automatiquement pour les fichiers winequality :
+
+```bash
+python -m trainedml --url https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv --target quality --model logistic --show
+```
+
+Si vous obtenez une erreur "colonne non trouvée" ou que toutes les données
+semblent dans une seule colonne, vérifiez le séparateur du CSV.
 
 ---
 
+## Journal du projet
+
+### Phase 1 : les fondations
+
+- Début : modules indépendants (data, modèles, visualisation) sans point d'entrée global.
+- Constat : le projet "marche" (tests OK) mais n'est pas utilisable sans API ou CLI.
+- Ajout d'un CLI (`cli.py`) pour exécuter un pipeline complet depuis le terminal.
+- Correction heatmap : sélection automatique des colonnes numériques.
+- Ajout de `--histogram` et de `--seed` pour tester la robustesse.
+- Affichage des tailles de splits pour vérifier l'absence de fuite de données.
+
+### Phase 2 : industrialisation
+
+- Environnement virtuel, packaging (pyproject.toml), publication PyPI (0.1.x).
+- Documentation Sphinx (autodoc + napoleon + thème RTD) publiée sur GitHub Pages.
+- Docstrings NumPy-style avec formules mathématiques.
+
+### Phase 3 : la refonte 0.2.0 (2026-07-18)
+
+Objectif : trouver la niche du package ("du CSV au comparatif de modèles et
+au rapport EDA en une ligne") et le rendre digne de confiance.
+
+- Rectification d'architecture : la CLI et les tests passent par `DataLoader.split`
+  (API du package) au lieu d'appeler scikit-learn directement ; factories
+  dupliquées supprimées ; `__pycache__` retirés du suivi git.
+- Bugs corrigés : métriques de classification appliquées aux régresseurs,
+  incompatibilités pandas récents (StringDtype), heatmap sur colonnes mixtes,
+  incompatibilités scipy/matplotlib anciens.
+- Nouvelles capacités : `compare()`, prétraitement automatique sans fuite,
+  validation croisée, hyperparamètres, estimateurs sklearn arbitraires,
+  données en mémoire, save/load, rapport EDA HTML, CLI enrichie.
+- Qualité : type hints + mypy, ruff, CI honnête en matrice (3.9 à 3.13 + Windows),
+  publication PyPI uniquement sur tag, notebooks validés, CHANGELOG.
+- Publication : v0.2.0 sur PyPI, Release GitHub, doc à jour.
+- Style : pas de tirets longs, ponctuation à la française ; pas de signature
+  d'outil dans les commits.
+
+### Chantiers restants
+
+- Unifier la langue des docstrings (FR/EN mélangés) : viser l'anglais pour
+  l'API, tutoriels bilingues.
+- Consolider les couches de visualisation (`figure.py`, `visualization.py`,
+  `analyzer.py`, `viz/`) autour de la façade `Visualizer`.
+- Annoter les modules viz et retirer leur exclusion mypy.
+- Ajouter d'autres datasets intégrés et d'autres visualisations (ROC, scatter).
+
+---
 
 ## Conseils d'utilisation
-- Les scores parfaits (1.000) sont rares et peuvent indiquer un split "trop facile" ou une fuite de données. Pour t'auto-évaluer et progresser, utilise les options `--seed` et `--test-size` pour tester la robustesse de tes modèles.
-- Le CLI est le point d'entrée recommandé pour les utilisateurs non-développeurs ou pour automatiser des workflows.
-- Pour des usages avancés, il est possible d'utiliser directement les modules Python (data, modèles, visualisation).
 
-> **Note personnelle (pour l'apprentissage)** :
-> Cette démarche (tester plusieurs seeds, augmenter la taille du jeu de test) est essentielle pour comprendre la robustesse de tes modèles et éviter de te faire piéger par des résultats trop beaux pour être vrais. C'est une bonne pratique à garder pour tous tes futurs projets de machine learning.
+- Les scores parfaits (1.000) sont rares et peuvent indiquer un split "trop
+  facile" ou une fuite de données. Utilisez `--seed` et `--test-size` (ou
+  `trainer.fit(seed=...)`) pour tester la robustesse, et préférez `--cv` pour
+  une évaluation fiable.
+- La CLI est le point d'entrée recommandé pour automatiser des workflows ;
+  l'API Python pour les usages avancés.
 
----
-
-## Pour aller plus loin
-- Ajouter d'autres jeux de données ou modèles.
-- Ajouter d'autres visualisations (courbes ROC, scatter, etc.).
-- Ajouter une API Python haut-niveau (`trainedml.run(...)`).
-- Publier le package sur PyPI.
+> Note personnelle (pour l'apprentissage) :
+> tester plusieurs seeds et augmenter la taille du jeu de test est essentiel
+> pour comprendre la robustesse des modèles et éviter de se faire piéger par
+> des résultats trop beaux pour être vrais.
 
 ---
 
-## Auteurs
-- diamankayero
-- Contributions et corrections par GitHub Copilot (GPT-4.1)
+## Erreurs fréquentes et solutions
+
+### 1. Scores parfaits (1.000 partout)
+**Cause possible :** split trop facile, fuite de données, dataset trop simple.
+**Solution :** tester plusieurs seeds, augmenter la taille du jeu de test, utiliser `--cv`.
+
+### 2. Erreur "could not convert string to float"
+**Cause :** calcul de corrélation ou entraînement sur une colonne non numérique.
+**Solution :** depuis la 0.2.0, la heatmap ignore les colonnes non numériques et le
+prétraitement du Trainer encode les colonnes catégorielles ; mettre à jour le package.
+
+### 3. AttributeError: 'Axes' object has no attribute 'show'
+**Cause :** `fig.show()` sur un objet Axes.
+**Solution :** `import matplotlib.pyplot as plt; plt.show()`.
+
+### 4. ImportError: No module named 'trainedml...'
+**Cause :** problème d'installation ou d'environnement Python.
+**Solution :** vérifier `pip install trainedml` (ou `pip install -e .`) dans le bon environnement.
+
+### 5. Problèmes de reproductibilité
+**Cause :** résultats différents à chaque exécution.
+**Solution :** fixer la seed (`--seed` ou `seed=` dans le Trainer).
+
+### 6. Erreur de shape ou de colonnes manquantes
+**Cause :** mauvais nom de colonne, DataFrame mal préparé.
+**Solution :** vérifier les noms de colonnes ; pour `predict`, fournir les mêmes
+features que l'entraînement (le préprocesseur sauvegardé s'occupe du reste).
 
 ---
 
-## Licence
-MIT
+## Environnement virtuel (venv)
 
----
-## Partie 2 : Industrialisation et Documentation API avec Sphinx
-
-### Pourquoi industrialiser et documenter ?
-L'objectif est de rendre le projet utilisable, maintenable, partageable et compréhensible par tous (développeurs, utilisateurs, collègues, futurs contributeurs). Une documentation professionnelle et une structure de code claire sont essentielles pour tout projet open source ou d'entreprise.
-
-### Environnement virtuel (venv)
-- **Pourquoi ?** Isole les dépendances du projet pour éviter les conflits avec d'autres projets Python sur la machine.
-- **Commande d'initialisation :**
+- **Pourquoi ?** Isoler les dépendances du projet.
+- **Commandes :**
   ```bash
   python -m venv venv
   # Activation sous Windows
   .\venv\Scripts\activate
   # Activation sous Linux/Mac
   source venv/bin/activate
-  # oubien si ça marche pas tu fais les commandes suivantes pour activer venv
+  # ou bien si ça ne marche pas :
   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-  .\venv\Scripts\Activate.ps1 #pour le cas de ma machine
-  # pour desactiver le venv on fait
+  .\venv\Scripts\Activate.ps1
+  # désactiver
   deactivate
-  # pour suprimer le venv
+  # supprimer
   Remove-Item -Recurse -Force venv
-  # Et pour installer en fontion de la version python on utilise la commande suivante
+  # créer avec une version précise de Python
   py -3.11 -m venv venv
   ```
-- **Installation des dépendances :**
+- **Installation :**
   ```bash
-  pip install -r requirements.txt
-  pip install .
-  # ou bien tu fais la commande suivant
-  pip install -e .
-  #pour desinstaller le module trainedml tu peux juste faire
+  pip install -e ".[dev]"
+  # désinstaller
   pip uninstall -y trainedml
   ```
 
-### Génération de la documentation API avec Sphinx
-- **Initialisation de Sphinx :**
-  ```bash
-  cd doc
-  sphinx-quickstart source
-  ```
-- **Extensions activées :**
-  - `sphinx.ext.autodoc` : génère la doc API à partir des docstrings Python.
-  - `sphinx.ext.napoleon` : supporte les docstrings au format Google/Numpy.
-  - `sphinx_rtd_theme` : thème moderne et professionnel (comme sur ReadTheDocs).
-  - `sphinx.ext.viewcode`, `sphinx.ext.autosectionlabel` : navigation et affichage du code source.
-- **Installation du thème :**
-  ```bash
-  pip install sphinx_rtd_theme
-  ```
-- **Configuration dans conf.py :**
-  ```python
-  html_theme = 'sphinx_rtd_theme'
-  extensions = [
-      'sphinx.ext.autodoc',
-      'sphinx.ext.napoleon',
-      'sphinx.ext.viewcode',
-      'sphinx.ext.autosectionlabel',
-  ]
-  ```
-- **Ajout du chemin source :**
-  ```python
-  import os, sys
-  sys.path.insert(0, os.path.abspath('../../src'))
-  ```
-- **Structuration de la doc :**
-  - `index.rst` : page d’accueil, sommaire, guide rapide, FAQ, etc.
-  - `modules.rst` : API détaillée, inclut tous les modules avec `.. automodule::`.
-  - Utilisation du toctree pour la navigation.
+## Documentation Sphinx
 
-### Commandes pour générer la documentation
-- **Sous Windows :**
-  ```bash
-  cd doc
-  .\make.bat html
-  ```
-- **Sous Linux/Mac :**
-  ```bash
-  cd doc
-  make html
-  ```
-- **Résultat :**
-  Ouvre `doc/build/html/index.html` dans ton navigateur.
+Voir [doc/README.md](doc/README.md) pour le build local et la structure.
+La doc est publiée automatiquement sur GitHub Pages à chaque push sur main.
 
-### Conseils pour une doc parfaite
-- Utilise des docstrings complètes et structurées (Google/Numpy) dans chaque classe/fonction.
-- Ajoute des exemples d’utilisation dans la doc utilisateur et dans les docstrings.
-- Corrige tous les warnings Sphinx (soulignement des titres, toctree, etc.).
-- Utilise un thème moderne (sphinx_rtd_theme, furo, pydata-sphinx-theme).
-- Ajoute une FAQ, une section contribution, une licence.
-- Pour publier en ligne : ReadTheDocs (gratuit, facile à connecter à GitHub).
+Conseils : docstrings complètes NumPy-style avec exemples, corriger tous les
+warnings Sphinx, ajouter chaque nouveau module dans `doc/source/modules.rst`.
 
-### Résumé des apports
-- Projet modulaire, testé, documenté comme un vrai projet open source.
-- Documentation API générée automatiquement et toujours à jour.
-- Utilisation professionnelle de Sphinx et des outils Python modernes.
-- Prêt à être partagé, maintenu, et enrichi par d’autres utilisateurs ou contributeurs.
+---
+
+## Auteurs
+
+- diamankayero
+
+## Licence
+
+MIT
