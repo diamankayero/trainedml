@@ -234,6 +234,18 @@ streamlit run trainedml_webapp/src/app.py
 
 Or visit the hosted version: [trainedml.streamlit.app](https://trainedml.streamlit.app)
 
+### Web API (FastAPI)
+
+Serve trainedml over HTTP for any frontend (HTML/JS, React, mobile):
+
+```bash
+pip install "trainedml[web]"
+uvicorn webapp_api.api:app --reload
+# demo page: http://localhost:8000   interactive docs: http://localhost:8000/docs
+```
+
+See [webapp_api/README.md](webapp_api/README.md) for routes and details.
+
 ---
 
 ## Architecture
@@ -258,6 +270,7 @@ trainedml/
 ├── doc/                   # Sphinx documentation
 ├── examples/              # Runnable examples + notebooks (quickstart, compare, EDA report)
 ├── tests/                 # Unit tests
+├── webapp_api/            # HTTP API (FastAPI) + HTML/JS demo page
 └── CHANGELOG.md
 ```
 

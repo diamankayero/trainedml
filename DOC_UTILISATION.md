@@ -17,6 +17,7 @@ le README du dossier concerné.
 | [doc/](doc/README.md) | Documentation Sphinx : build local et publication |
 | [public/](public/README.md) | Images du README |
 | [.github/](.github/README.md) | CI, publication PyPI, procédure de release |
+| [webapp_api/](webapp_api/README.md) | API HTTP (FastAPI) + page web de démo |
 
 ---
 
@@ -203,6 +204,15 @@ au rapport EDA en une ligne") et le rendre digne de confiance.
 - Publication : v0.2.0 sur PyPI, Release GitHub, doc à jour.
 - Style : pas de tirets longs, ponctuation à la française ; pas de signature
   d'outil dans les commits.
+
+### Phase 4 : ouverture web (2026-07-18)
+
+- Documentation par dossier : un README dans chaque dossier du projet,
+  DOC_UTILISATION.md restructuré avec ce journal.
+- API HTTP (`webapp_api/`) : FastAPI expose train/predict/compare/models ;
+  page de démo HTML/JS vanilla servie à la racine, doc interactive sur /docs.
+  Le pattern : le frontend (HTML, React...) ne fait que des appels fetch,
+  le Python reste côté serveur. Extra d'installation `trainedml[web]`.
 
 ### Chantiers restants
 

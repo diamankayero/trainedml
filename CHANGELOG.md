@@ -4,6 +4,16 @@ Toutes les évolutions notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/) et le projet
 adhère au [versionnement sémantique](https://semver.org/lang/fr/).
 
+## [Non publié]
+
+### Ajouté
+- API web FastAPI (`webapp_api/`) : routes /api/train, /api/predict,
+  /api/compare, /api/models, avec page de démo HTML/JS servie à la racine
+  et documentation interactive /docs. Extra d'installation : `trainedml[web]`.
+- Tests de l'API (`tests/test_api.py`), ignorés si fastapi absent.
+- Un README de documentation dans chaque dossier du projet ;
+  DOC_UTILISATION.md restructuré avec journal du projet.
+
 ## [0.2.0] - 2026-07-18
 
 ### Ajouté
