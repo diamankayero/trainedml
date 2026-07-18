@@ -221,12 +221,20 @@ au rapport EDA en une ligne") et le rendre digne de confiance.
   package ne contient plus que la bibliothèque ; render.yaml, Dockerfile et
   l'extra [web] sont partis avec la webapp.
 - Version React : https://github.com/diamankayero/ModeLmL (nom choisi par
-  l'utilisateur), même interface portée en composants React (Vite), mêmes
-  jetons de design, déployée sur GitHub Pages
+  l'utilisateur), déployée sur GitHub Pages
   (https://diamankayero.github.io/ModeLmL/). La page HTML de
   trainedml-webapp est conservée volontairement : c'est la version la plus
   lisible pour apprendre ; ModeLmL est la version industrielle. Les deux
   consomment la même API.
+- ModeLmL v2 : vraie application d'atelier ML avec identité visuelle propre
+  (violet), barre latérale de configuration et quatre onglets : Données
+  (datasets intégrés, CSV par URL ou upload, filtres, describe, export),
+  Comparer (choix des modèles, CV, graphiques en barres), Prédire
+  (formulaire par variable pré-rempli avec les moyennes), Analyse (rapport
+  EDA de trainedml intégré). L'API a été enrichie en conséquence
+  (/api/dataset, /api/report, données uploadées, sous-ensemble de modèles).
+  Vérification par banc de test visuel (scripts/visual-check.mjs, Edge
+  headless piloté).
 
 ### Chantiers restants
 
