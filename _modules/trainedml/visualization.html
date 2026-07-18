@@ -60,6 +60,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Code du module</a></li>
+          <li class="breadcrumb-item"><a href="../trainedml.html">trainedml</a></li>
       <li class="breadcrumb-item active">trainedml.visualization</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -176,6 +177,38 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">analyzer</span> <span class="o">=</span> <span class="n">DataAnalyzer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Visualizer.report">
+<a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.report">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Rapport exploratoire — trainedml&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Génère un rapport EDA HTML complet et auto-contenu.</span>
+
+<span class="sd">        Le rapport rassemble toutes les analyses du package : aperçu,</span>
+<span class="sd">        statistiques descriptives, valeurs manquantes, corrélations (avec</span>
+<span class="sd">        heatmap), distributions, outliers, normalité et VIF. Les figures</span>
+<span class="sd">        sont embarquées dans le HTML (aucune dépendance externe).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path : str, optional</span>
+<span class="sd">            Chemin du fichier HTML de sortie. Si None, le HTML est seulement retourné.</span>
+<span class="sd">        title : str, optional</span>
+<span class="sd">            Titre du rapport.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Le contenu HTML du rapport.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; viz = Visualizer(df)</span>
+<span class="sd">        &gt;&gt;&gt; viz.report(&quot;rapport.html&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">.report</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_report</span>
+        <span class="k">return</span> <span class="n">generate_report</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="Visualizer.heatmap">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.heatmap">[docs]</a>

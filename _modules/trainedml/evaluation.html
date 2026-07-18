@@ -7,14 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>trainedml.evaluation &mdash; Documentation trainedml 0.01</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../_static/documentation_options.js?v=e42f2b11"></script>
-      <script src="../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/translations.js?v=e6b791cb"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -25,7 +25,7 @@
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search"  style="background: #2980B9" >
+        <div class="wy-side-nav-search" >
 
           
           
@@ -42,92 +42,14 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.Trainer"><code class="docutils literal notranslate"><span class="pre">Trainer</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.Trainer.evaluate"><code class="docutils literal notranslate"><span class="pre">Trainer.evaluate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.Trainer.fit"><code class="docutils literal notranslate"><span class="pre">Trainer.fit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.Trainer.load_data"><code class="docutils literal notranslate"><span class="pre">Trainer.load_data()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.Trainer.predict"><code class="docutils literal notranslate"><span class="pre">Trainer.predict()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.data.loader.DataLoader"><code class="docutils literal notranslate"><span class="pre">DataLoader</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.data.loader.DataLoader.load_csv_from_url"><code class="docutils literal notranslate"><span class="pre">DataLoader.load_csv_from_url()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.data.loader.DataLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">DataLoader.load_dataset()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.models.base.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.base.BaseModel.evaluate"><code class="docutils literal notranslate"><span class="pre">BaseModel.evaluate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.base.BaseModel.fit"><code class="docutils literal notranslate"><span class="pre">BaseModel.fit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.base.BaseModel.predict"><code class="docutils literal notranslate"><span class="pre">BaseModel.predict()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.models.knn.KNNModel"><code class="docutils literal notranslate"><span class="pre">KNNModel</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.knn.KNNModel.evaluate"><code class="docutils literal notranslate"><span class="pre">KNNModel.evaluate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.knn.KNNModel.fit"><code class="docutils literal notranslate"><span class="pre">KNNModel.fit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.knn.KNNModel.predict"><code class="docutils literal notranslate"><span class="pre">KNNModel.predict()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.models.logistic.LogisticModel"><code class="docutils literal notranslate"><span class="pre">LogisticModel</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.logistic.LogisticModel.evaluate"><code class="docutils literal notranslate"><span class="pre">LogisticModel.evaluate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.logistic.LogisticModel.fit"><code class="docutils literal notranslate"><span class="pre">LogisticModel.fit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.logistic.LogisticModel.predict"><code class="docutils literal notranslate"><span class="pre">LogisticModel.predict()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.models.random_forest.RandomForestModel"><code class="docutils literal notranslate"><span class="pre">RandomForestModel</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.random_forest.RandomForestModel.evaluate"><code class="docutils literal notranslate"><span class="pre">RandomForestModel.evaluate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.random_forest.RandomForestModel.fit"><code class="docutils literal notranslate"><span class="pre">RandomForestModel.fit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.models.random_forest.RandomForestModel.predict"><code class="docutils literal notranslate"><span class="pre">RandomForestModel.predict()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.viz.heatmap.HeatmapViz"><code class="docutils literal notranslate"><span class="pre">HeatmapViz</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.viz.heatmap.HeatmapViz.vizs"><code class="docutils literal notranslate"><span class="pre">HeatmapViz.vizs()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.viz.histogram.HistogramViz"><code class="docutils literal notranslate"><span class="pre">HistogramViz</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.viz.histogram.HistogramViz.vizs"><code class="docutils literal notranslate"><span class="pre">HistogramViz.vizs()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.viz.line.LineViz"><code class="docutils literal notranslate"><span class="pre">LineViz</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.viz.line.LineViz.vizs"><code class="docutils literal notranslate"><span class="pre">LineViz.vizs()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.viz.vizs.Vizs"><code class="docutils literal notranslate"><span class="pre">Vizs</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.viz.vizs.Vizs.figure"><code class="docutils literal notranslate"><span class="pre">Vizs.figure</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.viz.vizs.Vizs.vizs"><code class="docutils literal notranslate"><span class="pre">Vizs.vizs()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.benchmark.Benchmark"><code class="docutils literal notranslate"><span class="pre">Benchmark</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.benchmark.Benchmark.run"><code class="docutils literal notranslate"><span class="pre">Benchmark.run()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.evaluation.Evaluator"><code class="docutils literal notranslate"><span class="pre">Evaluator</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.evaluation.Evaluator.evaluate_all"><code class="docutils literal notranslate"><span class="pre">Evaluator.evaluate_all()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.figure.Figure"><code class="docutils literal notranslate"><span class="pre">Figure</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.figure.Figure.annotate"><code class="docutils literal notranslate"><span class="pre">Figure.annotate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.figure.Figure.save"><code class="docutils literal notranslate"><span class="pre">Figure.save()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.figure.Figure.show"><code class="docutils literal notranslate"><span class="pre">Figure.show()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../modules.html#trainedml.visualization.Visualizer"><code class="docutils literal notranslate"><span class="pre">Visualizer</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.visualization.Visualizer.get_features"><code class="docutils literal notranslate"><span class="pre">Visualizer.get_features()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.visualization.Visualizer.heatmap"><code class="docutils literal notranslate"><span class="pre">Visualizer.heatmap()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.visualization.Visualizer.histogram"><code class="docutils literal notranslate"><span class="pre">Visualizer.histogram()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../modules.html#trainedml.visualization.Visualizer.line"><code class="docutils literal notranslate"><span class="pre">Visualizer.line()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a></li>
 </ul>
 
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">trainedml</a>
       </nav>
@@ -150,28 +72,116 @@
              
   <h1>Code source de trainedml.evaluation</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Module d&#39;évaluation des modèles de classification pour trainedml.</span>
-<span class="sd">Calcule les métriques standards de classification.</span>
+<span class="sd">Evaluation utilities for classification and regression models in trainedml.</span>
+
+<span class="sd">This module provides standard metrics for evaluating classification models (accuracy,</span>
+<span class="sd">precision, recall, F1-score) and regression models (R², MSE, RMSE, MAE), using scikit-learn.</span>
+
+<span class="sd">Mathematical Formulation</span>
+<span class="sd">------------------------</span>
+<span class="sd">**Classification:**</span>
+
+<span class="sd">Let $y_i$ be the true label and $\hat{y}_i$ the predicted label for sample $i$.</span>
+
+<span class="sd">- **Accuracy**:</span>
+
+<span class="sd">  .. math::</span>
+<span class="sd">      \mathrm{accuracy} = \frac{1}{n} \sum_{i=1}^n \mathbb{I}(y_i = \hat{y}_i)</span>
+
+<span class="sd">- **Precision** (for class $k$):</span>
+
+<span class="sd">  .. math::</span>
+<span class="sd">      \mathrm{precision}_k = \frac{TP_k}{TP_k + FP_k}</span>
+
+<span class="sd">- **Recall** (for class $k$):</span>
+
+<span class="sd">  .. math::</span>
+<span class="sd">      \mathrm{recall}_k = \frac{TP_k}{TP_k + FN_k}</span>
+
+<span class="sd">- **F1-score** (for class $k$):</span>
+
+<span class="sd">  .. math::</span>
+<span class="sd">      \mathrm{F1}_k = 2 \cdot \frac{\mathrm{precision}_k \cdot \mathrm{recall}_k}{\mathrm{precision}_k + \mathrm{recall}_k}</span>
+
+<span class="sd">**Regression:**</span>
+
+<span class="sd">- **Mean Squared Error (MSE)**:</span>
+
+<span class="sd">  .. math::</span>
+<span class="sd">      \mathrm{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2</span>
+
+<span class="sd">- **Root Mean Squared Error (RMSE)**:</span>
+
+<span class="sd">  .. math::</span>
+<span class="sd">      \mathrm{RMSE} = \sqrt{\mathrm{MSE}}</span>
+
+<span class="sd">- **Mean Absolute Error (MAE)**:</span>
+
+<span class="sd">  .. math::</span>
+<span class="sd">      \mathrm{MAE} = \frac{1}{n} \sum_{i=1}^n |y_i - \hat{y}_i|</span>
+
+<span class="sd">- **R² (coefficient of determination)**:</span>
+
+<span class="sd">  .. math::</span>
+<span class="sd">      R^2 = 1 - \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{\sum_{i=1}^n (y_i - \bar{y})^2}</span>
+
+<span class="sd">Examples</span>
+<span class="sd">--------</span>
+<span class="sd">&gt;&gt;&gt; from trainedml.evaluation import Evaluator</span>
+<span class="sd">&gt;&gt;&gt; y_true = [0, 1, 1, 0]</span>
+<span class="sd">&gt;&gt;&gt; y_pred = [0, 1, 0, 0]</span>
+<span class="sd">&gt;&gt;&gt; scores = Evaluator.evaluate_all(y_true, y_pred)</span>
+<span class="sd">&gt;&gt;&gt; print(scores)</span>
+
+<span class="sd">&gt;&gt;&gt; y_true_reg = [3.0, -0.5, 2.0, 7.0]</span>
+<span class="sd">&gt;&gt;&gt; y_pred_reg = [2.5, 0.0, 2.0, 8.0]</span>
+<span class="sd">&gt;&gt;&gt; scores_reg = Evaluator.evaluate_regression(y_true_reg, y_pred_reg)</span>
+<span class="sd">&gt;&gt;&gt; print(scores_reg)</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span>
+    <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="p">)</span>
+
 
 <div class="viewcode-block" id="Evaluator">
-<a class="viewcode-back" href="../../modules.html#trainedml.evaluation.Evaluator">[docs]</a>
+<a class="viewcode-back" href="../../trainedml/evaluation.html#trainedml.evaluation.Evaluator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Evaluator</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe utilitaire pour évaluer les performances d&#39;un modèle de classification.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Utility class for evaluating classification and regression models.</span>
+
+<span class="sd">    Provides static methods to compute standard classification and regression metrics.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
 <div class="viewcode-block" id="Evaluator.evaluate_all">
-<a class="viewcode-back" href="../../modules.html#trainedml.evaluation.Evaluator.evaluate_all">[docs]</a>
+<a class="viewcode-back" href="../../trainedml/evaluation.html#trainedml.evaluation.Evaluator.evaluate_all">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_all</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_all</span><span class="p">(</span><span class="n">y_true</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calcule plusieurs métriques de classification.</span>
-<span class="sd">        Args:</span>
-<span class="sd">            y_true: vraies classes</span>
-<span class="sd">            y_pred: classes prédites</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            dict: dictionnaire des métriques</span>
+<span class="sd">        Compute accuracy, precision, recall, and F1-score for classification.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        y_true : array-like</span>
+<span class="sd">            True class labels.</span>
+<span class="sd">        y_pred : array-like</span>
+<span class="sd">            Predicted class labels.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Dictionary with keys &#39;accuracy&#39;, &#39;precision&#39;, &#39;recall&#39;, &#39;f1&#39;.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; Evaluator.evaluate_all([0, 1, 1], [0, 1, 0])</span>
+<span class="sd">        {&#39;accuracy&#39;: 0.666..., &#39;precision&#39;: 0.666..., &#39;recall&#39;: 0.666..., &#39;f1&#39;: 0.666...}</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
@@ -179,6 +189,108 @@
             <span class="s1">&#39;recall&#39;</span><span class="p">:</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
             <span class="s1">&#39;f1&#39;</span><span class="p">:</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="Evaluator.evaluate_regression">
+<a class="viewcode-back" href="../../trainedml/evaluation.html#trainedml.evaluation.Evaluator.evaluate_regression">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_regression</span><span class="p">(</span><span class="n">y_true</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute R², MSE, RMSE, and MAE for regression.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        y_true : array-like</span>
+<span class="sd">            True continuous values.</span>
+<span class="sd">        y_pred : array-like</span>
+<span class="sd">            Predicted continuous values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Dictionary with keys &#39;r2&#39;, &#39;mse&#39;, &#39;rmse&#39;, &#39;mae&#39;.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; Evaluator.evaluate_regression([3.0, -0.5, 2.0, 7.0], [2.5, 0.0, 2.0, 8.0])</span>
+<span class="sd">        {&#39;r2&#39;: 0.948..., &#39;mse&#39;: 0.375, &#39;rmse&#39;: 0.612..., &#39;mae&#39;: 0.5}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;r2&#39;</span><span class="p">:</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+            <span class="s1">&#39;mse&#39;</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span>
+            <span class="s1">&#39;rmse&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">)),</span>
+            <span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="Evaluator.evaluate_for">
+<a class="viewcode-back" href="../../trainedml/evaluation.html#trainedml.evaluation.Evaluator.evaluate_for">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_for</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">y_true</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the metrics appropriate for a given task type.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        task : str or None</span>
+<span class="sd">            ``&#39;classification&#39;``, ``&#39;regression&#39;``, or None (auto-detect from y_true).</span>
+<span class="sd">        y_true : array-like</span>
+<span class="sd">            True values.</span>
+<span class="sd">        y_pred : array-like</span>
+<span class="sd">            Predicted values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Classification metrics (accuracy, precision, recall, f1) or</span>
+<span class="sd">            regression metrics (r2, mse, rmse, mae).</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; Evaluator.evaluate_for(&#39;regression&#39;, [3.0, 2.5], [3.1, 2.4])</span>
+<span class="sd">        {&#39;r2&#39;: ..., &#39;mse&#39;: ..., &#39;rmse&#39;: ..., &#39;mae&#39;: ...}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s1">&#39;regression&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Evaluator</span><span class="o">.</span><span class="n">evaluate_regression</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s1">&#39;classification&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Evaluator</span><span class="o">.</span><span class="n">evaluate_all</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Evaluator</span><span class="o">.</span><span class="n">auto_evaluate</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Evaluator.auto_evaluate">
+<a class="viewcode-back" href="../../trainedml/evaluation.html#trainedml.evaluation.Evaluator.auto_evaluate">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">auto_evaluate</span><span class="p">(</span><span class="n">y_true</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Automatically detect classification vs regression and compute the appropriate metrics.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        y_true : array-like</span>
+<span class="sd">            True values.</span>
+<span class="sd">        y_pred : array-like</span>
+<span class="sd">            Predicted values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Classification or regression metrics (auto-detected).</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; Evaluator.auto_evaluate([0, 1, 1], [0, 1, 0])  # classification</span>
+<span class="sd">        {&#39;accuracy&#39;: ..., &#39;precision&#39;: ..., &#39;recall&#39;: ..., &#39;f1&#39;: ...}</span>
+<span class="sd">        &gt;&gt;&gt; Evaluator.auto_evaluate([3.0, 2.5, 7.1], [3.1, 2.4, 7.0])  # regression</span>
+<span class="sd">        {&#39;r2&#39;: ..., &#39;mse&#39;: ..., &#39;rmse&#39;: ..., &#39;mae&#39;: ...}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
+        <span class="c1"># Heuristic: if dtype is object/str or few unique values -&gt; classification</span>
+        <span class="k">if</span> <span class="n">y_true</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Evaluator</span><span class="o">.</span><span class="n">evaluate_all</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="mi">20</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">y_true</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Evaluator</span><span class="o">.</span><span class="n">evaluate_all</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Evaluator</span><span class="o">.</span><span class="n">evaluate_regression</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span></div>
 </div>
 
 </pre></div>
@@ -190,7 +302,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Droits d'auteur 2025, Yéro Diamanka.</p>
+    <p>&#169; Droits d'auteur 2026, Yéro Diamanka.</p>
   </div>
 
   Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un

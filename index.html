@@ -86,11 +86,20 @@
 </section>
 <section id="guide-de-demarrage-rapide">
 <h1>Guide de démarrage rapide<a class="headerlink" href="#guide-de-demarrage-rapide" title="Lien vers cette rubrique"></a></h1>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trainer</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trainer</span><span class="p">,</span> <span class="n">compare</span>
+
+<span class="c1"># Entraîner, évaluer, prédire</span>
 <span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;random_forest&quot;</span><span class="p">)</span>
 <span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]])</span>
+
+<span class="c1"># Sauvegarder / recharger</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;model.joblib&quot;</span><span class="p">)</span>
+<span class="n">restored</span> <span class="o">=</span> <span class="n">Trainer</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;model.joblib&quot;</span><span class="p">)</span>
+
+<span class="c1"># Comparer tous les modèles (validation croisée) en une ligne</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
 </pre></div>
 </div>
 </section>
@@ -113,6 +122,13 @@ pip<span class="w"> </span>install<span class="w"> </span>.
 <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">trainedml - API détaillée</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trainedml/trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainedml/loader.html">DataLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainedml/preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainedml/tasks.html">Détection de tâche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainedml/benchmark.html">Benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainedml/evaluation.html">Evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainedml/report.html">Rapport EDA</a></li>
 <li class="toctree-l2"><a class="reference internal" href="trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="trainedml/models/logistic.html">Régression logistique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="trainedml/models/random_forest.html">Random Forest</a></li>

@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trainedml.report &mdash; Documentation trainedml 0.01</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=e42f2b11"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/translations.js?v=e6b791cb"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            trainedml
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">trainedml</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Code du module</a></li>
+          <li class="breadcrumb-item"><a href="../trainedml.html">trainedml</a></li>
+      <li class="breadcrumb-item active">trainedml.report</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de trainedml.report</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Génération de rapport EDA HTML autonome pour trainedml.</span>
+
+<span class="sd">Ce module assemble les analyses exploratoires du package (statistiques</span>
+<span class="sd">descriptives, valeurs manquantes, corrélations, distributions, outliers,</span>
+<span class="sd">normalité, multicolinéarité) en un rapport HTML **auto-contenu** : les</span>
+<span class="sd">figures matplotlib sont embarquées en base64, le fichier s&#39;ouvre dans</span>
+<span class="sd">n&#39;importe quel navigateur sans dépendance.</span>
+
+<span class="sd">Point d&#39;entrée : :func:`generate_report`, aussi accessible via</span>
+<span class="sd">:meth:`trainedml.visualization.Visualizer.report`.</span>
+
+<span class="sd">Exemple</span>
+<span class="sd">-------</span>
+<span class="sd">&gt;&gt;&gt; from trainedml.report import generate_report</span>
+<span class="sd">&gt;&gt;&gt; generate_report(df, &quot;rapport.html&quot;, title=&quot;Mon dataset&quot;)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+
+<span class="n">_CSS</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">body { font-family: -apple-system, &#39;Segoe UI&#39;, Roboto, sans-serif; margin: 2rem auto;</span>
+<span class="s2">       max-width: 1100px; padding: 0 1rem; color: #1a1a2e; }</span>
+<span class="s2">h1 { border-bottom: 3px solid #4361ee; padding-bottom: .4rem; }</span>
+<span class="s2">h2 { color: #4361ee; margin-top: 2.2rem; }</span>
+<span class="s2">table { border-collapse: collapse; font-size: .85rem; margin: .8rem 0; }</span>
+<span class="s2">th, td { border: 1px solid #d0d0e0; padding: .35rem .6rem; text-align: right; }</span>
+<span class="s2">th { background: #eef0fb; }</span>
+<span class="s2">img { max-width: 100%; height: auto; border: 1px solid #e0e0ea; border-radius: 6px; }</span>
+<span class="s2">.note { color: #777; font-style: italic; }</span>
+<span class="s2">.meta { color: #555; font-size: .9rem; }</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_fig_to_html</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convertit une figure matplotlib en balise &lt;img&gt; base64 auto-contenue.&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">110</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+    <span class="n">encoded</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;img src=&quot;data:image/png;base64,</span><span class="si">{</span><span class="n">encoded</span><span class="si">}</span><span class="s1">&quot; alt=&quot;figure&quot;/&gt;&#39;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_safe_section</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">builder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Construit une section HTML ; en cas d&#39;erreur, insère une note au lieu de planter.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="n">builder</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># le rapport doit rester généré même si une analyse échoue</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;p class=&quot;note&quot;&gt;Section indisponible : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&lt;/p&gt;&#39;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;h2&gt;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&lt;/h2&gt;</span><span class="se">\n</span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="s2">&quot;</span>
+
+
+<div class="viewcode-block" id="generate_report">
+<a class="viewcode-back" href="../../trainedml/report.html#trainedml.report.generate_report">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_report</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Rapport exploratoire — trainedml&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Génère un rapport EDA HTML complet et auto-contenu pour un DataFrame.</span>
+
+<span class="sd">    Le rapport contient : aperçu du dataset, statistiques descriptives,</span>
+<span class="sd">    valeurs manquantes, matrice et heatmap de corrélation, distributions,</span>
+<span class="sd">    outliers (IQR), tests de normalité et facteurs d&#39;inflation de la</span>
+<span class="sd">    variance (VIF).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : pandas.DataFrame</span>
+<span class="sd">        Le dataset à analyser.</span>
+<span class="sd">    path : str, optional</span>
+<span class="sd">        Chemin du fichier HTML de sortie. Si None, le HTML est seulement retourné.</span>
+<span class="sd">    title : str, default=&quot;Rapport exploratoire — trainedml&quot;</span>
+<span class="sd">        Titre du rapport.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        Le contenu HTML du rapport.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from trainedml.report import generate_report</span>
+<span class="sd">    &gt;&gt;&gt; html = generate_report(df, &quot;rapport.html&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.analyzer</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataAnalyzer</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.viz.heatmap</span><span class="w"> </span><span class="kn">import</span> <span class="n">HeatmapViz</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.viz.missing</span><span class="w"> </span><span class="kn">import</span> <span class="n">missing_summary</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.viz.multicollinearity</span><span class="w"> </span><span class="kn">import</span> <span class="n">vif_summary</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.viz.normality</span><span class="w"> </span><span class="kn">import</span> <span class="n">normality_tests</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.viz.outliers</span><span class="w"> </span><span class="kn">import</span> <span class="n">outlier_summary</span>
+
+    <span class="n">analyzer</span> <span class="o">=</span> <span class="n">DataAnalyzer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">numeric</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span>
+    <span class="n">sections</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># --- Aperçu ---</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">overview</span><span class="p">():</span>
+        <span class="n">dtypes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;dtype&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;&lt;p class=&quot;meta&quot;&gt;</span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> lignes × </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> colonnes — &#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> doublon(s)&lt;/p&gt;&#39;</span>
+            <span class="o">+</span> <span class="n">dtypes</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+            <span class="o">+</span> <span class="s2">&quot;&lt;h3&gt;Premières lignes&lt;/h3&gt;&quot;</span> <span class="o">+</span> <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+        <span class="p">)</span>
+    <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_safe_section</span><span class="p">(</span><span class="s2">&quot;Aperçu du dataset&quot;</span><span class="p">,</span> <span class="n">overview</span><span class="p">))</span>
+
+    <span class="c1"># --- Statistiques descriptives ---</span>
+    <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_safe_section</span><span class="p">(</span>
+        <span class="s2">&quot;Statistiques descriptives&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()))</span>
+
+    <span class="c1"># --- Valeurs manquantes ---</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">missing</span><span class="p">():</span>
+        <span class="n">miss</span> <span class="o">=</span> <span class="n">missing_summary</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;valeurs manquantes&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+        <span class="n">miss</span><span class="p">[</span><span class="s2">&quot;%&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">miss</span><span class="p">[</span><span class="s2">&quot;valeurs manquantes&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">miss</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+    <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_safe_section</span><span class="p">(</span><span class="s2">&quot;Valeurs manquantes&quot;</span><span class="p">,</span> <span class="n">missing</span><span class="p">))</span>
+
+    <span class="c1"># --- Corrélation ---</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">correlation</span><span class="p">():</span>
+        <span class="n">viz</span> <span class="o">=</span> <span class="n">HeatmapViz</span><span class="p">(</span><span class="n">numeric</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">numeric</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">numeric</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span> <span class="o">+</span> <span class="n">_fig_to_html</span><span class="p">(</span><span class="n">viz</span><span class="o">.</span><span class="n">figure</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">numeric</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_safe_section</span><span class="p">(</span><span class="s2">&quot;Corrélations&quot;</span><span class="p">,</span> <span class="n">correlation</span><span class="p">))</span>
+
+    <span class="c1"># --- Distributions ---</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">distributions</span><span class="p">():</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">distribution</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">_fig_to_html</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;figure&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;figure&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numeric</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_safe_section</span><span class="p">(</span><span class="s2">&quot;Distributions&quot;</span><span class="p">,</span> <span class="n">distributions</span><span class="p">))</span>
+
+    <span class="c1"># --- Outliers ---</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">outliers</span><span class="p">():</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">outlier_summary</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numeric</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_safe_section</span><span class="p">(</span><span class="s2">&quot;Outliers (méthode IQR)&quot;</span><span class="p">,</span> <span class="n">outliers</span><span class="p">))</span>
+
+    <span class="c1"># --- Normalité ---</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">normality</span><span class="p">():</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">normality_tests</span><span class="p">(</span><span class="n">numeric</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">numeric</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">stat</span><span class="p">,</span> <span class="n">pval</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;shapiro&quot;</span><span class="p">]</span>
+            <span class="n">rows</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;shapiro_stat&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">stat</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
+                         <span class="s2">&quot;p_value&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">pval</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
+                         <span class="s2">&quot;normale (α=5%)&quot;</span><span class="p">:</span> <span class="s2">&quot;oui&quot;</span> <span class="k">if</span> <span class="n">pval</span> <span class="o">&gt;</span> <span class="mf">0.05</span> <span class="k">else</span> <span class="s2">&quot;non&quot;</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numeric</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_safe_section</span><span class="p">(</span><span class="s2">&quot;Tests de normalité (Shapiro-Wilk)&quot;</span><span class="p">,</span> <span class="n">normality</span><span class="p">))</span>
+
+    <span class="c1"># --- Multicolinéarité ---</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vif</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">vif_summary</span><span class="p">(</span><span class="n">numeric</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;VIF&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">numeric</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_safe_section</span><span class="p">(</span><span class="s2">&quot;Multicolinéarité (VIF)&quot;</span><span class="p">,</span> <span class="n">vif</span><span class="p">))</span>
+
+    <span class="n">html</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;&lt;!DOCTYPE html&gt;&lt;html lang=&#39;fr&#39;&gt;&lt;head&gt;&lt;meta charset=&#39;utf-8&#39;&gt;&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;&lt;title&gt;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&lt;/title&gt;&lt;style&gt;</span><span class="si">{</span><span class="n">_CSS</span><span class="si">}</span><span class="s2">&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&lt;/h1&gt;&quot;</span>
+        <span class="sa">f</span><span class="s1">&#39;&lt;p class=&quot;meta&quot;&gt;Généré par trainedml — pandas </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s1">&lt;/p&gt;&#39;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sections</span><span class="p">)</span>
+        <span class="o">+</span> <span class="s2">&quot;&lt;/body&gt;&lt;/html&gt;&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">html</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2026, Yéro Diamanka.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

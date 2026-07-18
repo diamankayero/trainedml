@@ -46,6 +46,13 @@
               <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../modules.html">trainedml - API détaillée</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loader.html">DataLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html">Détection de tâche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmark.html">Benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html">Evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report.html">Rapport EDA</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models/knn.html">k-Nearest Neighbors (kNN)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models/logistic.html">Régression logistique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models/random_forest.html">Random Forest</a></li>
@@ -67,6 +74,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#trainedml.visualization.Visualizer.normality"><code class="docutils literal notranslate"><span class="pre">Visualizer.normality()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#trainedml.visualization.Visualizer.outliers"><code class="docutils literal notranslate"><span class="pre">Visualizer.outliers()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#trainedml.visualization.Visualizer.profiling"><code class="docutils literal notranslate"><span class="pre">Visualizer.profiling()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.visualization.Visualizer.report"><code class="docutils literal notranslate"><span class="pre">Visualizer.report()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#trainedml.visualization.Visualizer.target"><code class="docutils literal notranslate"><span class="pre">Visualizer.target()</span></code></a></li>
 </ul>
 </li>
@@ -582,6 +590,35 @@ Returns a dictionary with all results.</p>
 <p class="rubric">Exemples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">profiling</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="p">[</span><span class="s1">&#39;describe&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.report">
+<span class="sig-name descname"><span class="pre">report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Rapport</span> <span class="pre">exploratoire</span> <span class="pre">—</span> <span class="pre">trainedml'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/visualization.html#Visualizer.report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.report" title="Lien vers cette définition"></a></dt>
+<dd><p>Génère un rapport EDA HTML complet et auto-contenu.</p>
+<p>Le rapport rassemble toutes les analyses du package : aperçu,
+statistiques descriptives, valeurs manquantes, corrélations (avec
+heatmap), distributions, outliers, normalité et VIF. Les figures
+sont embarquées dans le HTML (aucune dépendance externe).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Chemin du fichier HTML de sortie. Si None, le HTML est seulement retourné.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Titre du rapport.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Le contenu HTML du rapport.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span> <span class="o">=</span> <span class="n">Visualizer</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="s2">&quot;rapport.html&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>

@@ -1,0 +1,188 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rapport EDA &mdash; Documentation trainedml 0.01</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=e42f2b11"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="k-Nearest Neighbors (kNN)" href="models/knn.html" />
+    <link rel="prev" title="Evaluator" href="evaluation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            trainedml
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">trainedml - API détaillée</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loader.html">DataLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html">Détection de tâche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmark.html">Benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html">Evaluator</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Rapport EDA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#exemple">Exemple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.report.generate_report"><code class="docutils literal notranslate"><span class="pre">generate_report()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/random_forest.html">Random Forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html">Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyzer.html">DataAnalyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="histogram.html">Histogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distribution.html">Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="correlation.html">Correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="missing.html">Missing Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outliers.html">Outliers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="target.html">Target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boxplot.html">Boxplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bivariate.html">Bivariate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normality.html">Normality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">trainedml</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">trainedml - API détaillée</a></li>
+      <li class="breadcrumb-item active">Rapport EDA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/trainedml/report.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-trainedml.report">
+<span id="rapport-eda"></span><h1>Rapport EDA<a class="headerlink" href="#module-trainedml.report" title="Lien vers cette rubrique"></a></h1>
+<p>Génération de rapport EDA HTML autonome pour trainedml.</p>
+<p>Ce module assemble les analyses exploratoires du package (statistiques
+descriptives, valeurs manquantes, corrélations, distributions, outliers,
+normalité, multicolinéarité) en un rapport HTML <strong>auto-contenu</strong> : les
+figures matplotlib sont embarquées en base64, le fichier s’ouvre dans
+n’importe quel navigateur sans dépendance.</p>
+<p>Point d’entrée : <a class="reference internal" href="#trainedml.report.generate_report" title="trainedml.report.generate_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">generate_report()</span></code></a>, aussi accessible via
+<a class="reference internal" href="visualization.html#trainedml.visualization.Visualizer.report" title="trainedml.visualization.Visualizer.report"><code class="xref py py-meth docutils literal notranslate"><span class="pre">trainedml.visualization.Visualizer.report()</span></code></a>.</p>
+<section id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique"></a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.report</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_report</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">generate_report</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;rapport.html&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Mon dataset&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="trainedml.report.generate_report">
+<span class="sig-prename descclassname"><span class="pre">trainedml.report.</span></span><span class="sig-name descname"><span class="pre">generate_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Rapport</span> <span class="pre">exploratoire</span> <span class="pre">—</span> <span class="pre">trainedml'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/trainedml/report.html#generate_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.report.generate_report" title="Lien vers cette définition"></a></dt>
+<dd><p>Génère un rapport EDA HTML complet et auto-contenu pour un DataFrame.</p>
+<p>Le rapport contient : aperçu du dataset, statistiques descriptives,
+valeurs manquantes, matrice et heatmap de corrélation, distributions,
+outliers (IQR), tests de normalité et facteurs d’inflation de la
+variance (VIF).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pandas.DataFrame</em>) – Le dataset à analyser.</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Chemin du fichier HTML de sortie. Si None, le HTML est seulement retourné.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>default=&quot;Rapport exploratoire — trainedml&quot;</em>) – Titre du rapport.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Le contenu HTML du rapport.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.report</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_report</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">html</span> <span class="o">=</span> <span class="n">generate_report</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;rapport.html&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="evaluation.html" class="btn btn-neutral float-left" title="Evaluator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="models/knn.html" class="btn btn-neutral float-right" title="k-Nearest Neighbors (kNN)" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2026, Yéro Diamanka.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

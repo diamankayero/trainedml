@@ -1,0 +1,228 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trainedml.compare &mdash; Documentation trainedml 0.01</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=e42f2b11"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/translations.js?v=e6b791cb"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            trainedml
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">trainedml</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Code du module</a></li>
+          <li class="breadcrumb-item"><a href="../trainedml.html">trainedml</a></li>
+      <li class="breadcrumb-item active">trainedml.compare</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de trainedml.compare</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Comparaison de tous les modèles en une ligne pour trainedml.</span>
+
+<span class="sd">Ce module expose :func:`compare`, qui enchaîne tout le pipeline :</span>
+<span class="sd">chargement des données, détection du type de tâche, prétraitement,</span>
+<span class="sd">validation croisée de tous les modèles adaptés, et retourne un</span>
+<span class="sd">DataFrame pandas trié du meilleur au moins bon modèle.</span>
+
+<span class="sd">Exemple</span>
+<span class="sd">-------</span>
+<span class="sd">&gt;&gt;&gt; from trainedml import compare</span>
+<span class="sd">&gt;&gt;&gt; df = compare(dataset=&quot;wine&quot;, cv=5)</span>
+<span class="sd">&gt;&gt;&gt; print(df)</span>
+<span class="sd">                     accuracy  accuracy_std  ...  fit_time  predict_time</span>
+<span class="sd">model                                        ...</span>
+<span class="sd">random_forest          0.98          0.02    ...    0.081        0.004</span>
+<span class="sd">...</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.benchmark</span><span class="w"> </span><span class="kn">import</span> <span class="n">Benchmark</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.data.loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CLASSIFIER_MAP</span><span class="p">,</span> <span class="n">REGRESSOR_MAP</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreprocessedModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect_task</span>
+
+
+<div class="viewcode-block" id="compare">
+<a class="viewcode-back" href="../../trainedml/trainer.html#trainedml.compare">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">target</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">X</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">models</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cv</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">preprocess</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
+    <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">sort</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compare tous les modèles adaptés à un dataset et retourne un DataFrame trié.</span>
+
+<span class="sd">    Le type de tâche (classification ou régression) est détecté automatiquement</span>
+<span class="sd">    à partir de la cible, et seuls les modèles adaptés sont comparés. Chaque</span>
+<span class="sd">    modèle est évalué par validation croisée ; le prétraitement (imputation,</span>
+<span class="sd">    standardisation, one-hot) est réentraîné à chaque pli pour éviter toute</span>
+<span class="sd">    fuite d&#39;information.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dataset : str, optional</span>
+<span class="sd">        Nom d&#39;un dataset intégré (&quot;iris&quot;, &quot;wine&quot;).</span>
+<span class="sd">    url : str, optional</span>
+<span class="sd">        URL d&#39;un CSV distant (nécessite ``target``).</span>
+<span class="sd">    target : str, optional</span>
+<span class="sd">        Nom de la colonne cible (si ``url``).</span>
+<span class="sd">    X : pandas.DataFrame or array-like, optional</span>
+<span class="sd">        Features fournies directement en mémoire (alternative à dataset/url).</span>
+<span class="sd">    y : pandas.Series or array-like, optional</span>
+<span class="sd">        Cible correspondante (obligatoire si X est fourni).</span>
+<span class="sd">    models : dict, optional</span>
+<span class="sd">        Dictionnaire {nom: instance} pour comparer des modèles personnalisés</span>
+<span class="sd">        (trainedml ou scikit-learn). Par défaut : tous les modèles trainedml</span>
+<span class="sd">        adaptés à la tâche détectée.</span>
+<span class="sd">    cv : int, default=5</span>
+<span class="sd">        Nombre de plis de validation croisée.</span>
+<span class="sd">    preprocess : bool, default=True</span>
+<span class="sd">        Applique le prétraitement standard de trainedml à chaque pli.</span>
+<span class="sd">    seed : int, default=42</span>
+<span class="sd">        Graine aléatoire pour le mélange des plis.</span>
+<span class="sd">    show_progress : bool, default=True</span>
+<span class="sd">        Affiche une barre de progression.</span>
+<span class="sd">    sort : bool, default=True</span>
+<span class="sd">        Trie le tableau par la métrique principale (accuracy ou r2), décroissante.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        Une ligne par modèle : métriques moyennes, écarts-types (``*_std``),</span>
+<span class="sd">        temps moyens d&#39;entraînement et de prédiction.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        Si ni ``dataset`` ni ``url``+``target`` n&#39;est fourni.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Comparer tous les classificateurs sur Wine :</span>
+
+<span class="sd">    &gt;&gt;&gt; from trainedml import compare</span>
+<span class="sd">    &gt;&gt;&gt; print(compare(dataset=&quot;wine&quot;))</span>
+
+<span class="sd">    Comparer des modèles personnalisés (y compris scikit-learn) :</span>
+
+<span class="sd">    &gt;&gt;&gt; from sklearn.svm import SVC</span>
+<span class="sd">    &gt;&gt;&gt; from trainedml.models import KNNModel</span>
+<span class="sd">    &gt;&gt;&gt; print(compare(dataset=&quot;iris&quot;, models={&quot;svc&quot;: SVC(), &quot;knn&quot;: KNNModel()}))</span>
+
+<span class="sd">    Sur un CSV distant (régression) :</span>
+
+<span class="sd">    &gt;&gt;&gt; print(compare(url=&quot;https://.../winequality-red.csv&quot;, target=&quot;quality&quot;))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">X</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">models</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">detect_task</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">model_map</span> <span class="o">=</span> <span class="n">CLASSIFIER_MAP</span> <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;classification&quot;</span> <span class="k">else</span> <span class="n">REGRESSOR_MAP</span>
+        <span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="bp">cls</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">model_map</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="k">if</span> <span class="n">preprocess</span><span class="p">:</span>
+        <span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">PreprocessedModel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="n">bench</span> <span class="o">=</span> <span class="n">Benchmark</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+    <span class="n">bench</span><span class="o">.</span><span class="n">run_cv</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="n">show_progress</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">bench</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2026, Yéro Diamanka.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

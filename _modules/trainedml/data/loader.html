@@ -7,14 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>trainedml.data.loader &mdash; Documentation trainedml 0.01</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=e42f2b11"></script>
-      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/translations.js?v=e6b791cb"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -25,7 +25,7 @@
   <div class="wy-grid-for-nav">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search"  style="background: #2980B9" >
+        <div class="wy-side-nav-search" >
 
           
           
@@ -42,92 +42,14 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">trainedml - API détaillée</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.Trainer"><code class="docutils literal notranslate"><span class="pre">Trainer</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.Trainer.evaluate"><code class="docutils literal notranslate"><span class="pre">Trainer.evaluate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.Trainer.fit"><code class="docutils literal notranslate"><span class="pre">Trainer.fit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.Trainer.load_data"><code class="docutils literal notranslate"><span class="pre">Trainer.load_data()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.Trainer.predict"><code class="docutils literal notranslate"><span class="pre">Trainer.predict()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.data.loader.DataLoader"><code class="docutils literal notranslate"><span class="pre">DataLoader</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.data.loader.DataLoader.load_csv_from_url"><code class="docutils literal notranslate"><span class="pre">DataLoader.load_csv_from_url()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.data.loader.DataLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">DataLoader.load_dataset()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.models.base.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.models.base.BaseModel.evaluate"><code class="docutils literal notranslate"><span class="pre">BaseModel.evaluate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.models.base.BaseModel.fit"><code class="docutils literal notranslate"><span class="pre">BaseModel.fit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.models.base.BaseModel.predict"><code class="docutils literal notranslate"><span class="pre">BaseModel.predict()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.models.knn.KNNModel"><code class="docutils literal notranslate"><span class="pre">KNNModel</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.models.knn.KNNModel.evaluate"><code class="docutils literal notranslate"><span class="pre">KNNModel.evaluate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.models.knn.KNNModel.fit"><code class="docutils literal notranslate"><span class="pre">KNNModel.fit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.models.knn.KNNModel.predict"><code class="docutils literal notranslate"><span class="pre">KNNModel.predict()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.models.logistic.LogisticModel"><code class="docutils literal notranslate"><span class="pre">LogisticModel</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.models.logistic.LogisticModel.evaluate"><code class="docutils literal notranslate"><span class="pre">LogisticModel.evaluate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.models.logistic.LogisticModel.fit"><code class="docutils literal notranslate"><span class="pre">LogisticModel.fit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.models.logistic.LogisticModel.predict"><code class="docutils literal notranslate"><span class="pre">LogisticModel.predict()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.models.random_forest.RandomForestModel"><code class="docutils literal notranslate"><span class="pre">RandomForestModel</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.models.random_forest.RandomForestModel.evaluate"><code class="docutils literal notranslate"><span class="pre">RandomForestModel.evaluate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.models.random_forest.RandomForestModel.fit"><code class="docutils literal notranslate"><span class="pre">RandomForestModel.fit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.models.random_forest.RandomForestModel.predict"><code class="docutils literal notranslate"><span class="pre">RandomForestModel.predict()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.viz.heatmap.HeatmapViz"><code class="docutils literal notranslate"><span class="pre">HeatmapViz</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.viz.heatmap.HeatmapViz.vizs"><code class="docutils literal notranslate"><span class="pre">HeatmapViz.vizs()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.viz.histogram.HistogramViz"><code class="docutils literal notranslate"><span class="pre">HistogramViz</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.viz.histogram.HistogramViz.vizs"><code class="docutils literal notranslate"><span class="pre">HistogramViz.vizs()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.viz.line.LineViz"><code class="docutils literal notranslate"><span class="pre">LineViz</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.viz.line.LineViz.vizs"><code class="docutils literal notranslate"><span class="pre">LineViz.vizs()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.viz.vizs.Vizs"><code class="docutils literal notranslate"><span class="pre">Vizs</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.viz.vizs.Vizs.figure"><code class="docutils literal notranslate"><span class="pre">Vizs.figure</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.viz.vizs.Vizs.vizs"><code class="docutils literal notranslate"><span class="pre">Vizs.vizs()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.benchmark.Benchmark"><code class="docutils literal notranslate"><span class="pre">Benchmark</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.benchmark.Benchmark.run"><code class="docutils literal notranslate"><span class="pre">Benchmark.run()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.evaluation.Evaluator"><code class="docutils literal notranslate"><span class="pre">Evaluator</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.evaluation.Evaluator.evaluate_all"><code class="docutils literal notranslate"><span class="pre">Evaluator.evaluate_all()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.figure.Figure"><code class="docutils literal notranslate"><span class="pre">Figure</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.figure.Figure.annotate"><code class="docutils literal notranslate"><span class="pre">Figure.annotate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.figure.Figure.save"><code class="docutils literal notranslate"><span class="pre">Figure.save()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.figure.Figure.show"><code class="docutils literal notranslate"><span class="pre">Figure.show()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../modules.html#trainedml.visualization.Visualizer"><code class="docutils literal notranslate"><span class="pre">Visualizer</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.visualization.Visualizer.get_features"><code class="docutils literal notranslate"><span class="pre">Visualizer.get_features()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.visualization.Visualizer.heatmap"><code class="docutils literal notranslate"><span class="pre">Visualizer.heatmap()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.visualization.Visualizer.histogram"><code class="docutils literal notranslate"><span class="pre">Visualizer.histogram()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../modules.html#trainedml.visualization.Visualizer.line"><code class="docutils literal notranslate"><span class="pre">Visualizer.line()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">trainedml - API détaillée</a></li>
 </ul>
 
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">trainedml</a>
       </nav>
@@ -149,35 +71,128 @@
            <div itemprop="articleBody">
              
   <h1>Code source de trainedml.data.loader</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Module de chargement de données publiques en ligne pour trainedml.</span>
-<span class="sd">Ce module permet de récupérer automatiquement des jeux de données depuis des sources open data ou des URLs documentées.</span>
+<span></span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module de chargement de données publiques pour trainedml.</span>
+
+<span class="sd">Ce module fournit la classe `DataLoader` qui permet de charger facilement des jeux de données open data</span>
+<span class="sd">ou des fichiers CSV distants, avec gestion du cache local et adaptation automatique du format.</span>
+
+<span class="sd">Fonctionnalités principales</span>
+<span class="sd">--------------------------</span>
+<span class="sd">- Datasets intégrés chargés localement via scikit-learn (Iris, Wine) — aucun réseau requis</span>
+<span class="sd">- Chargement de CSV depuis une URL avec cache local pooch (séparateur et hash gérés)</span>
+<span class="sd">- Retourne X (features) et y (cible) prêts à l&#39;emploi pour le ML</span>
+<span class="sd">- Séparation train/test via :meth:`DataLoader.split`</span>
+<span class="sd">- Peut être étendu pour supporter d&#39;autres sources (INSEE, data.gouv.fr, etc.)</span>
+
+<span class="sd">Exemple</span>
+<span class="sd">-------</span>
+<span class="sd">&gt;&gt;&gt; loader = DataLoader()</span>
+<span class="sd">&gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;iris&quot;)</span>
+<span class="sd">&gt;&gt;&gt; print(X.shape, y.shape)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span> <span class="k">as</span> <span class="n">_sklearn_split</span>
+
 
 <div class="viewcode-block" id="DataLoader">
-<a class="viewcode-back" href="../../../modules.html#trainedml.data.loader.DataLoader">[docs]</a>
+<a class="viewcode-back" href="../../../trainedml/loader.html#trainedml.data.loader.DataLoader">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DataLoader</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Classe responsable du chargement et de l&#39;abstraction des jeux de données publics.</span>
-<span class="sd">    Les autres modules ne connaissent pas la source des données.</span>
+
+<span class="sd">    Cette classe isole la logique d&#39;accès aux données : les autres modules n&#39;ont pas à connaître</span>
+<span class="sd">    la provenance (URL, open data, local, etc.).</span>
+
+<span class="sd">    Fonctionnalités principales</span>
+<span class="sd">    --------------------------</span>
+<span class="sd">    - Téléchargement et cache automatique de jeux de données publics (Iris, Wine, etc.)</span>
+<span class="sd">    - Chargement de CSV depuis une URL (avec gestion du séparateur et du hash)</span>
+<span class="sd">    - Retourne X (features) et y (cible) prêts à l&#39;emploi pour le ML</span>
+<span class="sd">    - Peut être étendu pour supporter d&#39;autres sources (INSEE, data.gouv.fr, etc.)</span>
+
+<span class="sd">    Exemples détaillés</span>
+<span class="sd">    -----------------</span>
+<span class="sd">    Chargement du dataset Iris (public) :</span>
+<span class="sd">    &gt;&gt;&gt; loader = DataLoader()</span>
+<span class="sd">    &gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;iris&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; print(X.shape, y.unique())</span>
+
+<span class="sd">    Chargement du dataset Wine (public) :</span>
+<span class="sd">    &gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;wine&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; print(X.columns)</span>
+
+<span class="sd">    Chargement d&#39;un CSV distant avec colonne cible :</span>
+<span class="sd">    &gt;&gt;&gt; url = &quot;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&quot;</span>
+<span class="sd">    &gt;&gt;&gt; X, y = loader.load_dataset(url=url, target=&quot;quality&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; print(X.head())</span>
+
+<span class="sd">    Chargement d&#39;un CSV custom (séparateur automatique) :</span>
+<span class="sd">    &gt;&gt;&gt; X, y = loader.load_dataset(url=&quot;https://.../data.csv&quot;, target=&quot;classe&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; print(X.info())</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - Pour ajouter un nouveau dataset, il suffit d&#39;ajouter un bloc dans load_dataset.</span>
+<span class="sd">    - Le cache local évite de re-télécharger les fichiers à chaque appel.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialise un DataLoader.</span>
+
+<span class="sd">        Prévu pour extension future : configuration, gestion avancée du cache, etc.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; loader = DataLoader()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 
+
 <div class="viewcode-block" id="DataLoader.load_csv_from_url">
-<a class="viewcode-back" href="../../../modules.html#trainedml.data.loader.DataLoader.load_csv_from_url">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">load_csv_from_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">known_hash</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<a class="viewcode-back" href="../../../trainedml/loader.html#trainedml.data.loader.DataLoader.load_csv_from_url">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_csv_from_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">known_hash</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                          <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Télécharge un fichier CSV depuis une URL (avec cache local) et le charge dans un DataFrame pandas.</span>
-<span class="sd">        Args:</span>
-<span class="sd">            url (str): Lien direct vers le fichier CSV.</span>
-<span class="sd">            known_hash (str, optional): Hash du fichier pour vérification (voir doc pooch).</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            pd.DataFrame: Données chargées.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        url : str</span>
+<span class="sd">            Lien direct vers le fichier CSV.</span>
+<span class="sd">        known_hash : str, optional</span>
+<span class="sd">            Hash du fichier pour vérification d&#39;intégrité (voir doc pooch).</span>
+<span class="sd">        sep : str, default=&#39;,&#39;</span>
+<span class="sd">            Séparateur du CSV (&#39;,&#39; ou &#39;;&#39;, etc.).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pd.DataFrame</span>
+<span class="sd">            Données chargées dans un DataFrame pandas.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        RuntimeError</span>
+<span class="sd">            Si le téléchargement ou la lecture échoue.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        Chargement d&#39;un CSV public :</span>
+<span class="sd">        &gt;&gt;&gt; loader = DataLoader()</span>
+<span class="sd">        &gt;&gt;&gt; df = loader.load_csv_from_url(&quot;https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print(df.head())</span>
+
+<span class="sd">        Chargement d&#39;un CSV avec séparateur point-virgule :</span>
+<span class="sd">        &gt;&gt;&gt; df = loader.load_csv_from_url(&quot;https://.../winequality-red.csv&quot;, sep=&#39;;&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; print(df.columns)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">fname</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span>
@@ -191,32 +206,87 @@
 
 
 
+
 <div class="viewcode-block" id="DataLoader.load_dataset">
-<a class="viewcode-back" href="../../../modules.html#trainedml.data.loader.DataLoader.load_dataset">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">load_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<a class="viewcode-back" href="../../../trainedml/loader.html#trainedml.data.loader.DataLoader.load_dataset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">target</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">sep</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Charge un dataset par nom connu ou URL, et retourne X, y.</span>
-<span class="sd">        Args:</span>
-<span class="sd">            name (str): nom du dataset (&quot;iris&quot;, &quot;wine&quot;, etc.)</span>
-<span class="sd">            url (str): URL d&#39;un CSV distant</span>
-<span class="sd">            target (str): nom de la colonne cible (si url)</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            X (pd.DataFrame), y (pd.Series)</span>
+<span class="sd">        Charge un dataset par nom connu ou URL, et retourne X, y séparés.</span>
+
+<span class="sd">        Cette méthode gère automatiquement le téléchargement, le parsing, et la séparation</span>
+<span class="sd">        features/cible pour les datasets connus ou les CSV distants.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str, optional</span>
+<span class="sd">            Nom du dataset connu (&quot;iris&quot;, &quot;wine&quot;, etc.).</span>
+<span class="sd">        url : str, optional</span>
+<span class="sd">            URL d&#39;un CSV distant à charger.</span>
+<span class="sd">        target : str, optional</span>
+<span class="sd">            Nom de la colonne cible (obligatoire si url).</span>
+<span class="sd">        sep : str, optional</span>
+<span class="sd">            Séparateur du CSV (détecté automatiquement pour certains jeux).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        X : pd.DataFrame</span>
+<span class="sd">            Features (variables explicatives).</span>
+<span class="sd">        y : pd.Series</span>
+<span class="sd">            Cible (variable à prédire).</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Si aucun dataset connu ou url+target n&#39;est spécifié.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        Chargement du dataset Iris :</span>
+<span class="sd">        &gt;&gt;&gt; loader = DataLoader()</span>
+<span class="sd">        &gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;iris&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print(X.shape, y.unique())</span>
+
+<span class="sd">        Chargement du dataset Wine :</span>
+<span class="sd">        &gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;wine&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print(X.columns)</span>
+
+<span class="sd">        Chargement d&#39;un CSV distant :</span>
+<span class="sd">        &gt;&gt;&gt; url = &quot;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&quot;</span>
+<span class="sd">        &gt;&gt;&gt; X, y = loader.load_dataset(url=url, target=&quot;quality&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print(X.head())</span>
+
+<span class="sd">        Chargement d&#39;un CSV custom (séparateur automatique) :</span>
+<span class="sd">        &gt;&gt;&gt; X, y = loader.load_dataset(url=&quot;https://.../data.csv&quot;, target=&quot;classe&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print(X.info())</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;iris&quot;</span><span class="p">:</span>
-            <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv&quot;</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_csv_from_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-            <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">])</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span>
+            <span class="c1"># Jeu de données Iris, chargé localement via scikit-learn (aucun réseau requis).</span>
+            <span class="c1"># Colonnes renommées au format seaborn pour rester compatible avec les</span>
+            <span class="c1"># anciennes versions qui téléchargeaient le CSV seaborn.</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_iris</span>
+            <span class="n">bunch</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">bunch</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;sepal length (cm)&quot;</span><span class="p">:</span> <span class="s2">&quot;sepal_length&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;sepal width (cm)&quot;</span><span class="p">:</span> <span class="s2">&quot;sepal_width&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;petal length (cm)&quot;</span><span class="p">:</span> <span class="s2">&quot;petal_length&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;petal width (cm)&quot;</span><span class="p">:</span> <span class="s2">&quot;petal_width&quot;</span><span class="p">,</span>
+            <span class="p">})</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="o">.</span><span class="n">from_codes</span><span class="p">(</span><span class="n">bunch</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">categories</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">bunch</span><span class="o">.</span><span class="n">target_names</span><span class="p">)),</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
         <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;wine&quot;</span><span class="p">:</span>
-            <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data&quot;</span>
-            <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">,</span><span class="s2">&quot;alcohol&quot;</span><span class="p">,</span><span class="s2">&quot;malic_acid&quot;</span><span class="p">,</span><span class="s2">&quot;ash&quot;</span><span class="p">,</span><span class="s2">&quot;alcalinity_of_ash&quot;</span><span class="p">,</span><span class="s2">&quot;magnesium&quot;</span><span class="p">,</span><span class="s2">&quot;total_phenols&quot;</span><span class="p">,</span><span class="s2">&quot;flavanoids&quot;</span><span class="p">,</span><span class="s2">&quot;nonflavanoid_phenols&quot;</span><span class="p">,</span><span class="s2">&quot;proanthocyanins&quot;</span><span class="p">,</span><span class="s2">&quot;color_intensity&quot;</span><span class="p">,</span><span class="s2">&quot;hue&quot;</span><span class="p">,</span><span class="s2">&quot;od280/od315_of_diluted_wines&quot;</span><span class="p">,</span><span class="s2">&quot;proline&quot;</span><span class="p">]</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
-            <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">])</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span>
+            <span class="c1"># Jeu de données Wine, chargé localement via scikit-learn (aucun réseau requis).</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_wine</span>
+            <span class="n">bunch</span> <span class="o">=</span> <span class="n">load_wine</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">bunch</span><span class="o">.</span><span class="n">data</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">bunch</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
         <span class="k">elif</span> <span class="n">url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">target</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Chargement générique d&#39;un CSV distant</span>
             <span class="c1"># Si le CSV est winequality, utiliser sep=&#39;;&#39;</span>
             <span class="n">sep_to_use</span> <span class="o">=</span> <span class="n">sep</span>
             <span class="k">if</span> <span class="n">sep_to_use</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -230,10 +300,42 @@
             <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Spécifiez un nom de dataset connu ou une url+target.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DataLoader.split">
+<a class="viewcode-back" href="../../../trainedml/loader.html#trainedml.data.loader.DataLoader.split">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+              <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sépare les données en ensembles d&#39;entraînement et de test.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : pd.DataFrame</span>
+<span class="sd">            Features.</span>
+<span class="sd">        y : pd.Series</span>
+<span class="sd">            Cible.</span>
+<span class="sd">        test_size : float, default=0.2</span>
+<span class="sd">            Proportion de l&#39;ensemble de test.</span>
+<span class="sd">        random_state : int, default=42</span>
+<span class="sd">            Graine aléatoire pour la reproductibilité.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            (X_train, X_test, y_train, y_test)</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; loader = DataLoader()</span>
+<span class="sd">        &gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;iris&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test = loader.split(X, y, test_size=0.2)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_sklearn_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span></div>
 </div>
 
 
-    <span class="c1"># Ajouter ici d&#39;autres méthodes pour charger d&#39;autres datasets publics (INSEE, data.gouv.fr, etc.)</span>
+    <span class="c1"># TODO: Ajouter ici d&#39;autres méthodes pour charger d&#39;autres datasets publics (INSEE, data.gouv.fr, etc.)</span>
 </pre></div>
 
            </div>
@@ -243,7 +345,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Droits d'auteur 2025, Yéro Diamanka.</p>
+    <p>&#169; Droits d'auteur 2026, Yéro Diamanka.</p>
   </div>
 
   Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un

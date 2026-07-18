@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataLoader &mdash; Documentation trainedml 0.01</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=e42f2b11"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Prétraitement" href="preprocessing.html" />
+    <link rel="prev" title="Trainer (API principale)" href="trainer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            trainedml
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">trainedml - API détaillée</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">DataLoader</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fonctionnalites-principales">Fonctionnalités principales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exemple">Exemple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trainedml.data.loader.DataLoader"><code class="docutils literal notranslate"><span class="pre">DataLoader</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.data.loader.DataLoader.load_csv_from_url"><code class="docutils literal notranslate"><span class="pre">DataLoader.load_csv_from_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.data.loader.DataLoader.load_dataset"><code class="docutils literal notranslate"><span class="pre">DataLoader.load_dataset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trainedml.data.loader.DataLoader.split"><code class="docutils literal notranslate"><span class="pre">DataLoader.split()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks.html">Détection de tâche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmark.html">Benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html">Evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="report.html">Rapport EDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/random_forest.html">Random Forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html">Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analyzer.html">DataAnalyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="histogram.html">Histogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="line.html">Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distribution.html">Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="correlation.html">Correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="missing.html">Missing Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outliers.html">Outliers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="target.html">Target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boxplot.html">Boxplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bivariate.html">Bivariate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normality.html">Normality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">trainedml</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">trainedml - API détaillée</a></li>
+      <li class="breadcrumb-item active">DataLoader</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/trainedml/loader.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-trainedml.data.loader">
+<span id="dataloader"></span><h1>DataLoader<a class="headerlink" href="#module-trainedml.data.loader" title="Lien vers cette rubrique"></a></h1>
+<p>Module de chargement de données publiques pour trainedml.</p>
+<p>Ce module fournit la classe <cite>DataLoader</cite> qui permet de charger facilement des jeux de données open data
+ou des fichiers CSV distants, avec gestion du cache local et adaptation automatique du format.</p>
+<section id="fonctionnalites-principales">
+<h2>Fonctionnalités principales<a class="headerlink" href="#fonctionnalites-principales" title="Lien vers cette rubrique"></a></h2>
+<ul class="simple">
+<li><p>Datasets intégrés chargés localement via scikit-learn (Iris, Wine) — aucun réseau requis</p></li>
+<li><p>Chargement de CSV depuis une URL avec cache local pooch (séparateur et hash gérés)</p></li>
+<li><p>Retourne X (features) et y (cible) prêts à l’emploi pour le ML</p></li>
+<li><p>Séparation train/test via <a class="reference internal" href="#trainedml.data.loader.DataLoader.split" title="trainedml.data.loader.DataLoader.split"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataLoader.split()</span></code></a></p></li>
+<li><p>Peut être étendu pour supporter d’autres sources (INSEE, data.gouv.fr, etc.)</p></li>
+</ul>
+</section>
+<section id="exemple">
+<h2>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique"></a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="trainedml.data.loader.DataLoader">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.data.loader.</span></span><span class="sig-name descname"><span class="pre">DataLoader</span></span><a class="reference internal" href="../_modules/trainedml/data/loader.html#DataLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.data.loader.DataLoader" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe responsable du chargement et de l’abstraction des jeux de données publics.</p>
+<p>Cette classe isole la logique d’accès aux données : les autres modules n’ont pas à connaître
+la provenance (URL, open data, local, etc.).</p>
+<section id="id1">
+<h2>Fonctionnalités principales<a class="headerlink" href="#id1" title="Lien vers cette rubrique"></a></h2>
+<ul class="simple">
+<li><p>Téléchargement et cache automatique de jeux de données publics (Iris, Wine, etc.)</p></li>
+<li><p>Chargement de CSV depuis une URL (avec gestion du séparateur et du hash)</p></li>
+<li><p>Retourne X (features) et y (cible) prêts à l’emploi pour le ML</p></li>
+<li><p>Peut être étendu pour supporter d’autres sources (INSEE, data.gouv.fr, etc.)</p></li>
+</ul>
+</section>
+<section id="exemples-detailles">
+<h2>Exemples détaillés<a class="headerlink" href="#exemples-detailles" title="Lien vers cette rubrique"></a></h2>
+<p>Chargement du dataset Iris (public) :
+&gt;&gt;&gt; loader = DataLoader()
+&gt;&gt;&gt; X, y = loader.load_dataset(name= »iris »)
+&gt;&gt;&gt; print(X.shape, y.unique())</p>
+<p>Chargement du dataset Wine (public) :
+&gt;&gt;&gt; X, y = loader.load_dataset(name= »wine »)
+&gt;&gt;&gt; print(X.columns)</p>
+<p>Chargement d’un CSV distant avec colonne cible :
+&gt;&gt;&gt; url = « <a class="reference external" href="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv">https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv</a> »
+&gt;&gt;&gt; X, y = loader.load_dataset(url=url, target= »quality »)
+&gt;&gt;&gt; print(X.head())</p>
+<p>Chargement d’un CSV custom (séparateur automatique) :
+&gt;&gt;&gt; X, y = loader.load_dataset(url= »<a class="reference external" href="https://.../data.csv">https://…/data.csv</a> », target= »classe »)
+&gt;&gt;&gt; print(X.info())</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Pour ajouter un nouveau dataset, il suffit d’ajouter un bloc dans load_dataset.</p></li>
+<li><p>Le cache local évite de re-télécharger les fichiers à chaque appel.</p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.data.loader.DataLoader.load_csv_from_url">
+<span class="sig-name descname"><span class="pre">load_csv_from_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">known_hash</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/trainedml/data/loader.html#DataLoader.load_csv_from_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.data.loader.DataLoader.load_csv_from_url" title="Lien vers cette définition"></a></dt>
+<dd><p>Télécharge un fichier CSV depuis une URL (avec cache local) et le charge dans un DataFrame pandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> (<em>str</em>) – Lien direct vers le fichier CSV.</p></li>
+<li><p><strong>known_hash</strong> (<em>str</em><em>, </em><em>optional</em>) – Hash du fichier pour vérification d’intégrité (voir doc pooch).</p></li>
+<li><p><strong>sep</strong> (<em>str</em><em>, </em><em>default='</em><em>,</em><em>'</em>) – Séparateur du CSV (“,” ou “;”, etc.).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Données chargées dans un DataFrame pandas.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – Si le téléchargement ou la lecture échoue.</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<p>Chargement d’un CSV public :
+&gt;&gt;&gt; loader = DataLoader()
+&gt;&gt;&gt; df = loader.load_csv_from_url( »<a class="reference external" href="https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv">https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv</a> »)
+&gt;&gt;&gt; print(df.head())</p>
+<p>Chargement d’un CSV avec séparateur point-virgule :
+&gt;&gt;&gt; df = loader.load_csv_from_url( »<a class="reference external" href="https://.../winequality-red.csv">https://…/winequality-red.csv</a> », sep=”;”)
+&gt;&gt;&gt; print(df.columns)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.data.loader.DataLoader.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Series</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trainedml/data/loader.html#DataLoader.load_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.data.loader.DataLoader.load_dataset" title="Lien vers cette définition"></a></dt>
+<dd><p>Charge un dataset par nom connu ou URL, et retourne X, y séparés.</p>
+<p>Cette méthode gère automatiquement le téléchargement, le parsing, et la séparation
+features/cible pour les datasets connus ou les CSV distants.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – Nom du dataset connu (« iris », « wine », etc.).</p></li>
+<li><p><strong>url</strong> (<em>str</em><em>, </em><em>optional</em>) – URL d’un CSV distant à charger.</p></li>
+<li><p><strong>target</strong> (<em>str</em><em>, </em><em>optional</em>) – Nom de la colonne cible (obligatoire si url).</p></li>
+<li><p><strong>sep</strong> (<em>str</em><em>, </em><em>optional</em>) – Séparateur du CSV (détecté automatiquement pour certains jeux).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Features (variables explicatives).</p></li>
+<li><p><strong>y</strong> (<em>pd.Series</em>) – Cible (variable à prédire).</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Lève<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – Si aucun dataset connu ou url+target n’est spécifié.</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<p>Chargement du dataset Iris :
+&gt;&gt;&gt; loader = DataLoader()
+&gt;&gt;&gt; X, y = loader.load_dataset(name= »iris »)
+&gt;&gt;&gt; print(X.shape, y.unique())</p>
+<p>Chargement du dataset Wine :
+&gt;&gt;&gt; X, y = loader.load_dataset(name= »wine »)
+&gt;&gt;&gt; print(X.columns)</p>
+<p>Chargement d’un CSV distant :
+&gt;&gt;&gt; url = « <a class="reference external" href="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv">https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv</a> »
+&gt;&gt;&gt; X, y = loader.load_dataset(url=url, target= »quality »)
+&gt;&gt;&gt; print(X.head())</p>
+<p>Chargement d’un CSV custom (séparateur automatique) :
+&gt;&gt;&gt; X, y = loader.load_dataset(url= »<a class="reference external" href="https://.../data.csv">https://…/data.csv</a> », target= »classe »)
+&gt;&gt;&gt; print(X.info())</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.data.loader.DataLoader.split">
+<span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trainedml/data/loader.html#DataLoader.split"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.data.loader.DataLoader.split" title="Lien vers cette définition"></a></dt>
+<dd><p>Sépare les données en ensembles d’entraînement et de test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>pd.DataFrame</em>) – Features.</p></li>
+<li><p><strong>y</strong> (<em>pd.Series</em>) – Cible.</p></li>
+<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>default=0.2</em>) – Proportion de l’ensemble de test.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>default=42</em>) – Graine aléatoire pour la reproductibilité.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>(X_train, X_test, y_train, y_test)</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="trainer.html" class="btn btn-neutral float-left" title="Trainer (API principale)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="preprocessing.html" class="btn btn-neutral float-right" title="Prétraitement" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2026, Yéro Diamanka.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
