@@ -45,6 +45,37 @@ http://localhost:5173 peut appeler http://localhost:8000/api/... directement
 (le CORS est déjà ouvert) ; en production, builder le frontend et servir le
 dossier de build à la place de `static/`.
 
+## Mettre en ligne
+
+Le principe : la même commande uvicorn, mais sur une machine allumée 24h/24
+avec une URL publique. Deux fichiers à la racine du repo préparent ça.
+
+### Render (recommandé, gratuit)
+
+Le fichier `render.yaml` est détecté automatiquement :
+
+1. Créer un compte sur https://render.com (connexion via GitHub).
+2. New > Blueprint > choisir le repo `diamankayero/trainedml`.
+3. Render lit render.yaml et propose le service `trainedml-api` : valider.
+4. À la fin du build, l'URL publique (https://trainedml-api.onrender.com ou
+   proche) sert la page de démo et l'API.
+
+Chaque push sur main redéploie automatiquement. Plan gratuit : le service
+s'endort après 15 min d'inactivité, la première visite suivante prend ~30 s.
+
+### Docker (tout hébergeur)
+
+Le `Dockerfile` à la racine fonctionne sur Fly.io, Railway, Hugging Face
+Spaces (Space de type Docker), ou un VPS :
+
+```bash
+docker build -t trainedml-api .
+docker run -p 8000:8000 trainedml-api
+```
+
+L'hébergeur fournit la variable d'environnement `PORT` ; l'image l'utilise
+automatiquement (8000 par défaut en local).
+
 ## Tests
 
 `tests/test_api.py` couvre toutes les routes avec le TestClient FastAPI

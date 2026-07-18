@@ -213,6 +213,9 @@ au rapport EDA en une ligne") et le rendre digne de confiance.
   page de démo HTML/JS vanilla servie à la racine, doc interactive sur /docs.
   Le pattern : le frontend (HTML, React...) ne fait que des appels fetch,
   le Python reste côté serveur. Extra d'installation `trainedml[web]`.
+- Déploiement préparé : render.yaml (Render, un clic depuis GitHub),
+  Dockerfile + .dockerignore (tout hébergeur Docker). Reste à faire côté
+  compte : créer le compte Render et valider le Blueprint.
 
 ### Chantiers restants
 

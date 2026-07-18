@@ -11,6 +11,9 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
   /api/compare, /api/models, avec page de démo HTML/JS servie à la racine
   et documentation interactive /docs. Extra d'installation : `trainedml[web]`.
 - Tests de l'API (`tests/test_api.py`), ignorés si fastapi absent.
+- Fichiers de déploiement : `render.yaml` (Render, gratuit), `Dockerfile`
+  et `.dockerignore` (tout hébergeur Docker) ; marche à suivre dans
+  webapp_api/README.md.
 - Un README de documentation dans chaque dossier du projet ;
   DOC_UTILISATION.md restructuré avec journal du projet.
 

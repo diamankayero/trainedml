@@ -1,0 +1,18 @@
+# Exclure du contexte Docker tout ce qui n'est pas utile au serveur
+.git
+.github
+__pycache__
+*.pyc
+venv
+.venv
+doc
+tests
+examples
+public
+dist
+build
+*.egg-info
+.mypy_cache
+.pytest_cache
+*.joblib
+rapport*.html
