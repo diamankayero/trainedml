@@ -232,9 +232,9 @@ python -m trainedml --dataset iris --show
 
 The web demo (FastAPI API + HTML/JS front) lives in its own repository,
 [trainedml-webapp](https://github.com/diamankayero/trainedml-webapp), which
-consumes this package from PyPI like any user would. A React version of the
-same interface, [ModeLmL](https://github.com/diamankayero/ModeLmL), is live
-at [diamankayero.github.io/ModeLmL](https://diamankayero.github.io/ModeLmL/).
+consumes this package from PyPI like any user would. A full Next.js product
+version of the same idea, [ModeLmL](https://github.com/diamankayero/ModeLmL),
+is live at [modelml.vercel.app](https://modelml.vercel.app).
 
 ---
 

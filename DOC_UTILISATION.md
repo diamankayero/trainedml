@@ -220,21 +220,28 @@ au rapport EDA en une ligne") et le rendre digne de confiance.
   depuis PyPI (test d'intégration permanent du package publié). Le repo du
   package ne contient plus que la bibliothèque ; render.yaml, Dockerfile et
   l'extra [web] sont partis avec la webapp.
-- Version React : https://github.com/diamankayero/ModeLmL (nom choisi par
-  l'utilisateur), déployée sur GitHub Pages
-  (https://diamankayero.github.io/ModeLmL/). La page HTML de
-  trainedml-webapp est conservée volontairement : c'est la version la plus
-  lisible pour apprendre ; ModeLmL est la version industrielle. Les deux
+- ModeLmL : https://github.com/diamankayero/ModeLmL (nom choisi par
+  l'utilisateur), **en ligne sur https://modelml.vercel.app**. La page HTML
+  de trainedml-webapp est conservée volontairement : c'est la version la
+  plus lisible pour apprendre ; ModeLmL est la version produit. Les deux
   consomment la même API.
-- ModeLmL v2 : vraie application d'atelier ML avec identité visuelle propre
-  (violet), barre latérale de configuration et quatre onglets : Données
-  (datasets intégrés, CSV par URL ou upload, filtres, describe, export),
-  Comparer (choix des modèles, CV, graphiques en barres), Prédire
-  (formulaire par variable pré-rempli avec les moyennes), Analyse (rapport
-  EDA de trainedml intégré). L'API a été enrichie en conséquence
-  (/api/dataset, /api/report, données uploadées, sous-ensemble de modèles).
-  Vérification par banc de test visuel (scripts/visual-check.mjs, Edge
-  headless piloté).
+- Migration Next.js + Tailwind : `/` = vitrine style Notion (clair,
+  éditorial), `/app` = atelier repensé en produit avec navigation latérale
+  à cinq écrans (Aperçu = dashboard du dataset, Données, Analyse native
+  dessinée depuis /api/analysis avec heatmap de corrélation et histogrammes
+  SVG maison, Comparaison, Prédiction). Le rapport HTML de trainedml est un
+  téléchargement, pas un écran ; les tests de normalité y sont relégués
+  (peu utiles en ML, retirés de l'Aperçu et de l'Analyse). L'écran
+  Prédiction affiche l'importance des variables du modèle entraîné.
+  L'API a été enrichie en conséquence (/api/dataset, /api/analysis,
+  /api/report, importances dans /api/train, données uploadées).
+- Hero de la vitrine : un vrai GIF de l'atelier en action (pas un mockup),
+  capturé par un banc de test qui pilote un navigateur réel à travers les
+  cinq écrans, frappe clavier comprise. Pas de ffmpeg disponible sur la
+  machine : le pipeline est en JS pur (puppeteer pour les frames, sharp
+  pour le redimensionnement, gifenc pour l'encodage GIF).
+  Vérification par bancs de test visuels (scripts/visual-check.mjs et
+  scripts/capture-hero-gif.mjs, Edge headless piloté).
 
 ### Chantiers restants
 
