@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 244 64" role="img" aria-label="trainedml">
+  <defs>
+    <linearGradient id="tmlb-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8CD612"/>
+      <stop offset="0.5" stop-color="#76B900"/>
+      <stop offset="1" stop-color="#578F00"/>
+    </linearGradient>
+    <linearGradient id="tmlb-sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Icone -->
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#tmlb-bg)"/>
+  <rect x="2" y="2" width="60" height="30" rx="15" fill="url(#tmlb-sheen)"/>
+  <g fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(-1 0)">
+    <path d="M13 20 H29 M21 20 V45"/>
+    <path d="M35 45 V33 Q35 27 39.5 27 Q44 27 44 33 V45 M44 33 Q44 27 48.5 27 Q53 27 53 33 V45"/>
+  </g>
+  <!-- Mot-symbole "trainedml" en monoligne (aucune police requise) -->
+  <g fill="none" stroke="#76B900" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" transform="translate(84 0)">
+    <!-- t -->
+    <path d="M3 14 V36 Q3 42 9 42 M0 22 H9"/>
+    <!-- r -->
+    <path d="M16.5 22 V42 M16.5 29 Q16.5 22 23.5 22"/>
+    <!-- a -->
+    <circle cx="38.5" cy="32" r="5.5"/>
+    <path d="M44 22 V42"/>
+    <!-- i -->
+    <path d="M53 22 V42"/>
+    <circle cx="53" cy="14.5" r="2.4" fill="#76B900" stroke="none"/>
+    <!-- n -->
+    <path d="M61 22 V42 M61 28 Q61 22 66.5 22 Q72 22 72 28 V42"/>
+    <!-- e -->
+    <path d="M80.5 31 H91.5 M91.5 31 Q91.5 22 86 22 Q80.5 22 80.5 32 Q80.5 42 86 42 Q89.5 42 91.1 39"/>
+    <!-- d -->
+    <circle cx="105" cy="32" r="5.5"/>
+    <path d="M110.5 12 V42"/>
+    <!-- m -->
+    <path d="M118.5 42 V22 M118.5 28 Q118.5 22 123.5 22 Q128.5 22 128.5 28 V42 M128.5 28 Q128.5 22 133.5 22 Q138.5 22 138.5 28 V42"/>
+    <!-- l -->
+    <path d="M146.5 12 V36 Q146.5 42 152.5 42"/>
+  </g>
+</svg>

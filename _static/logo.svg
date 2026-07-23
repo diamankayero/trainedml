@@ -1,14 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="trainedml">
   <defs>
     <linearGradient id="tml-bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#6366f1"/>
-      <stop offset="1" stop-color="#8b5cf6"/>
+      <stop offset="0" stop-color="#8CD612"/>
+      <stop offset="0.5" stop-color="#76B900"/>
+      <stop offset="1" stop-color="#578F00"/>
+    </linearGradient>
+    <linearGradient id="tml-sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
   </defs>
-  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#tml-bg)"/>
-  <!-- Monogramme "Tm" dessine en traits (aucune dependance a une police) -->
-  <g fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" transform="translate(-1.5 0)">
-    <path d="M14 21 H30 M22 21 V46"/>
-    <path d="M36 46 V34 Q36 28 40.5 28 Q45 28 45 34 V46 M45 34 Q45 28 49.5 28 Q54 28 54 34 V46"/>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#tml-bg)"/>
+  <rect x="2" y="2" width="60" height="30" rx="15" fill="url(#tml-sheen)"/>
+  <!-- Monogramme "Tm" dessine en traits geometriques (aucune police requise) -->
+  <g fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(-1 0)">
+    <path d="M13 20 H29 M21 20 V45"/>
+    <path d="M35 45 V33 Q35 27 39.5 27 Q44 27 44 33 V45 M44 33 Q44 27 48.5 27 Q53 27 53 33 V45"/>
   </g>
 </svg>
