@@ -57,13 +57,15 @@ class BaseModel(ABC):
 
     Examples
     --------
-    # Minimal custom model
+    Minimal custom model:
+
     >>> class DummyModel(BaseModel):
     ...     def fit(self, X, y): pass
     ...     def predict(self, X): return [0]*len(X)
     ...     def evaluate(self, X, y): return 0.0
 
-    # Using a scikit-learn estimator
+    Using a scikit-learn estimator:
+
     >>> from sklearn.linear_model import LogisticRegression
     >>> class MyLogistic(BaseModel):
     ...     def __init__(self):
@@ -75,7 +77,8 @@ class BaseModel(ABC):
     ...         from sklearn.metrics import accuracy_score
     ...         return accuracy_score(y, self.model.predict(X))
 
-    # Usage
+    Usage:
+
     >>> model = MyLogistic()
     >>> model.fit(X_train, y_train)
     >>> y_pred = model.predict(X_test)

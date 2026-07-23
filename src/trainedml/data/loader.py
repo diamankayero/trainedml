@@ -48,20 +48,24 @@ class DataLoader:
     Detailed examples
     -----------------
     Loading the Iris dataset (public):
+
     >>> loader = DataLoader()
     >>> X, y = loader.load_dataset(name="iris")
     >>> print(X.shape, y.unique())
 
     Loading the Wine dataset (public):
+
     >>> X, y = loader.load_dataset(name="wine")
     >>> print(X.columns)
 
     Loading a remote CSV with a target column:
+
     >>> url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
     >>> X, y = loader.load_dataset(url=url, target="quality")
     >>> print(X.head())
 
     Loading a custom CSV (automatic separator):
+
     >>> X, y = loader.load_dataset(url="https://.../data.csv", target="class")
     >>> print(X.info())
 
@@ -111,11 +115,13 @@ class DataLoader:
         Examples
         --------
         Loading a public CSV:
+
         >>> loader = DataLoader()
         >>> df = loader.load_csv_from_url("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
         >>> print(df.head())
 
         Loading a CSV with a semicolon separator:
+
         >>> df = loader.load_csv_from_url("https://.../winequality-red.csv", sep=';')
         >>> print(df.columns)
         """
@@ -166,20 +172,24 @@ class DataLoader:
         Examples
         --------
         Loading the Iris dataset:
+
         >>> loader = DataLoader()
         >>> X, y = loader.load_dataset(name="iris")
         >>> print(X.shape, y.unique())
 
         Loading the Wine dataset:
+
         >>> X, y = loader.load_dataset(name="wine")
         >>> print(X.columns)
 
         Loading a remote CSV:
+
         >>> url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
         >>> X, y = loader.load_dataset(url=url, target="quality")
         >>> print(X.head())
 
         Loading a custom CSV (automatic separator):
+
         >>> X, y = loader.load_dataset(url="https://.../data.csv", target="class")
         >>> print(X.info())
         """

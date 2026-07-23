@@ -86,6 +86,7 @@ class Figure:
     Examples
     --------
     Basic usage with matplotlib:
+
     >>> import matplotlib.pyplot as plt
     >>> from trainedml.figure import Figure
     >>> fig, ax = plt.subplots()
@@ -96,6 +97,7 @@ class Figure:
     >>> f.save('plot.png')
 
     Basic usage with plotly:
+
     >>> import plotly.graph_objects as go
     >>> fig = go.Figure()
     >>> fig.add_scatter(x=[1,2,3], y=[4,5,6])

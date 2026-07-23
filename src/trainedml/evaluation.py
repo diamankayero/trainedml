@@ -8,24 +8,24 @@ Mathematical Formulation
 ------------------------
 **Classification:**
 
-Let $y_i$ be the true label and $\hat{y}_i$ the predicted label for sample $i$.
+Let :math:`y_i` be the true label and :math:`\hat{y}_i` the predicted label for sample :math:`i`.
 
 - **Accuracy**:
 
   .. math::
       \mathrm{accuracy} = \frac{1}{n} \sum_{i=1}^n \mathbb{I}(y_i = \hat{y}_i)
 
-- **Precision** (for class $k$):
+- **Precision** (for class :math:`k`):
 
   .. math::
       \mathrm{precision}_k = \frac{TP_k}{TP_k + FP_k}
 
-- **Recall** (for class $k$):
+- **Recall** (for class :math:`k`):
 
   .. math::
       \mathrm{recall}_k = \frac{TP_k}{TP_k + FN_k}
 
-- **F1-score** (for class $k$):
+- **F1-score** (for class :math:`k`):
 
   .. math::
       \mathrm{F1}_k = 2 \cdot \frac{\mathrm{precision}_k \cdot \mathrm{recall}_k}{\mathrm{precision}_k + \mathrm{recall}_k}

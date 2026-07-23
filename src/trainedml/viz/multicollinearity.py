@@ -6,7 +6,7 @@ to assess multicollinearity among features in a pandas DataFrame.
 
 Mathematical context
 --------------------
-- VIF: $VIF_j = \frac{1}{1 - R_j^2}$
+- VIF: :math:`VIF_j = \frac{1}{1 - R_j^2}`
 
 Examples
 --------

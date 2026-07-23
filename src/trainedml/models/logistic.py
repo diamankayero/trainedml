@@ -6,12 +6,12 @@ It exposes a consistent API (fit, predict, evaluate) as required by the trainedm
 
 Mathematical Formulation
 ------------------------
-The logistic regression model estimates the probability $P(y=1|\mathbf{x})$ as:
+The logistic regression model estimates the probability :math:`P(y=1|\mathbf{x})` as:
 
 .. math::
     P(y=1|\mathbf{x}) = \sigma(\mathbf{w}^T \mathbf{x} + b) = \frac{1}{1 + e^{-\mathbf{w}^T \mathbf{x} - b}}
 
-where $\sigma$ is the sigmoid function, $\mathbf{w}$ the weights, $b$ the bias.
+where :math:`\sigma` is the sigmoid function, :math:`\mathbf{w}` the weights, :math:`b` the bias.
 
 Examples
 --------

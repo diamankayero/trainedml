@@ -164,7 +164,7 @@ class DataAnalyzer:
         Notes
         -----
         Pearson correlation:
-        $r_{xy} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}$
+        :math:`r_{xy} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}`
 
         Examples
         --------
@@ -224,9 +224,9 @@ class DataAnalyzer:
         Notes
         -----
         IQR method:
-        $Q_1 = 25\%$ percentile, $Q_3 = 75\%$ percentile
-        $IQR = Q_3 - Q_1$
-        Outlier if $x < Q_1 - k \cdot IQR$ or $x > Q_3 + k \cdot IQR$
+        :math:`Q_1 = 25\%` percentile, :math:`Q_3 = 75\%` percentile
+        :math:`IQR = Q_3 - Q_1`
+        Outlier if :math:`x < Q_1 - k \cdot IQR` or :math:`x > Q_3 + k \cdot IQR`
 
         Examples
         --------

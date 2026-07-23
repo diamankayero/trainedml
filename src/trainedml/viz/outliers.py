@@ -6,8 +6,8 @@ Outlier detection using the IQR and Z-score methods.
 
 Mathematical background
 ------------------------
-- IQR: $IQR = Q_3 - Q_1$
-- Z-score: $z = \frac{x - \mu}{\sigma}$
+- IQR: :math:`IQR = Q_3 - Q_1`
+- Z-score: :math:`z = \frac{x - \mu}{\sigma}`
 
 Examples
 --------
@@ -70,13 +70,13 @@ def outlier_summary(data: pd.DataFrame, method: str = 'iqr',
     Notes
     -----
     IQR method:
-    $Q_1 = 25\%$ percentile, $Q_3 = 75\%$ percentile
-    $IQR = Q_3 - Q_1$
-    Outlier if $x < Q_1 - k \cdot IQR$ or $x > Q_3 + k \cdot IQR$
+    :math:`Q_1 = 25\%` percentile, :math:`Q_3 = 75\%` percentile
+    :math:`IQR = Q_3 - Q_1`
+    Outlier if :math:`x < Q_1 - k \cdot IQR` or :math:`x > Q_3 + k \cdot IQR`
 
     Z-score method:
-    $z = \frac{x - \mu}{\sigma}$
-    Outlier if $|z| >$ threshold
+    :math:`z = \frac{x - \mu}{\sigma}`
+    Outlier if :math:`|z| >` threshold
 
     Examples
     --------

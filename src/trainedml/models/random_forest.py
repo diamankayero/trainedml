@@ -6,8 +6,8 @@ It exposes a consistent API (fit, predict, evaluate) as required by the trainedm
 
 Mathematical Formulation
 ------------------------
-A random forest is an ensemble of $M$ decision trees $\{T_1, ..., T_M\}$, each trained on a bootstrap sample of the data.
-The prediction for a new sample $\mathbf{x}$ is given by majority vote:
+A random forest is an ensemble of :math:`M` decision trees :math:`\{T_1, ..., T_M\}`, each trained on a bootstrap sample of the data.
+The prediction for a new sample :math:`\mathbf{x}` is given by majority vote:
 
 .. math::
     \hat{y} = \mathrm{mode}\left( T_1(\mathbf{x}), ..., T_M(\mathbf{x}) \right)

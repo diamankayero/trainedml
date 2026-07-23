@@ -34,6 +34,10 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
 - Docstrings LaTeX non-raw (`evaluation.py`, `models/logistic.py`,
   `viz/multicollinearity.py`) : `\f` et `\b` y étaient interprétés comme
   séquences d'échappement Python et corrompaient le rendu Sphinx.
+- Formules `$...$` remplacées par le rôle reST `:math:` (la syntaxe dollar
+  n'est pas du reST et s'affichait littéralement dans la doc), et lignes
+  vides ajoutées entre les intros et les blocs `>>>` pour que Sphinx les
+  rende en blocs doctest colorisés au lieu de texte courant.
 
 ## [0.2.0] - 2026-07-18
 

@@ -6,10 +6,10 @@ of several models on the same dataset, with optional parallelization and progres
 
 Mathematical Formulation
 ------------------------
-Let $\mathcal{M} = \{M_1, ..., M_K\}$ be a set of models. For each model $M_k$:
-- Fit time: $T_{fit}^{(k)}$
-- Predict time: $T_{pred}^{(k)}$
-- Score: $S^{(k)}$ (e.g., accuracy)
+Let :math:`\mathcal{M} = \{M_1, ..., M_K\}` be a set of models. For each model :math:`M_k`:
+- Fit time: :math:`T_{fit}^{(k)}`
+- Predict time: :math:`T_{pred}^{(k)}`
+- Score: :math:`S^{(k)}` (e.g., accuracy)
 
 The benchmark returns a dictionary:
 
