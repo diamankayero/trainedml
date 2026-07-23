@@ -9,7 +9,13 @@
 project = 'trainedml'
 copyright = '2026, Yéro Diamanka'
 author = 'Yéro Diamanka'
-release = '0.01'
+
+# La version affichée est lue depuis pyproject.toml : une seule source de vérité.
+import tomllib
+from pathlib import Path
+
+with open(Path(__file__).resolve().parents[2] / 'pyproject.toml', 'rb') as f:
+    release = tomllib.load(f)['project']['version']
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -30,7 +36,8 @@ language = 'fr'
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'shibuya'
+html_title = f'trainedml {release}'
 html_static_path = ['_static']
 
 # -- Extension configuration ------------------------------------------------
@@ -38,4 +45,9 @@ extensions += [
     'sphinx.ext.viewcode',
     'sphinx.ext.autosectionlabel',
 ]
+
+# Les titres de section des docstrings se répètent d'un module à l'autre
+# (Examples, Mathematical context...) : on préfixe les labels par le document
+# pour éviter les collisions.
+autosectionlabel_prefix_document = True
 

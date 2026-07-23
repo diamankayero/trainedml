@@ -1,4 +1,4 @@
-"""
+r"""
 Multicollinearity analysis utilities for trainedml.
 
 This module provides functions for computing the Variance Inflation Factor (VIF)

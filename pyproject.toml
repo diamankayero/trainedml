@@ -33,7 +33,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest", "ruff", "mypy"]
-doc = ["sphinx", "sphinx_rtd_theme"]
+doc = ["sphinx", "shibuya"]
 
 [project.scripts]
 trainedml = "trainedml.cli:main"

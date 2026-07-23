@@ -1,4 +1,4 @@
-"""
+r"""
 Evaluation utilities for classification and regression models in trainedml.
 
 This module provides standard metrics for evaluating classification models (accuracy,

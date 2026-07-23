@@ -1,4 +1,4 @@
-"""
+r"""
 Logistic Regression classifier for trainedml.
 
 This module implements a supervised classification model using logistic regression (scikit-learn).

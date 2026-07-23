@@ -1,1 +1,0 @@
-Les figures pédagogiques (schémas kNN, sigmoïde, Random Forest) sont générées automatiquement par matplotlib. Vous pouvez les remplacer par vos propres images si besoin.
