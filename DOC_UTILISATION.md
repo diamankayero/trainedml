@@ -13,7 +13,7 @@ le README du dossier concerné.
 | [src/trainedml/models/](src/trainedml/models/README.md) | Modèles ML, registres, comment ajouter un modèle |
 | [src/trainedml/viz/](src/trainedml/viz/README.md) | Visualisations spécialisées et compatibilité |
 | [tests/](tests/README.md) | Organisation des tests et règles (pas de réseau, non-régression) |
-| [examples/](examples/README.md) | Scripts et notebooks d'exemples |
+| [examples/](examples/README.md) | Galerie d'exemples (source des pages Sphinx-Gallery de la doc) |
 | [doc/](doc/README.md) | Documentation Sphinx : build local et publication |
 | [public/](public/README.md) | Images du README |
 | [.github/workflows/](.github/workflows/README.md) | CI, publication PyPI, procédure de release |
@@ -290,16 +290,19 @@ au rapport EDA en une ligne") et le rendre digne de confiance.
   s'exécutent avec le dossier source de l'exemple comme répertoire courant,
   polluant `examples/` à chaque build tant qu'ils n'écrivent pas dans un
   dossier temporaire (`tempfile.mkdtemp()`).
+- Les scripts historiques à plat de `examples/` (`quickstart.py`,
+  `compare_models.py`, `exemple_regression.py`, `rapport_eda.py`) et le
+  dossier `examples/notebooks/` ont été retirés : ils recoupaient
+  entièrement la nouvelle galerie, qui les remplace avec un meilleur
+  résultat (sorties et graphiques réels, notebook généré automatiquement
+  pour chaque exemple). `examples/` n'a plus qu'une seule source de
+  vérité : `01_bases/`, `02_donnees_et_modeles/`, `03_production/`.
 
 ### Chantiers restants
 
 - Consolider les couches de visualisation (`figure.py`, `visualization.py`,
   `analyzer.py`, `viz/`) autour de la façade `Visualizer`.
 - Ajouter d'autres datasets intégrés et d'autres visualisations (ROC, scatter).
-- Les scripts historiques à plat de `examples/` (`quickstart.py`,
-  `compare_models.py`, `exemple_regression.py`, `rapport_eda.py`)
-  recoupent maintenant largement la nouvelle galerie ; à terme, les
-  fusionner ou les retirer pour n'avoir qu'une seule source d'exemples.
 
 ---
 

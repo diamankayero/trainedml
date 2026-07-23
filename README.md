@@ -286,7 +286,7 @@ CI runs the suite on Python 3.9 to 3.13 (Ubuntu) and Windows, plus ruff and mypy
 - [Example gallery](https://diamankayero.github.io/trainedml/auto_examples/01_bases/index.html): eleven runnable, narrated examples from first model to production, with real output and plots
 - [Usage guide and project journal](DOC_UTILISATION.md)
 - [Changelog](CHANGELOG.md)
-- [Examples and notebooks](examples/README.md)
+- [Example gallery source](examples/README.md)
 - Every folder has its own README (architecture, conventions, how to contribute)
 
 ---

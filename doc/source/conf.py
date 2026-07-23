@@ -63,9 +63,8 @@ autosectionlabel_prefix_document = True
 
 # Galerie d'exemples exécutables (façon scikit-learn/matplotlib) : les
 # scripts source vivent dans des sous-dossiers de examples/ à la racine du
-# dépôt (les scripts historiques à plat, quickstart.py etc., restent de
-# simples exemples à copier-coller et ne sont pas scannés ici) ; la galerie
-# générée (HTML, miniatures, notebooks) vit dans doc/source/auto_examples/.
+# dépôt ; la galerie générée (HTML, miniatures, notebooks) vit dans
+# doc/source/auto_examples/.
 sphinx_gallery_conf = {
     'examples_dirs': [
         '../../examples/01_bases',

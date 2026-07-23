@@ -1,38 +1,27 @@
-# examples : exemples exécutables
+# examples : galerie d'exemples
 
-Tous les scripts se lancent depuis la racine du projet et n'ont besoin que du
-package installé (`pip install trainedml` ou `pip install -e .`).
+Onze scripts exécutables et narrés, organisés en trois sections, du premier
+modèle à la mise en production. C'est la source de la **galerie d'exemples**
+de la documentation (https://diamankayero.github.io/trainedml/), générée par
+[Sphinx-Gallery](https://sphinx-gallery.github.io/) : chaque script `plot_*.py`
+y est réellement exécuté au moment du build (sorties et graphiques inclus),
+puis proposé au téléchargement en `.py` et en notebook `.ipynb` généré
+automatiquement.
 
-## Scripts
-
-| Script | Ce qu'il montre |
-|---|---|
-| `quickstart.py` | Workflow complet du Trainer : fit, evaluate, variation de seed, predict, save/load |
-| `compare_models.py` | `compare()` sur Wine, puis avec des modèles personnalisés (dont un SVC scikit-learn) |
-| `exemple_regression.py` | Régression avec données en mémoire (X, y), métriques adaptées, comparatif des régresseurs en CV |
-| `rapport_eda.py` | Génération d'un rapport EDA HTML auto-contenu sur Iris |
+Ils se lancent aussi directement depuis la racine du projet, sans rien
+d'autre que le package installé (`pip install trainedml` ou `pip install -e .`) :
 
 ```bash
-python examples/quickstart.py
+python examples/01_bases/plot_premiers_pas.py
 ```
 
-## Notebooks (`notebooks/`)
+## Sections
 
-| Notebook | Contenu |
+| Dossier | Contenu |
 |---|---|
-| `01_quickstart.ipynb` | Prise en main pas à pas : Trainer, seeds, estimateurs sklearn, persistance, données en mémoire |
-| `02_comparaison_et_eda.ipynb` | `compare()` (classification, régression, modèles personnalisés) et rapport EDA |
+| [`01_bases/`](01_bases/) | Premier modèle, découpage train/test |
+| [`02_donnees_et_modeles/`](02_donnees_et_modeles/) | Comparer des modèles, explorer un dataset, données distantes, régression, données en mémoire, hyperparamètres |
+| [`03_production/`](03_production/) | Rigueur et reproductibilité, sauvegarde/déploiement, projet complet de bout en bout |
 
-Les notebooks sont validés en CI locale en exécutant toutes leurs cellules de
-code ; si vous les modifiez, vérifiez qu'ils s'exécutent de bout en bout.
-
-## Galerie d'exemples (`01_bases/`, `02_donnees_et_modeles/`, `03_production/`)
-
-Ces trois sous-dossiers sont la source de la **galerie d'exemples** de la
-documentation (https://diamankayero.github.io/trainedml/), générée par
-[Sphinx-Gallery](https://sphinx-gallery.github.io/) : chaque script
-`plot_*.py` y est réellement exécuté au moment du build (sorties et graphiques
-inclus), puis proposé au téléchargement en `.py` et en notebook `.ipynb`.
-Onze scripts couvrent un projet ML complet, du premier modèle à la mise en
-production : voir le sommaire dans chaque `README.txt`. Ils se lancent aussi
-directement comme les scripts ci-dessus (`python examples/01_bases/plot_premiers_pas.py`).
+Le sommaire détaillé de chaque section est dans son `README.txt` (repris tel
+quel comme en-tête de la sous-galerie dans la doc).

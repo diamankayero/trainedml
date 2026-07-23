@@ -42,6 +42,12 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
   redondantes retirées des docstrings (elles dupliquaient les entrées
   générées par autodoc).
 
+### Retiré
+- Les scripts historiques à plat `examples/quickstart.py`,
+  `compare_models.py`, `exemple_regression.py`, `rapport_eda.py`, ainsi que
+  `examples/notebooks/`, remplacés par la galerie d'exemples ci-dessus
+  qu'ils recoupaient entièrement.
+
 ### Corrigé
 - `Visualizer.multicollinearity()` ne transmet plus de `**kwargs` vers
   `DataAnalyzer.multicollinearity()`, qui n'en accepte pas.
