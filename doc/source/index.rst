@@ -61,6 +61,10 @@ La même chose en ligne de commande :
    trainedml --dataset iris --model random_forest --show
    trainedml --dataset wine --benchmark --cv 5
 
+Voir aussi la :doc:`galerie d'exemples <auto_examples/01_bases/index>` : des scripts
+complets, exécutables et téléchargeables, pour chaque étape d'un projet
+(premiers pas, comparaison de modèles, régression, production...).
+
 Fonctionnalités
 ---------------
 
@@ -107,6 +111,15 @@ Contribuer et licence
 Les contributions sont les bienvenues : issues et pull requests sur
 `GitHub <https://github.com/diamankayero/trainedml>`_. Le projet est
 distribué sous licence MIT.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Exemples
+   :hidden:
+
+   auto_examples/01_bases/index
+   auto_examples/02_donnees_et_modeles/index
+   auto_examples/03_production/index
 
 .. toctree::
    :maxdepth: 1

@@ -260,7 +260,7 @@ trainedml/
 │   ├── models/            # ML models (KNN, LR, RF, regressors...)
 │   └── viz/               # Advanced visualizations
 ├── doc/                   # Sphinx documentation
-├── examples/              # Runnable examples + notebooks (quickstart, compare, EDA report)
+├── examples/              # Runnable examples, notebooks, and the doc's example gallery source
 ├── tests/                 # Unit tests
 └── CHANGELOG.md
 
@@ -283,6 +283,7 @@ CI runs the suite on Python 3.9 to 3.13 (Ubuntu) and Windows, plus ruff and mypy
 ## Documentation
 
 - [Online docs (GitHub Pages)](https://diamankayero.github.io/trainedml/)
+- [Example gallery](https://diamankayero.github.io/trainedml/auto_examples/01_bases/index.html): eleven runnable, narrated examples from first model to production, with real output and plots
 - [Usage guide and project journal](DOC_UTILISATION.md)
 - [Changelog](CHANGELOG.md)
 - [Examples and notebooks](examples/README.md)

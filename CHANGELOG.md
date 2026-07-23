@@ -9,6 +9,11 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
 ### Ajouté
 - Un README de documentation dans chaque dossier du projet ;
   DOC_UTILISATION.md restructuré avec journal du projet.
+- Galerie d'exemples dans la doc (Sphinx-Gallery, façon
+  scikit-learn/matplotlib) : onze scripts `examples/*/plot_*.py`, organisés
+  en trois sections (Bases, Données et modèles, Production), réellement
+  exécutés au moment du build avec sorties et graphiques inclus, et
+  téléchargeables en `.py` ou en notebook `.ipynb`.
 
 ### Modifié
 - La démo web (API FastAPI + page HTML/JS, déployée sur

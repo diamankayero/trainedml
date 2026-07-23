@@ -263,11 +263,43 @@ au rapport EDA en une ligne") et le rendre digne de confiance.
   vers `DataAnalyzer.multicollinearity()` qui n'en accepte pas (échouerait à
   l'exécution si un appelant passait un argument).
 
+### Phase 6 : identité visuelle et galerie d'exemples (2026-07-23)
+
+- Doc Sphinx passée au thème Shibuya (accent vert `grass`, logo et
+  mot-symbole SVG dessinés en tracés géométriques, aucune police requise),
+  page d'accueil refondue (installation PyPI, badges réels, écosystème),
+  bannière reprise dans le README GitHub et sur PyPI. Détail complet dans
+  le CHANGELOG (plusieurs bugs de rendu Sphinx corrigés au passage :
+  formules `$...$` invalides en reST, docstrings LaTeX non-raw, blocs
+  `>>>` fondus dans le texte faute de ligne vide).
+- Galerie d'exemples façon scikit-learn/matplotlib, via
+  [Sphinx-Gallery](https://sphinx-gallery.github.io/) : onze scripts dans
+  `examples/{01_bases,02_donnees_et_modeles,03_production}/plot_*.py`,
+  réellement exécutés au moment du build (code, sorties, graphiques
+  inclus), téléchargeables en `.py`/`.ipynb`, organisés en trois
+  sous-galeries liées depuis la sidebar. Contenu repris et adapté de la
+  série pédagogique du dépôt `trainedml-tp` (mêmes 11 étapes, du premier
+  modèle au projet complet), reformaté au format cellules Sphinx-Gallery
+  (`# %%`) et enrichi de vrais graphiques (`viz.heatmap()`,
+  `viz.histogram()`) sur l'exemple d'exploration.
+- Deux pièges rencontrés : le motif par défaut de Sphinx-Gallery
+  (`'/plot_'`) ne matche jamais sur les chemins Windows à antislashs, donc
+  aucun exemple n'était réellement exécuté (juste affiché statiquement)
+  tant que le motif n'a pas été rendu indépendant du séparateur ; et les
+  scripts qui sauvegardent un fichier (`Trainer.save()`, export CSV)
+  s'exécutent avec le dossier source de l'exemple comme répertoire courant,
+  polluant `examples/` à chaque build tant qu'ils n'écrivent pas dans un
+  dossier temporaire (`tempfile.mkdtemp()`).
+
 ### Chantiers restants
 
 - Consolider les couches de visualisation (`figure.py`, `visualization.py`,
   `analyzer.py`, `viz/`) autour de la façade `Visualizer`.
 - Ajouter d'autres datasets intégrés et d'autres visualisations (ROC, scatter).
+- Les scripts historiques à plat de `examples/` (`quickstart.py`,
+  `compare_models.py`, `exemple_regression.py`, `rapport_eda.py`)
+  recoupent maintenant largement la nouvelle galerie ; à terme, les
+  fusionner ou les retirer pour n'avoir qu'une seule source d'exemples.
 
 ---
 
