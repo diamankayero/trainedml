@@ -21,6 +21,8 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
 - `figure.py`, `analyzer.py`, `visualization.py` et tout `trainedml.viz.*`
   sont désormais annotés en type hints ; l'exclusion mypy correspondante a
   été retirée de `pyproject.toml`.
+- Doc Sphinx : thème Shibuya (remplace sphinx_rtd_theme), version affichée
+  lue depuis pyproject.toml, labels de section préfixés par document.
 
 ### Corrigé
 - `Visualizer.multicollinearity()` ne transmet plus de `**kwargs` vers
@@ -29,6 +31,9 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
   annotations` était placé avant le docstring de module, ce qui le
   désactivait silencieusement.
 - `viz/normality.py` : docstring de module dupliqué et mort supprimé.
+- Docstrings LaTeX non-raw (`evaluation.py`, `models/logistic.py`,
+  `viz/multicollinearity.py`) : `\f` et `\b` y étaient interprétés comme
+  séquences d'échappement Python et corrompaient le rendu Sphinx.
 
 ## [0.2.0] - 2026-07-18
 
