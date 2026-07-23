@@ -128,54 +128,54 @@ in trainedml. It defines the interface and common attributes for visualizations.
 </div>
 <dl class="py class">
 <dt class="sig sig-object py" id="trainedml.viz.vizs.Vizs">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.vizs.</span></span><span class="sig-name descname"><span class="pre">Vizs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/vizs.html#Vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.vizs.Vizs" title="Lien vers cette définition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.vizs.</span></span><span class="sig-name descname"><span class="pre">Vizs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/vizs.html#Vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.vizs.Vizs" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Classe de base pour toutes les visualisations.
-Toutes les visualisations doivent hériter de cette classe et surcharger la méthode vizs().</p>
+<p>Base class for every visualization.
+All visualizations must inherit from this class and override the vizs() method.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="trainedml.viz.vizs.Vizs._data">
 <span class="sig-name descname"><span class="pre">_data</span></span><a class="headerlink" href="#trainedml.viz.vizs.Vizs._data" title="Lien vers cette définition"></a></dt>
-<dd><p>DataFrame pandas contenant les données</p>
+<dd><p>pandas DataFrame containing the data</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="trainedml.viz.vizs.Vizs._figure">
 <span class="sig-name descname"><span class="pre">_figure</span></span><a class="headerlink" href="#trainedml.viz.vizs.Vizs._figure" title="Lien vers cette définition"></a></dt>
-<dd><p>Figure matplotlib générée</p>
+<dd><p>generated matplotlib figure</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="trainedml.viz.vizs.Vizs._save_path">
 <span class="sig-name descname"><span class="pre">_save_path</span></span><a class="headerlink" href="#trainedml.viz.vizs.Vizs._save_path" title="Lien vers cette définition"></a></dt>
-<dd><p>Chemin optionnel pour sauvegarder automatiquement la figure</p>
+<dd><p>optional path to automatically save the figure</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="trainedml.viz.vizs.Vizs.figure">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">figure</span></span><a class="headerlink" href="#trainedml.viz.vizs.Vizs.figure" title="Lien vers cette définition"></a></dt>
-<dd><p>Retourne la figure générée.</p>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">figure</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></span><a class="headerlink" href="#trainedml.viz.vizs.Vizs.figure" title="Lien vers cette définition"></a></dt>
+<dd><p>Return the generated figure.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.viz.vizs.Vizs.save">
-<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">150</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/vizs.html#Vizs.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.vizs.Vizs.save" title="Lien vers cette définition"></a></dt>
-<dd><p>Sauvegarde la figure dans un fichier.</p>
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">150</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/vizs.html#Vizs.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.vizs.Vizs.save" title="Lien vers cette définition"></a></dt>
+<dd><p>Save the figure to a file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Chemin du fichier. Si None, utilise self._save_path</p></li>
-<li><p><strong>dpi</strong> (<em>int</em>) – Résolution de l’image (défaut: 150)</p></li>
-<li><p><strong>**kwargs</strong> – Arguments supplémentaires passés à plt.savefig()</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – file path. If None, uses self._save_path</p></li>
+<li><p><strong>dpi</strong> (<em>int</em>) – image resolution (default: 150)</p></li>
+<li><p><strong>**kwargs</strong> – extra arguments passed to plt.savefig()</p></li>
 </ul>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>Chemin du fichier sauvegardé, ou None si échec</p>
+<dd class="field-even"><p>path to the saved file, or None on failure</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 <dt class="field-even">Lève<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Si aucun chemin n’est spécifié et _save_path est None</p>
+<dd class="field-even"><p><strong>ValueError</strong> – if no path is specified and _save_path is None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -183,14 +183,17 @@ Toutes les visualisations doivent hériter de cette classe et surcharger la mét
 <dl class="py property">
 <dt class="sig sig-object py" id="trainedml.viz.vizs.Vizs.save_path">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">save_path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#trainedml.viz.vizs.Vizs.save_path" title="Lien vers cette définition"></a></dt>
-<dd><p>Retourne le chemin de sauvegarde configuré.</p>
+<dd><p>Return the configured save path.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.viz.vizs.Vizs.vizs">
-<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/vizs.html#Vizs.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.vizs.Vizs.vizs" title="Lien vers cette définition"></a></dt>
-<dd><p>Méthode à surcharger dans les classes filles pour générer la visualisation.
-Appelle automatiquement save() si un save_path a été défini.</p>
+<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/vizs.html#Vizs.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.vizs.Vizs.vizs" title="Lien vers cette définition"></a></dt>
+<dd><p>Method to override in subclasses to generate the visualization.
+Automatically calls save() if a save_path was set.</p>
+<p>Most subclasses return None and store their output on
+<code class="docutils literal notranslate"><span class="pre">self._figure</span></code> instead; a few (e.g. HistogramViz, BoxplotViz)
+also return it directly, hence the <code class="docutils literal notranslate"><span class="pre">Any</span></code> return type here.</p>
 </dd></dl>
 
 </dd></dl>

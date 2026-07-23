@@ -72,14 +72,14 @@
              
   <h1>Code source de trainedml.compare</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Comparaison de tous les modèles en une ligne pour trainedml.</span>
+<span class="sd">Compare every model in one line for trainedml.</span>
 
-<span class="sd">Ce module expose :func:`compare`, qui enchaîne tout le pipeline :</span>
-<span class="sd">chargement des données, détection du type de tâche, prétraitement,</span>
-<span class="sd">validation croisée de tous les modèles adaptés, et retourne un</span>
-<span class="sd">DataFrame pandas trié du meilleur au moins bon modèle.</span>
+<span class="sd">This module exposes :func:`compare`, which chains the whole pipeline:</span>
+<span class="sd">data loading, task type detection, preprocessing, cross-validation of</span>
+<span class="sd">every suitable model, and returns a pandas DataFrame sorted from best to</span>
+<span class="sd">worst model.</span>
 
-<span class="sd">Exemple</span>
+<span class="sd">Example</span>
 <span class="sd">-------</span>
 <span class="sd">&gt;&gt;&gt; from trainedml import compare</span>
 <span class="sd">&gt;&gt;&gt; df = compare(dataset=&quot;wine&quot;, cv=5)</span>
@@ -117,66 +117,66 @@
     <span class="n">sort</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compare tous les modèles adaptés à un dataset et retourne un DataFrame trié.</span>
+<span class="sd">    Compare every model suited to a dataset and return a sorted DataFrame.</span>
 
-<span class="sd">    Le type de tâche (classification ou régression) est détecté automatiquement</span>
-<span class="sd">    à partir de la cible, et seuls les modèles adaptés sont comparés. Chaque</span>
-<span class="sd">    modèle est évalué par validation croisée ; le prétraitement (imputation,</span>
-<span class="sd">    standardisation, one-hot) est réentraîné à chaque pli pour éviter toute</span>
-<span class="sd">    fuite d&#39;information.</span>
+<span class="sd">    The task type (classification or regression) is automatically detected</span>
+<span class="sd">    from the target, and only suitable models are compared. Each model is</span>
+<span class="sd">    evaluated by cross-validation; preprocessing (imputation,</span>
+<span class="sd">    standardization, one-hot) is refit on every fold to avoid any</span>
+<span class="sd">    information leakage.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    dataset : str, optional</span>
-<span class="sd">        Nom d&#39;un dataset intégré (&quot;iris&quot;, &quot;wine&quot;).</span>
+<span class="sd">        Name of a built-in dataset (&quot;iris&quot;, &quot;wine&quot;).</span>
 <span class="sd">    url : str, optional</span>
-<span class="sd">        URL d&#39;un CSV distant (nécessite ``target``).</span>
+<span class="sd">        URL of a remote CSV (requires ``target``).</span>
 <span class="sd">    target : str, optional</span>
-<span class="sd">        Nom de la colonne cible (si ``url``).</span>
+<span class="sd">        Name of the target column (if ``url``).</span>
 <span class="sd">    X : pandas.DataFrame or array-like, optional</span>
-<span class="sd">        Features fournies directement en mémoire (alternative à dataset/url).</span>
+<span class="sd">        Features provided directly in memory (alternative to dataset/url).</span>
 <span class="sd">    y : pandas.Series or array-like, optional</span>
-<span class="sd">        Cible correspondante (obligatoire si X est fourni).</span>
+<span class="sd">        Matching target (required if X is provided).</span>
 <span class="sd">    models : dict, optional</span>
-<span class="sd">        Dictionnaire {nom: instance} pour comparer des modèles personnalisés</span>
-<span class="sd">        (trainedml ou scikit-learn). Par défaut : tous les modèles trainedml</span>
-<span class="sd">        adaptés à la tâche détectée.</span>
+<span class="sd">        Dictionary {name: instance} to compare custom models</span>
+<span class="sd">        (trainedml or scikit-learn). Defaults to every trainedml model</span>
+<span class="sd">        suited to the detected task.</span>
 <span class="sd">    cv : int, default=5</span>
-<span class="sd">        Nombre de plis de validation croisée.</span>
+<span class="sd">        Number of cross-validation folds.</span>
 <span class="sd">    preprocess : bool, default=True</span>
-<span class="sd">        Applique le prétraitement standard de trainedml à chaque pli.</span>
+<span class="sd">        Applies trainedml&#39;s standard preprocessing on every fold.</span>
 <span class="sd">    seed : int, default=42</span>
-<span class="sd">        Graine aléatoire pour le mélange des plis.</span>
+<span class="sd">        Random seed for fold shuffling.</span>
 <span class="sd">    show_progress : bool, default=True</span>
-<span class="sd">        Affiche une barre de progression.</span>
+<span class="sd">        Show a progress bar.</span>
 <span class="sd">    sort : bool, default=True</span>
-<span class="sd">        Trie le tableau par la métrique principale (accuracy ou r2), décroissante.</span>
+<span class="sd">        Sort the table by the primary metric (accuracy or r2), descending.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    pandas.DataFrame</span>
-<span class="sd">        Une ligne par modèle : métriques moyennes, écarts-types (``*_std``),</span>
-<span class="sd">        temps moyens d&#39;entraînement et de prédiction.</span>
+<span class="sd">        One row per model: average metrics, standard deviations</span>
+<span class="sd">        (``*_std``), average training and prediction times.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
 <span class="sd">    ValueError</span>
-<span class="sd">        Si ni ``dataset`` ni ``url``+``target`` n&#39;est fourni.</span>
+<span class="sd">        If neither ``dataset`` nor ``url``+``target`` is provided.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Comparer tous les classificateurs sur Wine :</span>
+<span class="sd">    Compare every classifier on Wine:</span>
 
 <span class="sd">    &gt;&gt;&gt; from trainedml import compare</span>
 <span class="sd">    &gt;&gt;&gt; print(compare(dataset=&quot;wine&quot;))</span>
 
-<span class="sd">    Comparer des modèles personnalisés (y compris scikit-learn) :</span>
+<span class="sd">    Compare custom models (including scikit-learn):</span>
 
 <span class="sd">    &gt;&gt;&gt; from sklearn.svm import SVC</span>
 <span class="sd">    &gt;&gt;&gt; from trainedml.models import KNNModel</span>
 <span class="sd">    &gt;&gt;&gt; print(compare(dataset=&quot;iris&quot;, models={&quot;svc&quot;: SVC(), &quot;knn&quot;: KNNModel()}))</span>
 
-<span class="sd">    Sur un CSV distant (régression) :</span>
+<span class="sd">    On a remote CSV (regression):</span>
 
 <span class="sd">    &gt;&gt;&gt; print(compare(url=&quot;https://.../winequality-red.csv&quot;, target=&quot;quality&quot;))</span>
 <span class="sd">    &quot;&quot;&quot;</span>

@@ -50,8 +50,7 @@
 <li class="toctree-l2"><a class="reference internal" href="loader.html">DataLoader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preprocessing.html">Prétraitement</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Détection de tâche</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#heuristique">Heuristique</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exemple">Exemple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#heuristic">Heuristic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trainedml.tasks.MAX_UNIQUE_FOR_CLASSIFICATION"><code class="docutils literal notranslate"><span class="pre">MAX_UNIQUE_FOR_CLASSIFICATION</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trainedml.tasks.detect_model_task"><code class="docutils literal notranslate"><span class="pre">detect_model_task()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trainedml.tasks.detect_task"><code class="docutils literal notranslate"><span class="pre">detect_task()</span></code></a></li>
@@ -111,20 +110,18 @@
              
   <section id="module-trainedml.tasks">
 <span id="detection-de-tache"></span><h1>Détection de tâche<a class="headerlink" href="#module-trainedml.tasks" title="Lien vers cette rubrique"></a></h1>
-<p>Détection du type de tâche (classification vs régression) pour trainedml.</p>
-<p>Ce module centralise l’heuristique utilisée par le Trainer, la CLI, le Benchmark
-et <a class="reference internal" href="trainer.html#trainedml.compare" title="trainedml.compare"><code class="xref py py-func docutils literal notranslate"><span class="pre">trainedml.compare()</span></code></a> pour déterminer si une cible correspond à une tâche
-de classification ou de régression.</p>
-<section id="heuristique">
-<h2>Heuristique<a class="headerlink" href="#heuristique" title="Lien vers cette rubrique"></a></h2>
+<p>Task type detection (classification vs regression) for trainedml.</p>
+<p>This module centralizes the heuristic used by the Trainer, the CLI, the
+Benchmark, and <a class="reference internal" href="trainer.html#trainedml.compare" title="trainedml.compare"><code class="xref py py-func docutils literal notranslate"><span class="pre">trainedml.compare()</span></code></a> to determine whether a target
+corresponds to a classification or a regression task.</p>
+<section id="heuristic">
+<h2>Heuristic<a class="headerlink" href="#heuristic" title="Lien vers cette rubrique"></a></h2>
 <ul class="simple">
-<li><p>Cible non numérique (texte, catégoriel, <code class="docutils literal notranslate"><span class="pre">StringDtype</span></code>…) → classification</p></li>
-<li><p>Cible entière avec peu de valeurs uniques (≤ 20) → classification</p></li>
-<li><p>Sinon → régression</p></li>
+<li><p>Non-numeric target (text, categorical, <code class="docutils literal notranslate"><span class="pre">StringDtype</span></code>…) -&gt; classification</p></li>
+<li><p>Integer target with few unique values (&lt;= 20) -&gt; classification</p></li>
+<li><p>Otherwise -&gt; regression</p></li>
 </ul>
-</section>
-<section id="exemple">
-<h2>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique"></a></h2>
+<p class="rubric">Exemple</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect_task</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">detect_task</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;setosa&quot;</span><span class="p">,</span> <span class="s2">&quot;versicolor&quot;</span><span class="p">]))</span>
 <span class="go">&#39;classification&#39;</span>
@@ -136,30 +133,30 @@ de classification ou de régression.</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="trainedml.tasks.MAX_UNIQUE_FOR_CLASSIFICATION">
 <span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">MAX_UNIQUE_FOR_CLASSIFICATION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20</span></span><a class="headerlink" href="#trainedml.tasks.MAX_UNIQUE_FOR_CLASSIFICATION" title="Lien vers cette définition"></a></dt>
-<dd><p>Nombre maximal de valeurs uniques entières pour considérer une cible
-comme catégorielle (classification).</p>
+<dd><p>Maximum number of unique integer values for a target to be considered
+categorical (classification).</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.tasks.detect_model_task">
 <span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">detect_model_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/trainedml/tasks.html#detect_model_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.tasks.detect_model_task" title="Lien vers cette définition"></a></dt>
-<dd><p>Détermine le type de tâche d’un modèle, quel qu’il soit.</p>
-<p>L’ordre de priorité est :</p>
+<dd><p>Determine the task type of a model, whatever it is.</p>
+<p>Priority order:</p>
 <ol class="arabic simple">
-<li><p>l’attribut <code class="docutils literal notranslate"><span class="pre">task</span></code> du modèle (modèles trainedml, <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code>) ;</p></li>
-<li><p>les fonctions <code class="docutils literal notranslate"><span class="pre">is_classifier</span></code> / <code class="docutils literal notranslate"><span class="pre">is_regressor</span></code> de scikit-learn
-(estimateurs sklearn arbitraires) ;</p></li>
-<li><p>l’heuristique sur la cible <code class="docutils literal notranslate"><span class="pre">y</span></code> si elle est fournie.</p></li>
+<li><p>the model’s <code class="docutils literal notranslate"><span class="pre">task</span></code> attribute (trainedml models, <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code>);</p></li>
+<li><p>scikit-learn’s <code class="docutils literal notranslate"><span class="pre">is_classifier</span></code> / <code class="docutils literal notranslate"><span class="pre">is_regressor</span></code> functions
+(arbitrary sklearn estimators);</p></li>
+<li><p>the heuristic on the <code class="docutils literal notranslate"><span class="pre">y</span></code> target, if provided.</p></li>
 </ol>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<em>object</em>) – Modèle trainedml, estimateur scikit-learn, ou tout objet fit/predict.</p></li>
-<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>optional</em>) – Cible, utilisée en dernier recours pour l’heuristique.</p></li>
+<li><p><strong>model</strong> (<em>object</em>) – trainedml model, scikit-learn estimator, or any fit/predict object.</p></li>
+<li><p><strong>y</strong> (<em>array-like</em><em>, </em><em>optional</em>) – Target, used as a last resort for the heuristic.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">'classification'</span></code> ou <code class="docutils literal notranslate"><span class="pre">'regression'</span></code>.</p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">'classification'</span></code> or <code class="docutils literal notranslate"><span class="pre">'regression'</span></code>.</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
@@ -170,13 +167,13 @@ comme catégorielle (classification).</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.tasks.detect_task">
 <span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">detect_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/trainedml/tasks.html#detect_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.tasks.detect_task" title="Lien vers cette définition"></a></dt>
-<dd><p>Retourne le type de tâche associé à une cible.</p>
+<dd><p>Return the task type associated with a target.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>y</strong> (<em>pandas.Series</em><em> or </em><em>array-like</em>) – Colonne cible à analyser.</p>
+<dd class="field-odd"><p><strong>y</strong> (<em>pandas.Series</em><em> or </em><em>array-like</em>) – Target column to analyze.</p>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">'classification'</span></code> ou <code class="docutils literal notranslate"><span class="pre">'regression'</span></code>.</p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">'classification'</span></code> or <code class="docutils literal notranslate"><span class="pre">'regression'</span></code>.</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
@@ -192,13 +189,13 @@ comme catégorielle (classification).</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.tasks.is_classification_target">
 <span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">is_classification_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/trainedml/tasks.html#is_classification_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.tasks.is_classification_target" title="Lien vers cette définition"></a></dt>
-<dd><p>Détermine si la cible est catégorielle (classification) ou numérique (régression).</p>
+<dd><p>Determine whether the target is categorical (classification) or numeric (regression).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>y</strong> (<em>pandas.Series</em><em> or </em><em>array-like</em>) – Colonne cible à analyser.</p>
+<dd class="field-odd"><p><strong>y</strong> (<em>pandas.Series</em><em> or </em><em>array-like</em>) – Target column to analyze.</p>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>True si classification, False si régression.</p>
+<dd class="field-even"><p>True if classification, False if regression.</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>

@@ -121,21 +121,24 @@ including counts and visualizations.</p>
 </div>
 <dl class="py class">
 <dt class="sig sig-object py" id="trainedml.viz.missing.MissingValuesViz">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.missing.</span></span><span class="sig-name descname"><span class="pre">MissingValuesViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/missing.html#MissingValuesViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.missing.MissingValuesViz" title="Lien vers cette définition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.missing.</span></span><span class="sig-name descname"><span class="pre">MissingValuesViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pd.DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/missing.html#MissingValuesViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.missing.MissingValuesViz" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <a class="reference internal" href="vizs.html#trainedml.viz.vizs.Vizs" title="trainedml.viz.vizs.Vizs"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vizs</span></code></a></p>
-<p>Classe pour visualiser les valeurs manquantes.</p>
+<p>Class to visualize missing values.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.viz.missing.MissingValuesViz.vizs">
-<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/missing.html#MissingValuesViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.missing.MissingValuesViz.vizs" title="Lien vers cette définition"></a></dt>
-<dd><p>Méthode à surcharger dans les classes filles pour générer la visualisation.
-Appelle automatiquement save() si un save_path a été défini.</p>
+<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/missing.html#MissingValuesViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.missing.MissingValuesViz.vizs" title="Lien vers cette définition"></a></dt>
+<dd><p>Method to override in subclasses to generate the visualization.
+Automatically calls save() if a save_path was set.</p>
+<p>Most subclasses return None and store their output on
+<code class="docutils literal notranslate"><span class="pre">self._figure</span></code> instead; a few (e.g. HistogramViz, BoxplotViz)
+also return it directly, hence the <code class="docutils literal notranslate"><span class="pre">Any</span></code> return type here.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.viz.missing.missing_summary">
-<span class="sig-prename descclassname"><span class="pre">trainedml.viz.missing.</span></span><span class="sig-name descname"><span class="pre">missing_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/missing.html#missing_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.missing.missing_summary" title="Lien vers cette définition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">trainedml.viz.missing.</span></span><span class="sig-name descname"><span class="pre">missing_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pd.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pd.Series</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/missing.html#missing_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.missing.missing_summary" title="Lien vers cette définition"></a></dt>
 <dd><p>Compute the count of missing values per column.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>

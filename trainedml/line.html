@@ -123,34 +123,26 @@ using matplotlib, supporting custom styling and axis labeling.</p>
 <dt class="sig sig-object py" id="trainedml.viz.line.LineViz">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.line.</span></span><span class="sig-name descname"><span class="pre">LineViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/line.html#LineViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.line.LineViz" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <a class="reference internal" href="vizs.html#trainedml.viz.vizs.Vizs" title="trainedml.viz.vizs.Vizs"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vizs</span></code></a></p>
-<p>Visualisation de courbe entre deux colonnes.</p>
-<section id="parametres">
-<h2>Paramètres<a class="headerlink" href="#parametres" title="Lien vers cette rubrique"></a></h2>
-<dl class="simple">
-<dt>data<span class="classifier">pandas.DataFrame</span></dt><dd><p>Le jeu de données.</p>
-</dd>
-<dt>x_column<span class="classifier">str</span></dt><dd><p>Colonne pour l’axe des x.</p>
-</dd>
-<dt>y_column<span class="classifier">str</span></dt><dd><p>Colonne pour l’axe des y.</p>
-</dd>
-<dt>save_path<span class="classifier">str ou None</span></dt><dd><p>Chemin de sauvegarde optionnel.</p>
+<p>Line plot visualization between two columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pandas.DataFrame</em>) – The dataset.</p></li>
+<li><p><strong>x_column</strong> (<em>str</em>) – Column for the x-axis.</p></li>
+<li><p><strong>y_column</strong> (<em>str</em>) – Column for the y-axis.</p></li>
+<li><p><strong>save_path</strong> (<em>str</em><em> or </em><em>None</em>) – Optional save path.</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.viz.line.LineViz.vizs">
-<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/line.html#LineViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.line.LineViz.vizs" title="Lien vers cette définition"></a></dt>
+<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/line.html#LineViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.line.LineViz.vizs" title="Lien vers cette définition"></a></dt>
 <dd><p>Generate the line plot figure.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The generated line plot figure.</p>
-</dd>
-<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
-<dd class="field-even"><p>matplotlib.figure.Figure</p>
-</dd>
-</dl>
+<p>The plotted lines (matplotlib.lines.Line2D) are stored on
+<code class="docutils literal notranslate"><span class="pre">self._figure</span></code> for consistency with the other Vizs subclasses,
+even though they are not a matplotlib Figure.</p>
 </dd></dl>
 
-</section>
 </dd></dl>
 
 </section>

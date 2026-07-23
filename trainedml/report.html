@@ -53,7 +53,6 @@
 <li class="toctree-l2"><a class="reference internal" href="benchmark.html">Benchmark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="evaluation.html">Evaluator</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Rapport EDA</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#exemple">Exemple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trainedml.report.generate_report"><code class="docutils literal notranslate"><span class="pre">generate_report()</span></code></a></li>
 </ul>
 </li>
@@ -107,39 +106,36 @@
              
   <section id="module-trainedml.report">
 <span id="rapport-eda"></span><h1>Rapport EDA<a class="headerlink" href="#module-trainedml.report" title="Lien vers cette rubrique"></a></h1>
-<p>Génération de rapport EDA HTML autonome pour trainedml.</p>
-<p>Ce module assemble les analyses exploratoires du package (statistiques
-descriptives, valeurs manquantes, corrélations, distributions, outliers,
-normalité, multicolinéarité) en un rapport HTML <strong>auto-contenu</strong> : les
-figures matplotlib sont embarquées en base64, le fichier s’ouvre dans
-n’importe quel navigateur sans dépendance.</p>
-<p>Point d’entrée : <a class="reference internal" href="#trainedml.report.generate_report" title="trainedml.report.generate_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">generate_report()</span></code></a>, aussi accessible via
+<p>Self-contained HTML EDA report generation for trainedml.</p>
+<p>This module assembles the package’s exploratory analyses (descriptive
+statistics, missing values, correlations, distributions, outliers,
+normality, multicollinearity) into a <strong>self-contained</strong> HTML report:
+matplotlib figures are embedded as base64, the file opens in any browser
+with no dependency.</p>
+<p>Entry point: <a class="reference internal" href="#trainedml.report.generate_report" title="trainedml.report.generate_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">generate_report()</span></code></a>, also accessible via
 <a class="reference internal" href="visualization.html#trainedml.visualization.Visualizer.report" title="trainedml.visualization.Visualizer.report"><code class="xref py py-meth docutils literal notranslate"><span class="pre">trainedml.visualization.Visualizer.report()</span></code></a>.</p>
-<section id="exemple">
-<h2>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique"></a></h2>
+<p class="rubric">Exemple</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.report</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_report</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">generate_report</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;rapport.html&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Mon dataset&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">generate_report</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;report.html&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;My dataset&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.report.generate_report">
-<span class="sig-prename descclassname"><span class="pre">trainedml.report.</span></span><span class="sig-name descname"><span class="pre">generate_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Rapport</span> <span class="pre">exploratoire</span> <span class="pre">-</span> <span class="pre">trainedml'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/trainedml/report.html#generate_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.report.generate_report" title="Lien vers cette définition"></a></dt>
-<dd><p>Génère un rapport EDA HTML complet et auto-contenu pour un DataFrame.</p>
-<p>Le rapport contient : aperçu du dataset, statistiques descriptives,
-valeurs manquantes, matrice et heatmap de corrélation, distributions,
-outliers (IQR), tests de normalité et facteurs d’inflation de la
-variance (VIF).</p>
+<span class="sig-prename descclassname"><span class="pre">trainedml.report.</span></span><span class="sig-name descname"><span class="pre">generate_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Exploratory</span> <span class="pre">report</span> <span class="pre">-</span> <span class="pre">trainedml'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/trainedml/report.html#generate_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.report.generate_report" title="Lien vers cette définition"></a></dt>
+<dd><p>Generate a complete, self-contained HTML EDA report for a DataFrame.</p>
+<p>The report contains: dataset overview, descriptive statistics, missing
+values, correlation matrix and heatmap, distributions, outliers (IQR),
+normality tests, and variance inflation factors (VIF).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pandas.DataFrame</em>) – Le dataset à analyser.</p></li>
-<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Chemin du fichier HTML de sortie. Si None, le HTML est seulement retourné.</p></li>
-<li><p><strong>title</strong> (<em>str</em><em>, </em><em>default=&quot;Rapport exploratoire - trainedml&quot;</em>) – Titre du rapport.</p></li>
+<li><p><strong>data</strong> (<em>pandas.DataFrame</em>) – The dataset to analyze.</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Output HTML file path. If None, the HTML is only returned.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>default=&quot;Exploratory report - trainedml&quot;</em>) – Report title.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>Le contenu HTML du rapport.</p>
+<dd class="field-even"><p>The report’s HTML content.</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
@@ -147,7 +143,7 @@ variance (VIF).</p>
 </dl>
 <p class="rubric">Exemples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.report</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_report</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">html</span> <span class="o">=</span> <span class="n">generate_report</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;rapport.html&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">html</span> <span class="o">=</span> <span class="n">generate_report</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;report.html&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>

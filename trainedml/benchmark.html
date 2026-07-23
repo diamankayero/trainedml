@@ -239,23 +239,23 @@ of several models on the same dataset, with optional parallelization and progres
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.benchmark.Benchmark.run_cv">
 <span class="sig-name descname"><span class="pre">run_cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_progress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trainedml/benchmark.html#Benchmark.run_cv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.benchmark.Benchmark.run_cv" title="Lien vers cette définition"></a></dt>
-<dd><p>Compare les modèles par validation croisée (K-fold).</p>
-<p>Chaque modèle est entraîné et évalué sur <code class="docutils literal notranslate"><span class="pre">cv</span></code> plis ; les métriques
-retournées sont les moyennes sur les plis, avec l’écart-type dans
-<code class="docutils literal notranslate"><span class="pre">scores_std</span></code>. Pour la classification, les plis sont stratifiés.</p>
+<dd><p>Compare models by cross-validation (K-fold).</p>
+<p>Each model is trained and evaluated on <code class="docutils literal notranslate"><span class="pre">cv</span></code> folds; the returned
+metrics are the averages across folds, with the standard deviation
+in <code class="docutils literal notranslate"><span class="pre">scores_std</span></code>. For classification, folds are stratified.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>pandas.DataFrame</em><em> or </em><em>array-like</em>) – Features (jeu complet, non splitté).</p></li>
-<li><p><strong>y</strong> (<em>pandas.Series</em><em> or </em><em>array-like</em>) – Cible.</p></li>
-<li><p><strong>cv</strong> (<em>int</em><em>, </em><em>default=5</em>) – Nombre de plis.</p></li>
-<li><p><strong>show_progress</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Affiche une barre de progression.</p></li>
-<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>default=42</em>) – Graine pour le mélange des plis.</p></li>
+<li><p><strong>X</strong> (<em>pandas.DataFrame</em><em> or </em><em>array-like</em>) – Features (full dataset, not split).</p></li>
+<li><p><strong>y</strong> (<em>pandas.Series</em><em> or </em><em>array-like</em>) – Target.</p></li>
+<li><p><strong>cv</strong> (<em>int</em><em>, </em><em>default=5</em>) – Number of folds.</p></li>
+<li><p><strong>show_progress</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Show a progress bar.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>default=42</em>) – Seed for fold shuffling.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>{model_name: {“scores”: moyennes, “scores_std”: écarts-types,
-“fit_time”: temps moyen, “predict_time”: temps moyen, “cv”: cv}}</p>
+<dd class="field-even"><p>{model_name: {“scores”: averages, “scores_std”: standard deviations,
+“fit_time”: average time, “predict_time”: average time, “cv”: cv}}</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
@@ -286,17 +286,17 @@ retournées sont les moyennes sur les plis, avec l’écart-type dans
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.benchmark.Benchmark.to_dataframe">
 <span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="s"><span class="pre">'pd.DataFrame'</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml/benchmark.html#Benchmark.to_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.benchmark.Benchmark.to_dataframe" title="Lien vers cette définition"></a></dt>
-<dd><p>Convertit les résultats du benchmark en DataFrame pandas.</p>
-<p>Les colonnes sont les métriques (plus <code class="docutils literal notranslate"><span class="pre">fit_time</span></code> et <code class="docutils literal notranslate"><span class="pre">predict_time</span></code>),
-les lignes les modèles. Si les résultats proviennent de <a class="reference internal" href="#trainedml.benchmark.Benchmark.run_cv" title="trainedml.benchmark.Benchmark.run_cv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_cv()</span></code></a>,
-des colonnes <code class="docutils literal notranslate"><span class="pre">&lt;metric&gt;_std</span></code> sont ajoutées. Le tableau est trié par la
-métrique principale (<code class="docutils literal notranslate"><span class="pre">accuracy</span></code> ou <code class="docutils literal notranslate"><span class="pre">r2</span></code>), du meilleur au moins bon.</p>
+<dd><p>Convert the benchmark results to a pandas DataFrame.</p>
+<p>Columns are the metrics (plus <code class="docutils literal notranslate"><span class="pre">fit_time</span></code> and <code class="docutils literal notranslate"><span class="pre">predict_time</span></code>),
+rows are the models. If the results come from <a class="reference internal" href="#trainedml.benchmark.Benchmark.run_cv" title="trainedml.benchmark.Benchmark.run_cv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_cv()</span></code></a>,
+<code class="docutils literal notranslate"><span class="pre">&lt;metric&gt;_std</span></code> columns are added. The table is sorted by the
+primary metric (<code class="docutils literal notranslate"><span class="pre">accuracy</span></code> or <code class="docutils literal notranslate"><span class="pre">r2</span></code>), from best to worst.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>sort</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Trier par la métrique principale, décroissante.</p>
+<dd class="field-odd"><p><strong>sort</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Sort by the primary metric, descending.</p>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>Tableau comparatif, ou None si run()/run_cv() n’a pas été exécuté.</p>
+<dd class="field-even"><p>Comparison table, or None if run()/run_cv() has not been called.</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame or None</p>

@@ -72,10 +72,11 @@
              
   <h1>Code source de trainedml.viz.normality</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Normality test utilities for trainedml.</span>
+<span class="sd">Normality analysis utilities for trainedml.</span>
 
 <span class="sd">This module provides functions for testing the normality of variables in a pandas DataFrame,</span>
-<span class="sd">using Shapiro-Wilk, D&#39;Agostino, and Anderson-Darling tests.</span>
+<span class="sd">using Shapiro-Wilk, D&#39;Agostino, and Anderson-Darling tests, and the NormalityViz class,</span>
+<span class="sd">which shows a QQ-plot for each numeric variable.</span>
 
 <span class="sd">Examples</span>
 <span class="sd">--------</span>
@@ -84,11 +85,19 @@
 <span class="sd">&gt;&gt;&gt; print(results)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.vizs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Vizs</span>
+
 
 <div class="viewcode-block" id="normality_tests">
 <a class="viewcode-back" href="../../../trainedml/normality.html#trainedml.viz.normality.normality_tests">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">normality_tests</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">normality_tests</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Perform normality tests on selected columns.</span>
 
@@ -113,7 +122,7 @@
     <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shapiro&#39;</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">x</span><span class="p">)}</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shapiro&#39;</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">x</span><span class="p">)}</span>
         <span class="c1"># D&#39;Agostino requires n &gt;= 8</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">:</span>
             <span class="n">result</span><span class="p">[</span><span class="s1">&#39;dagostino&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">normaltest</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -122,33 +131,26 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">result</span><span class="p">[</span><span class="s1">&#39;anderson&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">anderson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;norm&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;interpolate&#39;</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="c1"># scipy ancien : pas de paramètre method (ni de p-value interpolée)</span>
+            <span class="c1"># old scipy: no method parameter (nor an interpolated p-value)</span>
             <span class="n">result</span><span class="p">[</span><span class="s1">&#39;anderson&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">anderson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;norm&#39;</span><span class="p">)</span>
         <span class="n">results</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
     <span class="k">return</span> <span class="n">results</span></div>
 
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Analyse de la normalité pour trainedml.</span>
-<span class="sd">Affiche un QQ-plot pour chaque variable numérique.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.vizs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Vizs</span>
 
 <div class="viewcode-block" id="NormalityViz">
 <a class="viewcode-back" href="../../../trainedml/normality.html#trainedml.viz.normality.NormalityViz">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NormalityViz</span><span class="p">(</span><span class="n">Vizs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe pour générer des QQ-plots pour tester la normalité.</span>
+<span class="sd">    Class to generate QQ-plots for normality testing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_columns</span> <span class="o">=</span> <span class="n">columns</span>
 
 <div class="viewcode-block" id="NormalityViz.vizs">
 <a class="viewcode-back" href="../../../trainedml/normality.html#trainedml.viz.normality.NormalityViz.vizs">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">vizs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vizs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_columns</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
             <span class="n">cols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
@@ -158,7 +160,7 @@
             <span class="n">axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">axes</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
             <span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">dist</span><span class="o">=</span><span class="s2">&quot;norm&quot;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;QQ-plot de </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;QQ-plot of </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_figure</span> <span class="o">=</span> <span class="n">fig</span></div>
 </div>

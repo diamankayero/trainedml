@@ -88,14 +88,17 @@
 <span class="sd">&gt;&gt;&gt; print(vif)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.vizs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Vizs</span>
 
+
 <div class="viewcode-block" id="vif_summary">
 <a class="viewcode-back" href="../../../trainedml/multicollinearity.html#trainedml.viz.multicollinearity.vif_summary">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">vif_summary</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">vif_summary</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the Variance Inflation Factor (VIF) for each feature.</span>
 
@@ -126,14 +129,14 @@
 <a class="viewcode-back" href="../../../trainedml/multicollinearity.html#trainedml.viz.multicollinearity.MulticollinearityViz">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MulticollinearityViz</span><span class="p">(</span><span class="n">Vizs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe pour calculer et visualiser le VIF de chaque variable.</span>
+<span class="sd">    Class to compute and visualize the VIF of each variable.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
 <div class="viewcode-block" id="MulticollinearityViz.vizs">
 <a class="viewcode-back" href="../../../trainedml/multicollinearity.html#trainedml.viz.multicollinearity.MulticollinearityViz.vizs">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">vizs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vizs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
         <span class="n">vif_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
         <span class="n">vif_data</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>

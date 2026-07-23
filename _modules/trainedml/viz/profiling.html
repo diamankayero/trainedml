@@ -84,6 +84,10 @@
 <span class="sd">&gt;&gt;&gt; print(report)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.vizs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Vizs</span>
@@ -93,25 +97,25 @@
 <a class="viewcode-back" href="../../../trainedml/profiling.html#trainedml.viz.profiling.ProfilingViz">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ProfilingViz</span><span class="p">(</span><span class="n">Vizs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe pour générer un rapport de profiling automatique.</span>
+<span class="sd">    Class to generate an automatic profiling report.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ProfilingViz.vizs">
 <a class="viewcode-back" href="../../../trainedml/profiling.html#trainedml.viz.profiling.ProfilingViz.vizs">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">vizs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Génère un DataFrame de statistiques descriptives et de valeurs manquantes</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vizs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Generates a DataFrame of descriptive statistics and missing values</span>
         <span class="n">desc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
         <span class="n">missing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
         <span class="n">desc</span><span class="p">[</span><span class="s1">&#39;missing&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">missing</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_figure</span> <span class="o">=</span> <span class="n">desc</span>  <span class="c1"># Ici, on retourne un DataFrame, pas une figure matplotlib</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_figure</span> <span class="o">=</span> <span class="n">desc</span>  <span class="c1"># Here we return a DataFrame, not a matplotlib figure</span></div>
 </div>
 
 
 <div class="viewcode-block" id="profiling_report">
 <a class="viewcode-back" href="../../../trainedml/profiling.html#trainedml.viz.profiling.profiling_report">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">profiling_report</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">profiling_report</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a profiling report for the dataset.</span>
 

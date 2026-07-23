@@ -85,9 +85,12 @@
 <span class="sd">&gt;&gt;&gt; viz.figure.show()</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.vizs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Vizs</span>
 
 
@@ -95,38 +98,38 @@
 <a class="viewcode-back" href="../../../trainedml/line.html#trainedml.viz.line.LineViz">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LineViz</span><span class="p">(</span><span class="n">Vizs</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Visualisation de courbe entre deux colonnes.</span>
+<span class="sd">    Line plot visualization between two columns.</span>
 
-<span class="sd">    Paramètres</span>
+<span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    data : pandas.DataFrame</span>
-<span class="sd">        Le jeu de données.</span>
+<span class="sd">        The dataset.</span>
 <span class="sd">    x_column : str</span>
-<span class="sd">        Colonne pour l&#39;axe des x.</span>
+<span class="sd">        Column for the x-axis.</span>
 <span class="sd">    y_column : str</span>
-<span class="sd">        Colonne pour l&#39;axe des y.</span>
-<span class="sd">    save_path : str ou None</span>
-<span class="sd">        Chemin de sauvegarde optionnel.</span>
+<span class="sd">        Column for the y-axis.</span>
+<span class="sd">    save_path : str or None</span>
+<span class="sd">        Optional save path.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">x_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">y_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">save_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">x_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">y_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="n">save_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">save_path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_x_column</span> <span class="o">=</span> <span class="n">x_column</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_y_column</span> <span class="o">=</span> <span class="n">y_column</span>
 
 <div class="viewcode-block" id="LineViz.vizs">
 <a class="viewcode-back" href="../../../trainedml/line.html#trainedml.viz.line.LineViz.vizs">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">vizs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vizs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate the line plot figure.</span>
 
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        matplotlib.figure.Figure</span>
-<span class="sd">            The generated line plot figure.</span>
+<span class="sd">        The plotted lines (matplotlib.lines.Line2D) are stored on</span>
+<span class="sd">        ``self._figure`` for consistency with the other Vizs subclasses,</span>
+<span class="sd">        even though they are not a matplotlib Figure.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_column</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_column</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Courbe </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_column</span><span class="si">}</span><span class="s2"> en fonction de </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_column</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_column</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_column</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_column</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_column</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>

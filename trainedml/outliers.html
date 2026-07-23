@@ -66,8 +66,7 @@
 <li class="toctree-l2"><a class="reference internal" href="correlation.html">Correlation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="missing.html">Missing Values</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Outliers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#contexte-mathematique">Contexte mathématique</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exemples">Exemples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mathematical-background">Mathematical background</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trainedml.viz.outliers.OutliersViz"><code class="docutils literal notranslate"><span class="pre">OutliersViz</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#trainedml.viz.outliers.OutliersViz.vizs"><code class="docutils literal notranslate"><span class="pre">OutliersViz.vizs()</span></code></a></li>
 </ul>
@@ -112,18 +111,16 @@
              
   <section id="module-trainedml.viz.outliers">
 <span id="outliers"></span><h1>Outliers<a class="headerlink" href="#module-trainedml.viz.outliers" title="Lien vers cette rubrique"></a></h1>
-<p>Analyse des outliers (valeurs aberrantes) pour trainedml.
-Affiche les boxplots pour détecter les outliers par variable numérique.</p>
-<p>Détection d’outliers par les méthodes IQR et Z-score.</p>
-<section id="contexte-mathematique">
-<h2>Contexte mathématique<a class="headerlink" href="#contexte-mathematique" title="Lien vers cette rubrique"></a></h2>
+<p>Outlier analysis for trainedml.
+Shows boxplots to detect outliers for each numeric variable.</p>
+<p>Outlier detection using the IQR and Z-score methods.</p>
+<section id="mathematical-background">
+<h2>Mathematical background<a class="headerlink" href="#mathematical-background" title="Lien vers cette rubrique"></a></h2>
 <ul class="simple">
 <li><p>IQR: $IQR = Q_3 - Q_1$</p></li>
 <li><p>Z-score: $z = frac{x - mu}{sigma}$</p></li>
 </ul>
-</section>
-<section id="exemples">
-<h2>Exemples<a class="headerlink" href="#exemples" title="Lien vers cette rubrique"></a></h2>
+<p class="rubric">Exemples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.outliers</span><span class="w"> </span><span class="kn">import</span> <span class="n">outlier_summary</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">summary</span> <span class="o">=</span> <span class="n">outlier_summary</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
@@ -132,21 +129,24 @@ Affiche les boxplots pour détecter les outliers par variable numérique.</p>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="trainedml.viz.outliers.OutliersViz">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.outliers.</span></span><span class="sig-name descname"><span class="pre">OutliersViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/outliers.html#OutliersViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.outliers.OutliersViz" title="Lien vers cette définition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.outliers.</span></span><span class="sig-name descname"><span class="pre">OutliersViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/outliers.html#OutliersViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.outliers.OutliersViz" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <a class="reference internal" href="vizs.html#trainedml.viz.vizs.Vizs" title="trainedml.viz.vizs.Vizs"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vizs</span></code></a></p>
-<p>Classe pour visualiser les outliers via boxplots.</p>
+<p>Class to visualize outliers via boxplots.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.viz.outliers.OutliersViz.vizs">
-<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/outliers.html#OutliersViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.outliers.OutliersViz.vizs" title="Lien vers cette définition"></a></dt>
-<dd><p>Méthode à surcharger dans les classes filles pour générer la visualisation.
-Appelle automatiquement save() si un save_path a été défini.</p>
+<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/outliers.html#OutliersViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.outliers.OutliersViz.vizs" title="Lien vers cette définition"></a></dt>
+<dd><p>Method to override in subclasses to generate the visualization.
+Automatically calls save() if a save_path was set.</p>
+<p>Most subclasses return None and store their output on
+<code class="docutils literal notranslate"><span class="pre">self._figure</span></code> instead; a few (e.g. HistogramViz, BoxplotViz)
+also return it directly, hence the <code class="docutils literal notranslate"><span class="pre">Any</span></code> return type here.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.viz.outliers.outlier_summary">
-<span class="sig-prename descclassname"><span class="pre">trainedml.viz.outliers.</span></span><span class="sig-name descname"><span class="pre">outlier_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'iqr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/outliers.html#outlier_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.outliers.outlier_summary" title="Lien vers cette définition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">trainedml.viz.outliers.</span></span><span class="sig-name descname"><span class="pre">outlier_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'iqr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Series</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trainedml/viz/outliers.html#outlier_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.outliers.outlier_summary" title="Lien vers cette définition"></a></dt>
 <dd><p>Detect outliers in the dataset using IQR or Z-score.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>

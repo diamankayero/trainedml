@@ -138,17 +138,17 @@
 <span class="sd">    tuple</span>
 <span class="sd">        (model name, results dict)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Mesure du temps d&#39;entraînement</span>
+    <span class="c1"># Measure training time</span>
     <span class="n">start_fit</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
     <span class="n">fit_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_fit</span>
 
-    <span class="c1"># Mesure du temps de prédiction</span>
+    <span class="c1"># Measure prediction time</span>
     <span class="n">start_pred</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
     <span class="n">predict_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_pred</span>
 
-    <span class="c1"># Métriques adaptées au type de tâche du modèle (classification ou régression)</span>
+    <span class="c1"># Metrics adapted to the model&#39;s task type (classification or regression)</span>
     <span class="n">task</span> <span class="o">=</span> <span class="n">detect_model_task</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
     <span class="n">scores</span> <span class="o">=</span> <span class="n">Evaluator</span><span class="o">.</span><span class="n">evaluate_for</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="p">{</span>
@@ -196,7 +196,7 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">models</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
-<span class="sd">            models (dict): dictionnaire {nom: instance_modele}</span>
+<span class="sd">            models (dict): dictionary {name: model_instance}</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="n">models</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -233,48 +233,48 @@
 <span class="sd">            {model_name: {scores, fit_time, predict_time}}</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
-        
+
         <span class="k">if</span> <span class="n">parallel</span><span class="p">:</span>
-            <span class="c1"># Exécution parallèle avec joblib</span>
+            <span class="c1"># Parallel execution with joblib</span>
             <span class="n">model_items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-            
+
             <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🚀 Benchmark parallèle de </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">model_items</span><span class="p">)</span><span class="si">}</span><span class="s2"> modèles...&quot;</span><span class="p">)</span>
-            
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">model_items</span><span class="p">)</span><span class="si">}</span><span class="s2"> models in parallel...&quot;</span><span class="p">)</span>
+
             <span class="n">parallel_results</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span>
                 <span class="n">delayed</span><span class="p">(</span><span class="n">_train_and_evaluate</span><span class="p">)(</span>
                     <span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span>
                 <span class="p">)</span>
                 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
                     <span class="n">model_items</span><span class="p">,</span>
-                    <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Entraînement&quot;</span><span class="p">,</span>
+                    <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Training&quot;</span><span class="p">,</span>
                     <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">show_progress</span>
                 <span class="p">)</span>
             <span class="p">)</span>
-            
+
             <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">parallel_results</span><span class="p">:</span>
                 <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># Exécution séquentielle avec barre de progression</span>
+            <span class="c1"># Sequential execution with progress bar</span>
             <span class="n">iterator</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
                 <span class="n">iterator</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span>
                     <span class="n">iterator</span><span class="p">,</span>
                     <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">),</span>
                     <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Benchmark&quot;</span><span class="p">,</span>
-                    <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;modèle&quot;</span>
+                    <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;model&quot;</span>
                 <span class="p">)</span>
-            
+
             <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
-                    <span class="n">iterator</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">({</span><span class="s2">&quot;modèle&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
-                
-                <span class="c1"># Mesure du temps d&#39;entraînement</span>
+                    <span class="n">iterator</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">({</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
+
+                <span class="c1"># Measure training time</span>
                 <span class="n">start_fit</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
                 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
                 <span class="n">fit_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_fit</span>
 
-                <span class="c1"># Mesure du temps de prédiction</span>
+                <span class="c1"># Measure prediction time</span>
                 <span class="n">start_pred</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
                 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
                 <span class="n">predict_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_pred</span>
@@ -285,11 +285,11 @@
                     <span class="s1">&#39;fit_time&#39;</span><span class="p">:</span> <span class="n">fit_time</span><span class="p">,</span>
                     <span class="s1">&#39;predict_time&#39;</span><span class="p">:</span> <span class="n">predict_time</span>
                 <span class="p">}</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">results</span>
         <span class="k">return</span> <span class="n">results</span></div>
 
-    
+
 <div class="viewcode-block" id="Benchmark.run_cv">
 <a class="viewcode-back" href="../../trainedml/benchmark.html#trainedml.benchmark.Benchmark.run_cv">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">run_cv</span><span class="p">(</span>
@@ -301,30 +301,30 @@
         <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compare les modèles par validation croisée (K-fold).</span>
+<span class="sd">        Compare models by cross-validation (K-fold).</span>
 
-<span class="sd">        Chaque modèle est entraîné et évalué sur ``cv`` plis ; les métriques</span>
-<span class="sd">        retournées sont les moyennes sur les plis, avec l&#39;écart-type dans</span>
-<span class="sd">        ``scores_std``. Pour la classification, les plis sont stratifiés.</span>
+<span class="sd">        Each model is trained and evaluated on ``cv`` folds; the returned</span>
+<span class="sd">        metrics are the averages across folds, with the standard deviation</span>
+<span class="sd">        in ``scores_std``. For classification, folds are stratified.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        X : pandas.DataFrame or array-like</span>
-<span class="sd">            Features (jeu complet, non splitté).</span>
+<span class="sd">            Features (full dataset, not split).</span>
 <span class="sd">        y : pandas.Series or array-like</span>
-<span class="sd">            Cible.</span>
+<span class="sd">            Target.</span>
 <span class="sd">        cv : int, default=5</span>
-<span class="sd">            Nombre de plis.</span>
+<span class="sd">            Number of folds.</span>
 <span class="sd">        show_progress : bool, default=True</span>
-<span class="sd">            Affiche une barre de progression.</span>
+<span class="sd">            Show a progress bar.</span>
 <span class="sd">        random_state : int, default=42</span>
-<span class="sd">            Graine pour le mélange des plis.</span>
+<span class="sd">            Seed for fold shuffling.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        dict</span>
-<span class="sd">            {model_name: {&#39;scores&#39;: moyennes, &#39;scores_std&#39;: écarts-types,</span>
-<span class="sd">            &#39;fit_time&#39;: temps moyen, &#39;predict_time&#39;: temps moyen, &#39;cv&#39;: cv}}</span>
+<span class="sd">            {model_name: {&#39;scores&#39;: averages, &#39;scores_std&#39;: standard deviations,</span>
+<span class="sd">            &#39;fit_time&#39;: average time, &#39;predict_time&#39;: average time, &#39;cv&#39;: cv}}</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
@@ -346,7 +346,7 @@
         <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">iterator</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
-            <span class="n">iterator</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;CV </span><span class="si">{</span><span class="n">cv</span><span class="si">}</span><span class="s2">-fold&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;modèle&quot;</span><span class="p">)</span>
+            <span class="n">iterator</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;CV </span><span class="si">{</span><span class="n">cv</span><span class="si">}</span><span class="s2">-fold&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
             <span class="n">fold_scores</span><span class="p">,</span> <span class="n">fit_times</span><span class="p">,</span> <span class="n">predict_times</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
@@ -382,22 +382,22 @@
 <a class="viewcode-back" href="../../trainedml/benchmark.html#trainedml.benchmark.Benchmark.to_dataframe">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sort</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;pd.DataFrame&quot;</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Convertit les résultats du benchmark en DataFrame pandas.</span>
+<span class="sd">        Convert the benchmark results to a pandas DataFrame.</span>
 
-<span class="sd">        Les colonnes sont les métriques (plus ``fit_time`` et ``predict_time``),</span>
-<span class="sd">        les lignes les modèles. Si les résultats proviennent de :meth:`run_cv`,</span>
-<span class="sd">        des colonnes ``&lt;metric&gt;_std`` sont ajoutées. Le tableau est trié par la</span>
-<span class="sd">        métrique principale (``accuracy`` ou ``r2``), du meilleur au moins bon.</span>
+<span class="sd">        Columns are the metrics (plus ``fit_time`` and ``predict_time``),</span>
+<span class="sd">        rows are the models. If the results come from :meth:`run_cv`,</span>
+<span class="sd">        ``&lt;metric&gt;_std`` columns are added. The table is sorted by the</span>
+<span class="sd">        primary metric (``accuracy`` or ``r2``), from best to worst.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        sort : bool, default=True</span>
-<span class="sd">            Trier par la métrique principale, décroissante.</span>
+<span class="sd">            Sort by the primary metric, descending.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        pandas.DataFrame or None</span>
-<span class="sd">            Tableau comparatif, ou None si run()/run_cv() n&#39;a pas été exécuté.</span>
+<span class="sd">            Comparison table, or None if run()/run_cv() has not been called.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
@@ -441,33 +441,33 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
-        
-        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span> <span class="s2">&quot;📊 RÉSUMÉ DU BENCHMARK&quot;</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">]</span>
-        
-        <span class="c1"># Trouver le meilleur modèle par accuracy</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span> <span class="s2">&quot;BENCHMARK SUMMARY&quot;</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">]</span>
+
+        <span class="c1"># Find the best model by accuracy</span>
         <span class="n">best_model</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">best_accuracy</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-        
+
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🔹 </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ⏱️ fit_time: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;fit_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
-            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ⏱️ predict_time: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;predict_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
-            
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  fit_time: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;fit_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  predict_time: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;predict_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+
             <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">best_accuracy</span><span class="p">:</span>
                 <span class="n">best_accuracy</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
                 <span class="n">best_model</span> <span class="o">=</span> <span class="n">name</span>
-        
+
         <span class="k">if</span> <span class="n">best_model</span><span class="p">:</span>
             <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
-            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🏆 MEILLEUR MODÈLE: </span><span class="si">{</span><span class="n">best_model</span><span class="si">}</span><span class="s2"> (accuracy: </span><span class="si">{</span><span class="n">best_accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BEST MODEL: </span><span class="si">{</span><span class="n">best_model</span><span class="si">}</span><span class="s2"> (accuracy: </span><span class="si">{</span><span class="n">best_accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
             <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
-        
+
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
 
-    
+
 <div class="viewcode-block" id="Benchmark.print_summary">
 <a class="viewcode-back" href="../../trainedml/benchmark.html#trainedml.benchmark.Benchmark.print_summary">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">print_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -478,7 +478,7 @@
         <span class="k">if</span> <span class="n">summary</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ Aucun résultat. Exécutez d&#39;abord run().&quot;</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No results. Run run() first.&quot;</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

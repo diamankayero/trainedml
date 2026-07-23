@@ -86,8 +86,10 @@
 <span class="sd">...         pass</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
@@ -96,97 +98,103 @@
 <a class="viewcode-back" href="../../../trainedml/vizs.html#trainedml.viz.vizs.Vizs">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Vizs</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe de base pour toutes les visualisations.</span>
-<span class="sd">    Toutes les visualisations doivent hériter de cette classe et surcharger la méthode vizs().</span>
-<span class="sd">    </span>
+<span class="sd">    Base class for every visualization.</span>
+<span class="sd">    All visualizations must inherit from this class and override the vizs() method.</span>
+
 <span class="sd">    Attributes:</span>
-<span class="sd">        _data: DataFrame pandas contenant les données</span>
-<span class="sd">        _figure: Figure matplotlib générée</span>
-<span class="sd">        _save_path: Chemin optionnel pour sauvegarder automatiquement la figure</span>
+<span class="sd">        _data: pandas DataFrame containing the data</span>
+<span class="sd">        _figure: generated matplotlib figure</span>
+<span class="sd">        _save_path: optional path to automatically save the figure</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">save_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">save_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialise la visualisation.</span>
-<span class="sd">        </span>
+<span class="sd">        Initialize the visualization.</span>
+
 <span class="sd">        Args:</span>
-<span class="sd">            data: DataFrame pandas contenant les données</span>
-<span class="sd">            save_path (str, optional): Chemin pour sauvegarder la figure automatiquement.</span>
-<span class="sd">                                       Formats supportés: png, pdf, svg, jpg, etc.</span>
+<span class="sd">            data: pandas DataFrame containing the data</span>
+<span class="sd">            save_path (str, optional): path to automatically save the figure.</span>
+<span class="sd">                                       Supported formats: png, pdf, svg, jpg, etc.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Vérifie que les données sont bien un DataFrame pandas</span>
+        <span class="c1"># Check that data is indeed a pandas DataFrame</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;data doit être un DataFrame pandas&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;data must be a pandas DataFrame&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_figure</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Stocke la figure générée (matplotlib, seaborn, etc.)</span>
+        <span class="c1"># Stores the generated output: usually a matplotlib Figure, but some</span>
+        <span class="c1"># subclasses (e.g. ProfilingViz) return a pandas DataFrame instead.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_figure</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span> <span class="o">=</span> <span class="n">save_path</span>
 
 <div class="viewcode-block" id="Vizs.vizs">
 <a class="viewcode-back" href="../../../trainedml/vizs.html#trainedml.viz.vizs.Vizs.vizs">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">vizs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vizs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Méthode à surcharger dans les classes filles pour générer la visualisation.</span>
-<span class="sd">        Appelle automatiquement save() si un save_path a été défini.</span>
+<span class="sd">        Method to override in subclasses to generate the visualization.</span>
+<span class="sd">        Automatically calls save() if a save_path was set.</span>
+
+<span class="sd">        Most subclasses return None and store their output on</span>
+<span class="sd">        ``self._figure`` instead; a few (e.g. HistogramViz, BoxplotViz)</span>
+<span class="sd">        also return it directly, hence the ``Any`` return type here.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Les sous-classes doivent implémenter cette méthode&#39;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Subclasses must implement this method&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Vizs.save">
 <a class="viewcode-back" href="../../../trainedml/vizs.html#trainedml.viz.vizs.Vizs.save">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dpi</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">150</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dpi</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">150</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sauvegarde la figure dans un fichier.</span>
-<span class="sd">        </span>
+<span class="sd">        Save the figure to a file.</span>
+
 <span class="sd">        Args:</span>
-<span class="sd">            path (str, optional): Chemin du fichier. Si None, utilise self._save_path</span>
-<span class="sd">            dpi (int): Résolution de l&#39;image (défaut: 150)</span>
-<span class="sd">            **kwargs: Arguments supplémentaires passés à plt.savefig()</span>
-<span class="sd">        </span>
+<span class="sd">            path (str, optional): file path. If None, uses self._save_path</span>
+<span class="sd">            dpi (int): image resolution (default: 150)</span>
+<span class="sd">            **kwargs: extra arguments passed to plt.savefig()</span>
+
 <span class="sd">        Returns:</span>
-<span class="sd">            str: Chemin du fichier sauvegardé, ou None si échec</span>
-<span class="sd">        </span>
+<span class="sd">            str: path to the saved file, or None on failure</span>
+
 <span class="sd">        Raises:</span>
-<span class="sd">            ValueError: Si aucun chemin n&#39;est spécifié et _save_path est None</span>
+<span class="sd">            ValueError: if no path is specified and _save_path is None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">save_path</span> <span class="o">=</span> <span class="n">path</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span>
-        
+
         <span class="k">if</span> <span class="n">save_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Aucun chemin spécifié. Passez &#39;path&#39; ou définissez save_path à l&#39;initialisation.&quot;</span><span class="p">)</span>
-        
-        <span class="c1"># Créer le dossier parent si nécessaire</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No path specified. Pass &#39;path&#39; or set save_path at init time.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Create the parent directory if needed</span>
         <span class="n">parent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">parent_dir</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        
+
         <span class="k">try</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Figure sauvegardée: </span><span class="si">{</span><span class="n">save_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Figure saved: </span><span class="si">{</span><span class="n">save_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">save_path</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Erreur lors de la sauvegarde: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error while saving: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_auto_save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_auto_save</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sauvegarde automatique si un save_path a été défini.</span>
-<span class="sd">        À appeler à la fin de vizs() dans les classes filles.</span>
+<span class="sd">        Automatically save if a save_path was set.</span>
+<span class="sd">        Should be called at the end of vizs() in subclasses.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">figure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retourne la figure générée.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">figure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the generated figure.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_figure</span>
-    
+
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">save_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retourne le chemin de sauvegarde configuré.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the configured save path.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span>
-    
+
     <span class="nd">@save_path</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">save_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Définit le chemin de sauvegarde.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the save path.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span> <span class="o">=</span> <span class="n">value</span></div>
 
 </pre></div>

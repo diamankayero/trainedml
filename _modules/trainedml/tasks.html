@@ -72,19 +72,19 @@
              
   <h1>Code source de trainedml.tasks</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Détection du type de tâche (classification vs régression) pour trainedml.</span>
+<span class="sd">Task type detection (classification vs regression) for trainedml.</span>
 
-<span class="sd">Ce module centralise l&#39;heuristique utilisée par le Trainer, la CLI, le Benchmark</span>
-<span class="sd">et :func:`trainedml.compare` pour déterminer si une cible correspond à une tâche</span>
-<span class="sd">de classification ou de régression.</span>
+<span class="sd">This module centralizes the heuristic used by the Trainer, the CLI, the</span>
+<span class="sd">Benchmark, and :func:`trainedml.compare` to determine whether a target</span>
+<span class="sd">corresponds to a classification or a regression task.</span>
 
-<span class="sd">Heuristique</span>
-<span class="sd">-----------</span>
-<span class="sd">- Cible non numérique (texte, catégoriel, ``StringDtype``...) → classification</span>
-<span class="sd">- Cible entière avec peu de valeurs uniques (≤ 20) → classification</span>
-<span class="sd">- Sinon → régression</span>
+<span class="sd">Heuristic</span>
+<span class="sd">---------</span>
+<span class="sd">- Non-numeric target (text, categorical, ``StringDtype``...) -&gt; classification</span>
+<span class="sd">- Integer target with few unique values (&lt;= 20) -&gt; classification</span>
+<span class="sd">- Otherwise -&gt; regression</span>
 
-<span class="sd">Exemple</span>
+<span class="sd">Example</span>
 <span class="sd">-------</span>
 <span class="sd">&gt;&gt;&gt; from trainedml.tasks import detect_task</span>
 <span class="sd">&gt;&gt;&gt; detect_task(pd.Series([&quot;setosa&quot;, &quot;versicolor&quot;]))</span>
@@ -97,8 +97,8 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="c1">#: Nombre maximal de valeurs uniques entières pour considérer une cible</span>
-<span class="c1">#: comme catégorielle (classification).</span>
+<span class="c1">#: Maximum number of unique integer values for a target to be considered</span>
+<span class="c1">#: categorical (classification).</span>
 <span class="n">MAX_UNIQUE_FOR_CLASSIFICATION</span> <span class="o">=</span> <span class="mi">20</span>
 
 
@@ -106,17 +106,17 @@
 <a class="viewcode-back" href="../../trainedml/tasks.html#trainedml.tasks.is_classification_target">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_classification_target</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Détermine si la cible est catégorielle (classification) ou numérique (régression).</span>
+<span class="sd">    Determine whether the target is categorical (classification) or numeric (regression).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    y : pandas.Series or array-like</span>
-<span class="sd">        Colonne cible à analyser.</span>
+<span class="sd">        Target column to analyze.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    bool</span>
-<span class="sd">        True si classification, False si régression.</span>
+<span class="sd">        True if classification, False if regression.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -126,10 +126,10 @@
 <span class="sd">    False</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="k">else</span> <span class="n">y</span>
-    <span class="c1"># Si ce n&#39;est pas numérique (texte, catégoriel, StringDtype...), c&#39;est de la classification</span>
+    <span class="c1"># If it&#39;s not numeric (text, categorical, StringDtype...), it&#39;s classification</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_numeric_dtype</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span>
-    <span class="c1"># Si peu de valeurs uniques et entiers, probablement classification</span>
+    <span class="c1"># If few unique values and integers, likely classification</span>
     <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">MAX_UNIQUE_FOR_CLASSIFICATION</span> <span class="ow">and</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_integer_dtype</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">return</span> <span class="kc">False</span></div>
@@ -140,17 +140,17 @@
 <a class="viewcode-back" href="../../trainedml/tasks.html#trainedml.tasks.detect_task">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">detect_task</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Retourne le type de tâche associé à une cible.</span>
+<span class="sd">    Return the task type associated with a target.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    y : pandas.Series or array-like</span>
-<span class="sd">        Colonne cible à analyser.</span>
+<span class="sd">        Target column to analyze.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    str</span>
-<span class="sd">        ``&#39;classification&#39;`` ou ``&#39;regression&#39;``.</span>
+<span class="sd">        ``&#39;classification&#39;`` or ``&#39;regression&#39;``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -165,26 +165,26 @@
 <a class="viewcode-back" href="../../trainedml/tasks.html#trainedml.tasks.detect_model_task">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">detect_model_task</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Détermine le type de tâche d&#39;un modèle, quel qu&#39;il soit.</span>
+<span class="sd">    Determine the task type of a model, whatever it is.</span>
 
-<span class="sd">    L&#39;ordre de priorité est :</span>
+<span class="sd">    Priority order:</span>
 
-<span class="sd">    1. l&#39;attribut ``task`` du modèle (modèles trainedml, :class:`BaseModel`) ;</span>
-<span class="sd">    2. les fonctions ``is_classifier`` / ``is_regressor`` de scikit-learn</span>
-<span class="sd">       (estimateurs sklearn arbitraires) ;</span>
-<span class="sd">    3. l&#39;heuristique sur la cible ``y`` si elle est fournie.</span>
+<span class="sd">    1. the model&#39;s ``task`` attribute (trainedml models, :class:`BaseModel`);</span>
+<span class="sd">    2. scikit-learn&#39;s ``is_classifier`` / ``is_regressor`` functions</span>
+<span class="sd">       (arbitrary sklearn estimators);</span>
+<span class="sd">    3. the heuristic on the ``y`` target, if provided.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    model : object</span>
-<span class="sd">        Modèle trainedml, estimateur scikit-learn, ou tout objet fit/predict.</span>
+<span class="sd">        trainedml model, scikit-learn estimator, or any fit/predict object.</span>
 <span class="sd">    y : array-like, optional</span>
-<span class="sd">        Cible, utilisée en dernier recours pour l&#39;heuristique.</span>
+<span class="sd">        Target, used as a last resort for the heuristic.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    str</span>
-<span class="sd">        ``&#39;classification&#39;`` ou ``&#39;regression&#39;``.</span>
+<span class="sd">        ``&#39;classification&#39;`` or ``&#39;regression&#39;``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">task</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;task&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">task</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span> <span class="s2">&quot;regression&quot;</span><span class="p">):</span>

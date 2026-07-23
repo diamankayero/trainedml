@@ -72,20 +72,20 @@
              
   <h1>Code source de trainedml.preprocessing</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Prétraitement automatique des données pour trainedml.</span>
+<span class="sd">Automatic data preprocessing for trainedml.</span>
 
-<span class="sd">Ce module fournit un préprocesseur standard construit avec scikit-learn :</span>
+<span class="sd">This module provides a standard preprocessor built with scikit-learn:</span>
 
-<span class="sd">- **colonnes numériques** : imputation par la médiane puis standardisation</span>
-<span class="sd">  (moyenne 0, écart-type 1) - indispensable pour KNN, la régression logistique,</span>
-<span class="sd">  Ridge/Lasso... ;</span>
-<span class="sd">- **colonnes catégorielles** : imputation par le mode puis encodage one-hot</span>
-<span class="sd">  (les catégories inconnues à la prédiction sont ignorées).</span>
+<span class="sd">- **numeric columns**: median imputation then standardization</span>
+<span class="sd">  (mean 0, std 1) - essential for KNN, logistic regression,</span>
+<span class="sd">  Ridge/Lasso...;</span>
+<span class="sd">- **categorical columns**: mode imputation then one-hot encoding</span>
+<span class="sd">  (categories unseen at prediction time are ignored).</span>
 
-<span class="sd">Il est utilisé par défaut par :class:`trainedml.Trainer` (``preprocess=True``)</span>
-<span class="sd">et par :func:`trainedml.compare`, mais peut aussi s&#39;employer seul.</span>
+<span class="sd">It is used by default by :class:`trainedml.Trainer` (``preprocess=True``)</span>
+<span class="sd">and by :func:`trainedml.compare`, but can also be used on its own.</span>
 
-<span class="sd">Exemple</span>
+<span class="sd">Example</span>
 <span class="sd">-------</span>
 <span class="sd">&gt;&gt;&gt; from trainedml.preprocessing import build_preprocessor</span>
 <span class="sd">&gt;&gt;&gt; pre = build_preprocessor()</span>
@@ -103,7 +103,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_make_onehot</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">OneHotEncoder</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Crée un OneHotEncoder dense, compatible avec toutes les versions de scikit-learn.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a dense OneHotEncoder, compatible with every scikit-learn version.&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># scikit-learn &gt;= 1.2</span>
         <span class="k">return</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -116,15 +116,15 @@
 <a class="viewcode-back" href="../../trainedml/preprocessing.html#trainedml.preprocessing.build_preprocessor">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">build_preprocessor</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ColumnTransformer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Construit le préprocesseur standard de trainedml.</span>
+<span class="sd">    Build trainedml&#39;s standard preprocessor.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    sklearn.compose.ColumnTransformer</span>
-<span class="sd">        Transformeur non entraîné : imputation médiane + standardisation pour</span>
-<span class="sd">        les colonnes numériques, imputation mode + one-hot pour les colonnes</span>
-<span class="sd">        catégorielles. À entraîner sur les données d&#39;entraînement uniquement</span>
-<span class="sd">        (``fit_transform``), puis à appliquer aux données de test (``transform``).</span>
+<span class="sd">        Untrained transformer: median imputation + standardization for</span>
+<span class="sd">        numeric columns, mode imputation + one-hot for categorical</span>
+<span class="sd">        columns. To be fit on the training data only (``fit_transform``),</span>
+<span class="sd">        then applied to the test data (``transform``).</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -154,26 +154,25 @@
 <a class="viewcode-back" href="../../trainedml/preprocessing.html#trainedml.preprocessing.PreprocessedModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PreprocessedModel</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Enveloppe un modèle avec le préprocesseur standard de trainedml.</span>
+<span class="sd">    Wraps a model with trainedml&#39;s standard preprocessor.</span>
 
-<span class="sd">    À chaque ``fit``, le préprocesseur est (ré)entraîné sur les données</span>
-<span class="sd">    d&#39;entraînement uniquement, puis appliqué aux données de prédiction :</span>
-<span class="sd">    aucune fuite d&#39;information du test vers l&#39;entraînement, y compris en</span>
-<span class="sd">    validation croisée.</span>
+<span class="sd">    On every ``fit``, the preprocessor is (re)trained on the training data</span>
+<span class="sd">    only, then applied to the prediction data: no information leaks from</span>
+<span class="sd">    test to train, including during cross-validation.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    model : object</span>
-<span class="sd">        Modèle à envelopper (trainedml ou scikit-learn, tout objet fit/predict).</span>
+<span class="sd">        Model to wrap (trainedml or scikit-learn, any fit/predict object).</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    model : object</span>
-<span class="sd">        Le modèle enveloppé.</span>
+<span class="sd">        The wrapped model.</span>
 <span class="sd">    preprocessor : sklearn.compose.ColumnTransformer</span>
-<span class="sd">        Le préprocesseur, réentraîné à chaque appel de :meth:`fit`.</span>
+<span class="sd">        The preprocessor, retrained on every call to :meth:`fit`.</span>
 <span class="sd">    task : str</span>
-<span class="sd">        Type de tâche du modèle enveloppé (délégué).</span>
+<span class="sd">        Task type of the wrapped model (delegated).</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -189,13 +188,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Type de tâche du modèle enveloppé (&#39;classification&#39; ou &#39;regression&#39;).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Task type of the wrapped model (&#39;classification&#39; or &#39;regression&#39;).&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;task&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PreprocessedModel.fit">
 <a class="viewcode-back" href="../../trainedml/preprocessing.html#trainedml.preprocessing.PreprocessedModel.fit">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Entraîne le préprocesseur puis le modèle sur (X, y).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fit the preprocessor then the model on (X, y).&quot;&quot;&quot;</span>
         <span class="n">X_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
@@ -204,7 +203,7 @@
 <div class="viewcode-block" id="PreprocessedModel.predict">
 <a class="viewcode-back" href="../../trainedml/preprocessing.html#trainedml.preprocessing.PreprocessedModel.predict">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prétraite X puis prédit avec le modèle enveloppé.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Preprocess X then predict with the wrapped model.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">))</span></div>
 
 

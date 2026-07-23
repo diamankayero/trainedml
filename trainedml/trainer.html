@@ -47,8 +47,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../modules.html">trainedml - API détaillée</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Trainer (API principale)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#fonctionnalites-principales">Fonctionnalités principales</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exemple">Exemple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main-features">Main features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trainedml.Trainer"><code class="docutils literal notranslate"><span class="pre">Trainer</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#trainedml.Trainer.model"><code class="docutils literal notranslate"><span class="pre">Trainer.model</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#trainedml.Trainer.preprocessor"><code class="docutils literal notranslate"><span class="pre">Trainer.preprocessor</span></code></a></li>
@@ -122,34 +121,33 @@
              
   <section id="module-trainedml">
 <span id="trainer-api-principale"></span><h1>Trainer (API principale)<a class="headerlink" href="#module-trainedml" title="Lien vers cette rubrique"></a></h1>
-<p>Module principal du package trainedml.</p>
-<p>Ce module expose la classe centrale <cite>Trainer</cite> qui permet de gérer tout le workflow de machine learning :
-chargement de données, séparation train/test, prétraitement, entraînement, évaluation, prédiction
-et persistance. Il expose aussi la fonction <a class="reference internal" href="#trainedml.compare" title="trainedml.compare"><code class="xref py py-func docutils literal notranslate"><span class="pre">compare()</span></code></a> pour comparer tous les modèles
-d’une tâche en une ligne.</p>
-<section id="fonctionnalites-principales">
-<h2>Fonctionnalités principales<a class="headerlink" href="#fonctionnalites-principales" title="Lien vers cette rubrique"></a></h2>
+<p>Main module of the trainedml package.</p>
+<p>This module exposes the central <cite>Trainer</cite> class, which handles the whole
+machine learning workflow: data loading, train/test splitting,
+preprocessing, training, evaluation, prediction, and persistence. It also
+exposes the <a class="reference internal" href="#trainedml.compare" title="trainedml.compare"><code class="xref py py-func docutils literal notranslate"><span class="pre">compare()</span></code></a> function to compare every model for a task in
+one line.</p>
+<section id="main-features">
+<h2>Main features<a class="headerlink" href="#main-features" title="Lien vers cette rubrique"></a></h2>
 <ul class="simple">
-<li><p>API haut niveau pour entraîner, évaluer et prédire avec un modèle ML</p></li>
-<li><p>Supporte les datasets intégrés (Iris, Wine) ou des CSV distants</p></li>
-<li><p>Prétraitement automatique (imputation, standardisation, encodage one-hot)</p></li>
-<li><p>Séparation automatique train/test, seed variable sans recréer l’objet</p></li>
-<li><p>Gestion des modèles trainedml (KNN, Logistic, Random Forest, régresseurs…)
-et de <strong>n’importe quel estimateur scikit-learn</strong> (ou objet fit/predict)</p></li>
-<li><p>Évaluation adaptée à la tâche : classification (accuracy, precision, recall, f1)
-ou régression (r2, mse, rmse, mae)</p></li>
-<li><p>Sauvegarde et rechargement du modèle entraîné (<a class="reference internal" href="#trainedml.Trainer.save" title="trainedml.Trainer.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Trainer.save()</span></code></a> / <a class="reference internal" href="#trainedml.Trainer.load" title="trainedml.Trainer.load"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Trainer.load()</span></code></a>)</p></li>
-<li><p>Peut être utilisé en script, API, CLI ou webapp</p></li>
+<li><p>High-level API to train, evaluate, and predict with an ML model</p></li>
+<li><p>Supports built-in datasets (Iris, Wine) or remote CSV files</p></li>
+<li><p>Automatic preprocessing (imputation, standardization, one-hot encoding)</p></li>
+<li><p>Automatic train/test split, seed can vary without recreating the object</p></li>
+<li><p>Handles trainedml models (KNN, Logistic, Random Forest, regressors…)
+and <strong>any scikit-learn estimator</strong> (or any fit/predict object)</p></li>
+<li><p>Task-aware evaluation: classification (accuracy, precision, recall, f1)
+or regression (r2, mse, rmse, mae)</p></li>
+<li><p>Save and reload a trained model (<a class="reference internal" href="#trainedml.Trainer.save" title="trainedml.Trainer.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Trainer.save()</span></code></a> / <a class="reference internal" href="#trainedml.Trainer.load" title="trainedml.Trainer.load"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Trainer.load()</span></code></a>)</p></li>
+<li><p>Usable as a script, an API, a CLI, or a webapp backend</p></li>
 </ul>
-</section>
-<section id="exemple">
-<h2>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique"></a></h2>
+<p class="rubric">Exemple</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trainer</span><span class="p">,</span> <span class="n">compare</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;knn&quot;</span><span class="p">,</span> <span class="n">model_params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;n_neighbors&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">preds</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">compare</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># comparatif de tous les modèles en DataFrame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">compare</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># comparison of every model as a DataFrame</span>
 </pre></div>
 </div>
 </section>
@@ -157,35 +155,39 @@ ou régression (r2, mse, rmse, mae)</p></li>
 <dt class="sig sig-object py" id="trainedml.Trainer">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.</span></span><span class="sig-name descname"><span class="pre">Trainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'random_forest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'pd.DataFrame'</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'pd.Series'</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocess</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml.html#Trainer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Classe haut niveau pour entraîner, évaluer et prédire avec un modèle de machine learning.</p>
-<p>Cette classe centralise tout le workflow ML : chargement des données, split train/test,
-prétraitement, entraînement, évaluation, prédiction et persistance. Elle est conçue pour
-être utilisée dans une API, une webapp ou en script Python.</p>
+<p>High-level class to train, evaluate, and predict with a machine
+learning model.</p>
+<p>This class centralizes the whole ML workflow: data loading, train/test
+split, preprocessing, training, evaluation, prediction, and
+persistence. It is designed to be used in an API, a webapp, or a plain
+Python script.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dataset</strong> (<em>str</em><em>, </em><em>optional</em>) – Nom du dataset connu (« iris », « wine »).</p></li>
-<li><p><strong>model</strong> (<em>str</em><em> or </em><em>object</em><em>, </em><em>default='random_forest'</em>) – Nom d’un modèle trainedml (« random_forest », « knn », « logistic », « linear »,
-« ridge », « lasso », …) <strong>ou</strong> n’importe quel estimateur possédant les
-méthodes <code class="docutils literal notranslate"><span class="pre">fit</span></code> et <code class="docutils literal notranslate"><span class="pre">predict</span></code> (par exemple un estimateur scikit-learn).</p></li>
-<li><p><strong>url</strong> (<em>str</em><em>, </em><em>optional</em>) – URL d’un CSV distant à charger.</p></li>
-<li><p><strong>target</strong> (<em>str</em><em>, </em><em>optional</em>) – Nom de la colonne cible (si url).</p></li>
-<li><p><strong>X</strong> (<em>pandas.DataFrame</em><em> or </em><em>array-like</em><em>, </em><em>optional</em>) – Features fournies directement en mémoire (alternative à dataset/url).</p></li>
-<li><p><strong>y</strong> (<em>pandas.Series</em><em> or </em><em>array-like</em><em>, </em><em>optional</em>) – Cible correspondante (obligatoire si X est fourni).</p></li>
-<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>default=0.2</em>) – Proportion de test (entre 0 et 1).</p></li>
-<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>default=42</em>) – Graine aléatoire pour la reproductibilité.</p></li>
-<li><p><strong>model_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – Hyperparamètres passés au constructeur du modèle (uniquement si <code class="docutils literal notranslate"><span class="pre">model</span></code>
-est un nom ; pour un estimateur déjà instancié, configurez-le directement).</p></li>
-<li><p><strong>preprocess</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Si True, applique le prétraitement standard de trainedml (imputation,
-standardisation des colonnes numériques, encodage one-hot des colonnes
-catégorielles). Le préprocesseur est entraîné sur le train uniquement.</p></li>
+<li><p><strong>dataset</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of a built-in dataset (« iris », « wine »).</p></li>
+<li><p><strong>model</strong> (<em>str</em><em> or </em><em>object</em><em>, </em><em>default='random_forest'</em>) – Name of a trainedml model (« random_forest », « knn », « logistic »,
+« linear », « ridge », « lasso », …) <strong>or</strong> any estimator that has
+<code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">predict</span></code> methods (for example a scikit-learn
+estimator).</p></li>
+<li><p><strong>url</strong> (<em>str</em><em>, </em><em>optional</em>) – URL of a remote CSV to load.</p></li>
+<li><p><strong>target</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the target column (if url).</p></li>
+<li><p><strong>X</strong> (<em>pandas.DataFrame</em><em> or </em><em>array-like</em><em>, </em><em>optional</em>) – Features provided directly in memory (alternative to dataset/url).</p></li>
+<li><p><strong>y</strong> (<em>pandas.Series</em><em> or </em><em>array-like</em><em>, </em><em>optional</em>) – Matching target (required if X is provided).</p></li>
+<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>default=0.2</em>) – Test proportion (between 0 and 1).</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>default=42</em>) – Random seed for reproducibility.</p></li>
+<li><p><strong>model_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – Hyperparameters passed to the model’s constructor (only usable
+with a model name; for an already-instantiated estimator, configure
+it directly).</p></li>
+<li><p><strong>preprocess</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True, applies trainedml’s standard preprocessing (imputation,
+standardization of numeric columns, one-hot encoding of categorical
+columns). The preprocessor is fit on the training set only.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="trainedml.Trainer.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#trainedml.Trainer.model" title="Lien vers cette définition"></a></dt>
-<dd><p>Instance du modèle ML utilisé.</p>
+<dd><p>The underlying ML model instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>object</p>
@@ -196,7 +198,7 @@ catégorielles). Le préprocesseur est entraîné sur le train uniquement.</p></
 <dl class="py attribute">
 <dt class="sig sig-object py" id="trainedml.Trainer.preprocessor">
 <span class="sig-name descname"><span class="pre">preprocessor</span></span><a class="headerlink" href="#trainedml.Trainer.preprocessor" title="Lien vers cette définition"></a></dt>
-<dd><p>Préprocesseur (None si <code class="docutils literal notranslate"><span class="pre">preprocess=False</span></code>).</p>
+<dd><p>The preprocessor (None if <code class="docutils literal notranslate"><span class="pre">preprocess=False</span></code>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>sklearn.compose.ColumnTransformer or None</p>
@@ -207,7 +209,7 @@ catégorielles). Le préprocesseur est entraîné sur le train uniquement.</p></
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">X_train,</span> <span class="pre">X_test,</span> <span class="pre">y_train,</span> <span class="pre">y_test</span></span></dt>
-<dd><p>Données séparées pour l’entraînement et le test (non prétraitées).</p>
+<dd><p>Train/test splits (not preprocessed).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>array-like</p>
@@ -218,7 +220,7 @@ catégorielles). Le préprocesseur est entraîné sur le train uniquement.</p></
 <dl class="py attribute">
 <dt class="sig sig-object py" id="trainedml.Trainer.task">
 <span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#trainedml.Trainer.task" title="Lien vers cette définition"></a></dt>
-<dd><p>Type de tâche (“classification” ou “regression”).</p>
+<dd><p>Task type (“classification” or “regression”).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
@@ -229,7 +231,7 @@ catégorielles). Le préprocesseur est entraîné sur le train uniquement.</p></
 <dl class="py attribute">
 <dt class="sig sig-object py" id="trainedml.Trainer.is_fitted">
 <span class="sig-name descname"><span class="pre">is_fitted</span></span><a class="headerlink" href="#trainedml.Trainer.is_fitted" title="Lien vers cette définition"></a></dt>
-<dd><p>Indique si le modèle a été entraîné.</p>
+<dd><p>Whether the model has been trained.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -238,25 +240,25 @@ catégorielles). Le préprocesseur est entraîné sur le train uniquement.</p></
 </dd></dl>
 
 <p class="rubric">Exemples</p>
-<p>Workflow standard :</p>
+<p>Standard workflow:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;knn&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">preds</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]])</span>
 </pre></div>
 </div>
-<p>Hyperparamètres et estimateur scikit-learn arbitraire :</p>
+<p>Hyperparameters and an arbitrary scikit-learn estimator:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;knn&quot;</span><span class="p">,</span> <span class="n">model_params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;n_neighbors&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;rbf&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Varier le seed sans recréer le Trainer :</p>
+<p>Varying the seed without recreating the Trainer:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>Sauvegarde et rechargement :</p>
+<p>Save and reload:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;model.joblib&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">restored</span> <span class="o">=</span> <span class="n">Trainer</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;model.joblib&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">restored</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]])</span>
@@ -265,18 +267,18 @@ catégorielles). Le préprocesseur est entraîné sur le train uniquement.</p></
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.Trainer.evaluate">
 <span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.evaluate" title="Lien vers cette définition"></a></dt>
-<dd><p>Évalue le modèle entraîné sur les données de test, avec les métriques
-adaptées à la tâche : classification (accuracy, precision, recall, f1)
-ou régression (r2, mse, rmse, mae).</p>
+<dd><p>Evaluate the trained model on the test data, with metrics adapted
+to the task: classification (accuracy, precision, recall, f1) or
+regression (r2, mse, rmse, mae).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Renvoie<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dictionnaire des scores.</p>
+<dd class="field-odd"><p>Dictionary of scores.</p>
 </dd>
 <dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict</p>
 </dd>
 <dt class="field-odd">Lève<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>RuntimeError</strong> – Si le modèle n’est pas entraîné.</p>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – If the model has not been trained.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -284,19 +286,19 @@ ou régression (r2, mse, rmse, mae).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.Trainer.fit">
 <span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#trainedml.Trainer" title="trainedml.Trainer"><span class="pre">Trainer</span></a></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.fit" title="Lien vers cette définition"></a></dt>
-<dd><p>Entraîne le préprocesseur (si activé) puis le modèle sur les données d’entraînement.
-Charge les données si nécessaire.</p>
+<dd><p>Fit the preprocessor (if enabled) then the model on the training data.
+Loads the data first if needed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Si fournie, les données sont re-séparées avec cette proportion avant l’entraînement.</p></li>
-<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – Si fournie, les données sont re-séparées avec cette graine avant l’entraînement.
-Permet d’évaluer la stabilité d’un modèle sur plusieurs splits :
+<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>optional</em>) – If provided, the data is re-split with this proportion before training.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – If provided, the data is re-split with this seed before training.
+Useful to check a model’s stability across splits:
 <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">s</span> <span class="pre">in</span> <span class="pre">range(5):</span> <span class="pre">print(trainer.fit(seed=s).evaluate())</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>self</strong> – L’instance courante (pour chaînage).</p>
+<dd class="field-even"><p><strong>self</strong> – The current instance (for chaining).</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#trainedml.Trainer" title="trainedml.Trainer">Trainer</a></p>
@@ -307,14 +309,14 @@ Permet d’évaluer la stabilité d’un modèle sur plusieurs splits :
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.Trainer.load">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="s"><span class="pre">'Path'</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#trainedml.Trainer" title="trainedml.Trainer"><span class="pre">Trainer</span></a></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.load" title="Lien vers cette définition"></a></dt>
-<dd><p>Recharge un Trainer sauvegardé avec <a class="reference internal" href="#trainedml.Trainer.save" title="trainedml.Trainer.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save()</span></code></a>, prêt à prédire.</p>
+<dd><p>Reload a Trainer saved with <a class="reference internal" href="#trainedml.Trainer.save" title="trainedml.Trainer.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save()</span></code></a>, ready to predict.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – Chemin du fichier sauvegardé.</p>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – Path to the saved file.</p>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>Instance prête pour <a class="reference internal" href="#trainedml.Trainer.predict" title="trainedml.Trainer.predict"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict()</span></code></a> (les données d’origine ne sont
-pas rechargées ; <code class="docutils literal notranslate"><span class="pre">X_train</span></code> etc. valent None).</p>
+<dd class="field-even"><p>Instance ready for <a class="reference internal" href="#trainedml.Trainer.predict" title="trainedml.Trainer.predict"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict()</span></code></a> (the original data is not
+reloaded; <code class="docutils literal notranslate"><span class="pre">X_train</span></code> etc. are None).</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#trainedml.Trainer" title="trainedml.Trainer">Trainer</a></p>
@@ -330,16 +332,17 @@ pas rechargées ; <code class="docutils literal notranslate"><span class="pre">X
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.Trainer.load_data">
 <span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.load_data" title="Lien vers cette définition"></a></dt>
-<dd><p>Charge les données, effectue la séparation train/test et les stocke dans l’objet.</p>
-<p>La séparation utilise l’API du package (<code class="xref py py-meth docutils literal notranslate"><span class="pre">DataLoader.split()</span></code>) : il n’est
-jamais nécessaire d’appeler scikit-learn directement. Les ensembles obtenus
-sont accessibles via les attributs <code class="docutils literal notranslate"><span class="pre">X_train</span></code>, <code class="docutils literal notranslate"><span class="pre">X_test</span></code>, <code class="docutils literal notranslate"><span class="pre">y_train</span></code>, <code class="docutils literal notranslate"><span class="pre">y_test</span></code>.</p>
+<dd><p>Load the data, perform the train/test split, and store it on the object.</p>
+<p>The split uses the package’s own API (<code class="xref py py-meth docutils literal notranslate"><span class="pre">DataLoader.split()</span></code>):
+there is never a need to call scikit-learn directly. The resulting
+sets are available via the <code class="docutils literal notranslate"><span class="pre">X_train</span></code>, <code class="docutils literal notranslate"><span class="pre">X_test</span></code>, <code class="docutils literal notranslate"><span class="pre">y_train</span></code>,
+<code class="docutils literal notranslate"><span class="pre">y_test</span></code> attributes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Nouvelle proportion de test. Si fournie, remplace celle du constructeur.</p></li>
-<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – Nouvelle graine aléatoire. Si fournie, remplace celle du constructeur,
-ce qui permet de faire varier le split sans recréer le Trainer.</p></li>
+<li><p><strong>test_size</strong> (<em>float</em><em>, </em><em>optional</em>) – New test proportion. If provided, overrides the constructor’s value.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – New random seed. If provided, overrides the constructor’s value,
+which lets you vary the split without recreating the Trainer.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
@@ -349,7 +352,7 @@ ce qui permet de faire varier le split sans recréer le Trainer.</p></li>
 <dd class="field-odd"><p>tuple</p>
 </dd>
 <dt class="field-even">Lève<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Si le dataset ou la cible n’est pas spécifié correctement.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – If the dataset or target is not specified correctly.</p>
 </dd>
 </dl>
 <p class="rubric">Exemples</p>
@@ -362,21 +365,21 @@ ce qui permet de faire varier le split sans recréer le Trainer.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.Trainer.predict">
 <span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">np.ndarray</span></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.predict" title="Lien vers cette définition"></a></dt>
-<dd><p>Prédit la cible pour de nouvelles données X.</p>
-<p>Le prétraitement appris à l’entraînement est appliqué automatiquement :
-X doit contenir les mêmes features (mêmes colonnes) que l’entraînement.</p>
+<dd><p>Predict the target for new data X.</p>
+<p>The preprocessing learned during training is applied automatically:
+X must contain the same features (same columns) as the training data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em><em> or </em><em>pandas.DataFrame</em>) – Données d’entrée (mêmes features que l’entraînement).</p>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em><em> or </em><em>pandas.DataFrame</em>) – Input data (same features as training).</p>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>Prédictions du modèle.</p>
+<dd class="field-even"><p>Model predictions.</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-odd"><p>array</p>
 </dd>
 <dt class="field-even">Lève<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>RuntimeError</strong> – Si le modèle n’est pas entraîné.</p>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -384,13 +387,13 @@ X doit contenir les mêmes features (mêmes colonnes) que l’entraînement.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.Trainer.save">
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="s"><span class="pre">'Path'</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.save" title="Lien vers cette définition"></a></dt>
-<dd><p>Sauvegarde le modèle entraîné (et son préprocesseur) sur disque.</p>
+<dd><p>Save the trained model (and its preprocessor) to disk.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – Chemin du fichier de sortie (convention : extension <code class="docutils literal notranslate"><span class="pre">.joblib</span></code>).</p>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – Output file path (convention: <code class="docutils literal notranslate"><span class="pre">.joblib</span></code> extension).</p>
 </dd>
 <dt class="field-even">Lève<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>RuntimeError</strong> – Si le modèle n’est pas entraîné.</p>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained.</p>
 </dd>
 </dl>
 <p class="rubric">Exemples</p>
@@ -402,7 +405,7 @@ X doit contenir les mêmes features (mêmes colonnes) que l’entraînement.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="id0">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">task</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#id0" title="Lien vers cette définition"></a></dt>
-<dd><p>Type de tâche du modèle (“classification” ou “regression”).</p>
+<dd><p>Task type of the model (“classification” or “regression”).</p>
 </dd></dl>
 
 </dd></dl>
@@ -410,54 +413,54 @@ X doit contenir les mêmes features (mêmes colonnes) que l’entraînement.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.compare">
 <span class="sig-prename descclassname"><span class="pre">trainedml.</span></span><span class="sig-name descname"><span class="pre">compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocess</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_progress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/compare.html#compare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.compare" title="Lien vers cette définition"></a></dt>
-<dd><p>Compare tous les modèles adaptés à un dataset et retourne un DataFrame trié.</p>
-<p>Le type de tâche (classification ou régression) est détecté automatiquement
-à partir de la cible, et seuls les modèles adaptés sont comparés. Chaque
-modèle est évalué par validation croisée ; le prétraitement (imputation,
-standardisation, one-hot) est réentraîné à chaque pli pour éviter toute
-fuite d’information.</p>
+<dd><p>Compare every model suited to a dataset and return a sorted DataFrame.</p>
+<p>The task type (classification or regression) is automatically detected
+from the target, and only suitable models are compared. Each model is
+evaluated by cross-validation; preprocessing (imputation,
+standardization, one-hot) is refit on every fold to avoid any
+information leakage.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dataset</strong> (<em>str</em><em>, </em><em>optional</em>) – Nom d’un dataset intégré (« iris », « wine »).</p></li>
-<li><p><strong>url</strong> (<em>str</em><em>, </em><em>optional</em>) – URL d’un CSV distant (nécessite <code class="docutils literal notranslate"><span class="pre">target</span></code>).</p></li>
-<li><p><strong>target</strong> (<em>str</em><em>, </em><em>optional</em>) – Nom de la colonne cible (si <code class="docutils literal notranslate"><span class="pre">url</span></code>).</p></li>
-<li><p><strong>X</strong> (<em>pandas.DataFrame</em><em> or </em><em>array-like</em><em>, </em><em>optional</em>) – Features fournies directement en mémoire (alternative à dataset/url).</p></li>
-<li><p><strong>y</strong> (<em>pandas.Series</em><em> or </em><em>array-like</em><em>, </em><em>optional</em>) – Cible correspondante (obligatoire si X est fourni).</p></li>
-<li><p><strong>models</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionnaire {nom: instance} pour comparer des modèles personnalisés
-(trainedml ou scikit-learn). Par défaut : tous les modèles trainedml
-adaptés à la tâche détectée.</p></li>
-<li><p><strong>cv</strong> (<em>int</em><em>, </em><em>default=5</em>) – Nombre de plis de validation croisée.</p></li>
-<li><p><strong>preprocess</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Applique le prétraitement standard de trainedml à chaque pli.</p></li>
-<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>default=42</em>) – Graine aléatoire pour le mélange des plis.</p></li>
-<li><p><strong>show_progress</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Affiche une barre de progression.</p></li>
-<li><p><strong>sort</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Trie le tableau par la métrique principale (accuracy ou r2), décroissante.</p></li>
+<li><p><strong>dataset</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of a built-in dataset (« iris », « wine »).</p></li>
+<li><p><strong>url</strong> (<em>str</em><em>, </em><em>optional</em>) – URL of a remote CSV (requires <code class="docutils literal notranslate"><span class="pre">target</span></code>).</p></li>
+<li><p><strong>target</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the target column (if <code class="docutils literal notranslate"><span class="pre">url</span></code>).</p></li>
+<li><p><strong>X</strong> (<em>pandas.DataFrame</em><em> or </em><em>array-like</em><em>, </em><em>optional</em>) – Features provided directly in memory (alternative to dataset/url).</p></li>
+<li><p><strong>y</strong> (<em>pandas.Series</em><em> or </em><em>array-like</em><em>, </em><em>optional</em>) – Matching target (required if X is provided).</p></li>
+<li><p><strong>models</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary {name: instance} to compare custom models
+(trainedml or scikit-learn). Defaults to every trainedml model
+suited to the detected task.</p></li>
+<li><p><strong>cv</strong> (<em>int</em><em>, </em><em>default=5</em>) – Number of cross-validation folds.</p></li>
+<li><p><strong>preprocess</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Applies trainedml’s standard preprocessing on every fold.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>default=42</em>) – Random seed for fold shuffling.</p></li>
+<li><p><strong>show_progress</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Show a progress bar.</p></li>
+<li><p><strong>sort</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Sort the table by the primary metric (accuracy or r2), descending.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>Une ligne par modèle : métriques moyennes, écarts-types (<code class="docutils literal notranslate"><span class="pre">*_std</span></code>),
-temps moyens d’entraînement et de prédiction.</p>
+<dd class="field-even"><p>One row per model: average metrics, standard deviations
+(<code class="docutils literal notranslate"><span class="pre">*_std</span></code>), average training and prediction times.</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 <dt class="field-even">Lève<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Si ni <code class="docutils literal notranslate"><span class="pre">dataset</span></code> ni <code class="docutils literal notranslate"><span class="pre">url``+``target</span></code> n’est fourni.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – If neither <code class="docutils literal notranslate"><span class="pre">dataset</span></code> nor <code class="docutils literal notranslate"><span class="pre">url``+``target</span></code> is provided.</p>
 </dd>
 </dl>
 <p class="rubric">Exemples</p>
-<p>Comparer tous les classificateurs sur Wine :</p>
+<p>Compare every classifier on Wine:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml</span><span class="w"> </span><span class="kn">import</span> <span class="n">compare</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Comparer des modèles personnalisés (y compris scikit-learn) :</p>
+<p>Compare custom models (including scikit-learn):</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNNModel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span> <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;svc&quot;</span><span class="p">:</span> <span class="n">SVC</span><span class="p">(),</span> <span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="n">KNNModel</span><span class="p">()}))</span>
 </pre></div>
 </div>
-<p>Sur un CSV distant (régression) :</p>
+<p>On a remote CSV (regression):</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://.../winequality-red.csv&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;quality&quot;</span><span class="p">))</span>
 </pre></div>
 </div>

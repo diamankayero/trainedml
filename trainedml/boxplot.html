@@ -109,24 +109,34 @@
              
   <section id="module-trainedml.viz.boxplot">
 <span id="boxplot"></span><h1>Boxplot<a class="headerlink" href="#module-trainedml.viz.boxplot" title="Lien vers cette rubrique"></a></h1>
+<p>Boxplot visualization for trainedml.</p>
+<p>This module provides the BoxplotViz class, which generates boxplots for one or more columns
+using matplotlib, supporting grouping by another variable.</p>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.boxplot</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoxplotViz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span> <span class="o">=</span> <span class="n">BoxplotViz</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">vizs</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viz</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="trainedml.viz.boxplot.BoxplotViz">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.boxplot.</span></span><span class="sig-name descname"><span class="pre">BoxplotViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pd.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'list[str]'</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/boxplot.html#BoxplotViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.boxplot.BoxplotViz" title="Lien vers cette définition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.boxplot.</span></span><span class="sig-name descname"><span class="pre">BoxplotViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/boxplot.html#BoxplotViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.boxplot.BoxplotViz" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <a class="reference internal" href="vizs.html#trainedml.viz.vizs.Vizs" title="trainedml.viz.vizs.Vizs"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vizs</span></code></a></p>
-<p>Visualisation de boxplots pour une ou plusieurs colonnes.</p>
-<section id="parametres-du-boxplot">
-<h2>Paramètres du boxplot<a class="headerlink" href="#parametres-du-boxplot" title="Lien vers cette rubrique"></a></h2>
+<p>Boxplot visualization for one or more columns.</p>
+<section id="boxplot-parameters">
+<h2>Boxplot parameters<a class="headerlink" href="#boxplot-parameters" title="Lien vers cette rubrique"></a></h2>
 <dl class="simple">
-<dt>data<span class="classifier">pandas.DataFrame</span></dt><dd><p>Le jeu de données.</p>
+<dt>data<span class="classifier">pandas.DataFrame</span></dt><dd><p>The dataset.</p>
 </dd>
-<dt>columns<span class="classifier">“all” ou list, default=”all”</span></dt><dd><p>Colonnes à tracer.</p>
+<dt>columns<span class="classifier">“all” or list, default=”all”</span></dt><dd><p>Columns to plot.</p>
 </dd>
-<dt>by<span class="classifier">str ou None, default=None</span></dt><dd><p>Variable de regroupement.</p>
+<dt>by<span class="classifier">str or None, default=None</span></dt><dd><p>Grouping variable.</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.viz.boxplot.BoxplotViz.vizs">
-<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/boxplot.html#BoxplotViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.boxplot.BoxplotViz.vizs" title="Lien vers cette définition"></a></dt>
+<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/boxplot.html#BoxplotViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.boxplot.BoxplotViz.vizs" title="Lien vers cette définition"></a></dt>
 <dd><p>Generate the boxplot figure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Renvoie<span class="colon">:</span></dt>

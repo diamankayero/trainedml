@@ -92,6 +92,13 @@
 <span class="sd">&gt;&gt;&gt; fig.show()</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.figure</span><span class="w"> </span><span class="kn">import</span> <span class="n">Figure</span>
+
 <span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.heatmap</span><span class="w"> </span><span class="kn">import</span> <span class="n">HeatmapViz</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.histogram</span><span class="w"> </span><span class="kn">import</span> <span class="n">HistogramViz</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.line</span><span class="w"> </span><span class="kn">import</span> <span class="n">LineViz</span>
@@ -174,37 +181,37 @@
 <span class="sd">    - For advanced customization, use the returned figure/axes objects directly.</span>
 <span class="sd">    - The Visualizer is designed to be extended with new visualizations as needed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">analyzer</span> <span class="o">=</span> <span class="n">DataAnalyzer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Visualizer.report">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.report">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Rapport exploratoire - trainedml&quot;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Exploratory report - trainedml&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Génère un rapport EDA HTML complet et auto-contenu.</span>
+<span class="sd">        Generate a complete, self-contained HTML EDA report.</span>
 
-<span class="sd">        Le rapport rassemble toutes les analyses du package : aperçu,</span>
-<span class="sd">        statistiques descriptives, valeurs manquantes, corrélations (avec</span>
-<span class="sd">        heatmap), distributions, outliers, normalité et VIF. Les figures</span>
-<span class="sd">        sont embarquées dans le HTML (aucune dépendance externe).</span>
+<span class="sd">        The report gathers every analysis in the package: overview,</span>
+<span class="sd">        descriptive statistics, missing values, correlations (with</span>
+<span class="sd">        heatmap), distributions, outliers, normality, and VIF. Figures are</span>
+<span class="sd">        embedded in the HTML (no external dependency).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        path : str, optional</span>
-<span class="sd">            Chemin du fichier HTML de sortie. Si None, le HTML est seulement retourné.</span>
+<span class="sd">            Output HTML file path. If None, the HTML is only returned.</span>
 <span class="sd">        title : str, optional</span>
-<span class="sd">            Titre du rapport.</span>
+<span class="sd">            Report title.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        str</span>
-<span class="sd">            Le contenu HTML du rapport.</span>
+<span class="sd">            The report&#39;s HTML content.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; viz = Visualizer(df)</span>
-<span class="sd">        &gt;&gt;&gt; viz.report(&quot;rapport.html&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; viz.report(&quot;report.html&quot;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">.report</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_report</span>
         <span class="k">return</span> <span class="n">generate_report</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span></div>
@@ -212,7 +219,8 @@
 
 <div class="viewcode-block" id="Visualizer.heatmap">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.heatmap">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;pearson&#39;</span><span class="p">,</span>
+                <span class="n">mask</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate a correlation heatmap between variables.</span>
 
@@ -253,7 +261,8 @@
 
 <div class="viewcode-block" id="Visualizer.histogram">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.histogram">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="n">bins</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Figure</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate one or more histograms for selected columns.</span>
 
@@ -294,7 +303,7 @@
 
 <div class="viewcode-block" id="Visualizer.line">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.line">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_column</span><span class="p">,</span> <span class="n">y_column</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">y_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate a line plot between two columns.</span>
 
@@ -330,7 +339,7 @@
 
 <div class="viewcode-block" id="Visualizer.get_features">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.get_features">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_features</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_features</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the list of feature columns in the DataFrame.</span>
 
@@ -350,7 +359,7 @@
     <span class="c1"># Exploratory analyses (via DataAnalyzer)</span>
 <div class="viewcode-block" id="Visualizer.distribution">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.distribution">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Distribution of variables (histograms).</span>
 
@@ -381,7 +390,8 @@
 
 <div class="viewcode-block" id="Visualizer.correlation">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.correlation">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">correlation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">correlation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;pearson&#39;</span><span class="p">,</span>
+                    <span class="n">mask</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Correlation matrix (heatmap).</span>
 
@@ -414,7 +424,7 @@
 
 <div class="viewcode-block" id="Visualizer.missing">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.missing">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">missing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">missing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Missing values analysis.</span>
 
@@ -436,7 +446,7 @@
 
 <div class="viewcode-block" id="Visualizer.outliers">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.outliers">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">outliers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">outliers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Outlier analysis.</span>
 
@@ -458,7 +468,7 @@
 
 <div class="viewcode-block" id="Visualizer.target">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.target">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_column</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Target variable analysis.</span>
 
@@ -487,7 +497,8 @@
 
 <div class="viewcode-block" id="Visualizer.boxplot">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.boxplot">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">boxplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">boxplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">by</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Figure</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Boxplots by variable.</span>
 
@@ -518,7 +529,7 @@
 
 <div class="viewcode-block" id="Visualizer.bivariate">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.bivariate">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">bivariate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bivariate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Figure</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Bivariate analysis (scatter, etc.).</span>
 
@@ -549,7 +560,8 @@
 
 <div class="viewcode-block" id="Visualizer.normality">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.normality">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">normality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">normality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Normality analysis (tests, QQ-plots, etc.).</span>
 
@@ -578,7 +590,7 @@
 
 <div class="viewcode-block" id="Visualizer.multicollinearity">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.multicollinearity">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">multicollinearity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">multicollinearity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Multicollinearity analysis (VIF, etc.).</span>
 
@@ -595,12 +607,12 @@
 <span class="sd">        &gt;&gt;&gt; vif = viz.multicollinearity()</span>
 <span class="sd">        &gt;&gt;&gt; print(vif)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">analyzer</span><span class="o">.</span><span class="n">multicollinearity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">analyzer</span><span class="o">.</span><span class="n">multicollinearity</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="Visualizer.profiling">
 <a class="viewcode-back" href="../../trainedml/visualization.html#trainedml.visualization.Visualizer.profiling">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">profiling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">profiling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Automatic profiling (global report).</span>
 

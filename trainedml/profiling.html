@@ -120,21 +120,24 @@ including summary statistics, missing values, outliers, and correlation.</p>
 </div>
 <dl class="py class">
 <dt class="sig sig-object py" id="trainedml.viz.profiling.ProfilingViz">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.profiling.</span></span><span class="sig-name descname"><span class="pre">ProfilingViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/profiling.html#ProfilingViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.profiling.ProfilingViz" title="Lien vers cette définition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.profiling.</span></span><span class="sig-name descname"><span class="pre">ProfilingViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/profiling.html#ProfilingViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.profiling.ProfilingViz" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <a class="reference internal" href="vizs.html#trainedml.viz.vizs.Vizs" title="trainedml.viz.vizs.Vizs"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vizs</span></code></a></p>
-<p>Classe pour générer un rapport de profiling automatique.</p>
+<p>Class to generate an automatic profiling report.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.viz.profiling.ProfilingViz.vizs">
-<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/profiling.html#ProfilingViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.profiling.ProfilingViz.vizs" title="Lien vers cette définition"></a></dt>
-<dd><p>Méthode à surcharger dans les classes filles pour générer la visualisation.
-Appelle automatiquement save() si un save_path a été défini.</p>
+<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/profiling.html#ProfilingViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.profiling.ProfilingViz.vizs" title="Lien vers cette définition"></a></dt>
+<dd><p>Method to override in subclasses to generate the visualization.
+Automatically calls save() if a save_path was set.</p>
+<p>Most subclasses return None and store their output on
+<code class="docutils literal notranslate"><span class="pre">self._figure</span></code> instead; a few (e.g. HistogramViz, BoxplotViz)
+also return it directly, hence the <code class="docutils literal notranslate"><span class="pre">Any</span></code> return type here.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.viz.profiling.profiling_report">
-<span class="sig-prename descclassname"><span class="pre">trainedml.viz.profiling.</span></span><span class="sig-name descname"><span class="pre">profiling_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/profiling.html#profiling_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.profiling.profiling_report" title="Lien vers cette définition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">trainedml.viz.profiling.</span></span><span class="sig-name descname"><span class="pre">profiling_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trainedml/viz/profiling.html#profiling_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.profiling.profiling_report" title="Lien vers cette définition"></a></dt>
 <dd><p>Generate a profiling report for the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>

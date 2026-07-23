@@ -49,7 +49,6 @@
 <li class="toctree-l2"><a class="reference internal" href="trainer.html">Trainer (API principale)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loader.html">DataLoader</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Prétraitement</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#exemple">Exemple</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#trainedml.preprocessing.PreprocessedModel"><code class="docutils literal notranslate"><span class="pre">PreprocessedModel</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#trainedml.preprocessing.PreprocessedModel.model"><code class="docutils literal notranslate"><span class="pre">PreprocessedModel.model</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#trainedml.preprocessing.PreprocessedModel.preprocessor"><code class="docutils literal notranslate"><span class="pre">PreprocessedModel.preprocessor</span></code></a></li>
@@ -116,44 +115,41 @@
              
   <section id="module-trainedml.preprocessing">
 <span id="pretraitement"></span><h1>Prétraitement<a class="headerlink" href="#module-trainedml.preprocessing" title="Lien vers cette rubrique"></a></h1>
-<p>Prétraitement automatique des données pour trainedml.</p>
-<p>Ce module fournit un préprocesseur standard construit avec scikit-learn :</p>
+<p>Automatic data preprocessing for trainedml.</p>
+<p>This module provides a standard preprocessor built with scikit-learn:</p>
 <ul class="simple">
-<li><p><strong>colonnes numériques</strong> : imputation par la médiane puis standardisation
-(moyenne 0, écart-type 1) - indispensable pour KNN, la régression logistique,
-Ridge/Lasso… ;</p></li>
-<li><p><strong>colonnes catégorielles</strong> : imputation par le mode puis encodage one-hot
-(les catégories inconnues à la prédiction sont ignorées).</p></li>
+<li><p><strong>numeric columns</strong>: median imputation then standardization
+(mean 0, std 1) - essential for KNN, logistic regression,
+Ridge/Lasso…;</p></li>
+<li><p><strong>categorical columns</strong>: mode imputation then one-hot encoding
+(categories unseen at prediction time are ignored).</p></li>
 </ul>
-<p>Il est utilisé par défaut par <a class="reference internal" href="trainer.html#trainedml.Trainer" title="trainedml.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">trainedml.Trainer</span></code></a> (<code class="docutils literal notranslate"><span class="pre">preprocess=True</span></code>)
-et par <a class="reference internal" href="trainer.html#trainedml.compare" title="trainedml.compare"><code class="xref py py-func docutils literal notranslate"><span class="pre">trainedml.compare()</span></code></a>, mais peut aussi s’employer seul.</p>
-<section id="exemple">
-<h2>Exemple<a class="headerlink" href="#exemple" title="Lien vers cette rubrique"></a></h2>
+<p>It is used by default by <a class="reference internal" href="trainer.html#trainedml.Trainer" title="trainedml.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">trainedml.Trainer</span></code></a> (<code class="docutils literal notranslate"><span class="pre">preprocess=True</span></code>)
+and by <a class="reference internal" href="trainer.html#trainedml.compare" title="trainedml.compare"><code class="xref py py-func docutils literal notranslate"><span class="pre">trainedml.compare()</span></code></a>, but can also be used on its own.</p>
+<p class="rubric">Exemple</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_preprocessor</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pre</span> <span class="o">=</span> <span class="n">build_preprocessor</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_t</span> <span class="o">=</span> <span class="n">pre</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">X_test_t</span> <span class="o">=</span> <span class="n">pre</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="trainedml.preprocessing.PreprocessedModel">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.preprocessing.</span></span><span class="sig-name descname"><span class="pre">PreprocessedModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/preprocessing.html#PreprocessedModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.preprocessing.PreprocessedModel" title="Lien vers cette définition"></a></dt>
 <dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Enveloppe un modèle avec le préprocesseur standard de trainedml.</p>
-<p>À chaque <code class="docutils literal notranslate"><span class="pre">fit</span></code>, le préprocesseur est (ré)entraîné sur les données
-d’entraînement uniquement, puis appliqué aux données de prédiction :
-aucune fuite d’information du test vers l’entraînement, y compris en
-validation croisée.</p>
+<p>Wraps a model with trainedml’s standard preprocessor.</p>
+<p>On every <code class="docutils literal notranslate"><span class="pre">fit</span></code>, the preprocessor is (re)trained on the training data
+only, then applied to the prediction data: no information leaks from
+test to train, including during cross-validation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>model</strong> (<em>object</em>) – Modèle à envelopper (trainedml ou scikit-learn, tout objet fit/predict).</p>
+<dd class="field-odd"><p><strong>model</strong> (<em>object</em>) – Model to wrap (trainedml or scikit-learn, any fit/predict object).</p>
 </dd>
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="trainedml.preprocessing.PreprocessedModel.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#trainedml.preprocessing.PreprocessedModel.model" title="Lien vers cette définition"></a></dt>
-<dd><p>Le modèle enveloppé.</p>
+<dd><p>The wrapped model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>object</p>
@@ -164,7 +160,7 @@ validation croisée.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="trainedml.preprocessing.PreprocessedModel.preprocessor">
 <span class="sig-name descname"><span class="pre">preprocessor</span></span><a class="headerlink" href="#trainedml.preprocessing.PreprocessedModel.preprocessor" title="Lien vers cette définition"></a></dt>
-<dd><p>Le préprocesseur, réentraîné à chaque appel de <a class="reference internal" href="#trainedml.preprocessing.PreprocessedModel.fit" title="trainedml.preprocessing.PreprocessedModel.fit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code></a>.</p>
+<dd><p>The preprocessor, retrained on every call to <a class="reference internal" href="#trainedml.preprocessing.PreprocessedModel.fit" title="trainedml.preprocessing.PreprocessedModel.fit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>sklearn.compose.ColumnTransformer</p>
@@ -175,7 +171,7 @@ validation croisée.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="trainedml.preprocessing.PreprocessedModel.task">
 <span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#trainedml.preprocessing.PreprocessedModel.task" title="Lien vers cette définition"></a></dt>
-<dd><p>Type de tâche du modèle enveloppé (délégué).</p>
+<dd><p>Task type of the wrapped model (delegated).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
@@ -193,19 +189,19 @@ validation croisée.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.preprocessing.PreprocessedModel.fit">
 <span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/preprocessing.html#PreprocessedModel.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.preprocessing.PreprocessedModel.fit" title="Lien vers cette définition"></a></dt>
-<dd><p>Entraîne le préprocesseur puis le modèle sur (X, y).</p>
+<dd><p>Fit the preprocessor then the model on (X, y).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="trainedml.preprocessing.PreprocessedModel.predict">
 <span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/preprocessing.html#PreprocessedModel.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.preprocessing.PreprocessedModel.predict" title="Lien vers cette définition"></a></dt>
-<dd><p>Prétraite X puis prédit avec le modèle enveloppé.</p>
+<dd><p>Preprocess X then predict with the wrapped model.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="id0">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#id0" title="Lien vers cette définition"></a></dt>
-<dd><p>Type de tâche du modèle enveloppé (“classification” ou “regression”).</p>
+<dd><p>Task type of the wrapped model (“classification” or “regression”).</p>
 </dd></dl>
 
 </dd></dl>
@@ -213,13 +209,13 @@ validation croisée.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.preprocessing.build_preprocessor">
 <span class="sig-prename descclassname"><span class="pre">trainedml.preprocessing.</span></span><span class="sig-name descname"><span class="pre">build_preprocessor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ColumnTransformer</span></span></span><a class="reference internal" href="../_modules/trainedml/preprocessing.html#build_preprocessor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.preprocessing.build_preprocessor" title="Lien vers cette définition"></a></dt>
-<dd><p>Construit le préprocesseur standard de trainedml.</p>
+<dd><p>Build trainedml’s standard preprocessor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Renvoie<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Transformeur non entraîné : imputation médiane + standardisation pour
-les colonnes numériques, imputation mode + one-hot pour les colonnes
-catégorielles. À entraîner sur les données d’entraînement uniquement
-(<code class="docutils literal notranslate"><span class="pre">fit_transform</span></code>), puis à appliquer aux données de test (<code class="docutils literal notranslate"><span class="pre">transform</span></code>).</p>
+<dd class="field-odd"><p>Untrained transformer: median imputation + standardization for
+numeric columns, mode imputation + one-hot for categorical
+columns. To be fit on the training data only (<code class="docutils literal notranslate"><span class="pre">fit_transform</span></code>),
+then applied to the test data (<code class="docutils literal notranslate"><span class="pre">transform</span></code>).</p>
 </dd>
 <dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-even"><p>sklearn.compose.ColumnTransformer</p>

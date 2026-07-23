@@ -73,20 +73,21 @@
   <h1>Code source de trainedml.data.loader</h1><div class="highlight"><pre>
 <span></span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Module de chargement de données publiques pour trainedml.</span>
+<span class="sd">Public data loading module for trainedml.</span>
 
-<span class="sd">Ce module fournit la classe `DataLoader` qui permet de charger facilement des jeux de données open data</span>
-<span class="sd">ou des fichiers CSV distants, avec gestion du cache local et adaptation automatique du format.</span>
+<span class="sd">This module provides the `DataLoader` class, which makes it easy to load</span>
+<span class="sd">open datasets or remote CSV files, with local caching and automatic format</span>
+<span class="sd">handling.</span>
 
-<span class="sd">Fonctionnalités principales</span>
-<span class="sd">--------------------------</span>
-<span class="sd">- Datasets intégrés chargés localement via scikit-learn (Iris, Wine) - aucun réseau requis</span>
-<span class="sd">- Chargement de CSV depuis une URL avec cache local pooch (séparateur et hash gérés)</span>
-<span class="sd">- Retourne X (features) et y (cible) prêts à l&#39;emploi pour le ML</span>
-<span class="sd">- Séparation train/test via :meth:`DataLoader.split`</span>
-<span class="sd">- Peut être étendu pour supporter d&#39;autres sources (INSEE, data.gouv.fr, etc.)</span>
+<span class="sd">Main features</span>
+<span class="sd">-------------</span>
+<span class="sd">- Built-in datasets loaded locally via scikit-learn (Iris, Wine) - no network required</span>
+<span class="sd">- CSV loading from a URL with local pooch cache (separator and hash handled)</span>
+<span class="sd">- Returns X (features) and y (target) ready to use for ML</span>
+<span class="sd">- Train/test split via :meth:`DataLoader.split`</span>
+<span class="sd">- Can be extended to support other sources (INSEE, data.gouv.fr, etc.)</span>
 
-<span class="sd">Exemple</span>
+<span class="sd">Example</span>
 <span class="sd">-------</span>
 <span class="sd">&gt;&gt;&gt; loader = DataLoader()</span>
 <span class="sd">&gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;iris&quot;)</span>
@@ -107,48 +108,49 @@
 <a class="viewcode-back" href="../../../trainedml/loader.html#trainedml.data.loader.DataLoader">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DataLoader</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Classe responsable du chargement et de l&#39;abstraction des jeux de données publics.</span>
+<span class="sd">    Class responsible for loading and abstracting away public datasets.</span>
 
-<span class="sd">    Cette classe isole la logique d&#39;accès aux données : les autres modules n&#39;ont pas à connaître</span>
-<span class="sd">    la provenance (URL, open data, local, etc.).</span>
+<span class="sd">    This class isolates data-access logic: other modules never need to</span>
+<span class="sd">    know where the data comes from (URL, open data, local, etc.).</span>
 
-<span class="sd">    Fonctionnalités principales</span>
-<span class="sd">    --------------------------</span>
-<span class="sd">    - Téléchargement et cache automatique de jeux de données publics (Iris, Wine, etc.)</span>
-<span class="sd">    - Chargement de CSV depuis une URL (avec gestion du séparateur et du hash)</span>
-<span class="sd">    - Retourne X (features) et y (cible) prêts à l&#39;emploi pour le ML</span>
-<span class="sd">    - Peut être étendu pour supporter d&#39;autres sources (INSEE, data.gouv.fr, etc.)</span>
+<span class="sd">    Main features</span>
+<span class="sd">    -------------</span>
+<span class="sd">    - Automatic download and caching of public datasets (Iris, Wine, etc.)</span>
+<span class="sd">    - CSV loading from a URL (with separator and hash handling)</span>
+<span class="sd">    - Returns X (features) and y (target) ready to use for ML</span>
+<span class="sd">    - Can be extended to support other sources (INSEE, data.gouv.fr, etc.)</span>
 
-<span class="sd">    Exemples détaillés</span>
+<span class="sd">    Detailed examples</span>
 <span class="sd">    -----------------</span>
-<span class="sd">    Chargement du dataset Iris (public) :</span>
+<span class="sd">    Loading the Iris dataset (public):</span>
 <span class="sd">    &gt;&gt;&gt; loader = DataLoader()</span>
 <span class="sd">    &gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;iris&quot;)</span>
 <span class="sd">    &gt;&gt;&gt; print(X.shape, y.unique())</span>
 
-<span class="sd">    Chargement du dataset Wine (public) :</span>
+<span class="sd">    Loading the Wine dataset (public):</span>
 <span class="sd">    &gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;wine&quot;)</span>
 <span class="sd">    &gt;&gt;&gt; print(X.columns)</span>
 
-<span class="sd">    Chargement d&#39;un CSV distant avec colonne cible :</span>
+<span class="sd">    Loading a remote CSV with a target column:</span>
 <span class="sd">    &gt;&gt;&gt; url = &quot;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&quot;</span>
 <span class="sd">    &gt;&gt;&gt; X, y = loader.load_dataset(url=url, target=&quot;quality&quot;)</span>
 <span class="sd">    &gt;&gt;&gt; print(X.head())</span>
 
-<span class="sd">    Chargement d&#39;un CSV custom (séparateur automatique) :</span>
-<span class="sd">    &gt;&gt;&gt; X, y = loader.load_dataset(url=&quot;https://.../data.csv&quot;, target=&quot;classe&quot;)</span>
+<span class="sd">    Loading a custom CSV (automatic separator):</span>
+<span class="sd">    &gt;&gt;&gt; X, y = loader.load_dataset(url=&quot;https://.../data.csv&quot;, target=&quot;class&quot;)</span>
 <span class="sd">    &gt;&gt;&gt; print(X.info())</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    - Pour ajouter un nouveau dataset, il suffit d&#39;ajouter un bloc dans load_dataset.</span>
-<span class="sd">    - Le cache local évite de re-télécharger les fichiers à chaque appel.</span>
+<span class="sd">    - To add a new dataset, just add a branch in load_dataset.</span>
+<span class="sd">    - The local cache avoids re-downloading files on every call.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialise un DataLoader.</span>
+<span class="sd">        Initialize a DataLoader.</span>
 
-<span class="sd">        Prévu pour extension future : configuration, gestion avancée du cache, etc.</span>
+<span class="sd">        Reserved for future extension: configuration, advanced cache</span>
+<span class="sd">        management, etc.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
@@ -162,35 +164,35 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">load_csv_from_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">known_hash</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                           <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Télécharge un fichier CSV depuis une URL (avec cache local) et le charge dans un DataFrame pandas.</span>
+<span class="sd">        Download a CSV file from a URL (with local caching) and load it into a pandas DataFrame.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        url : str</span>
-<span class="sd">            Lien direct vers le fichier CSV.</span>
+<span class="sd">            Direct link to the CSV file.</span>
 <span class="sd">        known_hash : str, optional</span>
-<span class="sd">            Hash du fichier pour vérification d&#39;intégrité (voir doc pooch).</span>
+<span class="sd">            File hash for integrity verification (see pooch docs).</span>
 <span class="sd">        sep : str, default=&#39;,&#39;</span>
-<span class="sd">            Séparateur du CSV (&#39;,&#39; ou &#39;;&#39;, etc.).</span>
+<span class="sd">            CSV separator (&#39;,&#39; or &#39;;&#39;, etc.).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        pd.DataFrame</span>
-<span class="sd">            Données chargées dans un DataFrame pandas.</span>
+<span class="sd">            Data loaded into a pandas DataFrame.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        RuntimeError</span>
-<span class="sd">            Si le téléchargement ou la lecture échoue.</span>
+<span class="sd">            If the download or read fails.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        Chargement d&#39;un CSV public :</span>
+<span class="sd">        Loading a public CSV:</span>
 <span class="sd">        &gt;&gt;&gt; loader = DataLoader()</span>
 <span class="sd">        &gt;&gt;&gt; df = loader.load_csv_from_url(&quot;https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; print(df.head())</span>
 
-<span class="sd">        Chargement d&#39;un CSV avec séparateur point-virgule :</span>
+<span class="sd">        Loading a CSV with a semicolon separator:</span>
 <span class="sd">        &gt;&gt;&gt; df = loader.load_csv_from_url(&quot;https://.../winequality-red.csv&quot;, sep=&#39;;&#39;)</span>
 <span class="sd">        &gt;&gt;&gt; print(df.columns)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -202,7 +204,7 @@
             <span class="p">)</span>
             <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Erreur lors du chargement des données depuis </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error loading data from </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 
@@ -213,58 +215,58 @@
                      <span class="n">target</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">sep</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Charge un dataset par nom connu ou URL, et retourne X, y séparés.</span>
+<span class="sd">        Load a dataset by known name or URL, and return X, y separately.</span>
 
-<span class="sd">        Cette méthode gère automatiquement le téléchargement, le parsing, et la séparation</span>
-<span class="sd">        features/cible pour les datasets connus ou les CSV distants.</span>
+<span class="sd">        This method automatically handles downloading, parsing, and</span>
+<span class="sd">        splitting features/target for known datasets or remote CSV files.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        name : str, optional</span>
-<span class="sd">            Nom du dataset connu (&quot;iris&quot;, &quot;wine&quot;, etc.).</span>
+<span class="sd">            Name of a known dataset (&quot;iris&quot;, &quot;wine&quot;, etc.).</span>
 <span class="sd">        url : str, optional</span>
-<span class="sd">            URL d&#39;un CSV distant à charger.</span>
+<span class="sd">            URL of a remote CSV to load.</span>
 <span class="sd">        target : str, optional</span>
-<span class="sd">            Nom de la colonne cible (obligatoire si url).</span>
+<span class="sd">            Name of the target column (required if url).</span>
 <span class="sd">        sep : str, optional</span>
-<span class="sd">            Séparateur du CSV (détecté automatiquement pour certains jeux).</span>
+<span class="sd">            CSV separator (auto-detected for some datasets).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        X : pd.DataFrame</span>
-<span class="sd">            Features (variables explicatives).</span>
+<span class="sd">            Features (explanatory variables).</span>
 <span class="sd">        y : pd.Series</span>
-<span class="sd">            Cible (variable à prédire).</span>
+<span class="sd">            Target (variable to predict).</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
-<span class="sd">            Si aucun dataset connu ou url+target n&#39;est spécifié.</span>
+<span class="sd">            If neither a known dataset nor url+target is specified.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        --------</span>
-<span class="sd">        Chargement du dataset Iris :</span>
+<span class="sd">        Loading the Iris dataset:</span>
 <span class="sd">        &gt;&gt;&gt; loader = DataLoader()</span>
 <span class="sd">        &gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;iris&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; print(X.shape, y.unique())</span>
 
-<span class="sd">        Chargement du dataset Wine :</span>
+<span class="sd">        Loading the Wine dataset:</span>
 <span class="sd">        &gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;wine&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; print(X.columns)</span>
 
-<span class="sd">        Chargement d&#39;un CSV distant :</span>
+<span class="sd">        Loading a remote CSV:</span>
 <span class="sd">        &gt;&gt;&gt; url = &quot;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&quot;</span>
 <span class="sd">        &gt;&gt;&gt; X, y = loader.load_dataset(url=url, target=&quot;quality&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; print(X.head())</span>
 
-<span class="sd">        Chargement d&#39;un CSV custom (séparateur automatique) :</span>
-<span class="sd">        &gt;&gt;&gt; X, y = loader.load_dataset(url=&quot;https://.../data.csv&quot;, target=&quot;classe&quot;)</span>
+<span class="sd">        Loading a custom CSV (automatic separator):</span>
+<span class="sd">        &gt;&gt;&gt; X, y = loader.load_dataset(url=&quot;https://.../data.csv&quot;, target=&quot;class&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; print(X.info())</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;iris&quot;</span><span class="p">:</span>
-            <span class="c1"># Jeu de données Iris, chargé localement via scikit-learn (aucun réseau requis).</span>
-            <span class="c1"># Colonnes renommées au format seaborn pour rester compatible avec les</span>
-            <span class="c1"># anciennes versions qui téléchargeaient le CSV seaborn.</span>
+            <span class="c1"># Iris dataset, loaded locally via scikit-learn (no network required).</span>
+            <span class="c1"># Columns renamed to the seaborn format to stay compatible with</span>
+            <span class="c1"># older versions that downloaded the seaborn CSV.</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_iris</span>
             <span class="n">bunch</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">X</span> <span class="o">=</span> <span class="n">bunch</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
@@ -279,15 +281,15 @@
             <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
         <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;wine&quot;</span><span class="p">:</span>
-            <span class="c1"># Jeu de données Wine, chargé localement via scikit-learn (aucun réseau requis).</span>
+            <span class="c1"># Wine dataset, loaded locally via scikit-learn (no network required).</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_wine</span>
             <span class="n">bunch</span> <span class="o">=</span> <span class="n">load_wine</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">X</span> <span class="o">=</span> <span class="n">bunch</span><span class="o">.</span><span class="n">data</span>
             <span class="n">y</span> <span class="o">=</span> <span class="n">bunch</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
         <span class="k">elif</span> <span class="n">url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">target</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># Chargement générique d&#39;un CSV distant</span>
-            <span class="c1"># Si le CSV est winequality, utiliser sep=&#39;;&#39;</span>
+            <span class="c1"># Generic loading of a remote CSV</span>
+            <span class="c1"># If the CSV is winequality, use sep=&#39;;&#39;</span>
             <span class="n">sep_to_use</span> <span class="o">=</span> <span class="n">sep</span>
             <span class="k">if</span> <span class="n">sep_to_use</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="s2">&quot;winequality&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
@@ -299,7 +301,7 @@
             <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
             <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Spécifiez un nom de dataset connu ou une url+target.&quot;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Specify a known dataset name or a url+target.&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="DataLoader.split">
@@ -307,18 +309,18 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
               <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sépare les données en ensembles d&#39;entraînement et de test.</span>
+<span class="sd">        Split the data into training and test sets.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        X : pd.DataFrame</span>
 <span class="sd">            Features.</span>
 <span class="sd">        y : pd.Series</span>
-<span class="sd">            Cible.</span>
+<span class="sd">            Target.</span>
 <span class="sd">        test_size : float, default=0.2</span>
-<span class="sd">            Proportion de l&#39;ensemble de test.</span>
+<span class="sd">            Proportion of the test set.</span>
 <span class="sd">        random_state : int, default=42</span>
-<span class="sd">            Graine aléatoire pour la reproductibilité.</span>
+<span class="sd">            Random seed for reproducibility.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -335,7 +337,7 @@
 </div>
 
 
-    <span class="c1"># TODO: Ajouter ici d&#39;autres méthodes pour charger d&#39;autres datasets publics (INSEE, data.gouv.fr, etc.)</span>
+    <span class="c1"># TODO: Add other methods here to load other public datasets (INSEE, data.gouv.fr, etc.)</span>
 </pre></div>
 
            </div>
