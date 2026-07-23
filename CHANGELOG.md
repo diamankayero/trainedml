@@ -28,6 +28,11 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
   (PyPI, Python, CI, licence), logo monogramme SVG, liens vers l'écosystème
   (démo web, ModeLmL), et navigation latérale groupée en trois sections
   (cœur, modèles, exploration) au lieu d'une liste plate de 26 pages.
+- Identité visuelle verte (inspiration NVIDIA, #76B900) : icône monogramme
+  Tm et mot-symbole trainedml dessinés en SVG monoligne (aucune police
+  requise), bannière en tête du README (visible sur GitHub et PyPI),
+  accent vert et lien GitHub dans l'en-tête de la doc, images du README
+  en URLs absolues pour un rendu correct sur PyPI.
 - Build de la doc sans aucun warning : sections Methods/Attributes
   redondantes retirées des docstrings (elles dupliquaient les entrées
   générées par autodoc).

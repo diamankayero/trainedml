@@ -43,6 +43,12 @@ html_logo = '_static/logo.svg'
 html_favicon = '_static/logo.svg'
 html_css_files = ['custom.css']
 
+html_theme_options = {
+    # Accent assorti au vert du logo (préréglage Shibuya le plus proche)
+    'accent_color': 'grass',
+    'github_url': 'https://github.com/diamankayero/trainedml',
+}
+
 # -- Extension configuration ------------------------------------------------
 extensions += [
     'sphinx.ext.viewcode',

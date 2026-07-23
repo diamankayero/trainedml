@@ -1,4 +1,6 @@
-# trainedml
+<p align="center">
+  <a href="https://diamankayero.github.io/trainedml/"><img src="https://raw.githubusercontent.com/diamankayero/trainedml/main/doc/source/_static/banner.svg" alt="trainedml" height="72"></a>
+</p>
 
 > Modular machine learning framework for Python - train, benchmark, and visualize ML models with a unified API, CLI, and web interface.
 
@@ -28,10 +30,10 @@
 - [License](#license)
 
 <p align="center">
-   <img src="public/matric_corre.png" alt="Matrice de corrélation" width="260"/>
-   <img src="public/histogram.png" alt="Histogramme" width="260"/>
-   <img src="public/line.png" alt="Courbe" width="260"/>
-   <img src="public/comparaison_de_model.jpeg" alt="Comparaison de modèles" width="260"/>
+   <img src="https://raw.githubusercontent.com/diamankayero/trainedml/main/public/matric_corre.png" alt="Matrice de corrélation" width="260"/>
+   <img src="https://raw.githubusercontent.com/diamankayero/trainedml/main/public/histogram.png" alt="Histogramme" width="260"/>
+   <img src="https://raw.githubusercontent.com/diamankayero/trainedml/main/public/line.png" alt="Courbe" width="260"/>
+   <img src="https://raw.githubusercontent.com/diamankayero/trainedml/main/public/comparaison_de_model.jpeg" alt="Comparaison de modèles" width="260"/>
 </p>
 
 ---
