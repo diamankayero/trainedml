@@ -66,7 +66,7 @@ colonne géante.
 
  .. code-block:: none
 
-    0.00B [00:00, ?B/s]    37.9kB [00:00, 349kB/s]    0.00B [00:00, ?B/s]        0.00B [00:00, ?B/s]
+    0.00B [00:00, ?B/s]    0.00B [00:00, ?B/s]    0.00B [00:00, ?B/s]
     Colonnes : ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar', 'chlorides', 'free sulfur dioxide', 'total sulfur dioxide', 'density', 'pH', 'sulphates', 'alcohol']
     Forme : (1599, 11)
 
@@ -111,7 +111,7 @@ partir du nombre de valeurs distinctes.
     8     18
     Name: count, dtype: int64
     task détecté : classification
-    {'accuracy': 0.665625, 'precision': 0.6327801588284734, 'recall': 0.665625, 'f1': 0.6461423736206909}
+    {'accuracy': 0.646875, 'precision': 0.6153527248236289, 'recall': 0.646875, 'f1': 0.6282701382581657}
 
 
 
@@ -137,7 +137,7 @@ Comparer avec un second fichier
 
  .. code-block:: none
 
-    0.00B [00:00, ?B/s]    37.9kB [00:00, 348kB/s]    181kB [00:00, 909kB/s]     0.00B [00:00, ?B/s]       0.00B [00:00, ?B/s]
+    0.00B [00:00, ?B/s]    161kB [00:00, 1.50MB/s]    0.00B [00:00, ?B/s]        0.00B [00:00, ?B/s]
     Échantillons rouges : 1599  -  blancs : 4898
 
 
@@ -146,7 +146,7 @@ Comparer avec un second fichier
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.244 seconds)
+   **Total running time of the script:** (0 minutes 0.923 seconds)
 
 
 .. _sphx_glr_download_auto_examples_02_donnees_et_modeles_plot_donnees_distantes.py:

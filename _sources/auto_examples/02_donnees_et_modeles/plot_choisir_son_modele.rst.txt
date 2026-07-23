@@ -42,12 +42,12 @@ validation croisée, et renvoie un tableau trié prêt à lire.
 
  .. code-block:: none
 
-    CV 5-fold:   0%|          | 0/3 [00:00<?, ?model/s]    CV 5-fold:  67%|██████▋   | 2/3 [00:00<00:00, 12.26model/s]    CV 5-fold: 100%|██████████| 3/3 [00:00<00:00,  4.41model/s]
+    CV 5-fold:   0%|          | 0/3 [00:00<?, ?model/s]    CV 5-fold:  67%|██████▋   | 2/3 [00:00<00:00,  8.54model/s]    CV 5-fold: 100%|██████████| 3/3 [00:00<00:00,  2.64model/s]    CV 5-fold: 100%|██████████| 3/3 [00:00<00:00,  3.06model/s]
                    accuracy  precision    recall  ...    f1_std  fit_time  predict_time
     model                                         ...                                  
-    logistic       0.983333   0.984714  0.983333  ...  0.013602  0.007521      0.002292
-    random_forest  0.977460   0.978470  0.977460  ...  0.021285  0.089283      0.007164
-    knn            0.971746   0.974261  0.971746  ...  0.018356  0.004298      0.002557
+    logistic       0.983333   0.984714  0.983333  ...  0.013602  0.011349      0.003018
+    random_forest  0.983016   0.983521  0.983016  ...  0.022766  0.127481      0.011365
+    knn            0.971746   0.974261  0.971746  ...  0.018356  0.006076      0.003491
 
     [3 rows x 10 columns]
 
@@ -83,9 +83,9 @@ nettement supérieur aux autres est moins fiable qu'il n'y paraît.
     Meilleur score moyen : logistic (0.983)
                    accuracy  accuracy_std  fit_time
     model                                          
-    logistic       0.983333      0.013608  0.007521
-    random_forest  0.977460      0.021299  0.089283
-    knn            0.971746      0.018074  0.004298
+    logistic       0.983333      0.013608  0.011349
+    random_forest  0.983016      0.022780  0.127481
+    knn            0.971746      0.018074  0.006076
 
 
 
@@ -119,11 +119,11 @@ mélangeant modèles nommés trainedml et estimateurs scikit-learn.
 
  .. code-block:: none
 
-    CV 5-fold:   0%|          | 0/2 [00:00<?, ?model/s]    CV 5-fold: 100%|██████████| 2/2 [00:00<00:00, 15.37model/s]    CV 5-fold: 100%|██████████| 2/2 [00:00<00:00, 15.36model/s]
+    CV 5-fold:   0%|          | 0/2 [00:00<?, ?model/s]    CV 5-fold: 100%|██████████| 2/2 [00:00<00:00, 10.82model/s]    CV 5-fold: 100%|██████████| 2/2 [00:00<00:00, 10.81model/s]
                   accuracy  precision    recall  ...    f1_std  fit_time  predict_time
     model                                        ...                                  
-    svm_rbf       0.983333   0.984209  0.983333  ...  0.022228  0.004623      0.001831
-    svm_lineaire  0.966349   0.969701  0.966349  ...  0.011477  0.004477      0.001767
+    svm_rbf       0.983333   0.984209  0.983333  ...  0.022228  0.006547      0.002433
+    svm_lineaire  0.966349   0.969701  0.966349  ...  0.011477  0.006127      0.002311
 
     [2 rows x 10 columns]
 
@@ -133,7 +133,7 @@ mélangeant modèles nommés trainedml et estimateurs scikit-learn.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.830 seconds)
+   **Total running time of the script:** (0 minutes 1.194 seconds)
 
 
 .. _sphx_glr_download_auto_examples_02_donnees_et_modeles_plot_choisir_son_modele.py:

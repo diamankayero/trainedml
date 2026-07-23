@@ -191,7 +191,7 @@ RMSE, MAE), et comparer un modèle linéaire à un modèle non linéaire.</p>
 </span></pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">task détecté : regression
-</span><span data-line="2">{&#39;r2&#39;: 0.5162481208625354, &#39;mse&#39;: 0.3161346875, &#39;rmse&#39;: 0.5622585592945651, &#39;mae&#39;: 0.43040625000000005}
+</span><span data-line="2">{&#39;r2&#39;: 0.5220332640953989, &#39;mse&#39;: 0.31235406250000003, &#39;rmse&#39;: 0.5588864486637692, &#39;mae&#39;: 0.42859374999999994}
 </span></pre></div>
 </div>
 <section id="modele-lineaire-contre-modele-non-lineaire">
@@ -205,7 +205,7 @@ quand le R² plafonne déjà autour de 0.5.</p>
 </span><span data-line="4"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R² linear                  : </span><span class="si">{</span><span class="n">trainer_lin</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()[</span><span class="s1">&#39;r2&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">R² random_forest_regressor : 0.516
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">R² random_forest_regressor : 0.522
 </span><span data-line="2">R² linear                  : 0.403
 </span></pre></div>
 </div>
@@ -233,11 +233,11 @@ Un R² autour de 0.5 sur ce type de cible n’est donc pas un échec.</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">linear                    -&gt; R²=0.403
 </span><span data-line="2">ridge                     -&gt; R²=0.403
 </span><span data-line="3">lasso                     -&gt; R²=-0.006
-</span><span data-line="4">random_forest_regressor   -&gt; R²=0.523
+</span><span data-line="4">random_forest_regressor   -&gt; R²=0.519
 </span><span data-line="5">knn_regressor             -&gt; R²=0.335
 </span></pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.927 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.167 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-02-donnees-et-modeles-plot-regression-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/26fda0700b4c49023fbc045ae67e5069/plot_regression.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_regression.ipynb</span></code></a></p>

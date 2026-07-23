@@ -184,15 +184,16 @@ validation croisée, et renvoie un tableau trié prêt à lire.</p>
 </span></pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">CV 5-fold:   0%|          | 0/3 [00:00&lt;?, ?model/s]
-</span><span data-line="2">CV 5-fold:  67%|██████▋   | 2/3 [00:00&lt;00:00, 12.26model/s]
-</span><span data-line="3">CV 5-fold: 100%|██████████| 3/3 [00:00&lt;00:00,  4.41model/s]
-</span><span data-line="4">               accuracy  precision    recall  ...    f1_std  fit_time  predict_time
-</span><span data-line="5">model                                         ...
-</span><span data-line="6">logistic       0.983333   0.984714  0.983333  ...  0.013602  0.007521      0.002292
-</span><span data-line="7">random_forest  0.977460   0.978470  0.977460  ...  0.021285  0.089283      0.007164
-</span><span data-line="8">knn            0.971746   0.974261  0.971746  ...  0.018356  0.004298      0.002557
-</span><span data-line="9">
-</span><span data-line="10">[3 rows x 10 columns]
+</span><span data-line="2">CV 5-fold:  67%|██████▋   | 2/3 [00:00&lt;00:00,  8.54model/s]
+</span><span data-line="3">CV 5-fold: 100%|██████████| 3/3 [00:00&lt;00:00,  2.64model/s]
+</span><span data-line="4">CV 5-fold: 100%|██████████| 3/3 [00:00&lt;00:00,  3.06model/s]
+</span><span data-line="5">               accuracy  precision    recall  ...    f1_std  fit_time  predict_time
+</span><span data-line="6">model                                         ...
+</span><span data-line="7">logistic       0.983333   0.984714  0.983333  ...  0.013602  0.011349      0.003018
+</span><span data-line="8">random_forest  0.983016   0.983521  0.983016  ...  0.022766  0.127481      0.011365
+</span><span data-line="9">knn            0.971746   0.974261  0.971746  ...  0.018356  0.006076      0.003491
+</span><span data-line="10">
+</span><span data-line="11">[3 rows x 10 columns]
 </span></pre></div>
 </div>
 <section id="score-moyen-et-stabilite">
@@ -208,9 +209,9 @@ nettement supérieur aux autres est moins fiable qu’il n’y paraît.</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">Meilleur score moyen : logistic (0.983)
 </span><span data-line="2">               accuracy  accuracy_std  fit_time
 </span><span data-line="3">model
-</span><span data-line="4">logistic       0.983333      0.013608  0.007521
-</span><span data-line="5">random_forest  0.977460      0.021299  0.089283
-</span><span data-line="6">knn            0.971746      0.018074  0.004298
+</span><span data-line="4">logistic       0.983333      0.013608  0.011349
+</span><span data-line="5">random_forest  0.983016      0.022780  0.127481
+</span><span data-line="6">knn            0.971746      0.018074  0.006076
 </span></pre></div>
 </div>
 </section>
@@ -230,17 +231,17 @@ mélangeant modèles nommés trainedml et estimateurs scikit-learn.</p>
 </span></pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">CV 5-fold:   0%|          | 0/2 [00:00&lt;?, ?model/s]
-</span><span data-line="2">CV 5-fold: 100%|██████████| 2/2 [00:00&lt;00:00, 15.37model/s]
-</span><span data-line="3">CV 5-fold: 100%|██████████| 2/2 [00:00&lt;00:00, 15.36model/s]
+</span><span data-line="2">CV 5-fold: 100%|██████████| 2/2 [00:00&lt;00:00, 10.82model/s]
+</span><span data-line="3">CV 5-fold: 100%|██████████| 2/2 [00:00&lt;00:00, 10.81model/s]
 </span><span data-line="4">              accuracy  precision    recall  ...    f1_std  fit_time  predict_time
 </span><span data-line="5">model                                        ...
-</span><span data-line="6">svm_rbf       0.983333   0.984209  0.983333  ...  0.022228  0.004623      0.001831
-</span><span data-line="7">svm_lineaire  0.966349   0.969701  0.966349  ...  0.011477  0.004477      0.001767
+</span><span data-line="6">svm_rbf       0.983333   0.984209  0.983333  ...  0.022228  0.006547      0.002433
+</span><span data-line="7">svm_lineaire  0.966349   0.969701  0.966349  ...  0.011477  0.006127      0.002311
 </span><span data-line="8">
 </span><span data-line="9">[2 rows x 10 columns]
 </span></pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.830 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.194 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-02-donnees-et-modeles-plot-choisir-son-modele-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/19a6c35145d0e0105dc938facd171359/plot_choisir_son_modele.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_choisir_son_modele.ipynb</span></code></a></p>

@@ -123,7 +123,7 @@ préparation manuelle n'est nécessaire.
 
  .. code-block:: none
 
-    {'accuracy': 0.7625, 'precision': 0.7930288461538462, 'recall': 0.7625, 'f1': 0.7719755469755469}
+    {'accuracy': 0.7375, 'precision': 0.7594907407407407, 'recall': 0.7375, 'f1': 0.745655243833553}
 
 
 
@@ -157,11 +157,11 @@ sous-jacent (qui porte ``feature_importances_``) est ``trainer.model.model``.
 
  .. code-block:: none
 
-    anciennete_mois          0.345356
-    mensualite               0.279910
-    type_contrat_mensuel     0.230906
-    support_technique_oui    0.097581
-    type_contrat_un_an       0.046247
+    anciennete_mois          0.357132
+    mensualite               0.281928
+    type_contrat_mensuel     0.221300
+    support_technique_oui    0.094652
+    type_contrat_un_an       0.044987
     dtype: float64
 
 
@@ -170,7 +170,7 @@ sous-jacent (qui porte ``feature_importances_``) est ``trainer.model.model``.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.199 seconds)
+   **Total running time of the script:** (0 minutes 0.291 seconds)
 
 
 .. _sphx_glr_download_auto_examples_02_donnees_et_modeles_plot_vos_donnees_en_memoire.py:

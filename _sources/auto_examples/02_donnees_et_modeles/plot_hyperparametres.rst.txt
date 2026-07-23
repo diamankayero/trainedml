@@ -67,7 +67,7 @@ scikit-learn quelconque directement dans ``Trainer``.
 
  .. code-block:: none
 
-    n_estimators=10  : {'accuracy': 0.9722222222222222, 'precision': 0.974074074074074, 'recall': 0.9722222222222222, 'f1': 0.9721867461331064}
+    n_estimators=10  : {'accuracy': 0.9722222222222222, 'precision': 0.9753086419753088, 'recall': 0.9722222222222222, 'f1': 0.9725248123940935}
     n_estimators=300 : {'accuracy': 1.0, 'precision': 1.0, 'recall': 1.0, 'f1': 1.0}
 
 
@@ -136,7 +136,7 @@ configurez-le directement (``SVC(C=2)``) plutôt que de passer
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.304 seconds)
+   **Total running time of the script:** (0 minutes 0.448 seconds)
 
 
 .. _sphx_glr_download_auto_examples_02_donnees_et_modeles_plot_hyperparametres.py:

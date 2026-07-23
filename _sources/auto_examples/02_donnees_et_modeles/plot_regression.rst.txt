@@ -49,7 +49,7 @@ RMSE, MAE), et comparer un modèle linéaire à un modèle non linéaire.
  .. code-block:: none
 
     task détecté : regression
-    {'r2': 0.5162481208625354, 'mse': 0.3161346875, 'rmse': 0.5622585592945651, 'mae': 0.43040625000000005}
+    {'r2': 0.5220332640953989, 'mse': 0.31235406250000003, 'rmse': 0.5588864486637692, 'mae': 0.42859374999999994}
 
 
 
@@ -80,7 +80,7 @@ quand le R² plafonne déjà autour de 0.5.
 
  .. code-block:: none
 
-    R² random_forest_regressor : 0.516
+    R² random_forest_regressor : 0.522
     R² linear                  : 0.403
 
 
@@ -125,7 +125,7 @@ Modèles de régression disponibles
     linear                    -> R²=0.403
     ridge                     -> R²=0.403
     lasso                     -> R²=-0.006
-    random_forest_regressor   -> R²=0.523
+    random_forest_regressor   -> R²=0.519
     knn_regressor             -> R²=0.335
 
 
@@ -134,7 +134,7 @@ Modèles de régression disponibles
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.927 seconds)
+   **Total running time of the script:** (0 minutes 1.167 seconds)
 
 
 .. _sphx_glr_download_auto_examples_02_donnees_et_modeles_plot_regression.py:

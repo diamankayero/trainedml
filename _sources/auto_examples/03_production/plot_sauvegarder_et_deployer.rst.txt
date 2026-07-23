@@ -56,7 +56,7 @@ production.
 
  .. code-block:: none
 
-    Modèle sauvegardé : /tmp/tmps7647dxh/modele_vin.joblib
+    Modèle sauvegardé : /tmp/tmpnq9_x4mz/modele_vin.joblib
 
 
 
@@ -164,7 +164,7 @@ d'écrire du code :
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.130 seconds)
+   **Total running time of the script:** (0 minutes 0.202 seconds)
 
 
 .. _sphx_glr_download_auto_examples_03_production_plot_sauvegarder_et_deployer.py:
