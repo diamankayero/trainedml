@@ -1,62 +1,67 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="fr" data-content_root="../">
+<html lang="fr" data-accent-color="violet" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Détection de tâche &mdash; Documentation trainedml 0.01</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
-
-  
-      <script src="../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=e42f2b11"></script>
-      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="../_static/translations.js?v=e6b791cb"></script>
-    <script src="../_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Recherche" href="../search.html" />
-    <link rel="next" title="Benchmark" href="benchmark.html" />
-    <link rel="prev" title="Prétraitement" href="preprocessing.html" /> 
-</head>
-
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../index.html" class="icon icon-home">
-            trainedml
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Détection de tâche - trainedml 0.2.0</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="next" title="Benchmark" href="benchmark.html" /><link rel="prev" title="Prétraitement" href="preprocessing.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="Détection de tâche"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>trainedml</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Recherche" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Passer en mode clair"
+data-aria-light="Passer en mode sombre"
+data-aria-dark="Passer en mode automatique">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">API</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../modules.html">trainedml - API détaillée</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="trainer.html">Trainer (API principale)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loader.html">DataLoader</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preprocessing.html">Prétraitement</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Détection de tâche</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#heuristic">Heuristic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trainedml.tasks.MAX_UNIQUE_FOR_CLASSIFICATION"><code class="docutils literal notranslate"><span class="pre">MAX_UNIQUE_FOR_CLASSIFICATION</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trainedml.tasks.detect_model_task"><code class="docutils literal notranslate"><span class="pre">detect_model_task()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trainedml.tasks.detect_task"><code class="docutils literal notranslate"><span class="pre">detect_task()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#trainedml.tasks.is_classification_target"><code class="docutils literal notranslate"><span class="pre">is_classification_target()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Détection de tâche</a></li>
 <li class="toctree-l2"><a class="reference internal" href="benchmark.html">Benchmark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="evaluation.html">Evaluator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="report.html">Rapport EDA</a></li>
@@ -85,61 +90,85 @@
 
         </div>
       </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">trainedml</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../modules.html">trainedml - API détaillée</a></li>
-      <li class="breadcrumb-item active">Détection de tâche</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/trainedml/tasks.rst.txt" rel="nofollow"> Afficher la source de la page</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="module-trainedml.tasks">
-<span id="detection-de-tache"></span><h1>Détection de tâche<a class="headerlink" href="#module-trainedml.tasks" title="Lien vers cette rubrique"></a></h1>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>Sur cette page</h3><ul>
+<li><a class="reference internal" href="#heuristic">Heuristic</a></li>
+<li><a class="reference internal" href="#trainedml.tasks.MAX_UNIQUE_FOR_CLASSIFICATION"><code class="docutils literal notranslate"><span class="pre">MAX_UNIQUE_FOR_CLASSIFICATION</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.tasks.detect_model_task"><code class="docutils literal notranslate"><span class="pre">detect_model_task()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.tasks.detect_task"><code class="docutils literal notranslate"><span class="pre">detect_task()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.tasks.is_classification_target"><code class="docutils literal notranslate"><span class="pre">is_classification_target()</span></code></a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">trainedml</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../modules.html"><span itemprop="name">trainedml - API détaillée</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Détection de tâche</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="module-trainedml.tasks">
+<span id="detection-de-tache"></span><h1>Détection de tâche<a class="headerlink" href="#module-trainedml.tasks" title="Lien vers cette rubrique">#</a></h1>
 <p>Task type detection (classification vs regression) for trainedml.</p>
 <p>This module centralizes the heuristic used by the Trainer, the CLI, the
 Benchmark, and <a class="reference internal" href="trainer.html#trainedml.compare" title="trainedml.compare"><code class="xref py py-func docutils literal notranslate"><span class="pre">trainedml.compare()</span></code></a> to determine whether a target
 corresponds to a classification or a regression task.</p>
 <section id="heuristic">
-<h2>Heuristic<a class="headerlink" href="#heuristic" title="Lien vers cette rubrique"></a></h2>
+<h2>Heuristic<a class="headerlink" href="#heuristic" title="Lien vers cette rubrique">#</a></h2>
 <ul class="simple">
 <li><p>Non-numeric target (text, categorical, <code class="docutils literal notranslate"><span class="pre">StringDtype</span></code>…) -&gt; classification</p></li>
 <li><p>Integer target with few unique values (&lt;= 20) -&gt; classification</p></li>
 <li><p>Otherwise -&gt; regression</p></li>
 </ul>
 <p class="rubric">Exemple</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect_task</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">detect_task</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;setosa&quot;</span><span class="p">,</span> <span class="s2">&quot;versicolor&quot;</span><span class="p">]))</span>
-<span class="go">&#39;classification&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">detect_task</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">]))</span>
-<span class="go">&#39;regression&#39;</span>
-</pre></div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect_task</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">detect_task</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;setosa&quot;</span><span class="p">,</span> <span class="s2">&quot;versicolor&quot;</span><span class="p">]))</span>
+</span><span data-line="3"><span class="go">&#39;classification&#39;</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">detect_task</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">]))</span>
+</span><span data-line="5"><span class="go">&#39;regression&#39;</span>
+</span></pre></div>
 </div>
 </section>
 <dl class="py data">
 <dt class="sig sig-object py" id="trainedml.tasks.MAX_UNIQUE_FOR_CLASSIFICATION">
-<span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">MAX_UNIQUE_FOR_CLASSIFICATION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20</span></span><a class="headerlink" href="#trainedml.tasks.MAX_UNIQUE_FOR_CLASSIFICATION" title="Lien vers cette définition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">MAX_UNIQUE_FOR_CLASSIFICATION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20</span></span><a class="headerlink" href="#trainedml.tasks.MAX_UNIQUE_FOR_CLASSIFICATION" title="Lien vers cette définition">#</a></dt>
 <dd><p>Maximum number of unique integer values for a target to be considered
 categorical (classification).</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.tasks.detect_model_task">
-<span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">detect_model_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/trainedml/tasks.html#detect_model_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.tasks.detect_model_task" title="Lien vers cette définition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">detect_model_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/trainedml/tasks.html#detect_model_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.tasks.detect_model_task" title="Lien vers cette définition">#</a></dt>
 <dd><p>Determine the task type of a model, whatever it is.</p>
 <p>Priority order:</p>
 <ol class="arabic simple">
@@ -166,7 +195,7 @@ categorical (classification).</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.tasks.detect_task">
-<span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">detect_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/trainedml/tasks.html#detect_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.tasks.detect_task" title="Lien vers cette définition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">detect_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/trainedml/tasks.html#detect_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.tasks.detect_task" title="Lien vers cette définition">#</a></dt>
 <dd><p>Return the task type associated with a target.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -180,15 +209,15 @@ categorical (classification).</p>
 </dd>
 </dl>
 <p class="rubric">Exemples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">detect_task</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
-<span class="go">&#39;classification&#39;</span>
-</pre></div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">detect_task</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+</span><span data-line="2"><span class="go">&#39;classification&#39;</span>
+</span></pre></div>
 </div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="trainedml.tasks.is_classification_target">
-<span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">is_classification_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/trainedml/tasks.html#is_classification_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.tasks.is_classification_target" title="Lien vers cette définition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">is_classification_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/trainedml/tasks.html#is_classification_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.tasks.is_classification_target" title="Lien vers cette définition">#</a></dt>
 <dd><p>Determine whether the target is categorical (classification) or numeric (regression).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -202,45 +231,59 @@ categorical (classification).</p>
 </dd>
 </dl>
 <p class="rubric">Exemples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">is_classification_target</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">]))</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">is_classification_target</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">]))</span>
-<span class="go">False</span>
-</pre></div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">is_classification_target</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">]))</span>
+</span><span data-line="2"><span class="go">True</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">is_classification_target</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">]))</span>
+</span><span data-line="4"><span class="go">False</span>
+</span></pre></div>
 </div>
 </dd></dl>
 
 </section>
 
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
-        <a href="preprocessing.html" class="btn btn-neutral float-left" title="Prétraitement" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
-        <a href="benchmark.html" class="btn btn-neutral float-right" title="Benchmark" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Droits d'auteur 2026, Yéro Diamanka.</p>
-  </div>
-
-  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
-    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Retour au sommet</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="preprocessing.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Précédent</span><div class="title">Prétraitement</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="benchmark.html">
+      <div class="page-info">
+        <span>Suivant</span>
+        <div class="title">Benchmark</div>
       </div>
-    </section>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Yéro Diamanka</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+</footer>
+      <script src="../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+      <script src="../_static/shibuya.js?v=50760d75"></script></body>
 </html>

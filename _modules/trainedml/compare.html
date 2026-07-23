@@ -1,228 +1,295 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="fr" data-content_root="../../">
+<html lang="fr" data-accent-color="violet" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>trainedml.compare &mdash; Documentation trainedml 0.01</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
-
-  
-      <script src="../../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=e42f2b11"></script>
-      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="../../_static/translations.js?v=e6b791cb"></script>
-    <script src="../../_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Recherche" href="../../search.html" /> 
-</head>
-
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../index.html" class="icon icon-home">
-            trainedml
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.compare - trainedml 0.2.0</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="trainedml.compare"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      
+      
+      <strong>trainedml</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Recherche" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Passer en mode clair"
+data-aria-light="Passer en mode sombre"
+data-aria-dark="Passer en mode automatique">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/loader.html">DataLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/tasks.html">Détection de tâche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/benchmark.html">Benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/evaluation.html">Evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/report.html">Rapport EDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/random_forest.html">Random Forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/visualization.html">Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/analyzer.html">DataAnalyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
       </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">trainedml</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../index.html">Code du module</a></li>
-          <li class="breadcrumb-item"><a href="../trainedml.html">trainedml</a></li>
-      <li class="breadcrumb-item active">trainedml.compare</li>
-      <li class="wy-breadcrumbs-aside">
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <h1>Code source de trainedml.compare</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Compare every model in one line for trainedml.</span>
-
-<span class="sd">This module exposes :func:`compare`, which chains the whole pipeline:</span>
-<span class="sd">data loading, task type detection, preprocessing, cross-validation of</span>
-<span class="sd">every suitable model, and returns a pandas DataFrame sorted from best to</span>
-<span class="sd">worst model.</span>
-
-<span class="sd">Example</span>
-<span class="sd">-------</span>
-<span class="sd">&gt;&gt;&gt; from trainedml import compare</span>
-<span class="sd">&gt;&gt;&gt; df = compare(dataset=&quot;wine&quot;, cv=5)</span>
-<span class="sd">&gt;&gt;&gt; print(df)</span>
-<span class="sd">                     accuracy  accuracy_std  ...  fit_time  predict_time</span>
-<span class="sd">model                                        ...</span>
-<span class="sd">random_forest          0.98          0.02    ...    0.081        0.004</span>
-<span class="sd">...</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">.benchmark</span><span class="w"> </span><span class="kn">import</span> <span class="n">Benchmark</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.data.loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CLASSIFIER_MAP</span><span class="p">,</span> <span class="n">REGRESSOR_MAP</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreprocessedModel</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect_task</span>
-
-
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">trainedml</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Code du module</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../trainedml.html"><span itemprop="name">trainedml</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">trainedml.compare</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <h1>Code source de trainedml.compare</h1><div class="highlight"><pre>
+<span></span><span data-line="1"><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="2"><span class="sd">Compare every model in one line for trainedml.</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="sd">This module exposes :func:`compare`, which chains the whole pipeline:</span>
+</span><span data-line="5"><span class="sd">data loading, task type detection, preprocessing, cross-validation of</span>
+</span><span data-line="6"><span class="sd">every suitable model, and returns a pandas DataFrame sorted from best to</span>
+</span><span data-line="7"><span class="sd">worst model.</span>
+</span><span data-line="8">
+</span><span data-line="9"><span class="sd">Example</span>
+</span><span data-line="10"><span class="sd">-------</span>
+</span><span data-line="11"><span class="sd">&gt;&gt;&gt; from trainedml import compare</span>
+</span><span data-line="12"><span class="sd">&gt;&gt;&gt; df = compare(dataset=&quot;wine&quot;, cv=5)</span>
+</span><span data-line="13"><span class="sd">&gt;&gt;&gt; print(df)</span>
+</span><span data-line="14"><span class="sd">                     accuracy  accuracy_std  ...  fit_time  predict_time</span>
+</span><span data-line="15"><span class="sd">model                                        ...</span>
+</span><span data-line="16"><span class="sd">random_forest          0.98          0.02    ...    0.081        0.004</span>
+</span><span data-line="17"><span class="sd">...</span>
+</span><span data-line="18"><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="19">
+</span><span data-line="20"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+</span><span data-line="21">
+</span><span data-line="22"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+</span><span data-line="23">
+</span><span data-line="24"><span class="kn">from</span><span class="w"> </span><span class="nn">.benchmark</span><span class="w"> </span><span class="kn">import</span> <span class="n">Benchmark</span>
+</span><span data-line="25"><span class="kn">from</span><span class="w"> </span><span class="nn">.data.loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+</span><span data-line="26"><span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CLASSIFIER_MAP</span><span class="p">,</span> <span class="n">REGRESSOR_MAP</span>
+</span><span data-line="27"><span class="kn">from</span><span class="w"> </span><span class="nn">.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreprocessedModel</span>
+</span><span data-line="28"><span class="kn">from</span><span class="w"> </span><span class="nn">.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect_task</span>
+</span><span data-line="29">
+</span><span data-line="30">
 <div class="viewcode-block" id="compare">
 <a class="viewcode-back" href="../../trainedml/trainer.html#trainedml.compare">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span>
-    <span class="n">dataset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">target</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">X</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">models</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">cv</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="n">preprocess</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
-    <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">sort</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compare every model suited to a dataset and return a sorted DataFrame.</span>
+</span><span data-line="31"><span class="k">def</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span>
+</span><span data-line="32">    <span class="n">dataset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="33">    <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="34">    <span class="n">target</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="35">    <span class="n">X</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span data-line="36">    <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span data-line="37">    <span class="n">models</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="38">    <span class="n">cv</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+</span><span data-line="39">    <span class="n">preprocess</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="40">    <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
+</span><span data-line="41">    <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="42">    <span class="n">sort</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="43"><span class="p">):</span>
+</span><span data-line="44"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="45"><span class="sd">    Compare every model suited to a dataset and return a sorted DataFrame.</span>
+</span><span data-line="46">
+</span><span data-line="47"><span class="sd">    The task type (classification or regression) is automatically detected</span>
+</span><span data-line="48"><span class="sd">    from the target, and only suitable models are compared. Each model is</span>
+</span><span data-line="49"><span class="sd">    evaluated by cross-validation; preprocessing (imputation,</span>
+</span><span data-line="50"><span class="sd">    standardization, one-hot) is refit on every fold to avoid any</span>
+</span><span data-line="51"><span class="sd">    information leakage.</span>
+</span><span data-line="52">
+</span><span data-line="53"><span class="sd">    Parameters</span>
+</span><span data-line="54"><span class="sd">    ----------</span>
+</span><span data-line="55"><span class="sd">    dataset : str, optional</span>
+</span><span data-line="56"><span class="sd">        Name of a built-in dataset (&quot;iris&quot;, &quot;wine&quot;).</span>
+</span><span data-line="57"><span class="sd">    url : str, optional</span>
+</span><span data-line="58"><span class="sd">        URL of a remote CSV (requires ``target``).</span>
+</span><span data-line="59"><span class="sd">    target : str, optional</span>
+</span><span data-line="60"><span class="sd">        Name of the target column (if ``url``).</span>
+</span><span data-line="61"><span class="sd">    X : pandas.DataFrame or array-like, optional</span>
+</span><span data-line="62"><span class="sd">        Features provided directly in memory (alternative to dataset/url).</span>
+</span><span data-line="63"><span class="sd">    y : pandas.Series or array-like, optional</span>
+</span><span data-line="64"><span class="sd">        Matching target (required if X is provided).</span>
+</span><span data-line="65"><span class="sd">    models : dict, optional</span>
+</span><span data-line="66"><span class="sd">        Dictionary {name: instance} to compare custom models</span>
+</span><span data-line="67"><span class="sd">        (trainedml or scikit-learn). Defaults to every trainedml model</span>
+</span><span data-line="68"><span class="sd">        suited to the detected task.</span>
+</span><span data-line="69"><span class="sd">    cv : int, default=5</span>
+</span><span data-line="70"><span class="sd">        Number of cross-validation folds.</span>
+</span><span data-line="71"><span class="sd">    preprocess : bool, default=True</span>
+</span><span data-line="72"><span class="sd">        Applies trainedml&#39;s standard preprocessing on every fold.</span>
+</span><span data-line="73"><span class="sd">    seed : int, default=42</span>
+</span><span data-line="74"><span class="sd">        Random seed for fold shuffling.</span>
+</span><span data-line="75"><span class="sd">    show_progress : bool, default=True</span>
+</span><span data-line="76"><span class="sd">        Show a progress bar.</span>
+</span><span data-line="77"><span class="sd">    sort : bool, default=True</span>
+</span><span data-line="78"><span class="sd">        Sort the table by the primary metric (accuracy or r2), descending.</span>
+</span><span data-line="79">
+</span><span data-line="80"><span class="sd">    Returns</span>
+</span><span data-line="81"><span class="sd">    -------</span>
+</span><span data-line="82"><span class="sd">    pandas.DataFrame</span>
+</span><span data-line="83"><span class="sd">        One row per model: average metrics, standard deviations</span>
+</span><span data-line="84"><span class="sd">        (``*_std``), average training and prediction times.</span>
+</span><span data-line="85">
+</span><span data-line="86"><span class="sd">    Raises</span>
+</span><span data-line="87"><span class="sd">    ------</span>
+</span><span data-line="88"><span class="sd">    ValueError</span>
+</span><span data-line="89"><span class="sd">        If neither ``dataset`` nor ``url``+``target`` is provided.</span>
+</span><span data-line="90">
+</span><span data-line="91"><span class="sd">    Examples</span>
+</span><span data-line="92"><span class="sd">    --------</span>
+</span><span data-line="93"><span class="sd">    Compare every classifier on Wine:</span>
+</span><span data-line="94">
+</span><span data-line="95"><span class="sd">    &gt;&gt;&gt; from trainedml import compare</span>
+</span><span data-line="96"><span class="sd">    &gt;&gt;&gt; print(compare(dataset=&quot;wine&quot;))</span>
+</span><span data-line="97">
+</span><span data-line="98"><span class="sd">    Compare custom models (including scikit-learn):</span>
+</span><span data-line="99">
+</span><span data-line="100"><span class="sd">    &gt;&gt;&gt; from sklearn.svm import SVC</span>
+</span><span data-line="101"><span class="sd">    &gt;&gt;&gt; from trainedml.models import KNNModel</span>
+</span><span data-line="102"><span class="sd">    &gt;&gt;&gt; print(compare(dataset=&quot;iris&quot;, models={&quot;svc&quot;: SVC(), &quot;knn&quot;: KNNModel()}))</span>
+</span><span data-line="103">
+</span><span data-line="104"><span class="sd">    On a remote CSV (regression):</span>
+</span><span data-line="105">
+</span><span data-line="106"><span class="sd">    &gt;&gt;&gt; print(compare(url=&quot;https://.../winequality-red.csv&quot;, target=&quot;quality&quot;))</span>
+</span><span data-line="107"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="108">    <span class="k">if</span> <span class="n">X</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="109">        <span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+</span><span data-line="110">        <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">)</span>
+</span><span data-line="111">
+</span><span data-line="112">    <span class="k">if</span> <span class="n">models</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="113">        <span class="n">task</span> <span class="o">=</span> <span class="n">detect_task</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</span><span data-line="114">        <span class="n">model_map</span> <span class="o">=</span> <span class="n">CLASSIFIER_MAP</span> <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;classification&quot;</span> <span class="k">else</span> <span class="n">REGRESSOR_MAP</span>
+</span><span data-line="115">        <span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="bp">cls</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">model_map</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</span><span data-line="116">
+</span><span data-line="117">    <span class="k">if</span> <span class="n">preprocess</span><span class="p">:</span>
+</span><span data-line="118">        <span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">PreprocessedModel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</span><span data-line="119">
+</span><span data-line="120">    <span class="n">bench</span> <span class="o">=</span> <span class="n">Benchmark</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+</span><span data-line="121">    <span class="n">bench</span><span class="o">.</span><span class="n">run_cv</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="n">show_progress</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+</span><span data-line="122">    <span class="k">return</span> <span class="n">bench</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">)</span></div>
 
-<span class="sd">    The task type (classification or regression) is automatically detected</span>
-<span class="sd">    from the target, and only suitable models are compared. Each model is</span>
-<span class="sd">    evaluated by cross-validation; preprocessing (imputation,</span>
-<span class="sd">    standardization, one-hot) is refit on every fold to avoid any</span>
-<span class="sd">    information leakage.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    dataset : str, optional</span>
-<span class="sd">        Name of a built-in dataset (&quot;iris&quot;, &quot;wine&quot;).</span>
-<span class="sd">    url : str, optional</span>
-<span class="sd">        URL of a remote CSV (requires ``target``).</span>
-<span class="sd">    target : str, optional</span>
-<span class="sd">        Name of the target column (if ``url``).</span>
-<span class="sd">    X : pandas.DataFrame or array-like, optional</span>
-<span class="sd">        Features provided directly in memory (alternative to dataset/url).</span>
-<span class="sd">    y : pandas.Series or array-like, optional</span>
-<span class="sd">        Matching target (required if X is provided).</span>
-<span class="sd">    models : dict, optional</span>
-<span class="sd">        Dictionary {name: instance} to compare custom models</span>
-<span class="sd">        (trainedml or scikit-learn). Defaults to every trainedml model</span>
-<span class="sd">        suited to the detected task.</span>
-<span class="sd">    cv : int, default=5</span>
-<span class="sd">        Number of cross-validation folds.</span>
-<span class="sd">    preprocess : bool, default=True</span>
-<span class="sd">        Applies trainedml&#39;s standard preprocessing on every fold.</span>
-<span class="sd">    seed : int, default=42</span>
-<span class="sd">        Random seed for fold shuffling.</span>
-<span class="sd">    show_progress : bool, default=True</span>
-<span class="sd">        Show a progress bar.</span>
-<span class="sd">    sort : bool, default=True</span>
-<span class="sd">        Sort the table by the primary metric (accuracy or r2), descending.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    pandas.DataFrame</span>
-<span class="sd">        One row per model: average metrics, standard deviations</span>
-<span class="sd">        (``*_std``), average training and prediction times.</span>
-
-<span class="sd">    Raises</span>
-<span class="sd">    ------</span>
-<span class="sd">    ValueError</span>
-<span class="sd">        If neither ``dataset`` nor ``url``+``target`` is provided.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    Compare every classifier on Wine:</span>
-
-<span class="sd">    &gt;&gt;&gt; from trainedml import compare</span>
-<span class="sd">    &gt;&gt;&gt; print(compare(dataset=&quot;wine&quot;))</span>
-
-<span class="sd">    Compare custom models (including scikit-learn):</span>
-
-<span class="sd">    &gt;&gt;&gt; from sklearn.svm import SVC</span>
-<span class="sd">    &gt;&gt;&gt; from trainedml.models import KNNModel</span>
-<span class="sd">    &gt;&gt;&gt; print(compare(dataset=&quot;iris&quot;, models={&quot;svc&quot;: SVC(), &quot;knn&quot;: KNNModel()}))</span>
-
-<span class="sd">    On a remote CSV (regression):</span>
-
-<span class="sd">    &gt;&gt;&gt; print(compare(url=&quot;https://.../winequality-red.csv&quot;, target=&quot;quality&quot;))</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">X</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
-        <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">models</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">task</span> <span class="o">=</span> <span class="n">detect_task</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">model_map</span> <span class="o">=</span> <span class="n">CLASSIFIER_MAP</span> <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;classification&quot;</span> <span class="k">else</span> <span class="n">REGRESSOR_MAP</span>
-        <span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="bp">cls</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">model_map</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-
-    <span class="k">if</span> <span class="n">preprocess</span><span class="p">:</span>
-        <span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">PreprocessedModel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-
-    <span class="n">bench</span> <span class="o">=</span> <span class="n">Benchmark</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
-    <span class="n">bench</span><span class="o">.</span><span class="n">run_cv</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="n">show_progress</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">bench</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">sort</span><span class="o">=</span><span class="n">sort</span><span class="p">)</span></div>
-
-</pre></div>
-
-           </div>
-          </div>
-          <footer>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Droits d'auteur 2026, Yéro Diamanka.</p>
+</span></pre></div>
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Retour au sommet</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Yéro Diamanka</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
   </div>
-
-  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
-    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
 </footer>
-        </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+      <script src="../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/translations.js?v=e6b791cb"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script></body>
 </html>

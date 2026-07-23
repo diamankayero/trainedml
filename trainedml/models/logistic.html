@@ -1,50 +1,61 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="fr" data-content_root="../../">
+<html lang="fr" data-accent-color="violet" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Régression logistique &mdash; Documentation trainedml 0.01</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
-
-  
-      <script src="../../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=e42f2b11"></script>
-      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="../../_static/translations.js?v=e6b791cb"></script>
-      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
-    <script src="../../_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Recherche" href="../../search.html" />
-    <link rel="next" title="Random Forest" href="random_forest.html" />
-    <link rel="prev" title="k-Nearest Neighbors (kNN)" href="knn.html" /> 
-</head>
-
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../index.html" class="icon icon-home">
-            trainedml
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Régression logistique - trainedml 0.2.0</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Random Forest" href="random_forest.html" /><link rel="prev" title="k-Nearest Neighbors (kNN)" href="knn.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="Régression logistique"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      
+      
+      <strong>trainedml</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Recherche" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Passer en mode clair"
+data-aria-light="Passer en mode sombre"
+data-aria-dark="Passer en mode automatique">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">API</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../trainer.html">Trainer (API principale)</a></li>
@@ -55,13 +66,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../evaluation.html">Evaluator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../report.html">Rapport EDA</a></li>
 <li class="toctree-l2"><a class="reference internal" href="knn.html">k-Nearest Neighbors (kNN)</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Régression logistique</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#principe-regression-logistique">Principe (Régression logistique)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#illustration-regression-logistique">Illustration (Régression logistique)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exemple-illustre-regression-logistique">Exemple illustré (Régression logistique)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pour-aller-plus-loin-regression-logistique">Pour aller plus loin (Régression logistique)</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Régression logistique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random_forest.html">Random Forest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../visualization.html">Visualizer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../analyzer.html">DataAnalyzer</a></li>
@@ -85,53 +90,80 @@
 
         </div>
       </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">trainedml</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../modules.html">trainedml - API détaillée</a></li>
-      <li class="breadcrumb-item active">Régression logistique</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/trainedml/models/logistic.rst.txt" rel="nofollow"> Afficher la source de la page</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="regression-logistique">
-<h1>Régression logistique<a class="headerlink" href="#regression-logistique" title="Lien vers cette rubrique"></a></h1>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>Sur cette page</h3><ul>
+<li><a class="reference internal" href="#principe-regression-logistique">Principe (R&#233;gression logistique)</a></li>
+<li><a class="reference internal" href="#illustration-regression-logistique">Illustration (R&#233;gression logistique)</a></li>
+<li><a class="reference internal" href="#exemple-illustre-regression-logistique">Exemple illustr&#233; (R&#233;gression logistique)</a></li>
+<li><a class="reference internal" href="#pour-aller-plus-loin-regression-logistique">Pour aller plus loin (R&#233;gression logistique)</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">trainedml</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../modules.html"><span itemprop="name">trainedml - API détaillée</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Régression logistique</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="regression-logistique">
+<h1>Régression logistique<a class="headerlink" href="#regression-logistique" title="Lien vers cette rubrique">#</a></h1>
 <section id="principe-regression-logistique">
-<h2>Principe (Régression logistique)<a class="headerlink" href="#principe-regression-logistique" title="Lien vers cette rubrique"></a></h2>
+<h2>Principe (Régression logistique)<a class="headerlink" href="#principe-regression-logistique" title="Lien vers cette rubrique">#</a></h2>
 <p>La régression logistique est un modèle linéaire pour la classification binaire. Elle modélise la probabilité d’appartenance à la classe 1 par la fonction sigmoïde :</p>
+<div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[P(y=1\mid x) = \sigma(w^T x + b) = \frac{1}{1 + e^{-(w^T x + b)}}\]</div>
+</div>
 <p>Les paramètres <span class="math notranslate nohighlight">\((w, b)\)</span> sont estimés par maximisation de la log-vraisemblance :</p>
+<div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\ell(w, b) = \sum_{i=1}^n \left[ y_i \log \sigma(w^T x_i + b) + (1-y_i) \log (1-\sigma(w^T x_i + b)) \right]\]</div>
+</div>
 <p><strong>Avantages</strong> : interprétable, rapide, probabiliste.</p>
 <p><strong>Limites</strong> : linéaire, sensible aux outliers, suppose l’indépendance des variables explicatives.</p>
 </section>
 <section id="illustration-regression-logistique">
-<h2>Illustration (Régression logistique)<a class="headerlink" href="#illustration-regression-logistique" title="Lien vers cette rubrique"></a></h2>
+<h2>Illustration (Régression logistique)<a class="headerlink" href="#illustration-regression-logistique" title="Lien vers cette rubrique">#</a></h2>
 <a class="reference internal image-reference" href="../../_images/building-predictive-models-logistic-regression-in-python_01.png"><img alt="Courbe sigmoïde" class="align-center" src="../../_images/building-predictive-models-logistic-regression-in-python_01.png" style="width: 400px;" />
 </a>
 </section>
 <section id="exemple-illustre-regression-logistique">
-<h2>Exemple illustré (Régression logistique)<a class="headerlink" href="#exemple-illustre-regression-logistique" title="Lien vers cette rubrique"></a></h2>
+<h2>Exemple illustré (Régression logistique)<a class="headerlink" href="#exemple-illustre-regression-logistique" title="Lien vers cette rubrique">#</a></h2>
 <p>Supposons que l’on veuille prédire si un étudiant réussit un examen (1) ou non (0) en fonction de son nombre d’heures de révision <span class="math notranslate nohighlight">\(x\)</span>. La régression logistique modélise la probabilité de réussite en fonction de <span class="math notranslate nohighlight">\(x\)</span> et ajuste la courbe sigmoïde pour séparer les deux classes.</p>
 </section>
 <section id="pour-aller-plus-loin-regression-logistique">
-<h2>Pour aller plus loin (Régression logistique)<a class="headerlink" href="#pour-aller-plus-loin-regression-logistique" title="Lien vers cette rubrique"></a></h2>
+<h2>Pour aller plus loin (Régression logistique)<a class="headerlink" href="#pour-aller-plus-loin-regression-logistique" title="Lien vers cette rubrique">#</a></h2>
 <ul class="simple">
 <li><p>Documentation scikit-learn : <a class="reference external" href="https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression">https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression</a></p></li>
 <li><p>Article Wikipedia : <a class="reference external" href="https://fr.wikipedia.org/wiki/R%C3%A9gression_logistique">https://fr.wikipedia.org/wiki/R%C3%A9gression_logistique</a></p></li>
@@ -139,35 +171,50 @@
 </section>
 </section>
 
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
-        <a href="knn.html" class="btn btn-neutral float-left" title="k-Nearest Neighbors (kNN)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
-        <a href="random_forest.html" class="btn btn-neutral float-right" title="Random Forest" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Droits d'auteur 2026, Yéro Diamanka.</p>
-  </div>
-
-  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
-    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Retour au sommet</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="knn.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Précédent</span><div class="title">k-Nearest Neighbors (kNN)</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="random_forest.html">
+      <div class="page-info">
+        <span>Suivant</span>
+        <div class="title">Random Forest</div>
       </div>
-    </section>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Yéro Diamanka</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+</footer>
+      <script src="../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/translations.js?v=e6b791cb"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script></body>
 </html>

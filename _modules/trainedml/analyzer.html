@@ -1,636 +1,703 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="fr" data-content_root="../../">
+<html lang="fr" data-accent-color="violet" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>trainedml.analyzer &mdash; Documentation trainedml 0.01</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
-
-  
-      <script src="../../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=e42f2b11"></script>
-      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="../../_static/translations.js?v=e6b791cb"></script>
-    <script src="../../_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Recherche" href="../../search.html" /> 
-</head>
-
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../index.html" class="icon icon-home">
-            trainedml
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.analyzer - trainedml 0.2.0</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="trainedml.analyzer"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      
+      
+      <strong>trainedml</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Recherche" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Passer en mode clair"
+data-aria-light="Passer en mode sombre"
+data-aria-dark="Passer en mode automatique">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">API</span></p>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">API</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/loader.html">DataLoader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/tasks.html">Détection de tâche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/benchmark.html">Benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/evaluation.html">Evaluator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/report.html">Rapport EDA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/random_forest.html">Random Forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/visualization.html">Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/analyzer.html">DataAnalyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
       </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">trainedml</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../index.html">Code du module</a></li>
-          <li class="breadcrumb-item"><a href="../trainedml.html">trainedml</a></li>
-      <li class="breadcrumb-item active">trainedml.analyzer</li>
-      <li class="wy-breadcrumbs-aside">
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <h1>Code source de trainedml.analyzer</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Data analysis and exploratory statistics for trainedml.</span>
-
-<span class="sd">This module provides the DataAnalyzer class, which offers a suite of methods for</span>
-<span class="sd">descriptive statistics, distribution analysis, correlation, missing values, outliers,</span>
-<span class="sd">target analysis, boxplots, bivariate analysis, normality, multicollinearity, and profiling.</span>
-
-<span class="sd">Math context</span>
-<span class="sd">------------</span>
-<span class="sd">- Correlation: Pearson, Spearman, Kendall</span>
-<span class="sd">- Outlier detection: IQR, Z-score</span>
-<span class="sd">- Normality: Shapiro-Wilk, D&#39;Agostino, Anderson-Darling</span>
-<span class="sd">- Multicollinearity: Variance Inflation Factor (VIF)</span>
-
-<span class="sd">Examples</span>
-<span class="sd">--------</span>
-<span class="sd">&gt;&gt;&gt; from trainedml.analyzer import DataAnalyzer</span>
-<span class="sd">&gt;&gt;&gt; analyzer = DataAnalyzer(df)</span>
-<span class="sd">&gt;&gt;&gt; stats = analyzer.distribution()</span>
-<span class="sd">&gt;&gt;&gt; print(stats)</span>
-<span class="sd">&gt;&gt;&gt; corr = analyzer.correlation(method=&#39;spearman&#39;)</span>
-<span class="sd">&gt;&gt;&gt; print(corr)</span>
-<span class="sd">&gt;&gt;&gt; out = analyzer.outliers(method=&#39;zscore&#39;, threshold=3)</span>
-<span class="sd">&gt;&gt;&gt; print(out)</span>
-<span class="sd">&gt;&gt;&gt; norm = analyzer.normality()</span>
-<span class="sd">&gt;&gt;&gt; print(norm)</span>
-<span class="sd">&gt;&gt;&gt; report = analyzer.profiling()</span>
-<span class="sd">&gt;&gt;&gt; print(report[&#39;describe&#39;])</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.figure</span><span class="w"> </span><span class="kn">import</span> <span class="n">Figure</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
-
-
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">trainedml</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Code du module</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../trainedml.html"><span itemprop="name">trainedml</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">trainedml.analyzer</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <h1>Code source de trainedml.analyzer</h1><div class="highlight"><pre>
+<span></span><span data-line="1"><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="2"><span class="sd">Data analysis and exploratory statistics for trainedml.</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="sd">This module provides the DataAnalyzer class, which offers a suite of methods for</span>
+</span><span data-line="5"><span class="sd">descriptive statistics, distribution analysis, correlation, missing values, outliers,</span>
+</span><span data-line="6"><span class="sd">target analysis, boxplots, bivariate analysis, normality, multicollinearity, and profiling.</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="sd">Math context</span>
+</span><span data-line="9"><span class="sd">------------</span>
+</span><span data-line="10"><span class="sd">- Correlation: Pearson, Spearman, Kendall</span>
+</span><span data-line="11"><span class="sd">- Outlier detection: IQR, Z-score</span>
+</span><span data-line="12"><span class="sd">- Normality: Shapiro-Wilk, D&#39;Agostino, Anderson-Darling</span>
+</span><span data-line="13"><span class="sd">- Multicollinearity: Variance Inflation Factor (VIF)</span>
+</span><span data-line="14">
+</span><span data-line="15"><span class="sd">Examples</span>
+</span><span data-line="16"><span class="sd">--------</span>
+</span><span data-line="17"><span class="sd">&gt;&gt;&gt; from trainedml.analyzer import DataAnalyzer</span>
+</span><span data-line="18"><span class="sd">&gt;&gt;&gt; analyzer = DataAnalyzer(df)</span>
+</span><span data-line="19"><span class="sd">&gt;&gt;&gt; stats = analyzer.distribution()</span>
+</span><span data-line="20"><span class="sd">&gt;&gt;&gt; print(stats)</span>
+</span><span data-line="21"><span class="sd">&gt;&gt;&gt; corr = analyzer.correlation(method=&#39;spearman&#39;)</span>
+</span><span data-line="22"><span class="sd">&gt;&gt;&gt; print(corr)</span>
+</span><span data-line="23"><span class="sd">&gt;&gt;&gt; out = analyzer.outliers(method=&#39;zscore&#39;, threshold=3)</span>
+</span><span data-line="24"><span class="sd">&gt;&gt;&gt; print(out)</span>
+</span><span data-line="25"><span class="sd">&gt;&gt;&gt; norm = analyzer.normality()</span>
+</span><span data-line="26"><span class="sd">&gt;&gt;&gt; print(norm)</span>
+</span><span data-line="27"><span class="sd">&gt;&gt;&gt; report = analyzer.profiling()</span>
+</span><span data-line="28"><span class="sd">&gt;&gt;&gt; print(report[&#39;describe&#39;])</span>
+</span><span data-line="29"><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="30">
+</span><span data-line="31"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+</span><span data-line="32">
+</span><span data-line="33"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+</span><span data-line="34">
+</span><span data-line="35"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="36"><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span data-line="37"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="38"><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.figure</span><span class="w"> </span><span class="kn">import</span> <span class="n">Figure</span>
+</span><span data-line="39"><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+</span><span data-line="40"><span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.outliers_influence</span><span class="w"> </span><span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+</span><span data-line="41">
+</span><span data-line="42">
 <div class="viewcode-block" id="DataAnalyzer">
 <a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">DataAnalyzer</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Exploratory data analysis and statistics.</span>
-
-<span class="sd">    Provides a suite of methods for descriptive statistics, distribution analysis, correlation,</span>
-<span class="sd">    missing values, outliers, target analysis, boxplots, bivariate analysis, normality,</span>
-<span class="sd">    multicollinearity, and profiling.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    data : pandas.DataFrame</span>
-<span class="sd">        The dataset to analyze.</span>
-
-<span class="sd">    Attributes</span>
-<span class="sd">    ----------</span>
-<span class="sd">    data : pandas.DataFrame</span>
-<span class="sd">        The underlying data.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; from trainedml.analyzer import DataAnalyzer</span>
-<span class="sd">    &gt;&gt;&gt; analyzer = DataAnalyzer(df)</span>
-<span class="sd">    &gt;&gt;&gt; stats = analyzer.distribution()</span>
-<span class="sd">    &gt;&gt;&gt; print(stats)</span>
-
-<span class="sd">    &gt;&gt;&gt; corr = analyzer.correlation(method=&#39;spearman&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; print(corr)</span>
-
-<span class="sd">    &gt;&gt;&gt; out = analyzer.outliers(method=&#39;zscore&#39;, threshold=3)</span>
-<span class="sd">    &gt;&gt;&gt; print(out)</span>
-
-<span class="sd">    &gt;&gt;&gt; norm = analyzer.normality()</span>
-<span class="sd">    &gt;&gt;&gt; print(norm)</span>
-
-<span class="sd">    &gt;&gt;&gt; report = analyzer.profiling()</span>
-<span class="sd">    &gt;&gt;&gt; print(report[&#39;describe&#39;])</span>
-
-<span class="sd">    Notes</span>
-<span class="sd">    -----</span>
-<span class="sd">    - All methods return pandas objects or dicts for easy integration with pandas workflows.</span>
-<span class="sd">    - For plotting, returned objects are matplotlib figures.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_select_numeric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return numeric columns from the DataFrame.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">columns</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">columns</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span>
-
+</span><span data-line="43"><span class="k">class</span><span class="w"> </span><span class="nc">DataAnalyzer</span><span class="p">:</span>
+</span><span data-line="44"><span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="45"><span class="sd">    Exploratory data analysis and statistics.</span>
+</span><span data-line="46">
+</span><span data-line="47"><span class="sd">    Provides a suite of methods for descriptive statistics, distribution analysis, correlation,</span>
+</span><span data-line="48"><span class="sd">    missing values, outliers, target analysis, boxplots, bivariate analysis, normality,</span>
+</span><span data-line="49"><span class="sd">    multicollinearity, and profiling.</span>
+</span><span data-line="50">
+</span><span data-line="51"><span class="sd">    Parameters</span>
+</span><span data-line="52"><span class="sd">    ----------</span>
+</span><span data-line="53"><span class="sd">    data : pandas.DataFrame</span>
+</span><span data-line="54"><span class="sd">        The dataset to analyze.</span>
+</span><span data-line="55">
+</span><span data-line="56"><span class="sd">    Attributes</span>
+</span><span data-line="57"><span class="sd">    ----------</span>
+</span><span data-line="58"><span class="sd">    data : pandas.DataFrame</span>
+</span><span data-line="59"><span class="sd">        The underlying data.</span>
+</span><span data-line="60">
+</span><span data-line="61"><span class="sd">    Examples</span>
+</span><span data-line="62"><span class="sd">    --------</span>
+</span><span data-line="63"><span class="sd">    &gt;&gt;&gt; from trainedml.analyzer import DataAnalyzer</span>
+</span><span data-line="64"><span class="sd">    &gt;&gt;&gt; analyzer = DataAnalyzer(df)</span>
+</span><span data-line="65"><span class="sd">    &gt;&gt;&gt; stats = analyzer.distribution()</span>
+</span><span data-line="66"><span class="sd">    &gt;&gt;&gt; print(stats)</span>
+</span><span data-line="67">
+</span><span data-line="68"><span class="sd">    &gt;&gt;&gt; corr = analyzer.correlation(method=&#39;spearman&#39;)</span>
+</span><span data-line="69"><span class="sd">    &gt;&gt;&gt; print(corr)</span>
+</span><span data-line="70">
+</span><span data-line="71"><span class="sd">    &gt;&gt;&gt; out = analyzer.outliers(method=&#39;zscore&#39;, threshold=3)</span>
+</span><span data-line="72"><span class="sd">    &gt;&gt;&gt; print(out)</span>
+</span><span data-line="73">
+</span><span data-line="74"><span class="sd">    &gt;&gt;&gt; norm = analyzer.normality()</span>
+</span><span data-line="75"><span class="sd">    &gt;&gt;&gt; print(norm)</span>
+</span><span data-line="76">
+</span><span data-line="77"><span class="sd">    &gt;&gt;&gt; report = analyzer.profiling()</span>
+</span><span data-line="78"><span class="sd">    &gt;&gt;&gt; print(report[&#39;describe&#39;])</span>
+</span><span data-line="79">
+</span><span data-line="80"><span class="sd">    Notes</span>
+</span><span data-line="81"><span class="sd">    -----</span>
+</span><span data-line="82"><span class="sd">    - All methods return pandas objects or dicts for easy integration with pandas workflows.</span>
+</span><span data-line="83"><span class="sd">    - For plotting, returned objects are matplotlib figures.</span>
+</span><span data-line="84"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="85">
+</span><span data-line="86">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="87">        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+</span><span data-line="88">
+</span><span data-line="89">    <span class="k">def</span><span class="w"> </span><span class="nf">_select_numeric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+</span><span data-line="90"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return numeric columns from the DataFrame.&quot;&quot;&quot;</span>
+</span><span data-line="91">        <span class="k">if</span> <span class="n">columns</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
+</span><span data-line="92">            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span>
+</span><span data-line="93">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+</span><span data-line="94">            <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">columns</span><span class="p">]</span>
+</span><span data-line="95">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span>
+</span><span data-line="96">
 <div class="viewcode-block" id="DataAnalyzer.distribution">
 <a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.distribution">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute and plot the distribution of variables.</span>
+</span><span data-line="97">    <span class="k">def</span><span class="w"> </span><span class="nf">distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="98"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="99"><span class="sd">        Compute and plot the distribution of variables.</span>
+</span><span data-line="100">
+</span><span data-line="101"><span class="sd">        Parameters</span>
+</span><span data-line="102"><span class="sd">        ----------</span>
+</span><span data-line="103"><span class="sd">        columns : &#39;all&#39; or list, default=&#39;all&#39;</span>
+</span><span data-line="104"><span class="sd">            Columns to analyze.</span>
+</span><span data-line="105"><span class="sd">        **kwargs :</span>
+</span><span data-line="106"><span class="sd">            Additional arguments for plotting.</span>
+</span><span data-line="107">
+</span><span data-line="108"><span class="sd">        Returns</span>
+</span><span data-line="109"><span class="sd">        -------</span>
+</span><span data-line="110"><span class="sd">        dict</span>
+</span><span data-line="111"><span class="sd">            Dictionary with keys &#39;describe&#39; (summary stats) and &#39;figure&#39; (histogram grid).</span>
+</span><span data-line="112">
+</span><span data-line="113"><span class="sd">        Examples</span>
+</span><span data-line="114"><span class="sd">        --------</span>
+</span><span data-line="115"><span class="sd">        &gt;&gt;&gt; stats = analyzer.distribution()</span>
+</span><span data-line="116"><span class="sd">        &gt;&gt;&gt; print(stats[&#39;describe&#39;])</span>
+</span><span data-line="117"><span class="sd">        &gt;&gt;&gt; stats[&#39;figure&#39;].show()</span>
+</span><span data-line="118"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="119">        <span class="n">df_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_numeric</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+</span><span data-line="120">        <span class="n">cols</span> <span class="o">=</span> <span class="n">df_num</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</span><span data-line="121">        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
+</span><span data-line="122">        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span data-line="123">            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;describe&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="s1">&#39;figure&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+</span><span data-line="124">
+</span><span data-line="125">        <span class="n">ncols_plot</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span><span data-line="126">        <span class="n">nrows_plot</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">ncols_plot</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">ncols_plot</span>
+</span><span data-line="127">        <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows_plot</span><span class="p">,</span> <span class="n">ncols_plot</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">ncols_plot</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">nrows_plot</span><span class="p">))</span>
+</span><span data-line="128">        <span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">axes</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</span><span data-line="129">
+</span><span data-line="130">        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+</span><span data-line="131">            <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span data-line="132">            <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df_num</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bins&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+</span><span data-line="133">            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+</span><span data-line="134">            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+</span><span data-line="135">            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+</span><span data-line="136">        <span class="c1"># Hide unused axes</span>
+</span><span data-line="137">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes</span><span class="p">)):</span>
+</span><span data-line="138">            <span class="n">axes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="139">        <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span data-line="140">
+</span><span data-line="141">        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;describe&#39;</span><span class="p">:</span> <span class="n">df_num</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span> <span class="s1">&#39;figure&#39;</span><span class="p">:</span> <span class="n">fig</span><span class="p">}</span></div>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        columns : &#39;all&#39; or list, default=&#39;all&#39;</span>
-<span class="sd">            Columns to analyze.</span>
-<span class="sd">        **kwargs :</span>
-<span class="sd">            Additional arguments for plotting.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        dict</span>
-<span class="sd">            Dictionary with keys &#39;describe&#39; (summary stats) and &#39;figure&#39; (histogram grid).</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; stats = analyzer.distribution()</span>
-<span class="sd">        &gt;&gt;&gt; print(stats[&#39;describe&#39;])</span>
-<span class="sd">        &gt;&gt;&gt; stats[&#39;figure&#39;].show()</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">df_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_numeric</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
-        <span class="n">cols</span> <span class="o">=</span> <span class="n">df_num</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;describe&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(),</span> <span class="s1">&#39;figure&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
-
-        <span class="n">ncols_plot</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-        <span class="n">nrows_plot</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">ncols_plot</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">ncols_plot</span>
-        <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows_plot</span><span class="p">,</span> <span class="n">ncols_plot</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">ncols_plot</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">nrows_plot</span><span class="p">))</span>
-        <span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">axes</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
-            <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df_num</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bins&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
-        <span class="c1"># Hide unused axes</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes</span><span class="p">)):</span>
-            <span class="n">axes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;describe&#39;</span><span class="p">:</span> <span class="n">df_num</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span> <span class="s1">&#39;figure&#39;</span><span class="p">:</span> <span class="n">fig</span><span class="p">}</span></div>
-
-
+</span><span data-line="142">
 <div class="viewcode-block" id="DataAnalyzer.correlation">
 <a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.correlation">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">correlation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;pearson&#39;</span><span class="p">,</span>
-                    <span class="n">mask</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the correlation matrix between features.</span>
+</span><span data-line="143">    <span class="k">def</span><span class="w"> </span><span class="nf">correlation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;pearson&#39;</span><span class="p">,</span>
+</span><span data-line="144">                    <span class="n">mask</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+</span><span data-line="145"><span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="146"><span class="sd">        Compute the correlation matrix between features.</span>
+</span><span data-line="147">
+</span><span data-line="148"><span class="sd">        Parameters</span>
+</span><span data-line="149"><span class="sd">        ----------</span>
+</span><span data-line="150"><span class="sd">        features : &#39;all&#39; or list, default=&#39;all&#39;</span>
+</span><span data-line="151"><span class="sd">            Features to include.</span>
+</span><span data-line="152"><span class="sd">        method : str, default=&#39;pearson&#39;</span>
+</span><span data-line="153"><span class="sd">            Correlation method (&#39;pearson&#39;, &#39;spearman&#39;, &#39;kendall&#39;).</span>
+</span><span data-line="154"><span class="sd">        mask : bool, default=True</span>
+</span><span data-line="155"><span class="sd">            Whether to mask the upper triangle.</span>
+</span><span data-line="156"><span class="sd">        **kwargs :</span>
+</span><span data-line="157"><span class="sd">            Additional arguments for plotting.</span>
+</span><span data-line="158">
+</span><span data-line="159"><span class="sd">        Returns</span>
+</span><span data-line="160"><span class="sd">        -------</span>
+</span><span data-line="161"><span class="sd">        pandas.DataFrame</span>
+</span><span data-line="162"><span class="sd">            Correlation matrix.</span>
+</span><span data-line="163">
+</span><span data-line="164"><span class="sd">        Notes</span>
+</span><span data-line="165"><span class="sd">        -----</span>
+</span><span data-line="166"><span class="sd">        Pearson correlation:</span>
+</span><span data-line="167"><span class="sd">        $r_{xy} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}$</span>
+</span><span data-line="168">
+</span><span data-line="169"><span class="sd">        Examples</span>
+</span><span data-line="170"><span class="sd">        --------</span>
+</span><span data-line="171"><span class="sd">        &gt;&gt;&gt; corr = analyzer.correlation()</span>
+</span><span data-line="172"><span class="sd">        &gt;&gt;&gt; print(corr)</span>
+</span><span data-line="173"><span class="sd">        &gt;&gt;&gt; corr = analyzer.correlation(features=[&#39;A&#39;, &#39;B&#39;], method=&#39;kendall&#39;)</span>
+</span><span data-line="174"><span class="sd">        &gt;&gt;&gt; print(corr)</span>
+</span><span data-line="175"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="176">        <span class="n">df_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_numeric</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+</span><span data-line="177">        <span class="n">corr</span> <span class="o">=</span> <span class="n">df_num</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+</span><span data-line="178">
+</span><span data-line="179">        <span class="k">if</span> <span class="n">mask</span><span class="p">:</span>
+</span><span data-line="180">            <span class="n">mask_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span data-line="181">            <span class="n">corr</span> <span class="o">=</span> <span class="n">corr</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="n">mask_arr</span><span class="p">)</span>
+</span><span data-line="182">
+</span><span data-line="183">        <span class="k">return</span> <span class="n">corr</span></div>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        features : &#39;all&#39; or list, default=&#39;all&#39;</span>
-<span class="sd">            Features to include.</span>
-<span class="sd">        method : str, default=&#39;pearson&#39;</span>
-<span class="sd">            Correlation method (&#39;pearson&#39;, &#39;spearman&#39;, &#39;kendall&#39;).</span>
-<span class="sd">        mask : bool, default=True</span>
-<span class="sd">            Whether to mask the upper triangle.</span>
-<span class="sd">        **kwargs :</span>
-<span class="sd">            Additional arguments for plotting.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        pandas.DataFrame</span>
-<span class="sd">            Correlation matrix.</span>
-
-<span class="sd">        Notes</span>
-<span class="sd">        -----</span>
-<span class="sd">        Pearson correlation:</span>
-<span class="sd">        $r_{xy} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}$</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; corr = analyzer.correlation()</span>
-<span class="sd">        &gt;&gt;&gt; print(corr)</span>
-<span class="sd">        &gt;&gt;&gt; corr = analyzer.correlation(features=[&#39;A&#39;, &#39;B&#39;], method=&#39;kendall&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; print(corr)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">df_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_numeric</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
-        <span class="n">corr</span> <span class="o">=</span> <span class="n">df_num</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">mask</span><span class="p">:</span>
-            <span class="n">mask_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">corr</span> <span class="o">=</span> <span class="n">corr</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="n">mask_arr</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">corr</span></div>
-
-
+</span><span data-line="184">
 <div class="viewcode-block" id="DataAnalyzer.missing">
 <a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.missing">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">missing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Analyze missing values in the dataset.</span>
+</span><span data-line="185">    <span class="k">def</span><span class="w"> </span><span class="nf">missing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+</span><span data-line="186"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="187"><span class="sd">        Analyze missing values in the dataset.</span>
+</span><span data-line="188">
+</span><span data-line="189"><span class="sd">        Returns</span>
+</span><span data-line="190"><span class="sd">        -------</span>
+</span><span data-line="191"><span class="sd">        pandas.DataFrame</span>
+</span><span data-line="192"><span class="sd">            DataFrame with columns &#39;count&#39;, &#39;percent&#39; for each column with missing values.</span>
+</span><span data-line="193">
+</span><span data-line="194"><span class="sd">        Examples</span>
+</span><span data-line="195"><span class="sd">        --------</span>
+</span><span data-line="196"><span class="sd">        &gt;&gt;&gt; missing = analyzer.missing()</span>
+</span><span data-line="197"><span class="sd">        &gt;&gt;&gt; print(missing)</span>
+</span><span data-line="198"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="199">        <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span><span data-line="200">        <span class="n">percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+</span><span data-line="201">        <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="n">total</span><span class="p">,</span> <span class="s1">&#39;percent&#39;</span><span class="p">:</span> <span class="n">percent</span><span class="p">})</span>
+</span><span data-line="202">        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="203">        <span class="k">return</span> <span class="n">result</span></div>
 
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        pandas.DataFrame</span>
-<span class="sd">            DataFrame with columns &#39;count&#39;, &#39;percent&#39; for each column with missing values.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; missing = analyzer.missing()</span>
-<span class="sd">        &gt;&gt;&gt; print(missing)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-        <span class="n">percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="n">total</span><span class="p">,</span> <span class="s1">&#39;percent&#39;</span><span class="p">:</span> <span class="n">percent</span><span class="p">})</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span></div>
-
-
+</span><span data-line="204">
 <div class="viewcode-block" id="DataAnalyzer.outliers">
 <a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.outliers">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">outliers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;iqr&#39;</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span>
-                <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Detect outliers in the dataset.</span>
+</span><span data-line="205">    <span class="k">def</span><span class="w"> </span><span class="nf">outliers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;iqr&#39;</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span>
+</span><span data-line="206">                <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+</span><span data-line="207"><span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="208"><span class="sd">        Detect outliers in the dataset.</span>
+</span><span data-line="209">
+</span><span data-line="210"><span class="sd">        Parameters</span>
+</span><span data-line="211"><span class="sd">        ----------</span>
+</span><span data-line="212"><span class="sd">        method : str, default=&#39;iqr&#39;</span>
+</span><span data-line="213"><span class="sd">            Outlier detection method (&#39;iqr&#39;, &#39;zscore&#39;).</span>
+</span><span data-line="214"><span class="sd">        threshold : float, default=1.5</span>
+</span><span data-line="215"><span class="sd">            Threshold for outlier detection (IQR multiplier or Z-score cutoff).</span>
+</span><span data-line="216"><span class="sd">        **kwargs :</span>
+</span><span data-line="217"><span class="sd">            Additional arguments.</span>
+</span><span data-line="218">
+</span><span data-line="219"><span class="sd">        Returns</span>
+</span><span data-line="220"><span class="sd">        -------</span>
+</span><span data-line="221"><span class="sd">        dict</span>
+</span><span data-line="222"><span class="sd">            Dictionary per column with keys &#39;count&#39;, &#39;indices&#39;, &#39;lower_bound&#39;, &#39;upper_bound&#39;.</span>
+</span><span data-line="223">
+</span><span data-line="224"><span class="sd">        Notes</span>
+</span><span data-line="225"><span class="sd">        -----</span>
+</span><span data-line="226"><span class="sd">        IQR method:</span>
+</span><span data-line="227"><span class="sd">        $Q_1 = 25\%$ percentile, $Q_3 = 75\%$ percentile</span>
+</span><span data-line="228"><span class="sd">        $IQR = Q_3 - Q_1$</span>
+</span><span data-line="229"><span class="sd">        Outlier if $x &lt; Q_1 - k \cdot IQR$ or $x &gt; Q_3 + k \cdot IQR$</span>
+</span><span data-line="230">
+</span><span data-line="231"><span class="sd">        Examples</span>
+</span><span data-line="232"><span class="sd">        --------</span>
+</span><span data-line="233"><span class="sd">        &gt;&gt;&gt; out = analyzer.outliers()</span>
+</span><span data-line="234"><span class="sd">        &gt;&gt;&gt; print(out)</span>
+</span><span data-line="235"><span class="sd">        &gt;&gt;&gt; out = analyzer.outliers(method=&#39;zscore&#39;, threshold=3)</span>
+</span><span data-line="236"><span class="sd">        &gt;&gt;&gt; print(out)</span>
+</span><span data-line="237"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="238">        <span class="n">df_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_numeric</span><span class="p">()</span>
+</span><span data-line="239">        <span class="n">results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="240">
+</span><span data-line="241">        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_num</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+</span><span data-line="242">            <span class="n">x</span> <span class="o">=</span> <span class="n">df_num</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</span><span data-line="243">            <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;iqr&#39;</span><span class="p">:</span>
+</span><span data-line="244">                <span class="n">q1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+</span><span data-line="245">                <span class="n">q3</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+</span><span data-line="246">                <span class="n">iqr</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span>
+</span><span data-line="247">                <span class="n">lower</span> <span class="o">=</span> <span class="n">q1</span> <span class="o">-</span> <span class="n">threshold</span> <span class="o">*</span> <span class="n">iqr</span>
+</span><span data-line="248">                <span class="n">upper</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">+</span> <span class="n">threshold</span> <span class="o">*</span> <span class="n">iqr</span>
+</span><span data-line="249">                <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">lower</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">)</span>
+</span><span data-line="250">            <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;zscore&#39;</span><span class="p">:</span>
+</span><span data-line="251">                <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+</span><span data-line="252">                <span class="n">lower</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">threshold</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</span><span data-line="253">                <span class="n">upper</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">threshold</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</span><span data-line="254">                <span class="n">mask</span> <span class="o">=</span> <span class="n">z</span> <span class="o">&gt;</span> <span class="n">threshold</span>
+</span><span data-line="255">            <span class="k">else</span><span class="p">:</span>
+</span><span data-line="256">                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown method: </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">. Use &#39;iqr&#39; or &#39;zscore&#39;.&quot;</span><span class="p">)</span>
+</span><span data-line="257">
+</span><span data-line="258">            <span class="n">outlier_idx</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</span><span data-line="259">            <span class="n">results</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="260">                <span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+</span><span data-line="261">                <span class="s1">&#39;indices&#39;</span><span class="p">:</span> <span class="n">outlier_idx</span><span class="p">,</span>
+</span><span data-line="262">                <span class="s1">&#39;lower_bound&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">lower</span><span class="p">),</span>
+</span><span data-line="263">                <span class="s1">&#39;upper_bound&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">upper</span><span class="p">),</span>
+</span><span data-line="264">            <span class="p">}</span>
+</span><span data-line="265">
+</span><span data-line="266">        <span class="k">return</span> <span class="n">results</span></div>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        method : str, default=&#39;iqr&#39;</span>
-<span class="sd">            Outlier detection method (&#39;iqr&#39;, &#39;zscore&#39;).</span>
-<span class="sd">        threshold : float, default=1.5</span>
-<span class="sd">            Threshold for outlier detection (IQR multiplier or Z-score cutoff).</span>
-<span class="sd">        **kwargs :</span>
-<span class="sd">            Additional arguments.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        dict</span>
-<span class="sd">            Dictionary per column with keys &#39;count&#39;, &#39;indices&#39;, &#39;lower_bound&#39;, &#39;upper_bound&#39;.</span>
-
-<span class="sd">        Notes</span>
-<span class="sd">        -----</span>
-<span class="sd">        IQR method:</span>
-<span class="sd">        $Q_1 = 25\%$ percentile, $Q_3 = 75\%$ percentile</span>
-<span class="sd">        $IQR = Q_3 - Q_1$</span>
-<span class="sd">        Outlier if $x &lt; Q_1 - k \cdot IQR$ or $x &gt; Q_3 + k \cdot IQR$</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; out = analyzer.outliers()</span>
-<span class="sd">        &gt;&gt;&gt; print(out)</span>
-<span class="sd">        &gt;&gt;&gt; out = analyzer.outliers(method=&#39;zscore&#39;, threshold=3)</span>
-<span class="sd">        &gt;&gt;&gt; print(out)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">df_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_numeric</span><span class="p">()</span>
-        <span class="n">results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
-
-        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_num</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">df_num</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;iqr&#39;</span><span class="p">:</span>
-                <span class="n">q1</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
-                <span class="n">q3</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
-                <span class="n">iqr</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span>
-                <span class="n">lower</span> <span class="o">=</span> <span class="n">q1</span> <span class="o">-</span> <span class="n">threshold</span> <span class="o">*</span> <span class="n">iqr</span>
-                <span class="n">upper</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">+</span> <span class="n">threshold</span> <span class="o">*</span> <span class="n">iqr</span>
-                <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">lower</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;zscore&#39;</span><span class="p">:</span>
-                <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
-                <span class="n">lower</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">threshold</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-                <span class="n">upper</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">threshold</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-                <span class="n">mask</span> <span class="o">=</span> <span class="n">z</span> <span class="o">&gt;</span> <span class="n">threshold</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown method: </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">. Use &#39;iqr&#39; or &#39;zscore&#39;.&quot;</span><span class="p">)</span>
-
-            <span class="n">outlier_idx</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-            <span class="n">results</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
-                <span class="s1">&#39;indices&#39;</span><span class="p">:</span> <span class="n">outlier_idx</span><span class="p">,</span>
-                <span class="s1">&#39;lower_bound&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">lower</span><span class="p">),</span>
-                <span class="s1">&#39;upper_bound&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">upper</span><span class="p">),</span>
-            <span class="p">}</span>
-
-        <span class="k">return</span> <span class="n">results</span></div>
-
-
+</span><span data-line="267">
 <div class="viewcode-block" id="DataAnalyzer.target">
 <a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.target">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Analyze the target variable (distribution, imbalance, etc.).</span>
+</span><span data-line="268">    <span class="k">def</span><span class="w"> </span><span class="nf">target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="269"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="270"><span class="sd">        Analyze the target variable (distribution, imbalance, etc.).</span>
+</span><span data-line="271">
+</span><span data-line="272"><span class="sd">        Parameters</span>
+</span><span data-line="273"><span class="sd">        ----------</span>
+</span><span data-line="274"><span class="sd">        target_column : str</span>
+</span><span data-line="275"><span class="sd">            Name of the target column.</span>
+</span><span data-line="276"><span class="sd">        **kwargs :</span>
+</span><span data-line="277"><span class="sd">            Additional arguments.</span>
+</span><span data-line="278">
+</span><span data-line="279"><span class="sd">        Returns</span>
+</span><span data-line="280"><span class="sd">        -------</span>
+</span><span data-line="281"><span class="sd">        dict</span>
+</span><span data-line="282"><span class="sd">            Target analysis summary with keys &#39;value_counts&#39;, &#39;percent&#39;, &#39;n_unique&#39;, &#39;dtype&#39;.</span>
+</span><span data-line="283">
+</span><span data-line="284"><span class="sd">        Examples</span>
+</span><span data-line="285"><span class="sd">        --------</span>
+</span><span data-line="286"><span class="sd">        &gt;&gt;&gt; target = analyzer.target(target_column=&#39;species&#39;)</span>
+</span><span data-line="287"><span class="sd">        &gt;&gt;&gt; print(target)</span>
+</span><span data-line="288"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="289">        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">target_column</span><span class="p">]</span>
+</span><span data-line="290">        <span class="n">counts</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</span><span data-line="291">        <span class="n">percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">counts</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+</span><span data-line="292">        <span class="k">return</span> <span class="p">{</span>
+</span><span data-line="293">            <span class="s1">&#39;value_counts&#39;</span><span class="p">:</span> <span class="n">counts</span><span class="p">,</span>
+</span><span data-line="294">            <span class="s1">&#39;percent&#39;</span><span class="p">:</span> <span class="n">percent</span><span class="p">,</span>
+</span><span data-line="295">            <span class="s1">&#39;n_unique&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">nunique</span><span class="p">()),</span>
+</span><span data-line="296">            <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+</span><span data-line="297">            <span class="s1">&#39;missing&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+</span><span data-line="298">        <span class="p">}</span></div>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        target_column : str</span>
-<span class="sd">            Name of the target column.</span>
-<span class="sd">        **kwargs :</span>
-<span class="sd">            Additional arguments.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        dict</span>
-<span class="sd">            Target analysis summary with keys &#39;value_counts&#39;, &#39;percent&#39;, &#39;n_unique&#39;, &#39;dtype&#39;.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; target = analyzer.target(target_column=&#39;species&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; print(target)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">target_column</span><span class="p">]</span>
-        <span class="n">counts</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-        <span class="n">percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">counts</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;value_counts&#39;</span><span class="p">:</span> <span class="n">counts</span><span class="p">,</span>
-            <span class="s1">&#39;percent&#39;</span><span class="p">:</span> <span class="n">percent</span><span class="p">,</span>
-            <span class="s1">&#39;n_unique&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">nunique</span><span class="p">()),</span>
-            <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
-            <span class="s1">&#39;missing&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
-        <span class="p">}</span></div>
-
-
+</span><span data-line="299">
 <div class="viewcode-block" id="DataAnalyzer.boxplot">
 <a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.boxplot">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">boxplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">by</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Figure</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate boxplots for selected columns.</span>
+</span><span data-line="300">    <span class="k">def</span><span class="w"> </span><span class="nf">boxplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">by</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="301">                <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Figure</span><span class="p">:</span>
+</span><span data-line="302"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="303"><span class="sd">        Generate boxplots for selected columns.</span>
+</span><span data-line="304">
+</span><span data-line="305"><span class="sd">        Parameters</span>
+</span><span data-line="306"><span class="sd">        ----------</span>
+</span><span data-line="307"><span class="sd">        columns : &#39;all&#39; or list, default=&#39;all&#39;</span>
+</span><span data-line="308"><span class="sd">            Columns to plot.</span>
+</span><span data-line="309"><span class="sd">        by : str or None, default=None</span>
+</span><span data-line="310"><span class="sd">            Grouping variable.</span>
+</span><span data-line="311"><span class="sd">        **kwargs :</span>
+</span><span data-line="312"><span class="sd">            Additional arguments for plotting.</span>
+</span><span data-line="313">
+</span><span data-line="314"><span class="sd">        Returns</span>
+</span><span data-line="315"><span class="sd">        -------</span>
+</span><span data-line="316"><span class="sd">        matplotlib.figure.Figure</span>
+</span><span data-line="317"><span class="sd">            The generated boxplot figure.</span>
+</span><span data-line="318">
+</span><span data-line="319"><span class="sd">        Examples</span>
+</span><span data-line="320"><span class="sd">        --------</span>
+</span><span data-line="321"><span class="sd">        &gt;&gt;&gt; fig = analyzer.boxplot(columns=[&#39;A&#39;, &#39;B&#39;], by=&#39;Group&#39;)</span>
+</span><span data-line="322"><span class="sd">        &gt;&gt;&gt; fig.show()</span>
+</span><span data-line="323"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="324">        <span class="n">df_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_numeric</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+</span><span data-line="325">        <span class="n">cols</span> <span class="o">=</span> <span class="n">df_num</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</span><span data-line="326">
+</span><span data-line="327">        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figsize&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)))</span>
+</span><span data-line="328">        <span class="k">if</span> <span class="n">by</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">by</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+</span><span data-line="329">            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="n">by</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</span><span data-line="330">            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Boxplot grouped by </span><span class="si">{</span><span class="n">by</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span><span data-line="331">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="332">            <span class="n">df_num</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</span><span data-line="333">            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Boxplot&#39;</span><span class="p">)</span>
+</span><span data-line="334">        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+</span><span data-line="335">        <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span data-line="336">        <span class="k">return</span> <span class="n">fig</span></div>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        columns : &#39;all&#39; or list, default=&#39;all&#39;</span>
-<span class="sd">            Columns to plot.</span>
-<span class="sd">        by : str or None, default=None</span>
-<span class="sd">            Grouping variable.</span>
-<span class="sd">        **kwargs :</span>
-<span class="sd">            Additional arguments for plotting.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        matplotlib.figure.Figure</span>
-<span class="sd">            The generated boxplot figure.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; fig = analyzer.boxplot(columns=[&#39;A&#39;, &#39;B&#39;], by=&#39;Group&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; fig.show()</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">df_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_numeric</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
-        <span class="n">cols</span> <span class="o">=</span> <span class="n">df_num</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-
-        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figsize&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)))</span>
-        <span class="k">if</span> <span class="n">by</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">by</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="n">by</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Boxplot grouped by </span><span class="si">{</span><span class="n">by</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">df_num</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Boxplot&#39;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
-        <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">fig</span></div>
-
-
+</span><span data-line="337">
 <div class="viewcode-block" id="DataAnalyzer.bivariate">
 <a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.bivariate">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">bivariate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Figure</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Bivariate analysis between two variables (scatter plot + regression line).</span>
+</span><span data-line="338">    <span class="k">def</span><span class="w"> </span><span class="nf">bivariate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Figure</span><span class="p">:</span>
+</span><span data-line="339"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="340"><span class="sd">        Bivariate analysis between two variables (scatter plot + regression line).</span>
+</span><span data-line="341">
+</span><span data-line="342"><span class="sd">        Parameters</span>
+</span><span data-line="343"><span class="sd">        ----------</span>
+</span><span data-line="344"><span class="sd">        x : str</span>
+</span><span data-line="345"><span class="sd">            First variable.</span>
+</span><span data-line="346"><span class="sd">        y : str</span>
+</span><span data-line="347"><span class="sd">            Second variable.</span>
+</span><span data-line="348"><span class="sd">        **kwargs :</span>
+</span><span data-line="349"><span class="sd">            Additional arguments for plotting.</span>
+</span><span data-line="350">
+</span><span data-line="351"><span class="sd">        Returns</span>
+</span><span data-line="352"><span class="sd">        -------</span>
+</span><span data-line="353"><span class="sd">        matplotlib.figure.Figure</span>
+</span><span data-line="354"><span class="sd">            The generated bivariate plot.</span>
+</span><span data-line="355">
+</span><span data-line="356"><span class="sd">        Examples</span>
+</span><span data-line="357"><span class="sd">        --------</span>
+</span><span data-line="358"><span class="sd">        &gt;&gt;&gt; fig = analyzer.bivariate(x=&#39;A&#39;, y=&#39;B&#39;)</span>
+</span><span data-line="359"><span class="sd">        &gt;&gt;&gt; fig.show()</span>
+</span><span data-line="360"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="361">        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figsize&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)))</span>
+</span><span data-line="362">        <span class="n">x_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</span><span data-line="363">        <span class="n">y_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</span><span data-line="364">        <span class="c1"># Align indices</span>
+</span><span data-line="365">        <span class="n">common</span> <span class="o">=</span> <span class="n">x_data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">y_data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</span><span data-line="366">        <span class="n">x_data</span> <span class="o">=</span> <span class="n">x_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+</span><span data-line="367">        <span class="n">y_data</span> <span class="o">=</span> <span class="n">y_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
+</span><span data-line="368">
+</span><span data-line="369">        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</span><span data-line="370">
+</span><span data-line="371">        <span class="c1"># Linear regression line</span>
+</span><span data-line="372">        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">x_data</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">y_data</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">):</span>
+</span><span data-line="373">            <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">)</span>
+</span><span data-line="374">            <span class="n">x_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_data</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x_data</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
+</span><span data-line="375">            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_line</span><span class="p">,</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x_line</span> <span class="o">+</span> <span class="n">intercept</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span>
+</span><span data-line="376">                    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;y=</span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">x+</span><span class="si">{</span><span class="n">intercept</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> (R²=</span><span class="si">{</span><span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+</span><span data-line="377">            <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span data-line="378">
+</span><span data-line="379">        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span data-line="380">        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</span><span data-line="381">        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1"> vs </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span><span data-line="382">        <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span data-line="383">        <span class="k">return</span> <span class="n">fig</span></div>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        x : str</span>
-<span class="sd">            First variable.</span>
-<span class="sd">        y : str</span>
-<span class="sd">            Second variable.</span>
-<span class="sd">        **kwargs :</span>
-<span class="sd">            Additional arguments for plotting.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        matplotlib.figure.Figure</span>
-<span class="sd">            The generated bivariate plot.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; fig = analyzer.bivariate(x=&#39;A&#39;, y=&#39;B&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; fig.show()</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figsize&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)))</span>
-        <span class="n">x_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-        <span class="n">y_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-        <span class="c1"># Align indices</span>
-        <span class="n">common</span> <span class="o">=</span> <span class="n">x_data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">y_data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-        <span class="n">x_data</span> <span class="o">=</span> <span class="n">x_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
-        <span class="n">y_data</span> <span class="o">=</span> <span class="n">y_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">common</span><span class="p">]</span>
-
-        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-
-        <span class="c1"># Linear regression line</span>
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">x_data</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">y_data</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">):</span>
-            <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">)</span>
-            <span class="n">x_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_data</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x_data</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_line</span><span class="p">,</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x_line</span> <span class="o">+</span> <span class="n">intercept</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span>
-                    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;y=</span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">x+</span><span class="si">{</span><span class="n">intercept</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> (R²=</span><span class="si">{</span><span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1"> vs </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">fig</span></div>
-
-
+</span><span data-line="384">
 <div class="viewcode-block" id="DataAnalyzer.normality">
 <a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.normality">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">normality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span>
-                <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Test normality of variables (Shapiro-Wilk, D&#39;Agostino-Pearson, Anderson-Darling).</span>
+</span><span data-line="385">    <span class="k">def</span><span class="w"> </span><span class="nf">normality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span>
+</span><span data-line="386">                <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+</span><span data-line="387"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="388"><span class="sd">        Test normality of variables (Shapiro-Wilk, D&#39;Agostino-Pearson, Anderson-Darling).</span>
+</span><span data-line="389">
+</span><span data-line="390"><span class="sd">        Parameters</span>
+</span><span data-line="391"><span class="sd">        ----------</span>
+</span><span data-line="392"><span class="sd">        columns : &#39;all&#39; or list, default=&#39;all&#39;</span>
+</span><span data-line="393"><span class="sd">            Columns to test.</span>
+</span><span data-line="394"><span class="sd">        **kwargs :</span>
+</span><span data-line="395"><span class="sd">            Additional arguments.</span>
+</span><span data-line="396">
+</span><span data-line="397"><span class="sd">        Returns</span>
+</span><span data-line="398"><span class="sd">        -------</span>
+</span><span data-line="399"><span class="sd">        dict</span>
+</span><span data-line="400"><span class="sd">            Normality test results per column with p-values and statistics.</span>
+</span><span data-line="401">
+</span><span data-line="402"><span class="sd">        Examples</span>
+</span><span data-line="403"><span class="sd">        --------</span>
+</span><span data-line="404"><span class="sd">        &gt;&gt;&gt; norm = analyzer.normality()</span>
+</span><span data-line="405"><span class="sd">        &gt;&gt;&gt; print(norm)</span>
+</span><span data-line="406"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="407">        <span class="n">df_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_numeric</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+</span><span data-line="408">        <span class="n">results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="409">
+</span><span data-line="410">        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_num</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+</span><span data-line="411">            <span class="n">x</span> <span class="o">=</span> <span class="n">df_num</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</span><span data-line="412">            <span class="n">col_result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="413">
+</span><span data-line="414">            <span class="c1"># Shapiro-Wilk (max 5000 samples)</span>
+</span><span data-line="415">            <span class="n">sample</span> <span class="o">=</span> <span class="n">x</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">5000</span> <span class="k">else</span> <span class="n">x</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span><span data-line="416">            <span class="n">stat_sw</span><span class="p">,</span> <span class="n">p_sw</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+</span><span data-line="417">            <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;shapiro&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;statistic&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">stat_sw</span><span class="p">),</span> <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">p_sw</span><span class="p">)}</span>
+</span><span data-line="418">
+</span><span data-line="419">            <span class="c1"># D&#39;Agostino-Pearson (requires n &gt;= 20)</span>
+</span><span data-line="420">            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>
+</span><span data-line="421">                <span class="n">stat_da</span><span class="p">,</span> <span class="n">p_da</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">normaltest</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span data-line="422">                <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;dagostino&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;statistic&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">stat_da</span><span class="p">),</span> <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">p_da</span><span class="p">)}</span>
+</span><span data-line="423">            <span class="k">else</span><span class="p">:</span>
+</span><span data-line="424">                <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;dagostino&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;statistic&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+</span><span data-line="425">
+</span><span data-line="426">            <span class="c1"># Anderson-Darling</span>
+</span><span data-line="427">            <span class="k">try</span><span class="p">:</span>
+</span><span data-line="428">                <span class="n">ad_result</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">anderson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;norm&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;interpolate&#39;</span><span class="p">)</span>
+</span><span data-line="429">                <span class="n">ad_pvalue</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ad_result</span><span class="o">.</span><span class="n">pvalue</span><span class="p">)</span>
+</span><span data-line="430">            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+</span><span data-line="431">                <span class="c1"># old scipy: no method parameter, so no p-value</span>
+</span><span data-line="432">                <span class="n">ad_result</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">anderson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;norm&#39;</span><span class="p">)</span>
+</span><span data-line="433">                <span class="n">ad_pvalue</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="434">            <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;anderson&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="435">                <span class="s1">&#39;statistic&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">ad_result</span><span class="o">.</span><span class="n">statistic</span><span class="p">),</span>
+</span><span data-line="436">                <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="n">ad_pvalue</span><span class="p">,</span>
+</span><span data-line="437">            <span class="p">}</span>
+</span><span data-line="438">
+</span><span data-line="439">            <span class="c1"># Skewness &amp; kurtosis</span>
+</span><span data-line="440">            <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;skewness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">skew</span><span class="p">())</span>
+</span><span data-line="441">            <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;kurtosis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">())</span>
+</span><span data-line="442">
+</span><span data-line="443">            <span class="n">results</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">col_result</span>
+</span><span data-line="444">
+</span><span data-line="445">        <span class="k">return</span> <span class="n">results</span></div>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        columns : &#39;all&#39; or list, default=&#39;all&#39;</span>
-<span class="sd">            Columns to test.</span>
-<span class="sd">        **kwargs :</span>
-<span class="sd">            Additional arguments.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        dict</span>
-<span class="sd">            Normality test results per column with p-values and statistics.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; norm = analyzer.normality()</span>
-<span class="sd">        &gt;&gt;&gt; print(norm)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">df_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_numeric</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
-        <span class="n">results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
-
-        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_num</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">df_num</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-            <span class="n">col_result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-
-            <span class="c1"># Shapiro-Wilk (max 5000 samples)</span>
-            <span class="n">sample</span> <span class="o">=</span> <span class="n">x</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">5000</span> <span class="k">else</span> <span class="n">x</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-            <span class="n">stat_sw</span><span class="p">,</span> <span class="n">p_sw</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-            <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;shapiro&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;statistic&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">stat_sw</span><span class="p">),</span> <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">p_sw</span><span class="p">)}</span>
-
-            <span class="c1"># D&#39;Agostino-Pearson (requires n &gt;= 20)</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>
-                <span class="n">stat_da</span><span class="p">,</span> <span class="n">p_da</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">normaltest</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-                <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;dagostino&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;statistic&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">stat_da</span><span class="p">),</span> <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">p_da</span><span class="p">)}</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;dagostino&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;statistic&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
-
-            <span class="c1"># Anderson-Darling</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">ad_result</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">anderson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;norm&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;interpolate&#39;</span><span class="p">)</span>
-                <span class="n">ad_pvalue</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ad_result</span><span class="o">.</span><span class="n">pvalue</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-                <span class="c1"># old scipy: no method parameter, so no p-value</span>
-                <span class="n">ad_result</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">anderson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;norm&#39;</span><span class="p">)</span>
-                <span class="n">ad_pvalue</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;anderson&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s1">&#39;statistic&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">ad_result</span><span class="o">.</span><span class="n">statistic</span><span class="p">),</span>
-                <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="n">ad_pvalue</span><span class="p">,</span>
-            <span class="p">}</span>
-
-            <span class="c1"># Skewness &amp; kurtosis</span>
-            <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;skewness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">skew</span><span class="p">())</span>
-            <span class="n">col_result</span><span class="p">[</span><span class="s1">&#39;kurtosis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">())</span>
-
-            <span class="n">results</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">col_result</span>
-
-        <span class="k">return</span> <span class="n">results</span></div>
-
-
+</span><span data-line="446">
 <div class="viewcode-block" id="DataAnalyzer.multicollinearity">
 <a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.multicollinearity">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">multicollinearity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Analyze multicollinearity in the dataset.</span>
+</span><span data-line="447">    <span class="k">def</span><span class="w"> </span><span class="nf">multicollinearity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+</span><span data-line="448"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="449"><span class="sd">        Analyze multicollinearity in the dataset.</span>
+</span><span data-line="450">
+</span><span data-line="451"><span class="sd">        Returns</span>
+</span><span data-line="452"><span class="sd">        -------</span>
+</span><span data-line="453"><span class="sd">        pandas.DataFrame</span>
+</span><span data-line="454"><span class="sd">            Variance Inflation Factor (VIF) for each feature.</span>
+</span><span data-line="455">
+</span><span data-line="456"><span class="sd">        Notes</span>
+</span><span data-line="457"><span class="sd">        -----</span>
+</span><span data-line="458"><span class="sd">        Multicollinearity occurs when independent variables are highly correlated.</span>
+</span><span data-line="459"><span class="sd">        This method calculates the VIF to detect multicollinearity.</span>
+</span><span data-line="460">
+</span><span data-line="461"><span class="sd">        Examples</span>
+</span><span data-line="462"><span class="sd">        --------</span>
+</span><span data-line="463"><span class="sd">        &gt;&gt;&gt; analyzer = DataAnalyzer(df)</span>
+</span><span data-line="464"><span class="sd">        &gt;&gt;&gt; vif = analyzer.multicollinearity()</span>
+</span><span data-line="465"><span class="sd">        &gt;&gt;&gt; print(vif)</span>
+</span><span data-line="466"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="467">        <span class="n">df_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_numeric</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</span><span data-line="468">        <span class="k">if</span> <span class="n">df_num</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+</span><span data-line="469">            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">,</span> <span class="s1">&#39;VIF&#39;</span><span class="p">])</span>
+</span><span data-line="470">
+</span><span data-line="471">        <span class="n">X</span> <span class="o">=</span> <span class="n">df_num</span><span class="o">.</span><span class="n">values</span>
+</span><span data-line="472">        <span class="n">vif_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+</span><span data-line="473">            <span class="s1">&#39;feature&#39;</span><span class="p">:</span> <span class="n">df_num</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+</span><span data-line="474">            <span class="s1">&#39;VIF&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+</span><span data-line="475">        <span class="p">})</span>
+</span><span data-line="476">        <span class="k">return</span> <span class="n">vif_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;VIF&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        pandas.DataFrame</span>
-<span class="sd">            Variance Inflation Factor (VIF) for each feature.</span>
-
-<span class="sd">        Notes</span>
-<span class="sd">        -----</span>
-<span class="sd">        Multicollinearity occurs when independent variables are highly correlated.</span>
-<span class="sd">        This method calculates the VIF to detect multicollinearity.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; analyzer = DataAnalyzer(df)</span>
-<span class="sd">        &gt;&gt;&gt; vif = analyzer.multicollinearity()</span>
-<span class="sd">        &gt;&gt;&gt; print(vif)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">df_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_numeric</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">df_num</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">,</span> <span class="s1">&#39;VIF&#39;</span><span class="p">])</span>
-
-        <span class="n">X</span> <span class="o">=</span> <span class="n">df_num</span><span class="o">.</span><span class="n">values</span>
-        <span class="n">vif_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-            <span class="s1">&#39;feature&#39;</span><span class="p">:</span> <span class="n">df_num</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
-            <span class="s1">&#39;VIF&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
-        <span class="p">})</span>
-        <span class="k">return</span> <span class="n">vif_data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;VIF&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
-
-
+</span><span data-line="477">
 <div class="viewcode-block" id="DataAnalyzer.profiling">
 <a class="viewcode-back" href="../../trainedml/analyzer.html#trainedml.analyzer.DataAnalyzer.profiling">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">profiling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate a global profiling report (summary statistics, missing, outliers, etc.).</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        dict</span>
-<span class="sd">            Profiling report with keys &#39;describe&#39;, &#39;dtypes&#39;, &#39;missing&#39;, &#39;outliers&#39;,</span>
-<span class="sd">            &#39;correlation&#39;, &#39;shape&#39;.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; report = analyzer.profiling()</span>
-<span class="sd">        &gt;&gt;&gt; print(report[&#39;describe&#39;])</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
-            <span class="s1">&#39;dtypes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtypes</span><span class="p">,</span>
-            <span class="s1">&#39;describe&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">),</span>
-            <span class="s1">&#39;missing&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">missing</span><span class="p">(),</span>
-            <span class="s1">&#39;outliers&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">outliers</span><span class="p">(),</span>
-            <span class="s1">&#39;correlation&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">correlation</span><span class="p">(),</span>
-        <span class="p">}</span></div>
+</span><span data-line="478">    <span class="k">def</span><span class="w"> </span><span class="nf">profiling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="479"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="480"><span class="sd">        Generate a global profiling report (summary statistics, missing, outliers, etc.).</span>
+</span><span data-line="481">
+</span><span data-line="482"><span class="sd">        Returns</span>
+</span><span data-line="483"><span class="sd">        -------</span>
+</span><span data-line="484"><span class="sd">        dict</span>
+</span><span data-line="485"><span class="sd">            Profiling report with keys &#39;describe&#39;, &#39;dtypes&#39;, &#39;missing&#39;, &#39;outliers&#39;,</span>
+</span><span data-line="486"><span class="sd">            &#39;correlation&#39;, &#39;shape&#39;.</span>
+</span><span data-line="487">
+</span><span data-line="488"><span class="sd">        Examples</span>
+</span><span data-line="489"><span class="sd">        --------</span>
+</span><span data-line="490"><span class="sd">        &gt;&gt;&gt; report = analyzer.profiling()</span>
+</span><span data-line="491"><span class="sd">        &gt;&gt;&gt; print(report[&#39;describe&#39;])</span>
+</span><span data-line="492"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="493">        <span class="k">return</span> <span class="p">{</span>
+</span><span data-line="494">            <span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+</span><span data-line="495">            <span class="s1">&#39;dtypes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtypes</span><span class="p">,</span>
+</span><span data-line="496">            <span class="s1">&#39;describe&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">),</span>
+</span><span data-line="497">            <span class="s1">&#39;missing&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">missing</span><span class="p">(),</span>
+</span><span data-line="498">            <span class="s1">&#39;outliers&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">outliers</span><span class="p">(),</span>
+</span><span data-line="499">            <span class="s1">&#39;correlation&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">correlation</span><span class="p">(),</span>
+</span><span data-line="500">        <span class="p">}</span></div>
 </div>
 
-</pre></div>
-
-           </div>
-          </div>
-          <footer>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Droits d'auteur 2026, Yéro Diamanka.</p>
+</span></pre></div>
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Retour au sommet</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Yéro Diamanka</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
   </div>
-
-  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
-    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
 </footer>
-        </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+      <script src="../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/translations.js?v=e6b791cb"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script></body>
 </html>
