@@ -303,7 +303,7 @@ multicollinearity, and profiling.</p>
 </dl>
 <p class="rubric">Notes</p>
 <p>Pearson correlation:
-$r_{xy} = frac{sum (x_i - bar{x})(y_i - bar{y})}{sqrt{sum (x_i - bar{x})^2 sum (y_i - bar{y})^2}}$</p>
+<span class="math notranslate nohighlight">\(r_{xy} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}\)</span></p>
 <p class="rubric">Exemples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">correlation</span><span class="p">()</span>
 </span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
@@ -427,9 +427,9 @@ This method calculates the VIF to detect multicollinearity.</p>
 </dl>
 <p class="rubric">Notes</p>
 <p>IQR method:
-$Q_1 = 25%$ percentile, $Q_3 = 75%$ percentile
-$IQR = Q_3 - Q_1$
-Outlier if $x &lt; Q_1 - k cdot IQR$ or $x &gt; Q_3 + k cdot IQR$</p>
+<span class="math notranslate nohighlight">\(Q_1 = 25\%\)</span> percentile, <span class="math notranslate nohighlight">\(Q_3 = 75\%\)</span> percentile
+<span class="math notranslate nohighlight">\(IQR = Q_3 - Q_1\)</span>
+Outlier if <span class="math notranslate nohighlight">\(x &lt; Q_1 - k \cdot IQR\)</span> or <span class="math notranslate nohighlight">\(x &gt; Q_3 + k \cdot IQR\)</span></p>
 <p class="rubric">Exemples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">outliers</span><span class="p">()</span>
 </span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
@@ -532,5 +532,6 @@ Outlier if $x &lt; Q_1 - k cdot IQR$ or $x &gt; Q_3 + k cdot IQR$</p>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/translations.js?v=e6b791cb"></script>
-      <script src="../_static/shibuya.js?v=50760d75"></script></body>
+      <script src="../_static/shibuya.js?v=50760d75"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script></body>
 </html>

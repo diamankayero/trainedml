@@ -148,7 +148,7 @@ precision, recall, F1-score) and regression models (R², MSE, RMSE, MAE), using 
 <section id="mathematical-formulation">
 <h2>Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Lien vers cette rubrique">#</a></h2>
 <p><strong>Classification:</strong></p>
-<p>Let $y_i$ be the true label and $hat{y}_i$ the predicted label for sample $i$.</p>
+<p>Let <span class="math notranslate nohighlight">\(y_i\)</span> be the true label and <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> the predicted label for sample <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <ul>
 <li><p><strong>Accuracy</strong>:</p>
 <div class="math-wrapper docutils container">
@@ -156,19 +156,19 @@ precision, recall, F1-score) and regression models (R², MSE, RMSE, MAE), using 
 \[\mathrm{accuracy} = \frac{1}{n} \sum_{i=1}^n \mathbb{I}(y_i = \hat{y}_i)\]</div>
 </div>
 </li>
-<li><p><strong>Precision</strong> (for class $k$):</p>
+<li><p><strong>Precision</strong> (for class <span class="math notranslate nohighlight">\(k\)</span>):</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\mathrm{precision}_k = \frac{TP_k}{TP_k + FP_k}\]</div>
 </div>
 </li>
-<li><p><strong>Recall</strong> (for class $k$):</p>
+<li><p><strong>Recall</strong> (for class <span class="math notranslate nohighlight">\(k\)</span>):</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\mathrm{recall}_k = \frac{TP_k}{TP_k + FN_k}\]</div>
 </div>
 </li>
-<li><p><strong>F1-score</strong> (for class $k$):</p>
+<li><p><strong>F1-score</strong> (for class <span class="math notranslate nohighlight">\(k\)</span>):</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
 \[\mathrm{F1}_k = 2 \cdot \frac{\mathrm{precision}_k \cdot \mathrm{recall}_k}{\mathrm{precision}_k + \mathrm{recall}_k}\]</div>

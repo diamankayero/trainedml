@@ -179,20 +179,28 @@ know where the data comes from (URL, open data, local, etc.).</p>
 </section>
 <section id="detailed-examples">
 <h2>Detailed examples<a class="headerlink" href="#detailed-examples" title="Lien vers cette rubrique">#</a></h2>
-<p>Loading the Iris dataset (public):
-&gt;&gt;&gt; loader = DataLoader()
-&gt;&gt;&gt; X, y = loader.load_dataset(name= »iris »)
-&gt;&gt;&gt; print(X.shape, y.unique())</p>
-<p>Loading the Wine dataset (public):
-&gt;&gt;&gt; X, y = loader.load_dataset(name= »wine »)
-&gt;&gt;&gt; print(X.columns)</p>
-<p>Loading a remote CSV with a target column:
-&gt;&gt;&gt; url = « <a class="reference external" href="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv">https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv</a> »
-&gt;&gt;&gt; X, y = loader.load_dataset(url=url, target= »quality »)
-&gt;&gt;&gt; print(X.head())</p>
-<p>Loading a custom CSV (automatic separator):
-&gt;&gt;&gt; X, y = loader.load_dataset(url= »<a class="reference external" href="https://.../data.csv">https://…/data.csv</a> », target= »class »)
-&gt;&gt;&gt; print(X.info())</p>
+<p>Loading the Iris dataset (public):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</span></pre></div>
+</div>
+<p>Loading the Wine dataset (public):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Loading a remote CSV with a target column:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&quot;</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;quality&quot;</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</span></pre></div>
+</div>
+<p>Loading a custom CSV (automatic separator):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://.../data.csv&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;class&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+</span></pre></div>
+</div>
 <p class="rubric">Notes</p>
 <ul class="simple">
 <li><p>To add a new dataset, just add a branch in load_dataset.</p></li>
@@ -221,13 +229,17 @@ know where the data comes from (URL, open data, local, etc.).</p>
 </dd>
 </dl>
 <p class="rubric">Exemples</p>
-<p>Loading a public CSV:
-&gt;&gt;&gt; loader = DataLoader()
-&gt;&gt;&gt; df = loader.load_csv_from_url( »<a class="reference external" href="https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv">https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv</a> »)
-&gt;&gt;&gt; print(df.head())</p>
-<p>Loading a CSV with a semicolon separator:
-&gt;&gt;&gt; df = loader.load_csv_from_url( »<a class="reference external" href="https://.../winequality-red.csv">https://…/winequality-red.csv</a> », sep=”;”)
-&gt;&gt;&gt; print(df.columns)</p>
+<p>Loading a public CSV:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_csv_from_url</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv&quot;</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</span></pre></div>
+</div>
+<p>Loading a CSV with a semicolon separator:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_csv_from_url</span><span class="p">(</span><span class="s2">&quot;https://.../winequality-red.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</span></pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -257,20 +269,28 @@ splitting features/target for known datasets or remote CSV files.</p>
 </dd>
 </dl>
 <p class="rubric">Exemples</p>
-<p>Loading the Iris dataset:
-&gt;&gt;&gt; loader = DataLoader()
-&gt;&gt;&gt; X, y = loader.load_dataset(name= »iris »)
-&gt;&gt;&gt; print(X.shape, y.unique())</p>
-<p>Loading the Wine dataset:
-&gt;&gt;&gt; X, y = loader.load_dataset(name= »wine »)
-&gt;&gt;&gt; print(X.columns)</p>
-<p>Loading a remote CSV:
-&gt;&gt;&gt; url = « <a class="reference external" href="https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv">https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv</a> »
-&gt;&gt;&gt; X, y = loader.load_dataset(url=url, target= »quality »)
-&gt;&gt;&gt; print(X.head())</p>
-<p>Loading a custom CSV (automatic separator):
-&gt;&gt;&gt; X, y = loader.load_dataset(url= »<a class="reference external" href="https://.../data.csv">https://…/data.csv</a> », target= »class »)
-&gt;&gt;&gt; print(X.info())</p>
+<p>Loading the Iris dataset:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</span></pre></div>
+</div>
+<p>Loading the Wine dataset:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Loading a remote CSV:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&quot;</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;quality&quot;</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</span></pre></div>
+</div>
+<p>Loading a custom CSV (automatic separator):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://.../data.csv&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;class&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+</span></pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">

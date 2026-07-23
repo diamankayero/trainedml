@@ -146,8 +146,8 @@ Shows boxplots to detect outliers for each numeric variable.</p>
 <section id="mathematical-background">
 <h2>Mathematical background<a class="headerlink" href="#mathematical-background" title="Lien vers cette rubrique">#</a></h2>
 <ul class="simple">
-<li><p>IQR: $IQR = Q_3 - Q_1$</p></li>
-<li><p>Z-score: $z = frac{x - mu}{sigma}$</p></li>
+<li><p>IQR: <span class="math notranslate nohighlight">\(IQR = Q_3 - Q_1\)</span></p></li>
+<li><p>Z-score: <span class="math notranslate nohighlight">\(z = \frac{x - \mu}{\sigma}\)</span></p></li>
 </ul>
 <p class="rubric">Exemples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.outliers</span><span class="w"> </span><span class="kn">import</span> <span class="n">outlier_summary</span>
@@ -194,12 +194,12 @@ also return it directly, hence the <code class="docutils literal notranslate"><s
 </dl>
 <p class="rubric">Notes</p>
 <p>IQR method:
-$Q_1 = 25%$ percentile, $Q_3 = 75%$ percentile
-$IQR = Q_3 - Q_1$
-Outlier if $x &lt; Q_1 - k cdot IQR$ or $x &gt; Q_3 + k cdot IQR$</p>
+<span class="math notranslate nohighlight">\(Q_1 = 25\%\)</span> percentile, <span class="math notranslate nohighlight">\(Q_3 = 75\%\)</span> percentile
+<span class="math notranslate nohighlight">\(IQR = Q_3 - Q_1\)</span>
+Outlier if <span class="math notranslate nohighlight">\(x &lt; Q_1 - k \cdot IQR\)</span> or <span class="math notranslate nohighlight">\(x &gt; Q_3 + k \cdot IQR\)</span></p>
 <p>Z-score method:
-$z = frac{x - mu}{sigma}$
-Outlier if $|z| &gt;$ threshold</p>
+<span class="math notranslate nohighlight">\(z = \frac{x - \mu}{\sigma}\)</span>
+Outlier if <span class="math notranslate nohighlight">\(|z| &gt;\)</span> threshold</p>
 <p class="rubric">Exemples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">summary</span> <span class="o">=</span> <span class="n">outlier_summary</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;zscore&#39;</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
@@ -253,5 +253,6 @@ Outlier if $|z| &gt;$ threshold</p>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/translations.js?v=e6b791cb"></script>
-      <script src="../_static/shibuya.js?v=50760d75"></script></body>
+      <script src="../_static/shibuya.js?v=50760d75"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script></body>
 </html>
