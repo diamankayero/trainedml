@@ -243,13 +243,30 @@ au rapport EDA en une ligne") et le rendre digne de confiance.
   Vérification par bancs de test visuels (scripts/visual-check.mjs et
   scripts/capture-hero-gif.mjs, Edge headless piloté).
 
+### Phase 5 : fermeture des chantiers restants (2026-07-18)
+
+- Docstrings, commentaires, messages d'erreur, sorties CLI et contenu HTML du
+  rapport EDA : entièrement traduits en anglais (le mélange FR/EN de la
+  phase 4 est résorbé). Deux passes de grep nécessaires : la première ne
+  cherchait que les caractères accentués et a raté plusieurs modules `viz/`
+  sans diacritiques (`target.py`, `missing.py`, `multicollinearity.py`) ;
+  une seconde passe par mots-clés les a rattrapés.
+- `figure.py`, `analyzer.py`, `visualization.py` et tout `viz/*` annotés en
+  type hints ; l'exclusion mypy sur ces modules a été retirée de
+  `pyproject.toml` et `mypy src/trainedml` passe sans erreur.
+- Bugs trouvés en cours d'annotation : deux fichiers (`viz/boxplot.py`,
+  `viz/correlation.py`) avaient `from __future__ import annotations` placé
+  avant le docstring de module, ce qui le désactive silencieusement (Python
+  n'assigne `__doc__` que si le docstring est la toute première instruction) ;
+  `viz/normality.py` avait un second docstring orphelin, mort, laissé par une
+  fusion précédente ; `Visualizer.multicollinearity()` transmettait `**kwargs`
+  vers `DataAnalyzer.multicollinearity()` qui n'en accepte pas (échouerait à
+  l'exécution si un appelant passait un argument).
+
 ### Chantiers restants
 
-- Unifier la langue des docstrings (FR/EN mélangés) : viser l'anglais pour
-  l'API, tutoriels bilingues.
 - Consolider les couches de visualisation (`figure.py`, `visualization.py`,
   `analyzer.py`, `viz/`) autour de la façade `Visualizer`.
-- Annoter les modules viz et retirer leur exclusion mypy.
 - Ajouter d'autres datasets intégrés et d'autres visualisations (ROC, scatter).
 
 ---

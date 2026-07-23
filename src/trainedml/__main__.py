@@ -1,5 +1,5 @@
 """
-Point d'entrée pour l'exécution du package via python -m trainedml.
+Entry point for running the package via python -m trainedml.
 """
 from .cli import main
 

@@ -1,17 +1,17 @@
 """
-Détection du type de tâche (classification vs régression) pour trainedml.
+Task type detection (classification vs regression) for trainedml.
 
-Ce module centralise l'heuristique utilisée par le Trainer, la CLI, le Benchmark
-et :func:`trainedml.compare` pour déterminer si une cible correspond à une tâche
-de classification ou de régression.
+This module centralizes the heuristic used by the Trainer, the CLI, the
+Benchmark, and :func:`trainedml.compare` to determine whether a target
+corresponds to a classification or a regression task.
 
-Heuristique
------------
-- Cible non numérique (texte, catégoriel, ``StringDtype``...) → classification
-- Cible entière avec peu de valeurs uniques (≤ 20) → classification
-- Sinon → régression
+Heuristic
+---------
+- Non-numeric target (text, categorical, ``StringDtype``...) -> classification
+- Integer target with few unique values (<= 20) -> classification
+- Otherwise -> regression
 
-Exemple
+Example
 -------
 >>> from trainedml.tasks import detect_task
 >>> detect_task(pd.Series(["setosa", "versicolor"]))
@@ -24,24 +24,24 @@ from __future__ import annotations
 
 import pandas as pd
 
-#: Nombre maximal de valeurs uniques entières pour considérer une cible
-#: comme catégorielle (classification).
+#: Maximum number of unique integer values for a target to be considered
+#: categorical (classification).
 MAX_UNIQUE_FOR_CLASSIFICATION = 20
 
 
 def is_classification_target(y) -> bool:
     """
-    Détermine si la cible est catégorielle (classification) ou numérique (régression).
+    Determine whether the target is categorical (classification) or numeric (regression).
 
     Parameters
     ----------
     y : pandas.Series or array-like
-        Colonne cible à analyser.
+        Target column to analyze.
 
     Returns
     -------
     bool
-        True si classification, False si régression.
+        True if classification, False if regression.
 
     Examples
     --------
@@ -51,10 +51,10 @@ def is_classification_target(y) -> bool:
     False
     """
     y = pd.Series(y) if not isinstance(y, pd.Series) else y
-    # Si ce n'est pas numérique (texte, catégoriel, StringDtype...), c'est de la classification
+    # If it's not numeric (text, categorical, StringDtype...), it's classification
     if not pd.api.types.is_numeric_dtype(y):
         return True
-    # Si peu de valeurs uniques et entiers, probablement classification
+    # If few unique values and integers, likely classification
     if y.nunique() <= MAX_UNIQUE_FOR_CLASSIFICATION and pd.api.types.is_integer_dtype(y):
         return True
     return False
@@ -62,17 +62,17 @@ def is_classification_target(y) -> bool:
 
 def detect_task(y) -> str:
     """
-    Retourne le type de tâche associé à une cible.
+    Return the task type associated with a target.
 
     Parameters
     ----------
     y : pandas.Series or array-like
-        Colonne cible à analyser.
+        Target column to analyze.
 
     Returns
     -------
     str
-        ``'classification'`` ou ``'regression'``.
+        ``'classification'`` or ``'regression'``.
 
     Examples
     --------
@@ -84,26 +84,26 @@ def detect_task(y) -> str:
 
 def detect_model_task(model, y=None) -> str:
     """
-    Détermine le type de tâche d'un modèle, quel qu'il soit.
+    Determine the task type of a model, whatever it is.
 
-    L'ordre de priorité est :
+    Priority order:
 
-    1. l'attribut ``task`` du modèle (modèles trainedml, :class:`BaseModel`) ;
-    2. les fonctions ``is_classifier`` / ``is_regressor`` de scikit-learn
-       (estimateurs sklearn arbitraires) ;
-    3. l'heuristique sur la cible ``y`` si elle est fournie.
+    1. the model's ``task`` attribute (trainedml models, :class:`BaseModel`);
+    2. scikit-learn's ``is_classifier`` / ``is_regressor`` functions
+       (arbitrary sklearn estimators);
+    3. the heuristic on the ``y`` target, if provided.
 
     Parameters
     ----------
     model : object
-        Modèle trainedml, estimateur scikit-learn, ou tout objet fit/predict.
+        trainedml model, scikit-learn estimator, or any fit/predict object.
     y : array-like, optional
-        Cible, utilisée en dernier recours pour l'heuristique.
+        Target, used as a last resort for the heuristic.
 
     Returns
     -------
     str
-        ``'classification'`` ou ``'regression'``.
+        ``'classification'`` or ``'regression'``.
     """
     task = getattr(model, "task", None)
     if task in ("classification", "regression"):

@@ -1,6 +1,6 @@
 """
-Implémentation des modèles de régression pour trainedml.
-Contient les régresseurs : RandomForestRegressor, KNNRegressor, LinearRegressor.
+Regression model implementations for trainedml.
+Contains the regressors: RandomForestRegressor, KNNRegressor, LinearRegressor.
 """
 from .base import BaseRegressor
 from sklearn.ensemble import RandomForestRegressor
@@ -10,123 +10,123 @@ from sklearn.linear_model import LinearRegression, Ridge, Lasso
 
 class RandomForestRegressorModel(BaseRegressor):
     """
-    Modèle de régression Random Forest.
-    
+    Random Forest regression model.
+
     Args:
-        n_estimators (int): Nombre d'arbres dans la forêt (défaut: 100)
-        **kwargs: Autres hyperparamètres passés à RandomForestRegressor
+        n_estimators (int): Number of trees in the forest (default: 100)
+        **kwargs: Other hyperparameters passed to RandomForestRegressor
     """
     def __init__(self, n_estimators=100, **kwargs):
         super().__init__()
         self.model = RandomForestRegressor(n_estimators=n_estimators, **kwargs)
 
     def fit(self, X, y):
-        """Entraîne le modèle Random Forest."""
+        """Fit the Random Forest model."""
         self.model.fit(X, y)
 
     def predict(self, X):
-        """Prédit la valeur cible pour de nouvelles données."""
+        """Predict the target value for new data."""
         return self.model.predict(X)
 
     def evaluate(self, X, y):
-        """Retourne le score R² du modèle sur les données de test."""
+        """Return the model's R² score on the test data."""
         return self.model.score(X, y)
 
 
 class KNNRegressorModel(BaseRegressor):
     """
-    Modèle de régression K-Nearest Neighbors.
-    
+    K-Nearest Neighbors regression model.
+
     Args:
-        n_neighbors (int): Nombre de voisins à considérer (défaut: 5)
-        **kwargs: Autres hyperparamètres passés à KNeighborsRegressor
+        n_neighbors (int): Number of neighbors to consider (default: 5)
+        **kwargs: Other hyperparameters passed to KNeighborsRegressor
     """
     def __init__(self, n_neighbors=5, **kwargs):
         super().__init__()
         self.model = KNeighborsRegressor(n_neighbors=n_neighbors, **kwargs)
 
     def fit(self, X, y):
-        """Entraîne le modèle KNN."""
+        """Fit the KNN model."""
         self.model.fit(X, y)
 
     def predict(self, X):
-        """Prédit la valeur cible pour de nouvelles données."""
+        """Predict the target value for new data."""
         return self.model.predict(X)
 
     def evaluate(self, X, y):
-        """Retourne le score R² du modèle sur les données de test."""
+        """Return the model's R² score on the test data."""
         return self.model.score(X, y)
 
 
 class LinearRegressorModel(BaseRegressor):
     """
-    Modèle de régression linéaire.
-    
+    Linear regression model.
+
     Args:
-        **kwargs: Hyperparamètres passés à LinearRegression
+        **kwargs: Hyperparameters passed to LinearRegression
     """
     def __init__(self, **kwargs):
         super().__init__()
         self.model = LinearRegression(**kwargs)
 
     def fit(self, X, y):
-        """Entraîne le modèle de régression linéaire."""
+        """Fit the linear regression model."""
         self.model.fit(X, y)
 
     def predict(self, X):
-        """Prédit la valeur cible pour de nouvelles données."""
+        """Predict the target value for new data."""
         return self.model.predict(X)
 
     def evaluate(self, X, y):
-        """Retourne le score R² du modèle sur les données de test."""
+        """Return the model's R² score on the test data."""
         return self.model.score(X, y)
 
 
 class RidgeRegressorModel(BaseRegressor):
     """
-    Modèle de régression Ridge (L2).
-    
+    Ridge (L2) regression model.
+
     Args:
-        alpha (float): Paramètre de régularisation (défaut: 1.0)
-        **kwargs: Autres hyperparamètres passés à Ridge
+        alpha (float): Regularization parameter (default: 1.0)
+        **kwargs: Other hyperparameters passed to Ridge
     """
     def __init__(self, alpha=1.0, **kwargs):
         super().__init__()
         self.model = Ridge(alpha=alpha, **kwargs)
 
     def fit(self, X, y):
-        """Entraîne le modèle Ridge."""
+        """Fit the Ridge model."""
         self.model.fit(X, y)
 
     def predict(self, X):
-        """Prédit la valeur cible pour de nouvelles données."""
+        """Predict the target value for new data."""
         return self.model.predict(X)
 
     def evaluate(self, X, y):
-        """Retourne le score R² du modèle sur les données de test."""
+        """Return the model's R² score on the test data."""
         return self.model.score(X, y)
 
 
 class LassoRegressorModel(BaseRegressor):
     """
-    Modèle de régression Lasso (L1).
-    
+    Lasso (L1) regression model.
+
     Args:
-        alpha (float): Paramètre de régularisation (défaut: 1.0)
-        **kwargs: Autres hyperparamètres passés à Lasso
+        alpha (float): Regularization parameter (default: 1.0)
+        **kwargs: Other hyperparameters passed to Lasso
     """
     def __init__(self, alpha=1.0, **kwargs):
         super().__init__()
         self.model = Lasso(alpha=alpha, **kwargs)
 
     def fit(self, X, y):
-        """Entraîne le modèle Lasso."""
+        """Fit the Lasso model."""
         self.model.fit(X, y)
 
     def predict(self, X):
-        """Prédit la valeur cible pour de nouvelles données."""
+        """Predict the target value for new data."""
         return self.model.predict(X)
 
     def evaluate(self, X, y):
-        """Retourne le score R² du modèle sur les données de test."""
+        """Return the model's R² score on the test data."""
         return self.model.score(X, y)

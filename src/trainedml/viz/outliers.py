@@ -1,33 +1,38 @@
 r"""
-Analyse des outliers (valeurs aberrantes) pour trainedml.
-Affiche les boxplots pour détecter les outliers par variable numérique.
+Outlier analysis for trainedml.
+Shows boxplots to detect outliers for each numeric variable.
 
-Détection d'outliers par les méthodes IQR et Z-score.
+Outlier detection using the IQR and Z-score methods.
 
-Contexte mathématique
---------------------
+Mathematical background
+------------------------
 - IQR: $IQR = Q_3 - Q_1$
 - Z-score: $z = \frac{x - \mu}{\sigma}$
 
-Exemples
+Examples
 --------
 >>> from trainedml.viz.outliers import outlier_summary
 >>> summary = outlier_summary(df)
 >>> print(summary)
 """
 
+from __future__ import annotations
+
+from typing import Dict
+
+import pandas as pd
 import matplotlib.pyplot as plt
 from .vizs import Vizs
 import numpy as np
 
 class OutliersViz(Vizs):
     """
-    Classe pour visualiser les outliers via boxplots.
+    Class to visualize outliers via boxplots.
     """
-    def __init__(self, data):
+    def __init__(self, data: pd.DataFrame) -> None:
         super().__init__(data)
 
-    def vizs(self):
+    def vizs(self) -> None:
         cols = self._data.select_dtypes(include='number').columns.tolist()
         fig, axes = plt.subplots(len(cols), 1, figsize=(8, 4*len(cols)))
         if len(cols) == 1:
@@ -37,13 +42,14 @@ class OutliersViz(Vizs):
             try:
                 ax.boxplot(values, orientation='horizontal')
             except TypeError:
-                # matplotlib < 3.10 : le paramètre s'appelle vert
+                # matplotlib < 3.10: the parameter is called vert
                 ax.boxplot(values, vert=False)
-            ax.set_title(f"Boxplot de {col}")
+            ax.set_title(f"Boxplot of {col}")
         plt.tight_layout()
         self._figure = fig
 
-def outlier_summary(data, method='iqr', threshold=1.5):
+def outlier_summary(data: pd.DataFrame, method: str = 'iqr',
+                    threshold: float = 1.5) -> Dict[str, pd.Series]:
     r"""
     Detect outliers in the dataset using IQR or Z-score.
 

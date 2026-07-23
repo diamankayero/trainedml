@@ -28,9 +28,9 @@ class TestReport(unittest.TestCase):
     def test_generate_report_returns_html(self):
         html = generate_report(self.data)
         self.assertIn("<html", html)
-        self.assertIn("Statistiques descriptives", html)
-        self.assertIn("Valeurs manquantes", html)
-        self.assertIn("Corrélations", html)
+        self.assertIn("Descriptive statistics", html)
+        self.assertIn("Missing values", html)
+        self.assertIn("Correlations", html)
         self.assertIn("data:image/png;base64", html)
 
     def test_generate_report_writes_file(self):

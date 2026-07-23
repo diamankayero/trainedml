@@ -65,17 +65,17 @@ def _train_and_evaluate(name, model, X_train, y_train, X_test, y_test):
     tuple
         (model name, results dict)
     """
-    # Mesure du temps d'entraînement
+    # Measure training time
     start_fit = time.time()
     model.fit(X_train, y_train)
     fit_time = time.time() - start_fit
 
-    # Mesure du temps de prédiction
+    # Measure prediction time
     start_pred = time.time()
     y_pred = model.predict(X_test)
     predict_time = time.time() - start_pred
 
-    # Métriques adaptées au type de tâche du modèle (classification ou régression)
+    # Metrics adapted to the model's task type (classification or regression)
     task = detect_model_task(model, y_test)
     scores = Evaluator.evaluate_for(task, y_test, y_pred)
     return name, {
@@ -121,7 +121,7 @@ class Benchmark:
     def __init__(self, models: Dict[str, Any]) -> None:
         """
         Args:
-            models (dict): dictionnaire {nom: instance_modele}
+            models (dict): dictionary {name: model_instance}
         """
         self.models = models
         self.results: Optional[Dict[str, Dict[str, Any]]] = None
@@ -156,48 +156,48 @@ class Benchmark:
             {model_name: {scores, fit_time, predict_time}}
         """
         results = {}
-        
+
         if parallel:
-            # Exécution parallèle avec joblib
+            # Parallel execution with joblib
             model_items = list(self.models.items())
-            
+
             if show_progress:
-                print(f"🚀 Benchmark parallèle de {len(model_items)} modèles...")
-            
+                print(f"Running {len(model_items)} models in parallel...")
+
             parallel_results = Parallel(n_jobs=n_jobs)(
                 delayed(_train_and_evaluate)(
                     name, model, X_train, y_train, X_test, y_test
                 )
                 for name, model in tqdm(
                     model_items,
-                    desc="Entraînement",
+                    desc="Training",
                     disable=not show_progress
                 )
             )
-            
+
             for name, res in parallel_results:
                 results[name] = res
         else:
-            # Exécution séquentielle avec barre de progression
+            # Sequential execution with progress bar
             iterator: Any = self.models.items()
             if show_progress:
                 iterator = tqdm(
                     iterator,
                     total=len(self.models),
                     desc="Benchmark",
-                    unit="modèle"
+                    unit="model"
                 )
-            
+
             for name, model in iterator:
                 if show_progress:
-                    iterator.set_postfix({"modèle": name})
-                
-                # Mesure du temps d'entraînement
+                    iterator.set_postfix({"model": name})
+
+                # Measure training time
                 start_fit = time.time()
                 model.fit(X_train, y_train)
                 fit_time = time.time() - start_fit
 
-                # Mesure du temps de prédiction
+                # Measure prediction time
                 start_pred = time.time()
                 y_pred = model.predict(X_test)
                 predict_time = time.time() - start_pred
@@ -208,10 +208,10 @@ class Benchmark:
                     'fit_time': fit_time,
                     'predict_time': predict_time
                 }
-        
+
         self.results = results
         return results
-    
+
     def run_cv(
         self,
         X,
@@ -221,30 +221,30 @@ class Benchmark:
         random_state: int = 42,
     ) -> Dict[str, Dict]:
         r"""
-        Compare les modèles par validation croisée (K-fold).
+        Compare models by cross-validation (K-fold).
 
-        Chaque modèle est entraîné et évalué sur ``cv`` plis ; les métriques
-        retournées sont les moyennes sur les plis, avec l'écart-type dans
-        ``scores_std``. Pour la classification, les plis sont stratifiés.
+        Each model is trained and evaluated on ``cv`` folds; the returned
+        metrics are the averages across folds, with the standard deviation
+        in ``scores_std``. For classification, folds are stratified.
 
         Parameters
         ----------
         X : pandas.DataFrame or array-like
-            Features (jeu complet, non splitté).
+            Features (full dataset, not split).
         y : pandas.Series or array-like
-            Cible.
+            Target.
         cv : int, default=5
-            Nombre de plis.
+            Number of folds.
         show_progress : bool, default=True
-            Affiche une barre de progression.
+            Show a progress bar.
         random_state : int, default=42
-            Graine pour le mélange des plis.
+            Seed for fold shuffling.
 
         Returns
         -------
         dict
-            {model_name: {'scores': moyennes, 'scores_std': écarts-types,
-            'fit_time': temps moyen, 'predict_time': temps moyen, 'cv': cv}}
+            {model_name: {'scores': averages, 'scores_std': standard deviations,
+            'fit_time': average time, 'predict_time': average time, 'cv': cv}}
 
         Examples
         --------
@@ -266,7 +266,7 @@ class Benchmark:
         results = {}
         iterator: Any = self.models.items()
         if show_progress:
-            iterator = tqdm(iterator, total=len(self.models), desc=f"CV {cv}-fold", unit="modèle")
+            iterator = tqdm(iterator, total=len(self.models), desc=f"CV {cv}-fold", unit="model")
 
         for name, model in iterator:
             fold_scores, fit_times, predict_times = [], [], []
@@ -299,22 +299,22 @@ class Benchmark:
 
     def to_dataframe(self, sort: bool = True) -> Optional["pd.DataFrame"]:
         """
-        Convertit les résultats du benchmark en DataFrame pandas.
+        Convert the benchmark results to a pandas DataFrame.
 
-        Les colonnes sont les métriques (plus ``fit_time`` et ``predict_time``),
-        les lignes les modèles. Si les résultats proviennent de :meth:`run_cv`,
-        des colonnes ``<metric>_std`` sont ajoutées. Le tableau est trié par la
-        métrique principale (``accuracy`` ou ``r2``), du meilleur au moins bon.
+        Columns are the metrics (plus ``fit_time`` and ``predict_time``),
+        rows are the models. If the results come from :meth:`run_cv`,
+        ``<metric>_std`` columns are added. The table is sorted by the
+        primary metric (``accuracy`` or ``r2``), from best to worst.
 
         Parameters
         ----------
         sort : bool, default=True
-            Trier par la métrique principale, décroissante.
+            Sort by the primary metric, descending.
 
         Returns
         -------
         pandas.DataFrame or None
-            Tableau comparatif, ou None si run()/run_cv() n'a pas été exécuté.
+            Comparison table, or None if run()/run_cv() has not been called.
 
         Examples
         --------
@@ -355,32 +355,32 @@ class Benchmark:
         """
         if self.results is None:
             return None
-        
-        lines = ["=" * 60, "📊 RÉSUMÉ DU BENCHMARK", "=" * 60]
-        
-        # Trouver le meilleur modèle par accuracy
+
+        lines = ["=" * 60, "BENCHMARK SUMMARY", "=" * 60]
+
+        # Find the best model by accuracy
         best_model = None
         best_accuracy = -1
-        
+
         for name, res in self.results.items():
-            lines.append(f"\n🔹 {name}")
+            lines.append(f"\n{name}")
             lines.append("-" * 40)
             for metric, value in res['scores'].items():
                 lines.append(f"  {metric}: {value:.4f}")
-            lines.append(f"  ⏱️ fit_time: {res['fit_time']:.4f}s")
-            lines.append(f"  ⏱️ predict_time: {res['predict_time']:.4f}s")
-            
+            lines.append(f"  fit_time: {res['fit_time']:.4f}s")
+            lines.append(f"  predict_time: {res['predict_time']:.4f}s")
+
             if res['scores'].get('accuracy', 0) > best_accuracy:
                 best_accuracy = res['scores'].get('accuracy', 0)
                 best_model = name
-        
+
         if best_model:
             lines.append("\n" + "=" * 60)
-            lines.append(f"🏆 MEILLEUR MODÈLE: {best_model} (accuracy: {best_accuracy:.4f})")
+            lines.append(f"BEST MODEL: {best_model} (accuracy: {best_accuracy:.4f})")
             lines.append("=" * 60)
-        
+
         return "\n".join(lines)
-    
+
     def print_summary(self) -> None:
         """
         Print the summary of the benchmark results.
@@ -389,4 +389,4 @@ class Benchmark:
         if summary:
             print(summary)
         else:
-            print("⚠️ Aucun résultat. Exécutez d'abord run().")
+            print("No results. Run run() first.")

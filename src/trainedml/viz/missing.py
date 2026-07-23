@@ -11,10 +11,18 @@ Examples
 >>> print(summary)
 """
 
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 import matplotlib.pyplot as plt
 from .vizs import Vizs
 
-def missing_summary(data):
+if TYPE_CHECKING:
+    import pandas as pd
+
+
+def missing_summary(data: "pd.DataFrame") -> "pd.Series":
     """
     Compute the count of missing values per column.
 
@@ -37,20 +45,20 @@ def missing_summary(data):
 
 class MissingValuesViz(Vizs):
     """
-    Classe pour visualiser les valeurs manquantes.
+    Class to visualize missing values.
     """
-    def __init__(self, data):
+    def __init__(self, data: "pd.DataFrame") -> None:
         super().__init__(data)
 
-    def vizs(self):
+    def vizs(self) -> None:
         missing = self._data.isnull().mean() * 100
         missing = missing[missing > 0]
         fig, ax = plt.subplots(figsize=(8, 4))
         if not missing.empty:
             missing.sort_values().plot(kind='barh', ax=ax, color='orange')
-            ax.set_xlabel('% de valeurs manquantes')
-            ax.set_title('Valeurs manquantes par colonne')
+            ax.set_xlabel('% missing values')
+            ax.set_title('Missing values per column')
         else:
-            ax.text(0.5, 0.5, 'Aucune valeur manquante', ha='center', va='center', fontsize=12)
+            ax.text(0.5, 0.5, 'No missing values', ha='center', va='center', fontsize=12)
             ax.set_axis_off()
         self._figure = fig

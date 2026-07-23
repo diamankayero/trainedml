@@ -13,97 +13,105 @@ Examples
 ...         pass
 """
 
+from __future__ import annotations
+
 import os
-from typing import Optional
+from typing import Any, Optional
 import pandas as pd
 import matplotlib.pyplot as plt
 
 
 class Vizs(object):
     """
-    Classe de base pour toutes les visualisations.
-    Toutes les visualisations doivent hériter de cette classe et surcharger la méthode vizs().
-    
+    Base class for every visualization.
+    All visualizations must inherit from this class and override the vizs() method.
+
     Attributes:
-        _data: DataFrame pandas contenant les données
-        _figure: Figure matplotlib générée
-        _save_path: Chemin optionnel pour sauvegarder automatiquement la figure
+        _data: pandas DataFrame containing the data
+        _figure: generated matplotlib figure
+        _save_path: optional path to automatically save the figure
     """
-    def __init__(self, data, save_path: Optional[str] = None):
+    def __init__(self, data: pd.DataFrame, save_path: Optional[str] = None) -> None:
         """
-        Initialise la visualisation.
-        
+        Initialize the visualization.
+
         Args:
-            data: DataFrame pandas contenant les données
-            save_path (str, optional): Chemin pour sauvegarder la figure automatiquement.
-                                       Formats supportés: png, pdf, svg, jpg, etc.
+            data: pandas DataFrame containing the data
+            save_path (str, optional): path to automatically save the figure.
+                                       Supported formats: png, pdf, svg, jpg, etc.
         """
-        # Vérifie que les données sont bien un DataFrame pandas
+        # Check that data is indeed a pandas DataFrame
         if not isinstance(data, pd.DataFrame):
-            raise ValueError('data doit être un DataFrame pandas')
+            raise ValueError('data must be a pandas DataFrame')
         self._data = data
-        self._figure = None  # Stocke la figure générée (matplotlib, seaborn, etc.)
+        # Stores the generated output: usually a matplotlib Figure, but some
+        # subclasses (e.g. ProfilingViz) return a pandas DataFrame instead.
+        self._figure: Any = None
         self._save_path = save_path
 
-    def vizs(self):
+    def vizs(self) -> Any:
         """
-        Méthode à surcharger dans les classes filles pour générer la visualisation.
-        Appelle automatiquement save() si un save_path a été défini.
-        """
-        raise NotImplementedError('Les sous-classes doivent implémenter cette méthode')
+        Method to override in subclasses to generate the visualization.
+        Automatically calls save() if a save_path was set.
 
-    def save(self, path: Optional[str] = None, dpi: int = 150, **kwargs) -> Optional[str]:
+        Most subclasses return None and store their output on
+        ``self._figure`` instead; a few (e.g. HistogramViz, BoxplotViz)
+        also return it directly, hence the ``Any`` return type here.
         """
-        Sauvegarde la figure dans un fichier.
-        
+        raise NotImplementedError('Subclasses must implement this method')
+
+    def save(self, path: Optional[str] = None, dpi: int = 150, **kwargs: Any) -> Optional[str]:
+        """
+        Save the figure to a file.
+
         Args:
-            path (str, optional): Chemin du fichier. Si None, utilise self._save_path
-            dpi (int): Résolution de l'image (défaut: 150)
-            **kwargs: Arguments supplémentaires passés à plt.savefig()
-        
+            path (str, optional): file path. If None, uses self._save_path
+            dpi (int): image resolution (default: 150)
+            **kwargs: extra arguments passed to plt.savefig()
+
         Returns:
-            str: Chemin du fichier sauvegardé, ou None si échec
-        
+            str: path to the saved file, or None on failure
+
         Raises:
-            ValueError: Si aucun chemin n'est spécifié et _save_path est None
+            ValueError: if no path is specified and _save_path is None
         """
         save_path = path or self._save_path
-        
+
         if save_path is None:
-            raise ValueError("Aucun chemin spécifié. Passez 'path' ou définissez save_path à l'initialisation.")
-        
-        # Créer le dossier parent si nécessaire
+            raise ValueError("No path specified. Pass 'path' or set save_path at init time.")
+
+        # Create the parent directory if needed
         parent_dir = os.path.dirname(save_path)
         if parent_dir and not os.path.exists(parent_dir):
             os.makedirs(parent_dir, exist_ok=True)
-        
+
         try:
             plt.savefig(save_path, dpi=dpi, bbox_inches='tight', **kwargs)
-            print(f"✅ Figure sauvegardée: {save_path}")
+            print(f"Figure saved: {save_path}")
             return save_path
         except Exception as e:
-            print(f"❌ Erreur lors de la sauvegarde: {e}")
+            print(f"Error while saving: {e}")
             return None
 
-    def _auto_save(self):
+    def _auto_save(self) -> None:
         """
-        Sauvegarde automatique si un save_path a été défini.
-        À appeler à la fin de vizs() dans les classes filles.
+        Automatically save if a save_path was set.
+        Should be called at the end of vizs() in subclasses.
         """
         if self._save_path:
             self.save()
 
     @property
-    def figure(self):
-        """Retourne la figure générée."""
+    def figure(self) -> Any:
+        """Return the generated figure."""
         return self._figure
-    
+
     @property
     def save_path(self) -> Optional[str]:
-        """Retourne le chemin de sauvegarde configuré."""
+        """Return the configured save path."""
         return self._save_path
-    
+
     @save_path.setter
-    def save_path(self, value: Optional[str]):
-        """Définit le chemin de sauvegarde."""
+    def save_path(self, value: Optional[str]) -> None:
+        """Set the save path."""
         self._save_path = value

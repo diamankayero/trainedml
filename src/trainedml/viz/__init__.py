@@ -1,7 +1,7 @@
-# Ce fichier permet d'importer le sous-package viz
+# This file makes it possible to import the viz sub-package
 """
-Ce module permet d'importer toutes les visualisations et analyses exploratoires de trainedml.viz
-pour un accès centralisé dans le package.
+This module makes it possible to import every visualization and
+exploratory analysis in trainedml.viz for centralized access in the package.
 """
 
 from .vizs import Vizs

@@ -11,6 +11,10 @@ Examples
 >>> print(report)
 """
 
+from __future__ import annotations
+
+from typing import Any, Dict
+
 import pandas as pd
 import numpy as np
 from .vizs import Vizs
@@ -18,19 +22,19 @@ from .outliers import outlier_summary
 
 class ProfilingViz(Vizs):
     """
-    Classe pour générer un rapport de profiling automatique.
+    Class to generate an automatic profiling report.
     """
-    def __init__(self, data):
+    def __init__(self, data: pd.DataFrame) -> None:
         super().__init__(data)
 
-    def vizs(self):
-        # Génère un DataFrame de statistiques descriptives et de valeurs manquantes
+    def vizs(self) -> None:
+        # Generates a DataFrame of descriptive statistics and missing values
         desc = self._data.describe(include='all').T
         missing = self._data.isnull().sum()
         desc['missing'] = missing
-        self._figure = desc  # Ici, on retourne un DataFrame, pas une figure matplotlib
+        self._figure = desc  # Here we return a DataFrame, not a matplotlib figure
 
-def profiling_report(data):
+def profiling_report(data: pd.DataFrame) -> Dict[str, Any]:
     """
     Generate a profiling report for the dataset.
 

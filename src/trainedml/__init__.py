@@ -1,32 +1,33 @@
 """
-Module principal du package trainedml.
+Main module of the trainedml package.
 
-Ce module expose la classe centrale `Trainer` qui permet de gérer tout le workflow de machine learning :
-chargement de données, séparation train/test, prétraitement, entraînement, évaluation, prédiction
-et persistance. Il expose aussi la fonction :func:`compare` pour comparer tous les modèles
-d'une tâche en une ligne.
+This module exposes the central `Trainer` class, which handles the whole
+machine learning workflow: data loading, train/test splitting,
+preprocessing, training, evaluation, prediction, and persistence. It also
+exposes the :func:`compare` function to compare every model for a task in
+one line.
 
-Fonctionnalités principales
---------------------------
-- API haut niveau pour entraîner, évaluer et prédire avec un modèle ML
-- Supporte les datasets intégrés (Iris, Wine) ou des CSV distants
-- Prétraitement automatique (imputation, standardisation, encodage one-hot)
-- Séparation automatique train/test, seed variable sans recréer l'objet
-- Gestion des modèles trainedml (KNN, Logistic, Random Forest, régresseurs...)
-  et de **n'importe quel estimateur scikit-learn** (ou objet fit/predict)
-- Évaluation adaptée à la tâche : classification (accuracy, precision, recall, f1)
-  ou régression (r2, mse, rmse, mae)
-- Sauvegarde et rechargement du modèle entraîné (:meth:`Trainer.save` / :meth:`Trainer.load`)
-- Peut être utilisé en script, API, CLI ou webapp
+Main features
+-------------
+- High-level API to train, evaluate, and predict with an ML model
+- Supports built-in datasets (Iris, Wine) or remote CSV files
+- Automatic preprocessing (imputation, standardization, one-hot encoding)
+- Automatic train/test split, seed can vary without recreating the object
+- Handles trainedml models (KNN, Logistic, Random Forest, regressors...)
+  and **any scikit-learn estimator** (or any fit/predict object)
+- Task-aware evaluation: classification (accuracy, precision, recall, f1)
+  or regression (r2, mse, rmse, mae)
+- Save and reload a trained model (:meth:`Trainer.save` / :meth:`Trainer.load`)
+- Usable as a script, an API, a CLI, or a webapp backend
 
-Exemple
+Example
 -------
 >>> from trainedml import Trainer, compare
 >>> trainer = Trainer(dataset="iris", model="knn", model_params={"n_neighbors": 5})
 >>> trainer.fit()
 >>> print(trainer.evaluate())
 >>> preds = trainer.predict([[5.1, 3.5, 1.4, 0.2]])
->>> compare(dataset="iris", cv=5)  # comparatif de tous les modèles en DataFrame
+>>> compare(dataset="iris", cv=5)  # comparison of every model as a DataFrame
 """
 
 from __future__ import annotations
@@ -64,74 +65,78 @@ __all__ = [
 
 class Trainer:
     r"""
-    Classe haut niveau pour entraîner, évaluer et prédire avec un modèle de machine learning.
+    High-level class to train, evaluate, and predict with a machine
+    learning model.
 
-    Cette classe centralise tout le workflow ML : chargement des données, split train/test,
-    prétraitement, entraînement, évaluation, prédiction et persistance. Elle est conçue pour
-    être utilisée dans une API, une webapp ou en script Python.
+    This class centralizes the whole ML workflow: data loading, train/test
+    split, preprocessing, training, evaluation, prediction, and
+    persistence. It is designed to be used in an API, a webapp, or a plain
+    Python script.
 
     Parameters
     ----------
     dataset : str, optional
-        Nom du dataset connu ("iris", "wine").
+        Name of a built-in dataset ("iris", "wine").
     model : str or object, default='random_forest'
-        Nom d'un modèle trainedml ("random_forest", "knn", "logistic", "linear",
-        "ridge", "lasso", ...) **ou** n'importe quel estimateur possédant les
-        méthodes ``fit`` et ``predict`` (par exemple un estimateur scikit-learn).
+        Name of a trainedml model ("random_forest", "knn", "logistic",
+        "linear", "ridge", "lasso", ...) **or** any estimator that has
+        ``fit`` and ``predict`` methods (for example a scikit-learn
+        estimator).
     url : str, optional
-        URL d'un CSV distant à charger.
+        URL of a remote CSV to load.
     target : str, optional
-        Nom de la colonne cible (si url).
+        Name of the target column (if url).
     X : pandas.DataFrame or array-like, optional
-        Features fournies directement en mémoire (alternative à dataset/url).
+        Features provided directly in memory (alternative to dataset/url).
     y : pandas.Series or array-like, optional
-        Cible correspondante (obligatoire si X est fourni).
+        Matching target (required if X is provided).
     test_size : float, default=0.2
-        Proportion de test (entre 0 et 1).
+        Test proportion (between 0 and 1).
     seed : int, default=42
-        Graine aléatoire pour la reproductibilité.
+        Random seed for reproducibility.
     model_params : dict, optional
-        Hyperparamètres passés au constructeur du modèle (uniquement si ``model``
-        est un nom ; pour un estimateur déjà instancié, configurez-le directement).
+        Hyperparameters passed to the model's constructor (only usable
+        with a model name; for an already-instantiated estimator, configure
+        it directly).
     preprocess : bool, default=True
-        Si True, applique le prétraitement standard de trainedml (imputation,
-        standardisation des colonnes numériques, encodage one-hot des colonnes
-        catégorielles). Le préprocesseur est entraîné sur le train uniquement.
+        If True, applies trainedml's standard preprocessing (imputation,
+        standardization of numeric columns, one-hot encoding of categorical
+        columns). The preprocessor is fit on the training set only.
 
     Attributes
     ----------
     model : object
-        Instance du modèle ML utilisé.
+        The underlying ML model instance.
     preprocessor : sklearn.compose.ColumnTransformer or None
-        Préprocesseur (None si ``preprocess=False``).
+        The preprocessor (None if ``preprocess=False``).
     X_train, X_test, y_train, y_test : array-like
-        Données séparées pour l'entraînement et le test (non prétraitées).
+        Train/test splits (not preprocessed).
     task : str
-        Type de tâche ('classification' ou 'regression').
+        Task type ('classification' or 'regression').
     is_fitted : bool
-        Indique si le modèle a été entraîné.
+        Whether the model has been trained.
 
     Examples
     --------
-    Workflow standard :
+    Standard workflow:
 
     >>> trainer = Trainer(dataset="iris", model="knn")
     >>> trainer.fit()
     >>> print(trainer.evaluate())
     >>> preds = trainer.predict([[5.1, 3.5, 1.4, 0.2]])
 
-    Hyperparamètres et estimateur scikit-learn arbitraire :
+    Hyperparameters and an arbitrary scikit-learn estimator:
 
     >>> trainer = Trainer(dataset="wine", model="knn", model_params={"n_neighbors": 7})
     >>> from sklearn.svm import SVC
     >>> trainer = Trainer(dataset="iris", model=SVC(kernel="rbf"))
 
-    Varier le seed sans recréer le Trainer :
+    Varying the seed without recreating the Trainer:
 
     >>> for s in range(5):
     ...     print(trainer.fit(seed=s).evaluate())
 
-    Sauvegarde et rechargement :
+    Save and reload:
 
     >>> trainer.save("model.joblib")
     >>> restored = Trainer.load("model.joblib")
@@ -155,21 +160,21 @@ class Trainer:
         if isinstance(model, str):
             if model not in MODEL_MAP:
                 raise ValueError(
-                    f"Modèle inconnu : {model!r}. Disponibles : {list(MODEL_MAP.keys())} "
-                    f"(ou passez directement un estimateur fit/predict)."
+                    f"Unknown model: {model!r}. Available: {list(MODEL_MAP.keys())} "
+                    f"(or pass a fit/predict estimator directly)."
                 )
             self.model_name = model
             self.model = MODEL_MAP[model](**self.model_params)
         else:
             if not (hasattr(model, "fit") and hasattr(model, "predict")):
                 raise TypeError(
-                    "`model` doit être un nom de modèle trainedml ou un objet "
-                    "avec les méthodes fit et predict (ex. estimateur scikit-learn)."
+                    "`model` must be a trainedml model name or an object "
+                    "with fit and predict methods (e.g. a scikit-learn estimator)."
                 )
             if self.model_params:
                 raise ValueError(
-                    "`model_params` n'est utilisable qu'avec un nom de modèle ; "
-                    "configurez directement votre estimateur."
+                    "`model_params` can only be used with a model name; "
+                    "configure your estimator directly instead."
                 )
             self.model_name = type(model).__name__
             self.model = model
@@ -185,7 +190,7 @@ class Trainer:
 
     @property
     def task(self) -> str:
-        """Type de tâche du modèle ('classification' ou 'regression')."""
+        """Task type of the model ('classification' or 'regression')."""
         if self._task is not None:
             return self._task
         return detect_model_task(self.model, self.y_train)
@@ -193,19 +198,20 @@ class Trainer:
     def load_data(self, test_size: Optional[float] = None,
                   seed: Optional[int] = None) -> Tuple[Any, Any, Any, Any]:
         """
-        Charge les données, effectue la séparation train/test et les stocke dans l'objet.
+        Load the data, perform the train/test split, and store it on the object.
 
-        La séparation utilise l'API du package (:meth:`DataLoader.split`) : il n'est
-        jamais nécessaire d'appeler scikit-learn directement. Les ensembles obtenus
-        sont accessibles via les attributs ``X_train``, ``X_test``, ``y_train``, ``y_test``.
+        The split uses the package's own API (:meth:`DataLoader.split`):
+        there is never a need to call scikit-learn directly. The resulting
+        sets are available via the ``X_train``, ``X_test``, ``y_train``,
+        ``y_test`` attributes.
 
         Parameters
         ----------
         test_size : float, optional
-            Nouvelle proportion de test. Si fournie, remplace celle du constructeur.
+            New test proportion. If provided, overrides the constructor's value.
         seed : int, optional
-            Nouvelle graine aléatoire. Si fournie, remplace celle du constructeur,
-            ce qui permet de faire varier le split sans recréer le Trainer.
+            New random seed. If provided, overrides the constructor's value,
+            which lets you vary the split without recreating the Trainer.
 
         Returns
         -------
@@ -215,7 +221,7 @@ class Trainer:
         Raises
         ------
         ValueError
-            Si le dataset ou la cible n'est pas spécifié correctement.
+            If the dataset or target is not specified correctly.
 
         Examples
         --------
@@ -228,40 +234,40 @@ class Trainer:
             self.seed = seed
         loader = DataLoader()
         if self._X is not None and self._y is not None:
-            # Données fournies directement en mémoire (X=..., y=...)
+            # Data provided directly in memory (X=..., y=...)
             X, y = self._X, self._y
         else:
             X, y = loader.load_dataset(name=self.dataset, url=self.url, target=self.target)
         self.X_train, self.X_test, self.y_train, self.y_test = loader.split(
             X, y, test_size=self.test_size, random_state=self.seed)
-        # Un nouveau split invalide tout entraînement précédent
+        # A new split invalidates any previous training
         self.is_fitted = False
         return self.X_train, self.X_test, self.y_train, self.y_test
 
     def _transform(self, X: Any, fit: bool = False) -> Any:
-        """Applique le préprocesseur (fit_transform sur le train, transform sinon)."""
+        """Apply the preprocessor (fit_transform on train, transform otherwise)."""
         if self.preprocessor is None:
             return X
         return self.preprocessor.fit_transform(X) if fit else self.preprocessor.transform(X)
 
     def fit(self, test_size: Optional[float] = None, seed: Optional[int] = None) -> "Trainer":
         """
-        Entraîne le préprocesseur (si activé) puis le modèle sur les données d'entraînement.
-        Charge les données si nécessaire.
+        Fit the preprocessor (if enabled) then the model on the training data.
+        Loads the data first if needed.
 
         Parameters
         ----------
         test_size : float, optional
-            Si fournie, les données sont re-séparées avec cette proportion avant l'entraînement.
+            If provided, the data is re-split with this proportion before training.
         seed : int, optional
-            Si fournie, les données sont re-séparées avec cette graine avant l'entraînement.
-            Permet d'évaluer la stabilité d'un modèle sur plusieurs splits :
+            If provided, the data is re-split with this seed before training.
+            Useful to check a model's stability across splits:
             ``for s in range(5): print(trainer.fit(seed=s).evaluate())``
 
         Returns
         -------
         self : Trainer
-            L'instance courante (pour chaînage).
+            The current instance (for chaining).
         """
         if self.X_train is None or test_size is not None or seed is not None:
             self.load_data(test_size=test_size, seed=seed)
@@ -275,27 +281,27 @@ class Trainer:
 
     def evaluate(self) -> Dict[str, float]:
         """
-        Évalue le modèle entraîné sur les données de test, avec les métriques
-        adaptées à la tâche : classification (accuracy, precision, recall, f1)
-        ou régression (r2, mse, rmse, mae).
+        Evaluate the trained model on the test data, with metrics adapted
+        to the task: classification (accuracy, precision, recall, f1) or
+        regression (r2, mse, rmse, mae).
 
         Returns
         -------
         dict
-            Dictionnaire des scores.
+            Dictionary of scores.
 
         Raises
         ------
         RuntimeError
-            Si le modèle n'est pas entraîné.
+            If the model has not been trained.
         """
         if not self.is_fitted:
-            raise RuntimeError("Le modèle doit être entraîné avant l'évaluation.")
+            raise RuntimeError("The model must be trained before evaluation.")
         y_pred = self.model.predict(self._transform(self.X_test))
         return Evaluator.evaluate_for(self.task, self.y_test, y_pred)
 
     def _as_frame(self, X: Any) -> "pd.DataFrame":
-        """Convertit X en DataFrame avec les colonnes de l'entraînement si possible."""
+        """Convert X to a DataFrame using the training columns when possible."""
         import numpy as np
         import pandas as pd
         if isinstance(X, pd.DataFrame):
@@ -309,51 +315,51 @@ class Trainer:
 
     def predict(self, X: Any) -> "np.ndarray":
         """
-        Prédit la cible pour de nouvelles données X.
+        Predict the target for new data X.
 
-        Le prétraitement appris à l'entraînement est appliqué automatiquement :
-        X doit contenir les mêmes features (mêmes colonnes) que l'entraînement.
+        The preprocessing learned during training is applied automatically:
+        X must contain the same features (same columns) as the training data.
 
         Parameters
         ----------
         X : array-like or pandas.DataFrame
-            Données d'entrée (mêmes features que l'entraînement).
+            Input data (same features as training).
 
         Returns
         -------
         array
-            Prédictions du modèle.
+            Model predictions.
 
         Raises
         ------
         RuntimeError
-            Si le modèle n'est pas entraîné.
+            If the model has not been trained.
         """
         if not self.is_fitted:
-            raise RuntimeError("Le modèle doit être entraîné avant la prédiction.")
+            raise RuntimeError("The model must be trained before prediction.")
         X = self._as_frame(X)
         return self.model.predict(self._transform(X))
 
     def save(self, path: Union[str, "Path"]) -> None:
         """
-        Sauvegarde le modèle entraîné (et son préprocesseur) sur disque.
+        Save the trained model (and its preprocessor) to disk.
 
         Parameters
         ----------
         path : str or pathlib.Path
-            Chemin du fichier de sortie (convention : extension ``.joblib``).
+            Output file path (convention: ``.joblib`` extension).
 
         Raises
         ------
         RuntimeError
-            Si le modèle n'est pas entraîné.
+            If the model has not been trained.
 
         Examples
         --------
         >>> trainer.fit().save("model.joblib")
         """
         if not self.is_fitted:
-            raise RuntimeError("Le modèle doit être entraîné avant la sauvegarde.")
+            raise RuntimeError("The model must be trained before saving.")
         import joblib
         payload = {
             "trainedml_version": __version__,
@@ -369,18 +375,18 @@ class Trainer:
     @classmethod
     def load(cls, path: Union[str, "Path"]) -> "Trainer":
         """
-        Recharge un Trainer sauvegardé avec :meth:`save`, prêt à prédire.
+        Reload a Trainer saved with :meth:`save`, ready to predict.
 
         Parameters
         ----------
         path : str or pathlib.Path
-            Chemin du fichier sauvegardé.
+            Path to the saved file.
 
         Returns
         -------
         Trainer
-            Instance prête pour :meth:`predict` (les données d'origine ne sont
-            pas rechargées ; ``X_train`` etc. valent None).
+            Instance ready for :meth:`predict` (the original data is not
+            reloaded; ``X_train`` etc. are None).
 
         Examples
         --------
@@ -393,7 +399,7 @@ class Trainer:
         trainer.dataset = None
         trainer.url = None
         trainer.target = None
-        # Valeurs par défaut : les données d'origine ne sont pas rechargées
+        # Default values: the original data is not reloaded
         trainer.test_size = 0.2
         trainer.seed = 42
         trainer.preprocess = payload["preprocessor"] is not None
@@ -410,8 +416,8 @@ class Trainer:
 
 def main() -> None:
     """
-    Point d'entrée CLI du package trainedml.
-    Lance l'interface en ligne de commande (voir src/trainedml/cli.py).
+    CLI entry point of the trainedml package.
+    Launches the command-line interface (see src/trainedml/cli.py).
     """
     from .cli import main as cli_main
     cli_main()

@@ -1,6 +1,6 @@
 """
-Module d'abstraction pour le sous-package data de trainedml.
-Permet d'importer facilement les fonctions de chargement de données.
+Abstraction module for trainedml's data sub-package.
+Makes it easy to import data loading functions.
 """
 
 from .loader import DataLoader

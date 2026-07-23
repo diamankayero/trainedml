@@ -1,12 +1,12 @@
 """
-Comparaison de tous les modèles en une ligne pour trainedml.
+Compare every model in one line for trainedml.
 
-Ce module expose :func:`compare`, qui enchaîne tout le pipeline :
-chargement des données, détection du type de tâche, prétraitement,
-validation croisée de tous les modèles adaptés, et retourne un
-DataFrame pandas trié du meilleur au moins bon modèle.
+This module exposes :func:`compare`, which chains the whole pipeline:
+data loading, task type detection, preprocessing, cross-validation of
+every suitable model, and returns a pandas DataFrame sorted from best to
+worst model.
 
-Exemple
+Example
 -------
 >>> from trainedml import compare
 >>> df = compare(dataset="wine", cv=5)
@@ -42,66 +42,66 @@ def compare(
     sort: bool = True,
 ):
     """
-    Compare tous les modèles adaptés à un dataset et retourne un DataFrame trié.
+    Compare every model suited to a dataset and return a sorted DataFrame.
 
-    Le type de tâche (classification ou régression) est détecté automatiquement
-    à partir de la cible, et seuls les modèles adaptés sont comparés. Chaque
-    modèle est évalué par validation croisée ; le prétraitement (imputation,
-    standardisation, one-hot) est réentraîné à chaque pli pour éviter toute
-    fuite d'information.
+    The task type (classification or regression) is automatically detected
+    from the target, and only suitable models are compared. Each model is
+    evaluated by cross-validation; preprocessing (imputation,
+    standardization, one-hot) is refit on every fold to avoid any
+    information leakage.
 
     Parameters
     ----------
     dataset : str, optional
-        Nom d'un dataset intégré ("iris", "wine").
+        Name of a built-in dataset ("iris", "wine").
     url : str, optional
-        URL d'un CSV distant (nécessite ``target``).
+        URL of a remote CSV (requires ``target``).
     target : str, optional
-        Nom de la colonne cible (si ``url``).
+        Name of the target column (if ``url``).
     X : pandas.DataFrame or array-like, optional
-        Features fournies directement en mémoire (alternative à dataset/url).
+        Features provided directly in memory (alternative to dataset/url).
     y : pandas.Series or array-like, optional
-        Cible correspondante (obligatoire si X est fourni).
+        Matching target (required if X is provided).
     models : dict, optional
-        Dictionnaire {nom: instance} pour comparer des modèles personnalisés
-        (trainedml ou scikit-learn). Par défaut : tous les modèles trainedml
-        adaptés à la tâche détectée.
+        Dictionary {name: instance} to compare custom models
+        (trainedml or scikit-learn). Defaults to every trainedml model
+        suited to the detected task.
     cv : int, default=5
-        Nombre de plis de validation croisée.
+        Number of cross-validation folds.
     preprocess : bool, default=True
-        Applique le prétraitement standard de trainedml à chaque pli.
+        Applies trainedml's standard preprocessing on every fold.
     seed : int, default=42
-        Graine aléatoire pour le mélange des plis.
+        Random seed for fold shuffling.
     show_progress : bool, default=True
-        Affiche une barre de progression.
+        Show a progress bar.
     sort : bool, default=True
-        Trie le tableau par la métrique principale (accuracy ou r2), décroissante.
+        Sort the table by the primary metric (accuracy or r2), descending.
 
     Returns
     -------
     pandas.DataFrame
-        Une ligne par modèle : métriques moyennes, écarts-types (``*_std``),
-        temps moyens d'entraînement et de prédiction.
+        One row per model: average metrics, standard deviations
+        (``*_std``), average training and prediction times.
 
     Raises
     ------
     ValueError
-        Si ni ``dataset`` ni ``url``+``target`` n'est fourni.
+        If neither ``dataset`` nor ``url``+``target`` is provided.
 
     Examples
     --------
-    Comparer tous les classificateurs sur Wine :
+    Compare every classifier on Wine:
 
     >>> from trainedml import compare
     >>> print(compare(dataset="wine"))
 
-    Comparer des modèles personnalisés (y compris scikit-learn) :
+    Compare custom models (including scikit-learn):
 
     >>> from sklearn.svm import SVC
     >>> from trainedml.models import KNNModel
     >>> print(compare(dataset="iris", models={"svc": SVC(), "knn": KNNModel()}))
 
-    Sur un CSV distant (régression) :
+    On a remote CSV (regression):
 
     >>> print(compare(url="https://.../winequality-red.csv", target="quality"))
     """

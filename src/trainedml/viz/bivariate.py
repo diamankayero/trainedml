@@ -12,7 +12,16 @@ Examples
 >>> viz.figure.show()
 """
 
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Optional
+
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+
+if TYPE_CHECKING:
+    import pandas as pd
+
 
 class BivariateViz:
     r"""
@@ -44,13 +53,13 @@ class BivariateViz:
     >>> viz.vizs()
     >>> viz.figure.show()
     """
-    def __init__(self, data, x, y):
+    def __init__(self, data: "pd.DataFrame", x: str, y: str) -> None:
         self.data = data
         self.x = x
         self.y = y
-        self.figure = None
+        self.figure: Optional[Figure] = None
 
-    def vizs(self):
+    def vizs(self) -> Figure:
         """
         Generate the bivariate scatter plot.
 

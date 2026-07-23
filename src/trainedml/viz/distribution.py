@@ -11,10 +11,15 @@ Examples
 >>> print(summary)
 """
 
+from __future__ import annotations
+
+from typing import List, Union
+
+import pandas as pd
 import matplotlib.pyplot as plt
 from .vizs import Vizs
 
-def distribution_summary(data, columns='all'):
+def distribution_summary(data: pd.DataFrame, columns: Union[str, List[str]] = 'all') -> pd.DataFrame:
     """
     Compute summary statistics for selected columns.
 
@@ -40,14 +45,14 @@ def distribution_summary(data, columns='all'):
 
 class DistributionViz(Vizs):
     """
-    Classe pour générer des histogrammes de distribution pour chaque variable.
+    Class to generate distribution histograms for each variable.
     """
-    def __init__(self, data, columns='all', bins=10):
+    def __init__(self, data: pd.DataFrame, columns: Union[str, List[str]] = 'all', bins: int = 10) -> None:
         super().__init__(data)
         self._columns = columns
         self._bins = bins
 
-    def vizs(self):
+    def vizs(self) -> None:
         if self._columns == 'all':
             cols = self._data.select_dtypes(include='number').columns.tolist()
         else:
@@ -57,6 +62,6 @@ class DistributionViz(Vizs):
             axes = [axes]
         for ax, col in zip(axes, cols):
             ax.hist(self._data[col].dropna(), bins=self._bins, color='skyblue', edgecolor='black')
-            ax.set_title(f"Distribution de {col}")
+            ax.set_title(f"Distribution of {col}")
         plt.tight_layout()
         self._figure = fig

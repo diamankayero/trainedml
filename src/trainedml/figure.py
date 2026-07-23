@@ -1,6 +1,6 @@
 """
-Classe Figure adaptée au projet trainedml :
-Encapsule une figure matplotlib, plotly, etc. Permet l'affichage, la sauvegarde et l'annotation multi-backend.
+Figure class adapted for the trainedml project:
+Wraps a matplotlib, plotly, etc. figure. Provides multi-backend display, saving, and annotation.
 
 Figure utilities for trainedml visualizations.
 
@@ -15,14 +15,20 @@ Examples
 >>> fig.show()
 """
 
+from __future__ import annotations
+
+from typing import Any, Dict, Optional, Tuple
+
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure as MplFigure
 try:
-    import plotly.graph_objects as go  # noqa: F401 -- test de disponibilité de plotly
+    import plotly.graph_objects as go  # noqa: F401 -- plotly availability probe
     _plotly_available = True
 except ImportError:
     _plotly_available = False
 
-def get_figure(figsize=(8, 6), dpi=100, nrows=1, ncols=1, **kwargs):
+def get_figure(figsize: Tuple[float, float] = (8, 6), dpi: int = 100, nrows: int = 1,
+                ncols: int = 1, **kwargs: Any) -> Tuple[MplFigure, Any]:
     """
     Create a matplotlib Figure and Axes with standard style.
 
@@ -85,18 +91,18 @@ class Figure:
     >>> fig, ax = plt.subplots()
     >>> ax.plot([1, 2, 3], [4, 5, 6])
     >>> f = Figure(fig, backend='matplotlib')
-    >>> f.annotate(title='Courbe', xlabel='X', ylabel='Y')
+    >>> f.annotate(title='Plot', xlabel='X', ylabel='Y')
     >>> f.show()
-    >>> f.save('courbe.png')
+    >>> f.save('plot.png')
 
     Basic usage with plotly:
     >>> import plotly.graph_objects as go
     >>> fig = go.Figure()
     >>> fig.add_scatter(x=[1,2,3], y=[4,5,6])
     >>> f = Figure(fig, backend='plotly')
-    >>> f.annotate(title='Courbe', xlabel='X', ylabel='Y')
+    >>> f.annotate(title='Plot', xlabel='X', ylabel='Y')
     >>> f.show()
-    >>> f.save('courbe_plotly.png')
+    >>> f.save('plot_plotly.png')
 
     Notes
     -----
@@ -104,19 +110,19 @@ class Figure:
     - For matplotlib, always call `tight_layout()` before saving for best results.
     - For plotly, the `kaleido` package is required for image export.
     """
-    def __init__(self, figure=None, backend='matplotlib'):
+    def __init__(self, figure: Optional[Any] = None, backend: str = 'matplotlib') -> None:
         """
         Args:
-            figure: objet figure (matplotlib.figure.Figure, go.Figure, ...)
-            backend: 'matplotlib' (défaut) ou 'plotly'
+            figure: figure object (matplotlib.figure.Figure, go.Figure, ...)
+            backend: 'matplotlib' (default) or 'plotly'
         """
         self.figure = figure
         self.backend = backend
-        self._title = None
-        self._xlabel = None
-        self._ylabel = None
+        self._title: Optional[str] = None
+        self._xlabel: Optional[str] = None
+        self._ylabel: Optional[str] = None
 
-    def show(self):
+    def show(self) -> None:
         """
         Display the figure using the selected backend.
 
@@ -134,9 +140,9 @@ class Figure:
         elif self.backend == 'plotly' and _plotly_available:
             self.figure.show()
         else:
-            raise NotImplementedError(f"Backend non supporté : {self.backend}")
+            raise NotImplementedError(f"Unsupported backend: {self.backend}")
 
-    def save(self, output_path):
+    def save(self, output_path: str) -> None:
         """
         Save the figure to a file using the selected backend.
 
@@ -159,9 +165,9 @@ class Figure:
         elif self.backend == 'plotly' and _plotly_available:
             self.figure.write_image(output_path)
         else:
-            raise NotImplementedError(f"Backend non supporté : {self.backend}")
+            raise NotImplementedError(f"Unsupported backend: {self.backend}")
 
-    def annotate(self, title='', xlabel='', ylabel=''):
+    def annotate(self, title: str = '', xlabel: str = '', ylabel: str = '') -> None:
         """
         Add a title and axis labels to the figure (main axis only).
 
@@ -178,7 +184,7 @@ class Figure:
         --------
         >>> fig, ax = get_figure()
         >>> f = Figure(fig)
-        >>> f.annotate(title='Titre', xlabel='X', ylabel='Y')
+        >>> f.annotate(title='Title', xlabel='X', ylabel='Y')
         """
         for arg in [title, xlabel, ylabel]:
             if not isinstance(arg, str):
@@ -197,7 +203,7 @@ class Figure:
             if ylabel:
                 ax.set_ylabel(ylabel)
         elif self.backend == 'plotly' and _plotly_available:
-            updates = {}
+            updates: Dict[str, str] = {}
             if title:
                 updates['title'] = title
             if xlabel:
@@ -206,4 +212,4 @@ class Figure:
                 updates['yaxis_title'] = ylabel
             self.figure.update_layout(**updates)
         else:
-            raise NotImplementedError(f"Backend non supporté : {self.backend}")
+            raise NotImplementedError(f"Unsupported backend: {self.backend}")

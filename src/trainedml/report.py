@@ -1,19 +1,19 @@
 """
-Génération de rapport EDA HTML autonome pour trainedml.
+Self-contained HTML EDA report generation for trainedml.
 
-Ce module assemble les analyses exploratoires du package (statistiques
-descriptives, valeurs manquantes, corrélations, distributions, outliers,
-normalité, multicolinéarité) en un rapport HTML **auto-contenu** : les
-figures matplotlib sont embarquées en base64, le fichier s'ouvre dans
-n'importe quel navigateur sans dépendance.
+This module assembles the package's exploratory analyses (descriptive
+statistics, missing values, correlations, distributions, outliers,
+normality, multicollinearity) into a **self-contained** HTML report:
+matplotlib figures are embedded as base64, the file opens in any browser
+with no dependency.
 
-Point d'entrée : :func:`generate_report`, aussi accessible via
+Entry point: :func:`generate_report`, also accessible via
 :meth:`trainedml.visualization.Visualizer.report`.
 
-Exemple
+Example
 -------
 >>> from trainedml.report import generate_report
->>> generate_report(df, "rapport.html", title="Mon dataset")
+>>> generate_report(df, "report.html", title="My dataset")
 """
 
 from __future__ import annotations
@@ -41,7 +41,7 @@ img { max-width: 100%; height: auto; border: 1px solid #e0e0ea; border-radius: 6
 
 
 def _fig_to_html(fig) -> str:
-    """Convertit une figure matplotlib en balise <img> base64 auto-contenue."""
+    """Convert a matplotlib figure into a self-contained base64 <img> tag."""
     import matplotlib.pyplot as plt
     buf = io.BytesIO()
     fig.savefig(buf, format="png", dpi=110, bbox_inches="tight")
@@ -51,42 +51,41 @@ def _fig_to_html(fig) -> str:
 
 
 def _safe_section(title: str, builder) -> str:
-    """Construit une section HTML ; en cas d'erreur, insère une note au lieu de planter."""
+    """Build an HTML section; on error, insert a note instead of crashing."""
     try:
         body = builder()
-    except Exception as e:  # le rapport doit rester généré même si une analyse échoue
-        body = f'<p class="note">Section indisponible : {e}</p>'
+    except Exception as e:  # the report must still be generated even if an analysis fails
+        body = f'<p class="note">Section unavailable: {e}</p>'
     return f"<h2>{title}</h2>\n{body}"
 
 
 def generate_report(data: pd.DataFrame, path: Optional[str] = None,
-                    title: str = "Rapport exploratoire - trainedml") -> str:
+                    title: str = "Exploratory report - trainedml") -> str:
     """
-    Génère un rapport EDA HTML complet et auto-contenu pour un DataFrame.
+    Generate a complete, self-contained HTML EDA report for a DataFrame.
 
-    Le rapport contient : aperçu du dataset, statistiques descriptives,
-    valeurs manquantes, matrice et heatmap de corrélation, distributions,
-    outliers (IQR), tests de normalité et facteurs d'inflation de la
-    variance (VIF).
+    The report contains: dataset overview, descriptive statistics, missing
+    values, correlation matrix and heatmap, distributions, outliers (IQR),
+    normality tests, and variance inflation factors (VIF).
 
     Parameters
     ----------
     data : pandas.DataFrame
-        Le dataset à analyser.
+        The dataset to analyze.
     path : str, optional
-        Chemin du fichier HTML de sortie. Si None, le HTML est seulement retourné.
-    title : str, default="Rapport exploratoire - trainedml"
-        Titre du rapport.
+        Output HTML file path. If None, the HTML is only returned.
+    title : str, default="Exploratory report - trainedml"
+        Report title.
 
     Returns
     -------
     str
-        Le contenu HTML du rapport.
+        The report's HTML content.
 
     Examples
     --------
     >>> from trainedml.report import generate_report
-    >>> html = generate_report(df, "rapport.html")
+    >>> html = generate_report(df, "report.html")
     """
     from .analyzer import DataAnalyzer
     from .viz.heatmap import HeatmapViz
@@ -99,35 +98,35 @@ def generate_report(data: pd.DataFrame, path: Optional[str] = None,
     numeric = data.select_dtypes(include=[np.number])
     sections = []
 
-    # --- Aperçu ---
+    # --- Overview ---
     def overview():
         dtypes = data.dtypes.astype(str).rename("dtype").to_frame()
         return (
-            f'<p class="meta">{data.shape[0]} lignes × {data.shape[1]} colonnes - '
-            f'{data.duplicated().sum()} doublon(s)</p>'
+            f'<p class="meta">{data.shape[0]} rows x {data.shape[1]} columns - '
+            f'{data.duplicated().sum()} duplicate(s)</p>'
             + dtypes.to_html()
-            + "<h3>Premières lignes</h3>" + data.head(10).to_html()
+            + "<h3>First rows</h3>" + data.head(10).to_html()
         )
-    sections.append(_safe_section("Aperçu du dataset", overview))
+    sections.append(_safe_section("Dataset overview", overview))
 
-    # --- Statistiques descriptives ---
+    # --- Descriptive statistics ---
     sections.append(_safe_section(
-        "Statistiques descriptives", lambda: data.describe().round(3).to_html()))
+        "Descriptive statistics", lambda: data.describe().round(3).to_html()))
 
-    # --- Valeurs manquantes ---
+    # --- Missing values ---
     def missing():
-        miss = missing_summary(data).rename("valeurs manquantes").to_frame()
-        miss["%"] = (miss["valeurs manquantes"] / len(data) * 100).round(2)
+        miss = missing_summary(data).rename("missing values").to_frame()
+        miss["%"] = (miss["missing values"] / len(data) * 100).round(2)
         return miss.to_html()
-    sections.append(_safe_section("Valeurs manquantes", missing))
+    sections.append(_safe_section("Missing values", missing))
 
-    # --- Corrélation ---
+    # --- Correlation ---
     def correlation():
         viz = HeatmapViz(numeric, features=list(numeric.columns))
         viz.vizs()
         return numeric.corr().round(3).to_html() + _fig_to_html(viz.figure)
     if numeric.shape[1] >= 2:
-        sections.append(_safe_section("Corrélations", correlation))
+        sections.append(_safe_section("Correlations", correlation))
 
     # --- Distributions ---
     def distributions():
@@ -141,9 +140,9 @@ def generate_report(data: pd.DataFrame, path: Optional[str] = None,
         summary = outlier_summary(data)
         return pd.DataFrame(summary).T.to_html()
     if not numeric.empty:
-        sections.append(_safe_section("Outliers (méthode IQR)", outliers))
+        sections.append(_safe_section("Outliers (IQR method)", outliers))
 
-    # --- Normalité ---
+    # --- Normality ---
     def normality():
         results = normality_tests(numeric, columns=list(numeric.columns))
         rows = {}
@@ -151,22 +150,22 @@ def generate_report(data: pd.DataFrame, path: Optional[str] = None,
             stat, pval = res["shapiro"]
             rows[col] = {"shapiro_stat": round(float(stat), 4),
                          "p_value": round(float(pval), 4),
-                         "normale (α=5%)": "oui" if pval > 0.05 else "non"}
+                         "normal (alpha=5%)": "yes" if pval > 0.05 else "no"}
         return pd.DataFrame(rows).T.to_html()
     if not numeric.empty:
-        sections.append(_safe_section("Tests de normalité (Shapiro-Wilk)", normality))
+        sections.append(_safe_section("Normality tests (Shapiro-Wilk)", normality))
 
-    # --- Multicolinéarité ---
+    # --- Multicollinearity ---
     def vif():
         return vif_summary(numeric).round(2).rename("VIF").to_frame().to_html()
     if numeric.shape[1] >= 2:
-        sections.append(_safe_section("Multicolinéarité (VIF)", vif))
+        sections.append(_safe_section("Multicollinearity (VIF)", vif))
 
     html = (
-        "<!DOCTYPE html><html lang='fr'><head><meta charset='utf-8'>"
+        "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>"
         f"<title>{title}</title><style>{_CSS}</style></head><body>"
         f"<h1>{title}</h1>"
-        f'<p class="meta">Généré par trainedml - pandas {pd.__version__}</p>'
+        f'<p class="meta">Generated by trainedml - pandas {pd.__version__}</p>'
         + "\n".join(sections)
         + "</body></html>"
     )

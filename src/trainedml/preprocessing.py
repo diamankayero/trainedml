@@ -1,18 +1,18 @@
 """
-Prétraitement automatique des données pour trainedml.
+Automatic data preprocessing for trainedml.
 
-Ce module fournit un préprocesseur standard construit avec scikit-learn :
+This module provides a standard preprocessor built with scikit-learn:
 
-- **colonnes numériques** : imputation par la médiane puis standardisation
-  (moyenne 0, écart-type 1) - indispensable pour KNN, la régression logistique,
-  Ridge/Lasso... ;
-- **colonnes catégorielles** : imputation par le mode puis encodage one-hot
-  (les catégories inconnues à la prédiction sont ignorées).
+- **numeric columns**: median imputation then standardization
+  (mean 0, std 1) - essential for KNN, logistic regression,
+  Ridge/Lasso...;
+- **categorical columns**: mode imputation then one-hot encoding
+  (categories unseen at prediction time are ignored).
 
-Il est utilisé par défaut par :class:`trainedml.Trainer` (``preprocess=True``)
-et par :func:`trainedml.compare`, mais peut aussi s'employer seul.
+It is used by default by :class:`trainedml.Trainer` (``preprocess=True``)
+and by :func:`trainedml.compare`, but can also be used on its own.
 
-Exemple
+Example
 -------
 >>> from trainedml.preprocessing import build_preprocessor
 >>> pre = build_preprocessor()
@@ -30,7 +30,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
 def _make_onehot() -> OneHotEncoder:
-    """Crée un OneHotEncoder dense, compatible avec toutes les versions de scikit-learn."""
+    """Create a dense OneHotEncoder, compatible with every scikit-learn version."""
     try:
         # scikit-learn >= 1.2
         return OneHotEncoder(handle_unknown="ignore", sparse_output=False)
@@ -41,15 +41,15 @@ def _make_onehot() -> OneHotEncoder:
 
 def build_preprocessor() -> ColumnTransformer:
     """
-    Construit le préprocesseur standard de trainedml.
+    Build trainedml's standard preprocessor.
 
     Returns
     -------
     sklearn.compose.ColumnTransformer
-        Transformeur non entraîné : imputation médiane + standardisation pour
-        les colonnes numériques, imputation mode + one-hot pour les colonnes
-        catégorielles. À entraîner sur les données d'entraînement uniquement
-        (``fit_transform``), puis à appliquer aux données de test (``transform``).
+        Untrained transformer: median imputation + standardization for
+        numeric columns, mode imputation + one-hot for categorical
+        columns. To be fit on the training data only (``fit_transform``),
+        then applied to the test data (``transform``).
 
     Examples
     --------
@@ -76,26 +76,25 @@ def build_preprocessor() -> ColumnTransformer:
 
 class PreprocessedModel:
     """
-    Enveloppe un modèle avec le préprocesseur standard de trainedml.
+    Wraps a model with trainedml's standard preprocessor.
 
-    À chaque ``fit``, le préprocesseur est (ré)entraîné sur les données
-    d'entraînement uniquement, puis appliqué aux données de prédiction :
-    aucune fuite d'information du test vers l'entraînement, y compris en
-    validation croisée.
+    On every ``fit``, the preprocessor is (re)trained on the training data
+    only, then applied to the prediction data: no information leaks from
+    test to train, including during cross-validation.
 
     Parameters
     ----------
     model : object
-        Modèle à envelopper (trainedml ou scikit-learn, tout objet fit/predict).
+        Model to wrap (trainedml or scikit-learn, any fit/predict object).
 
     Attributes
     ----------
     model : object
-        Le modèle enveloppé.
+        The wrapped model.
     preprocessor : sklearn.compose.ColumnTransformer
-        Le préprocesseur, réentraîné à chaque appel de :meth:`fit`.
+        The preprocessor, retrained on every call to :meth:`fit`.
     task : str
-        Type de tâche du modèle enveloppé (délégué).
+        Task type of the wrapped model (delegated).
 
     Examples
     --------
@@ -111,17 +110,17 @@ class PreprocessedModel:
 
     @property
     def task(self):
-        """Type de tâche du modèle enveloppé ('classification' ou 'regression')."""
+        """Task type of the wrapped model ('classification' or 'regression')."""
         return getattr(self.model, "task", None)
 
     def fit(self, X, y):
-        """Entraîne le préprocesseur puis le modèle sur (X, y)."""
+        """Fit the preprocessor then the model on (X, y)."""
         X_t = self.preprocessor.fit_transform(X)
         self.model.fit(X_t, y)
         return self
 
     def predict(self, X):
-        """Prétraite X puis prédit avec le modèle enveloppé."""
+        """Preprocess X then predict with the wrapped model."""
         return self.model.predict(self.preprocessor.transform(X))
 
     def __repr__(self):

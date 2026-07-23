@@ -16,6 +16,19 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
   https://github.com/diamankayero/trainedml-webapp, qui consomme trainedml
   depuis PyPI. Ce dépôt ne contient plus que le package ; l'extra
   d'installation `[web]`, render.yaml et le Dockerfile sont partis avec elle.
+- Docstrings, commentaires et sorties CLI entièrement en anglais (le mélange
+  FR/EN hérité des phases précédentes est résorbé).
+- `figure.py`, `analyzer.py`, `visualization.py` et tout `trainedml.viz.*`
+  sont désormais annotés en type hints ; l'exclusion mypy correspondante a
+  été retirée de `pyproject.toml`.
+
+### Corrigé
+- `Visualizer.multicollinearity()` ne transmet plus de `**kwargs` vers
+  `DataAnalyzer.multicollinearity()`, qui n'en accepte pas.
+- `viz/boxplot.py` et `viz/correlation.py` : `from __future__ import
+  annotations` était placé avant le docstring de module, ce qui le
+  désactivait silencieusement.
+- `viz/normality.py` : docstring de module dupliqué et mort supprimé.
 
 ## [0.2.0] - 2026-07-18
 

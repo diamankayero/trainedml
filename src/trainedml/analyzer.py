@@ -28,9 +28,14 @@ Examples
 >>> print(report['describe'])
 """
 
+from __future__ import annotations
+
+from typing import Any, Dict, List, Optional, Union
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 from scipy import stats
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
@@ -78,10 +83,10 @@ class DataAnalyzer:
     - For plotting, returned objects are matplotlib figures.
     """
 
-    def __init__(self, data):
+    def __init__(self, data: pd.DataFrame) -> None:
         self.data = data
 
-    def _select_numeric(self, columns='all'):
+    def _select_numeric(self, columns: Union[str, List[str]] = 'all') -> pd.DataFrame:
         """Return numeric columns from the DataFrame."""
         if columns == 'all':
             return self.data.select_dtypes(include=[np.number])
@@ -89,7 +94,7 @@ class DataAnalyzer:
             columns = [columns]
         return self.data[columns].select_dtypes(include=[np.number])
 
-    def distribution(self, columns='all', **kwargs):
+    def distribution(self, columns: Union[str, List[str]] = 'all', **kwargs: Any) -> Dict[str, Any]:
         """
         Compute and plot the distribution of variables.
 
@@ -135,7 +140,8 @@ class DataAnalyzer:
 
         return {'describe': df_num.describe(), 'figure': fig}
 
-    def correlation(self, features='all', method='pearson', mask=True, **kwargs):
+    def correlation(self, features: Union[str, List[str]] = 'all', method: str = 'pearson',
+                    mask: bool = True, **kwargs: Any) -> pd.DataFrame:
         r"""
         Compute the correlation matrix between features.
 
@@ -176,7 +182,7 @@ class DataAnalyzer:
 
         return corr
 
-    def missing(self, **kwargs):
+    def missing(self, **kwargs: Any) -> pd.DataFrame:
         """
         Analyze missing values in the dataset.
 
@@ -196,7 +202,8 @@ class DataAnalyzer:
         result = result[result['count'] > 0].sort_values('count', ascending=False)
         return result
 
-    def outliers(self, method='iqr', threshold=1.5, **kwargs):
+    def outliers(self, method: str = 'iqr', threshold: float = 1.5,
+                **kwargs: Any) -> Dict[str, Dict[str, Any]]:
         r"""
         Detect outliers in the dataset.
 
@@ -229,7 +236,7 @@ class DataAnalyzer:
         >>> print(out)
         """
         df_num = self._select_numeric()
-        results = {}
+        results: Dict[str, Dict[str, Any]] = {}
 
         for col in df_num.columns:
             x = df_num[col].dropna()
@@ -258,7 +265,7 @@ class DataAnalyzer:
 
         return results
 
-    def target(self, target_column, **kwargs):
+    def target(self, target_column: str, **kwargs: Any) -> Dict[str, Any]:
         """
         Analyze the target variable (distribution, imbalance, etc.).
 
@@ -290,7 +297,8 @@ class DataAnalyzer:
             'missing': int(y.isnull().sum()),
         }
 
-    def boxplot(self, columns='all', by=None, **kwargs):
+    def boxplot(self, columns: Union[str, List[str]] = 'all', by: Optional[str] = None,
+                **kwargs: Any) -> Figure:
         """
         Generate boxplots for selected columns.
 
@@ -327,7 +335,7 @@ class DataAnalyzer:
         fig.tight_layout()
         return fig
 
-    def bivariate(self, x, y, **kwargs):
+    def bivariate(self, x: str, y: str, **kwargs: Any) -> Figure:
         """
         Bivariate analysis between two variables (scatter plot + regression line).
 
@@ -374,7 +382,8 @@ class DataAnalyzer:
         fig.tight_layout()
         return fig
 
-    def normality(self, columns='all', **kwargs):
+    def normality(self, columns: Union[str, List[str]] = 'all',
+                **kwargs: Any) -> Dict[str, Dict[str, Any]]:
         """
         Test normality of variables (Shapiro-Wilk, D'Agostino-Pearson, Anderson-Darling).
 
@@ -396,11 +405,11 @@ class DataAnalyzer:
         >>> print(norm)
         """
         df_num = self._select_numeric(columns)
-        results = {}
+        results: Dict[str, Dict[str, Any]] = {}
 
         for col in df_num.columns:
             x = df_num[col].dropna()
-            col_result = {}
+            col_result: Dict[str, Any] = {}
 
             # Shapiro-Wilk (max 5000 samples)
             sample = x if len(x) <= 5000 else x.sample(5000, random_state=42)
@@ -419,7 +428,7 @@ class DataAnalyzer:
                 ad_result = stats.anderson(x, dist='norm', method='interpolate')
                 ad_pvalue = float(ad_result.pvalue)
             except TypeError:
-                # scipy ancien : pas de paramètre method, donc pas de p-value
+                # old scipy: no method parameter, so no p-value
                 ad_result = stats.anderson(x, dist='norm')
                 ad_pvalue = None
             col_result['anderson'] = {
@@ -435,7 +444,7 @@ class DataAnalyzer:
 
         return results
 
-    def multicollinearity(self):
+    def multicollinearity(self) -> pd.DataFrame:
         """
         Analyze multicollinearity in the dataset.
 
@@ -466,7 +475,7 @@ class DataAnalyzer:
         })
         return vif_data.sort_values('VIF', ascending=False).reset_index(drop=True)
 
-    def profiling(self, **kwargs):
+    def profiling(self, **kwargs: Any) -> Dict[str, Any]:
         """
         Generate a global profiling report (summary statistics, missing, outliers, etc.).
 

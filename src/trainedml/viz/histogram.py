@@ -12,8 +12,13 @@ Examples
 >>> viz.figure.show()
 """
 
+from __future__ import annotations
+
+from typing import List, Optional, Union
+
+import pandas as pd
 import matplotlib.pyplot as plt
-from typing import Optional
+from matplotlib.figure import Figure
 from .vizs import Vizs
 
 
@@ -51,28 +56,29 @@ class HistogramViz(Vizs):
     >>> viz.vizs()
     >>> viz.figure.show()
     """
-    def __init__(self, data, columns='all', legend=False, bins=10, save_path: Optional[str] = None):
+    def __init__(self, data: pd.DataFrame, columns: Union[str, List[str]] = 'all', legend: bool = False,
+                bins: int = 10, save_path: Optional[str] = None) -> None:
         super().__init__(data, save_path=save_path)
-        # Vérification des arguments
+        # Argument validation
         if not isinstance(columns, str) and not isinstance(columns, list):
-            raise ValueError('columns doit être une chaîne ou une liste')
+            raise ValueError('columns must be a string or a list')
         if isinstance(columns, str) and columns != 'all':
-            raise ValueError('columns doit être "all" ou une liste de noms de colonnes')
+            raise ValueError('columns must be "all" or a list of column names')
         if isinstance(columns, list):
             for col in columns:
                 if col not in self._data.columns.tolist():
-                    raise ValueError(f'Colonne inconnue : {col}')
+                    raise ValueError(f'Unknown column: {col}')
         if not isinstance(legend, bool):
-            raise ValueError('legend doit être un booléen')
+            raise ValueError('legend must be a boolean')
         if not isinstance(bins, int) or bins < 1:
-            raise ValueError('bins doit être un entier positif')
+            raise ValueError('bins must be a positive integer')
         self._columns = columns
         self._legend = legend
         self._bins = bins
 
-    def vizs(self):
+    def vizs(self) -> Figure:
         """
-        Génère et affiche l'histogramme.
+        Generate and display the histogram.
 
         Returns
         -------
@@ -86,9 +92,9 @@ class HistogramViz(Vizs):
         fig, ax = plt.subplots(figsize=(8, 6))
         for col in cols:
             ax.hist(self._data[col].dropna(), bins=self._bins, alpha=0.7, label=col, edgecolor='black')
-        ax.set_xlabel('Valeur')
-        ax.set_ylabel('Fréquence')
-        ax.set_title('Histogramme')
+        ax.set_xlabel('Value')
+        ax.set_ylabel('Frequency')
+        ax.set_title('Histogram')
         if self._legend and (len(cols) > 1):
             ax.legend()
         plt.tight_layout()

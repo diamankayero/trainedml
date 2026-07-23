@@ -15,12 +15,15 @@ Examples
 >>> print(vif)
 """
 
+from __future__ import annotations
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 from .vizs import Vizs
 
-def vif_summary(data):
+
+def vif_summary(data: pd.DataFrame) -> pd.Series:
     """
     Compute the Variance Inflation Factor (VIF) for each feature.
 
@@ -48,12 +51,12 @@ def vif_summary(data):
 
 class MulticollinearityViz(Vizs):
     """
-    Classe pour calculer et visualiser le VIF de chaque variable.
+    Class to compute and visualize the VIF of each variable.
     """
-    def __init__(self, data):
+    def __init__(self, data: pd.DataFrame) -> None:
         super().__init__(data)
 
-    def vizs(self):
+    def vizs(self) -> None:
         X = self._data.select_dtypes(include='number').dropna()
         vif_data = pd.DataFrame()
         vif_data['variable'] = X.columns

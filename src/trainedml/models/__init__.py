@@ -1,5 +1,5 @@
 """
-Permet d'importer facilement les modèles depuis le sous-package models.
+Makes it easy to import models from the models sub-package.
 """
 from typing import Callable, Dict
 
@@ -15,14 +15,14 @@ from .regressors import (
     LassoRegressorModel
 )
 
-# Registre centralisé des modèles de classification
+# Central registry of classification models
 CLASSIFIER_MAP: Dict[str, Callable[..., BaseModel]] = {
     'knn': KNNModel,
     'logistic': LogisticModel,
     'random_forest': RandomForestModel
 }
 
-# Registre centralisé des modèles de régression
+# Central registry of regression models
 REGRESSOR_MAP: Dict[str, Callable[..., BaseModel]] = {
     'knn_regressor': KNNRegressorModel,
     'linear': LinearRegressorModel,
@@ -31,7 +31,7 @@ REGRESSOR_MAP: Dict[str, Callable[..., BaseModel]] = {
     'random_forest_regressor': RandomForestRegressorModel
 }
 
-# Registre complet (classification + régression)
+# Full registry (classification + regression)
 MODEL_MAP: Dict[str, Callable[..., BaseModel]] = {**CLASSIFIER_MAP, **REGRESSOR_MAP}
 
 __all__ = [
@@ -46,50 +46,50 @@ __all__ = [
 
 def get_model(name: str, **kwargs):
     """
-    Factory pour obtenir une instance de modèle par son nom.
-    
+    Factory to get a model instance by name.
+
     Args:
-        name (str): nom du modèle (ex: 'knn', 'random_forest', 'linear', 'ridge')
-        **kwargs: hyperparamètres à passer au modèle
-    
+        name (str): model name (e.g. 'knn', 'random_forest', 'linear', 'ridge')
+        **kwargs: hyperparameters to pass to the model
+
     Returns:
-        BaseModel: instance du modèle
-    
+        BaseModel: model instance
+
     Raises:
-        ValueError: si le nom du modèle n'est pas reconnu
+        ValueError: if the model name is not recognized
     """
     if name not in MODEL_MAP:
-        raise ValueError(f"Modèle inconnu: {name}. Disponibles: {list(MODEL_MAP.keys())}")
+        raise ValueError(f"Unknown model: {name}. Available: {list(MODEL_MAP.keys())}")
     return MODEL_MAP[name](**kwargs)
 
 
 def get_classifier(name: str, **kwargs):
     """
-    Factory pour obtenir une instance de classificateur par son nom.
-    
+    Factory to get a classifier instance by name.
+
     Args:
-        name (str): nom du classificateur ('knn', 'logistic', 'random_forest')
-        **kwargs: hyperparamètres à passer au modèle
-    
+        name (str): classifier name ('knn', 'logistic', 'random_forest')
+        **kwargs: hyperparameters to pass to the model
+
     Returns:
-        BaseModel: instance du classificateur
+        BaseModel: classifier instance
     """
     if name not in CLASSIFIER_MAP:
-        raise ValueError(f"Classificateur inconnu: {name}. Disponibles: {list(CLASSIFIER_MAP.keys())}")
+        raise ValueError(f"Unknown classifier: {name}. Available: {list(CLASSIFIER_MAP.keys())}")
     return CLASSIFIER_MAP[name](**kwargs)
 
 
 def get_regressor(name: str, **kwargs):
     """
-    Factory pour obtenir une instance de régresseur par son nom.
-    
+    Factory to get a regressor instance by name.
+
     Args:
-        name (str): nom du régresseur ('linear', 'ridge', 'lasso', 'knn_regressor', 'random_forest_regressor')
-        **kwargs: hyperparamètres à passer au modèle
-    
+        name (str): regressor name ('linear', 'ridge', 'lasso', 'knn_regressor', 'random_forest_regressor')
+        **kwargs: hyperparameters to pass to the model
+
     Returns:
-        BaseRegressor: instance du régresseur
+        BaseRegressor: regressor instance
     """
     if name not in REGRESSOR_MAP:
-        raise ValueError(f"Régresseur inconnu: {name}. Disponibles: {list(REGRESSOR_MAP.keys())}")
+        raise ValueError(f"Unknown regressor: {name}. Available: {list(REGRESSOR_MAP.keys())}")
     return REGRESSOR_MAP[name](**kwargs)

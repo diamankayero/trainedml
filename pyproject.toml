@@ -43,15 +43,9 @@ Homepage = "https://github.com/diamankayero/trainedml"
 Issues = "https://github.com/diamankayero/trainedml"
 
 [tool.mypy]
-# Pas de python_version épinglée : mypy cible la version de l'interpréteur,
-# ce qui reste cohérent avec les stubs numpy installés (PEP 695 sur 3.12+).
+# No pinned python_version: mypy targets the interpreter's version,
+# which stays consistent with the installed numpy stubs (PEP 695 on 3.12+).
 files = ["src/trainedml"]
 ignore_missing_imports = true
 warn_unused_ignores = true
 no_implicit_optional = true
-
-[[tool.mypy.overrides]]
-# Les modules de visualisation historiques ne sont pas encore annotés ;
-# on vérifie seulement qu'ils s'importent proprement.
-module = ["trainedml.viz.*", "trainedml.figure", "trainedml.analyzer", "trainedml.visualization"]
-ignore_errors = true

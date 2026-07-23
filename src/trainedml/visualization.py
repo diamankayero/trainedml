@@ -19,6 +19,13 @@ Examples
 >>> fig.show()
 """
 
+from __future__ import annotations
+
+from typing import Any, Dict, List, Optional, Union
+
+import pandas as pd
+from matplotlib.figure import Figure
+
 from trainedml.viz.heatmap import HeatmapViz
 from trainedml.viz.histogram import HistogramViz
 from trainedml.viz.line import LineViz
@@ -99,40 +106,41 @@ class Visualizer:
     - For advanced customization, use the returned figure/axes objects directly.
     - The Visualizer is designed to be extended with new visualizations as needed.
     """
-    def __init__(self, data):
+    def __init__(self, data: pd.DataFrame) -> None:
         self.data = data
         self.analyzer = DataAnalyzer(data)
 
-    def report(self, path=None, title="Rapport exploratoire - trainedml"):
+    def report(self, path: Optional[str] = None, title: str = "Exploratory report - trainedml") -> str:
         """
-        Génère un rapport EDA HTML complet et auto-contenu.
+        Generate a complete, self-contained HTML EDA report.
 
-        Le rapport rassemble toutes les analyses du package : aperçu,
-        statistiques descriptives, valeurs manquantes, corrélations (avec
-        heatmap), distributions, outliers, normalité et VIF. Les figures
-        sont embarquées dans le HTML (aucune dépendance externe).
+        The report gathers every analysis in the package: overview,
+        descriptive statistics, missing values, correlations (with
+        heatmap), distributions, outliers, normality, and VIF. Figures are
+        embedded in the HTML (no external dependency).
 
         Parameters
         ----------
         path : str, optional
-            Chemin du fichier HTML de sortie. Si None, le HTML est seulement retourné.
+            Output HTML file path. If None, the HTML is only returned.
         title : str, optional
-            Titre du rapport.
+            Report title.
 
         Returns
         -------
         str
-            Le contenu HTML du rapport.
+            The report's HTML content.
 
         Examples
         --------
         >>> viz = Visualizer(df)
-        >>> viz.report("rapport.html")
+        >>> viz.report("report.html")
         """
         from .report import generate_report
         return generate_report(self.data, path=path, title=title)
 
-    def heatmap(self, features='all', method='pearson', mask=True, **kwargs):
+    def heatmap(self, features: Union[str, List[str]] = 'all', method: str = 'pearson',
+                mask: bool = True, **kwargs: Any) -> Any:
         """
         Generate a correlation heatmap between variables.
 
@@ -170,7 +178,8 @@ class Visualizer:
         viz.vizs()
         return viz.figure
 
-    def histogram(self, columns='all', legend=False, bins=10, **kwargs):
+    def histogram(self, columns: Union[str, List[str]] = 'all', legend: bool = False,
+                bins: int = 10, **kwargs: Any) -> Figure:
         """
         Generate one or more histograms for selected columns.
 
@@ -208,7 +217,7 @@ class Visualizer:
         viz.vizs()
         return viz.figure
 
-    def line(self, x_column, y_column, **kwargs):
+    def line(self, x_column: str, y_column: str, **kwargs: Any) -> Any:
         """
         Generate a line plot between two columns.
 
@@ -241,7 +250,7 @@ class Visualizer:
         viz.vizs()
         return viz.figure
 
-    def get_features(self):
+    def get_features(self) -> List[str]:
         """
         Return the list of feature columns in the DataFrame.
 
@@ -258,7 +267,7 @@ class Visualizer:
         return self.data.columns.tolist()
 
     # Exploratory analyses (via DataAnalyzer)
-    def distribution(self, columns='all', **kwargs):
+    def distribution(self, columns: Union[str, List[str]] = 'all', **kwargs: Any) -> Dict[str, Any]:
         """
         Distribution of variables (histograms).
 
@@ -286,7 +295,8 @@ class Visualizer:
         """
         return self.analyzer.distribution(columns=columns, **kwargs)
 
-    def correlation(self, features='all', method='pearson', mask=True, **kwargs):
+    def correlation(self, features: Union[str, List[str]] = 'all', method: str = 'pearson',
+                    mask: bool = True, **kwargs: Any) -> pd.DataFrame:
         """
         Correlation matrix (heatmap).
 
@@ -316,7 +326,7 @@ class Visualizer:
         """
         return self.analyzer.correlation(features=features, method=method, mask=mask, **kwargs)
 
-    def missing(self, **kwargs):
+    def missing(self, **kwargs: Any) -> pd.DataFrame:
         """
         Missing values analysis.
 
@@ -335,7 +345,7 @@ class Visualizer:
         """
         return self.analyzer.missing(**kwargs)
 
-    def outliers(self, **kwargs):
+    def outliers(self, **kwargs: Any) -> Dict[str, Dict[str, Any]]:
         """
         Outlier analysis.
 
@@ -354,7 +364,7 @@ class Visualizer:
         """
         return self.analyzer.outliers(**kwargs)
 
-    def target(self, target_column, **kwargs):
+    def target(self, target_column: str, **kwargs: Any) -> Dict[str, Any]:
         """
         Target variable analysis.
 
@@ -380,7 +390,8 @@ class Visualizer:
         """
         return self.analyzer.target(target_column=target_column, **kwargs)
 
-    def boxplot(self, columns='all', by=None, **kwargs):
+    def boxplot(self, columns: Union[str, List[str]] = 'all', by: Optional[str] = None,
+                **kwargs: Any) -> Figure:
         """
         Boxplots by variable.
 
@@ -408,7 +419,7 @@ class Visualizer:
         """
         return self.analyzer.boxplot(columns=columns, by=by, **kwargs)
 
-    def bivariate(self, x, y, **kwargs):
+    def bivariate(self, x: str, y: str, **kwargs: Any) -> Figure:
         """
         Bivariate analysis (scatter, etc.).
 
@@ -436,7 +447,8 @@ class Visualizer:
         """
         return self.analyzer.bivariate(x=x, y=y, **kwargs)
 
-    def normality(self, columns='all', **kwargs):
+    def normality(self, columns: Union[str, List[str]] = 'all',
+                **kwargs: Any) -> Dict[str, Dict[str, Any]]:
         """
         Normality analysis (tests, QQ-plots, etc.).
 
@@ -462,7 +474,7 @@ class Visualizer:
         """
         return self.analyzer.normality(columns=columns, **kwargs)
 
-    def multicollinearity(self, **kwargs):
+    def multicollinearity(self) -> pd.DataFrame:
         """
         Multicollinearity analysis (VIF, etc.).
 
@@ -479,9 +491,9 @@ class Visualizer:
         >>> vif = viz.multicollinearity()
         >>> print(vif)
         """
-        return self.analyzer.multicollinearity(**kwargs)
+        return self.analyzer.multicollinearity()
 
-    def profiling(self, **kwargs):
+    def profiling(self, **kwargs: Any) -> Dict[str, Any]:
         """
         Automatic profiling (global report).
 

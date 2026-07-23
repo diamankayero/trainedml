@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 """
 Boxplot visualization for trainedml.
 
@@ -14,30 +12,35 @@ Examples
 >>> viz.figure.show()
 """
 
+from __future__ import annotations
+
+from typing import List, Optional, Union
+
 import matplotlib.pyplot as plt
 import pandas as pd
+from matplotlib.figure import Figure
 from .vizs import Vizs
 
 class BoxplotViz(Vizs):
     r"""
-    Visualisation de boxplots pour une ou plusieurs colonnes.
+    Boxplot visualization for one or more columns.
 
-    Paramètres du boxplot
-    ---------------------
+    Boxplot parameters
+    -------------------
     data : pandas.DataFrame
-        Le jeu de données.
-    columns : 'all' ou list, default='all'
-        Colonnes à tracer.
-    by : str ou None, default=None
-        Variable de regroupement.
+        The dataset.
+    columns : 'all' or list, default='all'
+        Columns to plot.
+    by : str or None, default=None
+        Grouping variable.
     """
-    def __init__(self, data: pd.DataFrame, columns: 'list[str]' | str = 'all', by: str | None = None):
+    def __init__(self, data: pd.DataFrame, columns: Union[List[str], str] = 'all',
+                by: Optional[str] = None) -> None:
         super().__init__(data)
         self._columns = columns
         self._by = by
-        self._by = by
 
-    def vizs(self):
+    def vizs(self) -> Figure:
         """
         Generate the boxplot figure.
 
@@ -56,10 +59,10 @@ class BoxplotViz(Vizs):
         for ax, col in zip(axes, cols):
             if self._by:
                 self._data.boxplot(column=col, by=self._by, ax=ax)
-                ax.set_title(f"Boxplot de {col} par {self._by}")
+                ax.set_title(f"Boxplot of {col} by {self._by}")
             else:
                 ax.boxplot(self._data[col].dropna(), vert=False)
-                ax.set_title(f"Boxplot de {col}")
+                ax.set_title(f"Boxplot of {col}")
         plt.tight_layout()
         self._figure = fig
         return fig
