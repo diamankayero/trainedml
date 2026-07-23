@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr" data-accent-color="grass" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Charger des données distantes - trainedml 0.2.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Régression : estimer une note continue" href="plot_regression.html" /><link rel="prev" title="Explorer avant de modéliser" href="plot_explorer_avant_de_modeliser.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=192bdaf1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="Charger des données distantes"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      <img class="light-logo" src="../../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
+      <strong>trainedml</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Recherche" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/diamankayero/trainedml" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Passer en mode clair"
+data-aria-light="Passer en mode sombre"
+data-aria-dark="Passer en mode automatique">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Exemples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01_bases/index.html">Bases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01_bases/plot_premiers_pas.html">Premiers pas : entraîner et évaluer un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01_bases/plot_decouper_son_dataset.html">Découper son dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Données et modèles</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_regression.html">Régression : estimer une note continue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../03_production/index.html">Production</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03_production/plot_rigueur_et_reproductibilite.html">Rigueur et reproductibilité</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03_production/plot_sauvegarder_et_deployer.html">Sauvegarder et déployer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03_production/plot_projet_complet.html">Projet complet : de bout en bout</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Cœur du package</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/loader.html">DataLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/tasks.html">Détection de tâche</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/benchmark.html">Benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/evaluation.html">Evaluator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/report.html">Rapport EDA</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Modèles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/random_forest.html">Random Forest</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Exploration et visualisation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/visualization.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/analyzer.html">DataAnalyzer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>Sur cette page</h3><ul>
+<li><a class="reference internal" href="#classification-ou-regression">Classification ou r&#233;gression ?</a></li>
+<li><a class="reference internal" href="#comparer-avec-un-second-fichier">Comparer avec un second fichier</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">trainedml</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">Données et modèles</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Charger des données distantes</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-02-donnees-et-modeles-plot-donnees-distantes-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="charger-des-donnees-distantes">
+<span id="sphx-glr-auto-examples-02-donnees-et-modeles-plot-donnees-distantes-py"></span><h1>Charger des données distantes<a class="headerlink" href="#charger-des-donnees-distantes" title="Lien vers cette rubrique">#</a></h1>
+<p>Charger un CSV public par URL avec <code class="docutils literal notranslate"><span class="pre">DataLoader</span></code>, sans jamais le
+télécharger à la main, et gérer le séparateur CSV.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.data.loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trainer</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+</span><span data-line="5"><span class="n">url_rouge</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&quot;</span>
+</span></pre></div>
+</div>
+<p>trainedml détecte déjà automatiquement le séparateur pour les URLs
+<code class="docutils literal notranslate"><span class="pre">winequality*</span></code> (<code class="docutils literal notranslate"><span class="pre">;</span></code> au lieu de <code class="docutils literal notranslate"><span class="pre">,</span></code>) ; sur un autre CSV public,
+précisez <code class="docutils literal notranslate"><span class="pre">sep=&quot;;&quot;</span></code> explicitement si le chargement produit une seule
+colonne géante.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url_rouge</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;quality&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Colonnes :&quot;</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</span><span data-line="3"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Forme :&quot;</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">0.00B [00:00, ?B/s]
+</span><span data-line="2">37.9kB [00:00, 349kB/s]
+</span><span data-line="3">0.00B [00:00, ?B/s]
+</span><span data-line="4">0.00B [00:00, ?B/s]
+</span><span data-line="5">Colonnes : [&#39;fixed acidity&#39;, &#39;volatile acidity&#39;, &#39;citric acid&#39;, &#39;residual sugar&#39;, &#39;chlorides&#39;, &#39;free sulfur dioxide&#39;, &#39;total sulfur dioxide&#39;, &#39;density&#39;, &#39;pH&#39;, &#39;sulphates&#39;, &#39;alcohol&#39;]
+</span><span data-line="6">Forme : (1599, 11)
+</span></pre></div>
+</div>
+<section id="classification-ou-regression">
+<h2>Classification ou régression ?<a class="headerlink" href="#classification-ou-regression" title="Lien vers cette rubrique">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">quality</span></code> est un entier entre 3 et 8 : on peut le traiter comme une
+classification (chaque note est une classe) ou comme une régression (la
+note est une quantité continue). <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> déduit une heuristique à
+partir du nombre de valeurs distinctes.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;random_forest&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span><span data-line="5"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;task détecté :&quot;</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">task</span><span class="p">)</span>
+</span><span data-line="6"><span class="nb">print</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</span></pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">quality
+</span><span data-line="2">3     10
+</span><span data-line="3">4     53
+</span><span data-line="4">5    681
+</span><span data-line="5">6    638
+</span><span data-line="6">7    199
+</span><span data-line="7">8     18
+</span><span data-line="8">Name: count, dtype: int64
+</span><span data-line="9">task détecté : classification
+</span><span data-line="10">{&#39;accuracy&#39;: 0.665625, &#39;precision&#39;: 0.6327801588284734, &#39;recall&#39;: 0.665625, &#39;f1&#39;: 0.6461423736206909}
+</span></pre></div>
+</div>
+</section>
+<section id="comparer-avec-un-second-fichier">
+<h2>Comparer avec un second fichier<a class="headerlink" href="#comparer-avec-un-second-fichier" title="Lien vers cette rubrique">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">url_blanc</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv&quot;</span>
+</span><span data-line="2"><span class="n">X_blanc</span><span class="p">,</span> <span class="n">y_blanc</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url_blanc</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;quality&quot;</span><span class="p">)</span>
+</span><span data-line="3"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Échantillons rouges : </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">  -  blancs : </span><span class="si">{</span><span class="n">X_blanc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">0.00B [00:00, ?B/s]
+</span><span data-line="2">37.9kB [00:00, 348kB/s]
+</span><span data-line="3">181kB [00:00, 909kB/s]
+</span><span data-line="4">0.00B [00:00, ?B/s]
+</span><span data-line="5">0.00B [00:00, ?B/s]
+</span><span data-line="6">Échantillons rouges : 1599  -  blancs : 4898
+</span></pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.244 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-02-donnees-et-modeles-plot-donnees-distantes-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/051f581987f9ffc24292dd5fe94bfbbb/plot_donnees_distantes.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_donnees_distantes.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/9ae8965436077869003482faba1f4b46/plot_donnees_distantes.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_donnees_distantes.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/33c4eb2b640911191127adb33e473ec6/plot_donnees_distantes.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">plot_donnees_distantes.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Retour au sommet</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="plot_explorer_avant_de_modeliser.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Précédent</span><div class="title">Explorer avant de modéliser</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="plot_regression.html">
+      <div class="page-info">
+        <span>Suivant</span>
+        <div class="title">Régression : estimer une note continue</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Yéro Diamanka</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/diamankayero/trainedml" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
+      <script src="../../_static/translations.js?v=e6b791cb"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script></body>
+</html>

@@ -2,11 +2,15 @@
 <html lang="fr" data-accent-color="grass" data-content_root="./">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml 0.2.0</title><link rel="shortcut icon" href="_static/logo.svg"/><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Recherche" href="search.html" /><link rel="next" title="Trainer (API principale)" href="trainedml/trainer.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml 0.2.0</title><link rel="shortcut icon" href="_static/logo.svg"/><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Recherche" href="search.html" /><link rel="next" title="Bases" href="auto_examples/01_bases/index.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
     <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=192bdaf1" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +63,30 @@ data-aria-dark="Passer en mode automatique">
   <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
     <div class="sy-lside-inner md:sticky">
       <div class="sy-scrollbar p-6">
-        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Cœur du package</span></p>
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Exemples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/01_bases/index.html">Bases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/01_bases/plot_premiers_pas.html">Premiers pas : entraîner et évaluer un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/01_bases/plot_decouper_son_dataset.html">Découper son dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/02_donnees_et_modeles/index.html">Données et modèles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/02_donnees_et_modeles/plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/02_donnees_et_modeles/plot_regression.html">Régression : estimer une note continue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/03_production/index.html">Production</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/03_production/plot_rigueur_et_reproductibilite.html">Rigueur et reproductibilité</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/03_production/plot_sauvegarder_et_deployer.html">Sauvegarder et déployer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/03_production/plot_projet_complet.html">Projet complet : de bout en bout</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Cœur du package</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="trainedml/trainer.html">Trainer (API principale)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trainedml/loader.html">DataLoader</a></li>
@@ -185,6 +212,9 @@ unifiée et une CLI.</p>
 </span><span data-line="2">trainedml<span class="w"> </span>--dataset<span class="w"> </span>wine<span class="w"> </span>--benchmark<span class="w"> </span>--cv<span class="w"> </span><span class="m">5</span>
 </span></pre></div>
 </div>
+<p>Voir aussi la <a class="reference internal" href="auto_examples/01_bases/index.html"><span class="doc">galerie d’exemples</span></a> : des scripts
+complets, exécutables et téléchargeables, pour chaque étape d’un projet
+(premiers pas, comparaison de modèles, régression, production…).</p>
 </section>
 <section id="fonctionnalites">
 <h2>Fonctionnalités<a class="headerlink" href="#fonctionnalites" title="Lien vers cette rubrique">#</a></h2>
@@ -239,6 +269,8 @@ distribué sous licence MIT.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 </section>
 
@@ -248,10 +280,10 @@ distribué sous licence MIT.</p>
   </svg>
   <span>Retour au sommet</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-next">
-    <a href="trainedml/trainer.html">
+    <a href="auto_examples/01_bases/index.html">
       <div class="page-info">
         <span>Suivant</span>
-        <div class="title">Trainer (API principale)</div>
+        <div class="title">Bases</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>
@@ -282,6 +314,7 @@ distribué sous licence MIT.</p>
       <script src="_static/documentation_options.js?v=1b0070ce"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/sg-tags.js?v=d80f6fa4"></script>
       <script src="_static/translations.js?v=e6b791cb"></script>
       <script src="_static/shibuya.js?v=50760d75"></script></body>
 </html>

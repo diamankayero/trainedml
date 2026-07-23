@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr" data-accent-color="grass" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Explorer avant de modéliser - trainedml 0.2.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Charger des données distantes" href="plot_donnees_distantes.html" /><link rel="prev" title="Hyperparamètres et modèles externes" href="plot_hyperparametres.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=192bdaf1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="Explorer avant de modéliser"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      <img class="light-logo" src="../../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
+      <strong>trainedml</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Recherche" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/diamankayero/trainedml" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Passer en mode clair"
+data-aria-light="Passer en mode sombre"
+data-aria-dark="Passer en mode automatique">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Exemples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../01_bases/index.html">Bases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01_bases/plot_premiers_pas.html">Premiers pas : entraîner et évaluer un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01_bases/plot_decouper_son_dataset.html">Découper son dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Données et modèles</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Explorer avant de modéliser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_regression.html">Régression : estimer une note continue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../03_production/index.html">Production</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03_production/plot_rigueur_et_reproductibilite.html">Rigueur et reproductibilité</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03_production/plot_sauvegarder_et_deployer.html">Sauvegarder et déployer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03_production/plot_projet_complet.html">Projet complet : de bout en bout</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Cœur du package</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/loader.html">DataLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/tasks.html">Détection de tâche</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/benchmark.html">Benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/evaluation.html">Evaluator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/report.html">Rapport EDA</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Modèles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/random_forest.html">Random Forest</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Exploration et visualisation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/visualization.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/analyzer.html">DataAnalyzer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>Sur cette page</h3><ul>
+<li><a class="reference internal" href="#rapport-eda-en-une-ligne">Rapport EDA en une ligne</a></li>
+<li><a class="reference internal" href="#carte-de-correlation">Carte de corr&#233;lation</a></li>
+<li><a class="reference internal" href="#distribution-des-variables">Distribution des variables</a></li>
+<li><a class="reference internal" href="#valeurs-manquantes">Valeurs manquantes</a></li>
+<li><a class="reference internal" href="#outliers-methode-iqr">Outliers (m&#233;thode IQR)</a></li>
+<li><a class="reference internal" href="#multicolinearite-vif">Multicolin&#233;arit&#233; (VIF)</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">trainedml</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">Données et modèles</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Explorer avant de modéliser</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-02-donnees-et-modeles-plot-explorer-avant-de-modeliser-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="explorer-avant-de-modeliser">
+<span id="sphx-glr-auto-examples-02-donnees-et-modeles-plot-explorer-avant-de-modeliser-py"></span><h1>Explorer avant de modéliser<a class="headerlink" href="#explorer-avant-de-modeliser" title="Lien vers cette rubrique">#</a></h1>
+<p>Avant tout modèle : un rapport EDA complet, une carte de corrélation, la
+distribution des variables, les valeurs manquantes, les outliers et la
+multicolinéarité, le tout depuis <code class="docutils literal notranslate"><span class="pre">Visualizer</span></code>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.data.loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">Visualizer</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="n">viz</span> <span class="o">=</span> <span class="n">Visualizer</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<section id="rapport-eda-en-une-ligne">
+<h2>Rapport EDA en une ligne<a class="headerlink" href="#rapport-eda-en-une-ligne" title="Lien vers cette rubrique">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">report()</span></code> génère un rapport HTML auto-contenu (statistiques
+descriptives, corrélations, distributions, outliers, normalité) ; passez
+un <code class="docutils literal notranslate"><span class="pre">path</span></code> pour l’écrire sur disque, ou récupérez directement le HTML.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">html</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Rapport EDA - wine&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rapport généré : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">html</span><span class="p">)</span><span class="si">}</span><span class="s2"> caractères de HTML auto-contenu.&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_explorer_avant_de_modeliser_001.png" srcset="../../_images/sphx_glr_plot_explorer_avant_de_modeliser_001.png" alt="Correlation matrix (pearson)" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">Rapport généré : 273338 caractères de HTML auto-contenu.
+</span></pre></div>
+</div>
+</section>
+<section id="carte-de-correlation">
+<h2>Carte de corrélation<a class="headerlink" href="#carte-de-correlation" title="Lien vers cette rubrique">#</a></h2>
+<p>Deux variables corrélées à plus de 0.8 en valeur absolue apportent
+largement la même information au modèle.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">viz</span><span class="o">.</span><span class="n">heatmap</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_explorer_avant_de_modeliser_002.png" srcset="../../_images/sphx_glr_plot_explorer_avant_de_modeliser_002.png" alt="Correlation matrix (pearson)" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">&lt;Axes: title={&#39;center&#39;: &#39;Correlation matrix (pearson)&#39;}&gt;
+</span></pre></div>
+</div>
+</section>
+<section id="distribution-des-variables">
+<h2>Distribution des variables<a class="headerlink" href="#distribution-des-variables" title="Lien vers cette rubrique">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">viz</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;alcohol&quot;</span><span class="p">,</span> <span class="s2">&quot;magnesium&quot;</span><span class="p">,</span> <span class="s2">&quot;color_intensity&quot;</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_explorer_avant_de_modeliser_003.png" srcset="../../_images/sphx_glr_plot_explorer_avant_de_modeliser_003.png" alt="Histogram" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">&lt;Figure size 800x600 with 1 Axes&gt;
+</span></pre></div>
+</div>
+</section>
+<section id="valeurs-manquantes">
+<h2>Valeurs manquantes<a class="headerlink" href="#valeurs-manquantes" title="Lien vers cette rubrique">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">manquantes</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">missing</span><span class="p">()</span>
+</span><span data-line="2"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Colonnes avec valeurs manquantes : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">manquantes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">Colonnes avec valeurs manquantes : 0
+</span></pre></div>
+</div>
+</section>
+<section id="outliers-methode-iqr">
+<h2>Outliers (méthode IQR)<a class="headerlink" href="#outliers-methode-iqr" title="Lien vers cette rubrique">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">outliers</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">outliers</span><span class="p">()</span>
+</span><span data-line="2"><span class="k">for</span> <span class="n">colonne</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">outliers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="3">    <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span data-line="4">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">colonne</span><span class="si">:</span><span class="s2">20s</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> valeur(s) hors &quot;</span>
+</span><span data-line="5">              <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;lower_bound&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;upper_bound&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">malic_acid           : 3 valeur(s) hors [-0.62, 5.30]
+</span><span data-line="2">ash                  : 3 valeur(s) hors [1.69, 3.08]
+</span><span data-line="3">alcalinity_of_ash    : 4 valeur(s) hors [10.75, 27.95]
+</span><span data-line="4">magnesium            : 4 valeur(s) hors [59.50, 135.50]
+</span><span data-line="5">proanthocyanins      : 2 valeur(s) hors [0.20, 3.00]
+</span><span data-line="6">color_intensity      : 4 valeur(s) hors [-1.25, 10.67]
+</span><span data-line="7">hue                  : 1 valeur(s) hors [0.28, 1.63]
+</span></pre></div>
+</div>
+</section>
+<section id="multicolinearite-vif">
+<h2>Multicolinéarité (VIF)<a class="headerlink" href="#multicolinearite-vif" title="Lien vers cette rubrique">#</a></h2>
+<p>Cette implémentation ne recentre pas les données avant le calcul, ce qui
+gonfle mécaniquement le VIF des variables dont la moyenne est loin de
+zéro : lisez-le en classement relatif entre variables, pas au seuil
+manuel de 10.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nb">print</span><span class="p">(</span><span class="n">viz</span><span class="o">.</span><span class="n">multicollinearity</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</span></pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">                     feature        VIF
+</span><span data-line="2">                     alcohol 206.189057
+</span><span data-line="3">                         ash 165.640370
+</span><span data-line="4">           alcalinity_of_ash  73.141564
+</span><span data-line="5">                   magnesium  67.364868
+</span><span data-line="6">               total_phenols  62.786935
+</span><span data-line="7">od280/od315_of_diluted_wines  54.539165
+</span><span data-line="8">                         hue  45.398407
+</span><span data-line="9">                  flavanoids  35.535602
+</span><span data-line="10">             proanthocyanins  17.115665
+</span><span data-line="11">             color_intensity  17.022272
+</span><span data-line="12">        nonflavanoid_phenols  16.636708
+</span><span data-line="13">                     proline  16.370828
+</span><span data-line="14">                  malic_acid   8.925541
+</span></pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.734 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-02-donnees-et-modeles-plot-explorer-avant-de-modeliser-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/a3acfaa715dad674bd8001b42f1678c0/plot_explorer_avant_de_modeliser.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_explorer_avant_de_modeliser.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/cc02328e3f08c8257f7e919a56f445d2/plot_explorer_avant_de_modeliser.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_explorer_avant_de_modeliser.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/5cb7af801563a85c715ed0ffc09aee3c/plot_explorer_avant_de_modeliser.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">plot_explorer_avant_de_modeliser.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Retour au sommet</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="plot_hyperparametres.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Précédent</span><div class="title">Hyperparamètres et modèles externes</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="plot_donnees_distantes.html">
+      <div class="page-info">
+        <span>Suivant</span>
+        <div class="title">Charger des données distantes</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Yéro Diamanka</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/diamankayero/trainedml" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
+      <script src="../../_static/translations.js?v=e6b791cb"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script></body>
+</html>
