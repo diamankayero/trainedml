@@ -2,12 +2,13 @@
 <html lang="fr" data-accent-color="violet" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.benchmark - trainedml 0.2.0</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.benchmark - trainedml 0.2.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=192bdaf1" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,8 +26,8 @@
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
     <a class="sy-head-brand" href="../../index.html">
-      
-      
+      <img class="light-logo" src="../../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
       <strong>trainedml</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
@@ -55,37 +56,40 @@ data-aria-dark="Passer en mode automatique">
   <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
     <div class="sy-lside-inner md:sticky">
       <div class="sy-scrollbar p-6">
-        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">API</span></p>
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Cœur du package</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/trainer.html">Trainer (API principale)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/loader.html">DataLoader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/preprocessing.html">Prétraitement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/tasks.html">Détection de tâche</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/benchmark.html">Benchmark</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/evaluation.html">Evaluator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/report.html">Rapport EDA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/logistic.html">Régression logistique</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/random_forest.html">Random Forest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/visualization.html">Visualizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/analyzer.html">DataAnalyzer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/loader.html">DataLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/tasks.html">Détection de tâche</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/benchmark.html">Benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/evaluation.html">Evaluator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/report.html">Rapport EDA</a></li>
 </ul>
-</li>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Modèles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/random_forest.html">Random Forest</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Exploration et visualisation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/visualization.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/analyzer.html">DataAnalyzer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
 </ul>
 
         </div>
@@ -242,307 +246,298 @@ data-aria-dark="Passer en mode automatique">
 </span><span data-line="103"><span class="sd">    results : dict or None</span>
 </span><span data-line="104"><span class="sd">        Results after running the benchmark.</span>
 </span><span data-line="105">
-</span><span data-line="106"><span class="sd">    Methods</span>
-</span><span data-line="107"><span class="sd">    -------</span>
-</span><span data-line="108"><span class="sd">    run(X_train, y_train, X_test, y_test, parallel=False, n_jobs=-1, show_progress=True)</span>
-</span><span data-line="109"><span class="sd">        Run the benchmark and return results.</span>
-</span><span data-line="110"><span class="sd">    summary()</span>
-</span><span data-line="111"><span class="sd">        Return a formatted summary of the results.</span>
-</span><span data-line="112"><span class="sd">    print_summary()</span>
-</span><span data-line="113"><span class="sd">        Print the summary to stdout.</span>
-</span><span data-line="114">
-</span><span data-line="115"><span class="sd">    Examples</span>
-</span><span data-line="116"><span class="sd">    --------</span>
-</span><span data-line="117"><span class="sd">    &gt;&gt;&gt; bench = Benchmark({&#39;knn&#39;: KNNModel(), &#39;rf&#39;: RandomForestModel()})</span>
-</span><span data-line="118"><span class="sd">    &gt;&gt;&gt; results = bench.run(X_train, y_train, X_test, y_test)</span>
-</span><span data-line="119"><span class="sd">    &gt;&gt;&gt; bench.print_summary()</span>
-</span><span data-line="120"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="121">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">models</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="122"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="123"><span class="sd">        Args:</span>
-</span><span data-line="124"><span class="sd">            models (dict): dictionary {name: model_instance}</span>
-</span><span data-line="125"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="126">        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="n">models</span>
-</span><span data-line="127">        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="128">
+</span><span data-line="106"><span class="sd">    Examples</span>
+</span><span data-line="107"><span class="sd">    --------</span>
+</span><span data-line="108"><span class="sd">    &gt;&gt;&gt; bench = Benchmark({&#39;knn&#39;: KNNModel(), &#39;rf&#39;: RandomForestModel()})</span>
+</span><span data-line="109"><span class="sd">    &gt;&gt;&gt; results = bench.run(X_train, y_train, X_test, y_test)</span>
+</span><span data-line="110"><span class="sd">    &gt;&gt;&gt; bench.print_summary()</span>
+</span><span data-line="111"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="112">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">models</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="113"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="114"><span class="sd">        Args:</span>
+</span><span data-line="115"><span class="sd">            models (dict): dictionary {name: model_instance}</span>
+</span><span data-line="116"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="117">        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="n">models</span>
+</span><span data-line="118">        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="119">
 <div class="viewcode-block" id="Benchmark.run">
 <a class="viewcode-back" href="../../trainedml/benchmark.html#trainedml.benchmark.Benchmark.run">[docs]</a>
-</span><span data-line="129">    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span>
-</span><span data-line="130">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="131">        <span class="n">X_train</span><span class="p">,</span>
-</span><span data-line="132">        <span class="n">y_train</span><span class="p">,</span>
-</span><span data-line="133">        <span class="n">X_test</span><span class="p">,</span>
-</span><span data-line="134">        <span class="n">y_test</span><span class="p">,</span>
-</span><span data-line="135">        <span class="n">parallel</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span data-line="136">        <span class="n">n_jobs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-</span><span data-line="137">        <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span data-line="138">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]:</span>
-</span><span data-line="139"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="140"><span class="sd">        Train and evaluate each model, returning scores and timing.</span>
-</span><span data-line="141">
-</span><span data-line="142"><span class="sd">        Parameters</span>
-</span><span data-line="143"><span class="sd">        ----------</span>
-</span><span data-line="144"><span class="sd">        X_train, y_train, X_test, y_test : array-like</span>
-</span><span data-line="145"><span class="sd">            Data splits.</span>
-</span><span data-line="146"><span class="sd">        parallel : bool, default=False</span>
-</span><span data-line="147"><span class="sd">            If True, run models in parallel.</span>
-</span><span data-line="148"><span class="sd">        n_jobs : int, default=-1</span>
-</span><span data-line="149"><span class="sd">            Number of jobs for parallelization.</span>
-</span><span data-line="150"><span class="sd">        show_progress : bool, default=True</span>
-</span><span data-line="151"><span class="sd">            Show a progress bar.</span>
-</span><span data-line="152">
-</span><span data-line="153"><span class="sd">        Returns</span>
-</span><span data-line="154"><span class="sd">        -------</span>
-</span><span data-line="155"><span class="sd">        dict</span>
-</span><span data-line="156"><span class="sd">            {model_name: {scores, fit_time, predict_time}}</span>
-</span><span data-line="157"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="158">        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="159">
-</span><span data-line="160">        <span class="k">if</span> <span class="n">parallel</span><span class="p">:</span>
-</span><span data-line="161">            <span class="c1"># Parallel execution with joblib</span>
-</span><span data-line="162">            <span class="n">model_items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-</span><span data-line="163">
-</span><span data-line="164">            <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
-</span><span data-line="165">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">model_items</span><span class="p">)</span><span class="si">}</span><span class="s2"> models in parallel...&quot;</span><span class="p">)</span>
-</span><span data-line="166">
-</span><span data-line="167">            <span class="n">parallel_results</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span>
-</span><span data-line="168">                <span class="n">delayed</span><span class="p">(</span><span class="n">_train_and_evaluate</span><span class="p">)(</span>
-</span><span data-line="169">                    <span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span>
-</span><span data-line="170">                <span class="p">)</span>
-</span><span data-line="171">                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
-</span><span data-line="172">                    <span class="n">model_items</span><span class="p">,</span>
-</span><span data-line="173">                    <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Training&quot;</span><span class="p">,</span>
-</span><span data-line="174">                    <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">show_progress</span>
-</span><span data-line="175">                <span class="p">)</span>
-</span><span data-line="176">            <span class="p">)</span>
-</span><span data-line="177">
-</span><span data-line="178">            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">parallel_results</span><span class="p">:</span>
-</span><span data-line="179">                <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
-</span><span data-line="180">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="181">            <span class="c1"># Sequential execution with progress bar</span>
-</span><span data-line="182">            <span class="n">iterator</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-</span><span data-line="183">            <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
-</span><span data-line="184">                <span class="n">iterator</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span>
-</span><span data-line="185">                    <span class="n">iterator</span><span class="p">,</span>
-</span><span data-line="186">                    <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">),</span>
-</span><span data-line="187">                    <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Benchmark&quot;</span><span class="p">,</span>
-</span><span data-line="188">                    <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;model&quot;</span>
-</span><span data-line="189">                <span class="p">)</span>
+</span><span data-line="120">    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span>
+</span><span data-line="121">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="122">        <span class="n">X_train</span><span class="p">,</span>
+</span><span data-line="123">        <span class="n">y_train</span><span class="p">,</span>
+</span><span data-line="124">        <span class="n">X_test</span><span class="p">,</span>
+</span><span data-line="125">        <span class="n">y_test</span><span class="p">,</span>
+</span><span data-line="126">        <span class="n">parallel</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span data-line="127">        <span class="n">n_jobs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+</span><span data-line="128">        <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span data-line="129">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]:</span>
+</span><span data-line="130"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="131"><span class="sd">        Train and evaluate each model, returning scores and timing.</span>
+</span><span data-line="132">
+</span><span data-line="133"><span class="sd">        Parameters</span>
+</span><span data-line="134"><span class="sd">        ----------</span>
+</span><span data-line="135"><span class="sd">        X_train, y_train, X_test, y_test : array-like</span>
+</span><span data-line="136"><span class="sd">            Data splits.</span>
+</span><span data-line="137"><span class="sd">        parallel : bool, default=False</span>
+</span><span data-line="138"><span class="sd">            If True, run models in parallel.</span>
+</span><span data-line="139"><span class="sd">        n_jobs : int, default=-1</span>
+</span><span data-line="140"><span class="sd">            Number of jobs for parallelization.</span>
+</span><span data-line="141"><span class="sd">        show_progress : bool, default=True</span>
+</span><span data-line="142"><span class="sd">            Show a progress bar.</span>
+</span><span data-line="143">
+</span><span data-line="144"><span class="sd">        Returns</span>
+</span><span data-line="145"><span class="sd">        -------</span>
+</span><span data-line="146"><span class="sd">        dict</span>
+</span><span data-line="147"><span class="sd">            {model_name: {scores, fit_time, predict_time}}</span>
+</span><span data-line="148"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="149">        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="150">
+</span><span data-line="151">        <span class="k">if</span> <span class="n">parallel</span><span class="p">:</span>
+</span><span data-line="152">            <span class="c1"># Parallel execution with joblib</span>
+</span><span data-line="153">            <span class="n">model_items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</span><span data-line="154">
+</span><span data-line="155">            <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+</span><span data-line="156">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">model_items</span><span class="p">)</span><span class="si">}</span><span class="s2"> models in parallel...&quot;</span><span class="p">)</span>
+</span><span data-line="157">
+</span><span data-line="158">            <span class="n">parallel_results</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span>
+</span><span data-line="159">                <span class="n">delayed</span><span class="p">(</span><span class="n">_train_and_evaluate</span><span class="p">)(</span>
+</span><span data-line="160">                    <span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span>
+</span><span data-line="161">                <span class="p">)</span>
+</span><span data-line="162">                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+</span><span data-line="163">                    <span class="n">model_items</span><span class="p">,</span>
+</span><span data-line="164">                    <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Training&quot;</span><span class="p">,</span>
+</span><span data-line="165">                    <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">show_progress</span>
+</span><span data-line="166">                <span class="p">)</span>
+</span><span data-line="167">            <span class="p">)</span>
+</span><span data-line="168">
+</span><span data-line="169">            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">parallel_results</span><span class="p">:</span>
+</span><span data-line="170">                <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
+</span><span data-line="171">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="172">            <span class="c1"># Sequential execution with progress bar</span>
+</span><span data-line="173">            <span class="n">iterator</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span><span data-line="174">            <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+</span><span data-line="175">                <span class="n">iterator</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span>
+</span><span data-line="176">                    <span class="n">iterator</span><span class="p">,</span>
+</span><span data-line="177">                    <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">),</span>
+</span><span data-line="178">                    <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Benchmark&quot;</span><span class="p">,</span>
+</span><span data-line="179">                    <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;model&quot;</span>
+</span><span data-line="180">                <span class="p">)</span>
+</span><span data-line="181">
+</span><span data-line="182">            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+</span><span data-line="183">                <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+</span><span data-line="184">                    <span class="n">iterator</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">({</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
+</span><span data-line="185">
+</span><span data-line="186">                <span class="c1"># Measure training time</span>
+</span><span data-line="187">                <span class="n">start_fit</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</span><span data-line="188">                <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</span><span data-line="189">                <span class="n">fit_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_fit</span>
 </span><span data-line="190">
-</span><span data-line="191">            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
-</span><span data-line="192">                <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
-</span><span data-line="193">                    <span class="n">iterator</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">({</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span>
-</span><span data-line="194">
-</span><span data-line="195">                <span class="c1"># Measure training time</span>
-</span><span data-line="196">                <span class="n">start_fit</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-</span><span data-line="197">                <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</span><span data-line="198">                <span class="n">fit_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_fit</span>
-</span><span data-line="199">
-</span><span data-line="200">                <span class="c1"># Measure prediction time</span>
-</span><span data-line="201">                <span class="n">start_pred</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-</span><span data-line="202">                <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-</span><span data-line="203">                <span class="n">predict_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_pred</span>
-</span><span data-line="204">
-</span><span data-line="205">                <span class="n">scores</span> <span class="o">=</span> <span class="n">Evaluator</span><span class="o">.</span><span class="n">evaluate_for</span><span class="p">(</span><span class="n">detect_model_task</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-</span><span data-line="206">                <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-</span><span data-line="207">                    <span class="s1">&#39;scores&#39;</span><span class="p">:</span> <span class="n">scores</span><span class="p">,</span>
-</span><span data-line="208">                    <span class="s1">&#39;fit_time&#39;</span><span class="p">:</span> <span class="n">fit_time</span><span class="p">,</span>
-</span><span data-line="209">                    <span class="s1">&#39;predict_time&#39;</span><span class="p">:</span> <span class="n">predict_time</span>
-</span><span data-line="210">                <span class="p">}</span>
-</span><span data-line="211">
-</span><span data-line="212">        <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">results</span>
-</span><span data-line="213">        <span class="k">return</span> <span class="n">results</span></div>
+</span><span data-line="191">                <span class="c1"># Measure prediction time</span>
+</span><span data-line="192">                <span class="n">start_pred</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</span><span data-line="193">                <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</span><span data-line="194">                <span class="n">predict_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_pred</span>
+</span><span data-line="195">
+</span><span data-line="196">                <span class="n">scores</span> <span class="o">=</span> <span class="n">Evaluator</span><span class="o">.</span><span class="n">evaluate_for</span><span class="p">(</span><span class="n">detect_model_task</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</span><span data-line="197">                <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="198">                    <span class="s1">&#39;scores&#39;</span><span class="p">:</span> <span class="n">scores</span><span class="p">,</span>
+</span><span data-line="199">                    <span class="s1">&#39;fit_time&#39;</span><span class="p">:</span> <span class="n">fit_time</span><span class="p">,</span>
+</span><span data-line="200">                    <span class="s1">&#39;predict_time&#39;</span><span class="p">:</span> <span class="n">predict_time</span>
+</span><span data-line="201">                <span class="p">}</span>
+</span><span data-line="202">
+</span><span data-line="203">        <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">results</span>
+</span><span data-line="204">        <span class="k">return</span> <span class="n">results</span></div>
 
-</span><span data-line="214">
+</span><span data-line="205">
 <div class="viewcode-block" id="Benchmark.run_cv">
 <a class="viewcode-back" href="../../trainedml/benchmark.html#trainedml.benchmark.Benchmark.run_cv">[docs]</a>
-</span><span data-line="215">    <span class="k">def</span><span class="w"> </span><span class="nf">run_cv</span><span class="p">(</span>
-</span><span data-line="216">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="217">        <span class="n">X</span><span class="p">,</span>
-</span><span data-line="218">        <span class="n">y</span><span class="p">,</span>
-</span><span data-line="219">        <span class="n">cv</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
-</span><span data-line="220">        <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="221">        <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
-</span><span data-line="222">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]:</span>
-</span><span data-line="223"><span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="224"><span class="sd">        Compare models by cross-validation (K-fold).</span>
-</span><span data-line="225">
-</span><span data-line="226"><span class="sd">        Each model is trained and evaluated on ``cv`` folds; the returned</span>
-</span><span data-line="227"><span class="sd">        metrics are the averages across folds, with the standard deviation</span>
-</span><span data-line="228"><span class="sd">        in ``scores_std``. For classification, folds are stratified.</span>
-</span><span data-line="229">
-</span><span data-line="230"><span class="sd">        Parameters</span>
-</span><span data-line="231"><span class="sd">        ----------</span>
-</span><span data-line="232"><span class="sd">        X : pandas.DataFrame or array-like</span>
-</span><span data-line="233"><span class="sd">            Features (full dataset, not split).</span>
-</span><span data-line="234"><span class="sd">        y : pandas.Series or array-like</span>
-</span><span data-line="235"><span class="sd">            Target.</span>
-</span><span data-line="236"><span class="sd">        cv : int, default=5</span>
-</span><span data-line="237"><span class="sd">            Number of folds.</span>
-</span><span data-line="238"><span class="sd">        show_progress : bool, default=True</span>
-</span><span data-line="239"><span class="sd">            Show a progress bar.</span>
-</span><span data-line="240"><span class="sd">        random_state : int, default=42</span>
-</span><span data-line="241"><span class="sd">            Seed for fold shuffling.</span>
-</span><span data-line="242">
-</span><span data-line="243"><span class="sd">        Returns</span>
-</span><span data-line="244"><span class="sd">        -------</span>
-</span><span data-line="245"><span class="sd">        dict</span>
-</span><span data-line="246"><span class="sd">            {model_name: {&#39;scores&#39;: averages, &#39;scores_std&#39;: standard deviations,</span>
-</span><span data-line="247"><span class="sd">            &#39;fit_time&#39;: average time, &#39;predict_time&#39;: average time, &#39;cv&#39;: cv}}</span>
-</span><span data-line="248">
-</span><span data-line="249"><span class="sd">        Examples</span>
-</span><span data-line="250"><span class="sd">        --------</span>
-</span><span data-line="251"><span class="sd">        &gt;&gt;&gt; bench = Benchmark({&#39;knn&#39;: KNNModel(), &#39;rf&#39;: RandomForestModel()})</span>
-</span><span data-line="252"><span class="sd">        &gt;&gt;&gt; results = bench.run_cv(X, y, cv=5)</span>
-</span><span data-line="253"><span class="sd">        &gt;&gt;&gt; print(bench.to_dataframe())</span>
-</span><span data-line="254"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="255">        <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</span><span data-line="256">        <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-</span><span data-line="257">        <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">KFold</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
-</span><span data-line="258">
-</span><span data-line="259">        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</span><span data-line="260">        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</span><span data-line="206">    <span class="k">def</span><span class="w"> </span><span class="nf">run_cv</span><span class="p">(</span>
+</span><span data-line="207">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="208">        <span class="n">X</span><span class="p">,</span>
+</span><span data-line="209">        <span class="n">y</span><span class="p">,</span>
+</span><span data-line="210">        <span class="n">cv</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+</span><span data-line="211">        <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="212">        <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
+</span><span data-line="213">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]:</span>
+</span><span data-line="214"><span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="215"><span class="sd">        Compare models by cross-validation (K-fold).</span>
+</span><span data-line="216">
+</span><span data-line="217"><span class="sd">        Each model is trained and evaluated on ``cv`` folds; the returned</span>
+</span><span data-line="218"><span class="sd">        metrics are the averages across folds, with the standard deviation</span>
+</span><span data-line="219"><span class="sd">        in ``scores_std``. For classification, folds are stratified.</span>
+</span><span data-line="220">
+</span><span data-line="221"><span class="sd">        Parameters</span>
+</span><span data-line="222"><span class="sd">        ----------</span>
+</span><span data-line="223"><span class="sd">        X : pandas.DataFrame or array-like</span>
+</span><span data-line="224"><span class="sd">            Features (full dataset, not split).</span>
+</span><span data-line="225"><span class="sd">        y : pandas.Series or array-like</span>
+</span><span data-line="226"><span class="sd">            Target.</span>
+</span><span data-line="227"><span class="sd">        cv : int, default=5</span>
+</span><span data-line="228"><span class="sd">            Number of folds.</span>
+</span><span data-line="229"><span class="sd">        show_progress : bool, default=True</span>
+</span><span data-line="230"><span class="sd">            Show a progress bar.</span>
+</span><span data-line="231"><span class="sd">        random_state : int, default=42</span>
+</span><span data-line="232"><span class="sd">            Seed for fold shuffling.</span>
+</span><span data-line="233">
+</span><span data-line="234"><span class="sd">        Returns</span>
+</span><span data-line="235"><span class="sd">        -------</span>
+</span><span data-line="236"><span class="sd">        dict</span>
+</span><span data-line="237"><span class="sd">            {model_name: {&#39;scores&#39;: averages, &#39;scores_std&#39;: standard deviations,</span>
+</span><span data-line="238"><span class="sd">            &#39;fit_time&#39;: average time, &#39;predict_time&#39;: average time, &#39;cv&#39;: cv}}</span>
+</span><span data-line="239">
+</span><span data-line="240"><span class="sd">        Examples</span>
+</span><span data-line="241"><span class="sd">        --------</span>
+</span><span data-line="242"><span class="sd">        &gt;&gt;&gt; bench = Benchmark({&#39;knn&#39;: KNNModel(), &#39;rf&#39;: RandomForestModel()})</span>
+</span><span data-line="243"><span class="sd">        &gt;&gt;&gt; results = bench.run_cv(X, y, cv=5)</span>
+</span><span data-line="244"><span class="sd">        &gt;&gt;&gt; print(bench.to_dataframe())</span>
+</span><span data-line="245"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="246">        <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span data-line="247">        <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="248">        <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">KFold</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
+</span><span data-line="249">
+</span><span data-line="250">        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span><span data-line="251">        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</span><span data-line="252">
+</span><span data-line="253">        <span class="n">task</span> <span class="o">=</span> <span class="n">detect_task</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</span><span data-line="254">        <span class="n">splitter_cls</span> <span class="o">=</span> <span class="n">StratifiedKFold</span> <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;classification&quot;</span> <span class="k">else</span> <span class="n">KFold</span>
+</span><span data-line="255">        <span class="n">splitter</span> <span class="o">=</span> <span class="n">splitter_cls</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+</span><span data-line="256">
+</span><span data-line="257">        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="258">        <span class="n">iterator</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span><span data-line="259">        <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+</span><span data-line="260">            <span class="n">iterator</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;CV </span><span class="si">{</span><span class="n">cv</span><span class="si">}</span><span class="s2">-fold&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
 </span><span data-line="261">
-</span><span data-line="262">        <span class="n">task</span> <span class="o">=</span> <span class="n">detect_task</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-</span><span data-line="263">        <span class="n">splitter_cls</span> <span class="o">=</span> <span class="n">StratifiedKFold</span> <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="s2">&quot;classification&quot;</span> <span class="k">else</span> <span class="n">KFold</span>
-</span><span data-line="264">        <span class="n">splitter</span> <span class="o">=</span> <span class="n">splitter_cls</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
-</span><span data-line="265">
-</span><span data-line="266">        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="267">        <span class="n">iterator</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-</span><span data-line="268">        <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
-</span><span data-line="269">            <span class="n">iterator</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;CV </span><span class="si">{</span><span class="n">cv</span><span class="si">}</span><span class="s2">-fold&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
-</span><span data-line="270">
-</span><span data-line="271">        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
-</span><span data-line="272">            <span class="n">fold_scores</span><span class="p">,</span> <span class="n">fit_times</span><span class="p">,</span> <span class="n">predict_times</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
-</span><span data-line="273">            <span class="n">model_task</span> <span class="o">=</span> <span class="n">detect_model_task</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</span><span data-line="274">            <span class="k">for</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span> <span class="ow">in</span> <span class="n">splitter</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-</span><span data-line="275">                <span class="n">X_tr</span><span class="p">,</span> <span class="n">X_te</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">]</span>
-</span><span data-line="276">                <span class="n">y_tr</span><span class="p">,</span> <span class="n">y_te</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">]</span>
-</span><span data-line="277">
-</span><span data-line="278">                <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-</span><span data-line="279">                <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">)</span>
-</span><span data-line="280">                <span class="n">fit_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
-</span><span data-line="281">
-</span><span data-line="282">                <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-</span><span data-line="283">                <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_te</span><span class="p">)</span>
-</span><span data-line="284">                <span class="n">predict_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
-</span><span data-line="285">
-</span><span data-line="286">                <span class="n">fold_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Evaluator</span><span class="o">.</span><span class="n">evaluate_for</span><span class="p">(</span><span class="n">model_task</span><span class="p">,</span> <span class="n">y_te</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</span><span data-line="262">        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+</span><span data-line="263">            <span class="n">fold_scores</span><span class="p">,</span> <span class="n">fit_times</span><span class="p">,</span> <span class="n">predict_times</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+</span><span data-line="264">            <span class="n">model_task</span> <span class="o">=</span> <span class="n">detect_model_task</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span><span data-line="265">            <span class="k">for</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span> <span class="ow">in</span> <span class="n">splitter</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+</span><span data-line="266">                <span class="n">X_tr</span><span class="p">,</span> <span class="n">X_te</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">]</span>
+</span><span data-line="267">                <span class="n">y_tr</span><span class="p">,</span> <span class="n">y_te</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">]</span>
+</span><span data-line="268">
+</span><span data-line="269">                <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</span><span data-line="270">                <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">)</span>
+</span><span data-line="271">                <span class="n">fit_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+</span><span data-line="272">
+</span><span data-line="273">                <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</span><span data-line="274">                <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_te</span><span class="p">)</span>
+</span><span data-line="275">                <span class="n">predict_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+</span><span data-line="276">
+</span><span data-line="277">                <span class="n">fold_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Evaluator</span><span class="o">.</span><span class="n">evaluate_for</span><span class="p">(</span><span class="n">model_task</span><span class="p">,</span> <span class="n">y_te</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</span><span data-line="278">
+</span><span data-line="279">            <span class="n">metrics</span> <span class="o">=</span> <span class="n">fold_scores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</span><span data-line="280">            <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="281">                <span class="s1">&#39;scores&#39;</span><span class="p">:</span> <span class="p">{</span><span class="n">m</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">s</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">fold_scores</span><span class="p">]))</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">},</span>
+</span><span data-line="282">                <span class="s1">&#39;scores_std&#39;</span><span class="p">:</span> <span class="p">{</span><span class="n">m</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">([</span><span class="n">s</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">fold_scores</span><span class="p">]))</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">},</span>
+</span><span data-line="283">                <span class="s1">&#39;fit_time&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fit_times</span><span class="p">)),</span>
+</span><span data-line="284">                <span class="s1">&#39;predict_time&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predict_times</span><span class="p">)),</span>
+</span><span data-line="285">                <span class="s1">&#39;cv&#39;</span><span class="p">:</span> <span class="n">cv</span><span class="p">,</span>
+</span><span data-line="286">            <span class="p">}</span>
 </span><span data-line="287">
-</span><span data-line="288">            <span class="n">metrics</span> <span class="o">=</span> <span class="n">fold_scores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-</span><span data-line="289">            <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-</span><span data-line="290">                <span class="s1">&#39;scores&#39;</span><span class="p">:</span> <span class="p">{</span><span class="n">m</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">s</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">fold_scores</span><span class="p">]))</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">},</span>
-</span><span data-line="291">                <span class="s1">&#39;scores_std&#39;</span><span class="p">:</span> <span class="p">{</span><span class="n">m</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">([</span><span class="n">s</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">fold_scores</span><span class="p">]))</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">},</span>
-</span><span data-line="292">                <span class="s1">&#39;fit_time&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fit_times</span><span class="p">)),</span>
-</span><span data-line="293">                <span class="s1">&#39;predict_time&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predict_times</span><span class="p">)),</span>
-</span><span data-line="294">                <span class="s1">&#39;cv&#39;</span><span class="p">:</span> <span class="n">cv</span><span class="p">,</span>
-</span><span data-line="295">            <span class="p">}</span>
-</span><span data-line="296">
-</span><span data-line="297">        <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">results</span>
-</span><span data-line="298">        <span class="k">return</span> <span class="n">results</span></div>
+</span><span data-line="288">        <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">results</span>
+</span><span data-line="289">        <span class="k">return</span> <span class="n">results</span></div>
 
-</span><span data-line="299">
+</span><span data-line="290">
 <div class="viewcode-block" id="Benchmark.to_dataframe">
 <a class="viewcode-back" href="../../trainedml/benchmark.html#trainedml.benchmark.Benchmark.to_dataframe">[docs]</a>
-</span><span data-line="300">    <span class="k">def</span><span class="w"> </span><span class="nf">to_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sort</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;pd.DataFrame&quot;</span><span class="p">]:</span>
-</span><span data-line="301"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="302"><span class="sd">        Convert the benchmark results to a pandas DataFrame.</span>
-</span><span data-line="303">
-</span><span data-line="304"><span class="sd">        Columns are the metrics (plus ``fit_time`` and ``predict_time``),</span>
-</span><span data-line="305"><span class="sd">        rows are the models. If the results come from :meth:`run_cv`,</span>
-</span><span data-line="306"><span class="sd">        ``&lt;metric&gt;_std`` columns are added. The table is sorted by the</span>
-</span><span data-line="307"><span class="sd">        primary metric (``accuracy`` or ``r2``), from best to worst.</span>
-</span><span data-line="308">
-</span><span data-line="309"><span class="sd">        Parameters</span>
-</span><span data-line="310"><span class="sd">        ----------</span>
-</span><span data-line="311"><span class="sd">        sort : bool, default=True</span>
-</span><span data-line="312"><span class="sd">            Sort by the primary metric, descending.</span>
-</span><span data-line="313">
-</span><span data-line="314"><span class="sd">        Returns</span>
-</span><span data-line="315"><span class="sd">        -------</span>
-</span><span data-line="316"><span class="sd">        pandas.DataFrame or None</span>
-</span><span data-line="317"><span class="sd">            Comparison table, or None if run()/run_cv() has not been called.</span>
-</span><span data-line="318">
-</span><span data-line="319"><span class="sd">        Examples</span>
-</span><span data-line="320"><span class="sd">        --------</span>
-</span><span data-line="321"><span class="sd">        &gt;&gt;&gt; bench.run(X_train, y_train, X_test, y_test)</span>
-</span><span data-line="322"><span class="sd">        &gt;&gt;&gt; df = bench.to_dataframe()</span>
-</span><span data-line="323"><span class="sd">        &gt;&gt;&gt; print(df)</span>
-</span><span data-line="324"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="325">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="326">            <span class="k">return</span> <span class="kc">None</span>
-</span><span data-line="327">        <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-</span><span data-line="328">
-</span><span data-line="329">        <span class="n">rows</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="330">        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="331">            <span class="n">row</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">])</span>
-</span><span data-line="332">            <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scores_std&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="333">                <span class="n">row</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">_std&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
-</span><span data-line="334">            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;fit_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;fit_time&#39;</span><span class="p">]</span>
-</span><span data-line="335">            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;predict_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;predict_time&#39;</span><span class="p">]</span>
-</span><span data-line="336">            <span class="n">rows</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span>
-</span><span data-line="337">        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
-</span><span data-line="338">        <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;model&#39;</span>
-</span><span data-line="339">
-</span><span data-line="340">        <span class="k">if</span> <span class="n">sort</span><span class="p">:</span>
-</span><span data-line="341">            <span class="k">for</span> <span class="n">primary</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="s1">&#39;r2&#39;</span><span class="p">):</span>
-</span><span data-line="342">                <span class="k">if</span> <span class="n">primary</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-</span><span data-line="343">                    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">primary</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span data-line="344">                    <span class="k">break</span>
-</span><span data-line="345">        <span class="k">return</span> <span class="n">df</span></div>
+</span><span data-line="291">    <span class="k">def</span><span class="w"> </span><span class="nf">to_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sort</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;pd.DataFrame&quot;</span><span class="p">]:</span>
+</span><span data-line="292"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="293"><span class="sd">        Convert the benchmark results to a pandas DataFrame.</span>
+</span><span data-line="294">
+</span><span data-line="295"><span class="sd">        Columns are the metrics (plus ``fit_time`` and ``predict_time``),</span>
+</span><span data-line="296"><span class="sd">        rows are the models. If the results come from :meth:`run_cv`,</span>
+</span><span data-line="297"><span class="sd">        ``&lt;metric&gt;_std`` columns are added. The table is sorted by the</span>
+</span><span data-line="298"><span class="sd">        primary metric (``accuracy`` or ``r2``), from best to worst.</span>
+</span><span data-line="299">
+</span><span data-line="300"><span class="sd">        Parameters</span>
+</span><span data-line="301"><span class="sd">        ----------</span>
+</span><span data-line="302"><span class="sd">        sort : bool, default=True</span>
+</span><span data-line="303"><span class="sd">            Sort by the primary metric, descending.</span>
+</span><span data-line="304">
+</span><span data-line="305"><span class="sd">        Returns</span>
+</span><span data-line="306"><span class="sd">        -------</span>
+</span><span data-line="307"><span class="sd">        pandas.DataFrame or None</span>
+</span><span data-line="308"><span class="sd">            Comparison table, or None if run()/run_cv() has not been called.</span>
+</span><span data-line="309">
+</span><span data-line="310"><span class="sd">        Examples</span>
+</span><span data-line="311"><span class="sd">        --------</span>
+</span><span data-line="312"><span class="sd">        &gt;&gt;&gt; bench.run(X_train, y_train, X_test, y_test)</span>
+</span><span data-line="313"><span class="sd">        &gt;&gt;&gt; df = bench.to_dataframe()</span>
+</span><span data-line="314"><span class="sd">        &gt;&gt;&gt; print(df)</span>
+</span><span data-line="315"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="316">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="317">            <span class="k">return</span> <span class="kc">None</span>
+</span><span data-line="318">        <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="319">
+</span><span data-line="320">        <span class="n">rows</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="321">        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="322">            <span class="n">row</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">])</span>
+</span><span data-line="323">            <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scores_std&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="324">                <span class="n">row</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">_std&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+</span><span data-line="325">            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;fit_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;fit_time&#39;</span><span class="p">]</span>
+</span><span data-line="326">            <span class="n">row</span><span class="p">[</span><span class="s1">&#39;predict_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;predict_time&#39;</span><span class="p">]</span>
+</span><span data-line="327">            <span class="n">rows</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span>
+</span><span data-line="328">        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+</span><span data-line="329">        <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;model&#39;</span>
+</span><span data-line="330">
+</span><span data-line="331">        <span class="k">if</span> <span class="n">sort</span><span class="p">:</span>
+</span><span data-line="332">            <span class="k">for</span> <span class="n">primary</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="s1">&#39;r2&#39;</span><span class="p">):</span>
+</span><span data-line="333">                <span class="k">if</span> <span class="n">primary</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+</span><span data-line="334">                    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">primary</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="335">                    <span class="k">break</span>
+</span><span data-line="336">        <span class="k">return</span> <span class="n">df</span></div>
 
-</span><span data-line="346">
+</span><span data-line="337">
 <div class="viewcode-block" id="Benchmark.summary">
 <a class="viewcode-back" href="../../trainedml/benchmark.html#trainedml.benchmark.Benchmark.summary">[docs]</a>
-</span><span data-line="347">    <span class="k">def</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="348"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="349"><span class="sd">        Return a formatted summary of the benchmark results.</span>
-</span><span data-line="350">
-</span><span data-line="351"><span class="sd">        Returns</span>
-</span><span data-line="352"><span class="sd">        -------</span>
-</span><span data-line="353"><span class="sd">        str or None</span>
-</span><span data-line="354"><span class="sd">            Text summary, or None if no results.</span>
-</span><span data-line="355"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="356">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="357">            <span class="k">return</span> <span class="kc">None</span>
-</span><span data-line="358">
-</span><span data-line="359">        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span> <span class="s2">&quot;BENCHMARK SUMMARY&quot;</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">]</span>
-</span><span data-line="360">
-</span><span data-line="361">        <span class="c1"># Find the best model by accuracy</span>
-</span><span data-line="362">        <span class="n">best_model</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="363">        <span class="n">best_accuracy</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-</span><span data-line="364">
-</span><span data-line="365">        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="366">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span data-line="367">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
-</span><span data-line="368">            <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="369">                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span data-line="370">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  fit_time: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;fit_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
-</span><span data-line="371">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  predict_time: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;predict_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+</span><span data-line="338">    <span class="k">def</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="339"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="340"><span class="sd">        Return a formatted summary of the benchmark results.</span>
+</span><span data-line="341">
+</span><span data-line="342"><span class="sd">        Returns</span>
+</span><span data-line="343"><span class="sd">        -------</span>
+</span><span data-line="344"><span class="sd">        str or None</span>
+</span><span data-line="345"><span class="sd">            Text summary, or None if no results.</span>
+</span><span data-line="346"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="347">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="348">            <span class="k">return</span> <span class="kc">None</span>
+</span><span data-line="349">
+</span><span data-line="350">        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span> <span class="s2">&quot;BENCHMARK SUMMARY&quot;</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">]</span>
+</span><span data-line="351">
+</span><span data-line="352">        <span class="c1"># Find the best model by accuracy</span>
+</span><span data-line="353">        <span class="n">best_model</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="354">        <span class="n">best_accuracy</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</span><span data-line="355">
+</span><span data-line="356">        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="357">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="358">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+</span><span data-line="359">            <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="360">                <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="361">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  fit_time: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;fit_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+</span><span data-line="362">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  predict_time: </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;predict_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+</span><span data-line="363">
+</span><span data-line="364">            <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">best_accuracy</span><span class="p">:</span>
+</span><span data-line="365">                <span class="n">best_accuracy</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span data-line="366">                <span class="n">best_model</span> <span class="o">=</span> <span class="n">name</span>
+</span><span data-line="367">
+</span><span data-line="368">        <span class="k">if</span> <span class="n">best_model</span><span class="p">:</span>
+</span><span data-line="369">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+</span><span data-line="370">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BEST MODEL: </span><span class="si">{</span><span class="n">best_model</span><span class="si">}</span><span class="s2"> (accuracy: </span><span class="si">{</span><span class="n">best_accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span><span data-line="371">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
 </span><span data-line="372">
-</span><span data-line="373">            <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">best_accuracy</span><span class="p">:</span>
-</span><span data-line="374">                <span class="n">best_accuracy</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</span><span data-line="375">                <span class="n">best_model</span> <span class="o">=</span> <span class="n">name</span>
-</span><span data-line="376">
-</span><span data-line="377">        <span class="k">if</span> <span class="n">best_model</span><span class="p">:</span>
-</span><span data-line="378">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
-</span><span data-line="379">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BEST MODEL: </span><span class="si">{</span><span class="n">best_model</span><span class="si">}</span><span class="s2"> (accuracy: </span><span class="si">{</span><span class="n">best_accuracy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</span><span data-line="380">            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
-</span><span data-line="381">
-</span><span data-line="382">        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
+</span><span data-line="373">        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
 
-</span><span data-line="383">
+</span><span data-line="374">
 <div class="viewcode-block" id="Benchmark.print_summary">
 <a class="viewcode-back" href="../../trainedml/benchmark.html#trainedml.benchmark.Benchmark.print_summary">[docs]</a>
-</span><span data-line="384">    <span class="k">def</span><span class="w"> </span><span class="nf">print_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="385"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="386"><span class="sd">        Print the summary of the benchmark results.</span>
-</span><span data-line="387"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="388">        <span class="n">summary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
-</span><span data-line="389">        <span class="k">if</span> <span class="n">summary</span><span class="p">:</span>
-</span><span data-line="390">            <span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
-</span><span data-line="391">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="392">            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No results. Run run() first.&quot;</span><span class="p">)</span></div>
+</span><span data-line="375">    <span class="k">def</span><span class="w"> </span><span class="nf">print_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="376"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="377"><span class="sd">        Print the summary of the benchmark results.</span>
+</span><span data-line="378"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="379">        <span class="n">summary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</span><span data-line="380">        <span class="k">if</span> <span class="n">summary</span><span class="p">:</span>
+</span><span data-line="381">            <span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+</span><span data-line="382">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="383">            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No results. Run run() first.&quot;</span><span class="p">)</span></div>
 </div>
 
 </span></pre></div>

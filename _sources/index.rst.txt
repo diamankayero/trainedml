@@ -1,29 +1,41 @@
-.. trainedml documentation master file, created by
-   sphinx-quickstart on Mon Dec 22 02:19:59 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 trainedml
 =========
 
-.. image:: https://img.shields.io/badge/python-3.8+-blue.svg
-   :target: https://www.python.org/
-   :alt: Python Version
+.. image:: https://img.shields.io/pypi/v/trainedml.svg
+   :target: https://pypi.org/project/trainedml/
+   :alt: Version PyPI
 
-**trainedml** est une bibliothèque Python modulaire pour l'apprentissage automatique supervisé, conçue pour l'enseignement, la recherche et le prototypage rapide.
+.. image:: https://img.shields.io/pypi/pyversions/trainedml.svg
+   :target: https://pypi.org/project/trainedml/
+   :alt: Versions Python
 
-- Chargement flexible de jeux de données publics ou personnalisés
-- Modèles classiques (Random Forest, KNN, Régression Logistique)
-- Visualisations intégrées (heatmap, histogramme, courbe)
-- API simple pour l'intégration web/applications
-- Documentation API complète et tests unitaires
+.. image:: https://github.com/diamankayero/trainedml/actions/workflows/workflow.yml/badge.svg
+   :target: https://github.com/diamankayero/trainedml/actions
+   :alt: CI
 
-.. contents:: Sommaire
-   :depth: 2
-   :local:
+.. image:: https://img.shields.io/badge/licence-MIT-green.svg
+   :target: https://github.com/diamankayero/trainedml/blob/main/LICENCE
+   :alt: Licence MIT
 
-Guide de démarrage rapide
-=========================
+**Du CSV au comparatif de modèles et au rapport EDA en une ligne.**
+
+trainedml est une bibliothèque Python d'apprentissage automatique supervisé
+pensée pour l'enseignement, la recherche et le prototypage rapide : chargement
+de données, prétraitement automatique, entraînement, comparaison de modèles
+par validation croisée et exploration visuelle, le tout derrière une API
+unifiée et une CLI.
+
+Installation
+------------
+
+Le package est publié sur `PyPI <https://pypi.org/project/trainedml/>`_ :
+
+.. code-block:: bash
+
+   pip install trainedml
+
+Démarrage rapide
+----------------
 
 .. code-block:: python
 
@@ -42,68 +54,100 @@ Guide de démarrage rapide
    # Comparer tous les modèles (validation croisée) en une ligne
    print(compare(dataset="wine", cv=5))
 
-Installation
-============
+La même chose en ligne de commande :
 
 .. code-block:: bash
 
-   pip install -r requirements.txt
-   pip install .
+   trainedml --dataset iris --model random_forest --show
+   trainedml --dataset wine --benchmark --cv 5
 
-Utilisation en ligne de commande
-================================
+Fonctionnalités
+---------------
 
-.. code-block:: bash
+- **Données** : datasets intégrés (Iris, Wine...), CSV distants avec cache
+  local, données en mémoire ; voir :doc:`DataLoader <trainedml/loader>`.
+- **Prétraitement automatique** : imputation, standardisation, encodage
+  one-hot, sans fuite d'information en validation croisée ; voir
+  :doc:`Prétraitement <trainedml/preprocessing>`.
+- **Modèles** : Random Forest, kNN, régression logistique, régresseurs, et
+  n'importe quel estimateur scikit-learn ; voir :doc:`Trainer <trainedml/trainer>`.
+- **Comparaison** : benchmark de tous les modèles adaptés au dataset, avec
+  validation croisée ; voir :doc:`Benchmark <trainedml/benchmark>`.
+- **Exploration** : statistiques descriptives, corrélations, valeurs
+  manquantes, outliers, normalité, VIF, et rapport EDA HTML auto-contenu ;
+  voir :doc:`Visualizer <trainedml/visualization>` et
+  :doc:`Rapport EDA <trainedml/report>`.
 
-   python -m trainedml --dataset iris --model random_forest --show
-
-
-Sections de la documentation
-============================
-
-.. toctree::
-   :maxdepth: 2
-   :caption: API
-
-   modules
-
-
-Explications mathématiques des méthodes
-=======================================
-
-
-.. rubric:: Explications mathématiques des méthodes
-
-
-.. note::
-   Les explications mathématiques détaillées pour chaque méthode sont disponibles dans la section API détaillée :
-
-   - :doc:`k-Nearest Neighbors (kNN) <trainedml/models/knn>`
-   - :doc:`Régression Logistique <trainedml/models/logistic>`
-   - :doc:`Random Forest <trainedml/models/random_forest>`
-
-   (voir aussi "modules" dans le menu de gauche)
-
-.. Les blocs mathématiques sont désormais déplacés dans les pages dédiées de l'API.
-
-
-FAQ
----
-
-**Q : Comment ajouter un nouveau dataset ?**
-
-R : Utilisez la classe DataLoader avec l'URL de votre CSV et le nom de la colonne cible.
-
-**Q : Puis-je utiliser mes propres modèles ?**
-
-R : Oui, il suffit d'implémenter la classe BaseModel et de l'ajouter à MODEL_MAP.
-
-Contribuer
+Écosystème
 ----------
 
-Les contributions sont les bienvenues ! Merci de soumettre vos issues et pull requests sur GitHub.
+- `Code source sur GitHub <https://github.com/diamankayero/trainedml>`_
+- `Package sur PyPI <https://pypi.org/project/trainedml/>`_
+- `Démo web interactive <https://trainedml.onrender.com>`_ : l'API du package
+  exposée en HTTP, avec une page d'essai dans le navigateur
+- `ModeLmL <https://modelml.vercel.app>`_ : l'atelier web complet construit
+  sur trainedml (dashboard, analyse, comparaison, prédiction)
 
-Licence
--------
+Questions fréquentes
+--------------------
 
-Ce projet est distribué sous licence MIT.
+**Comment charger mon propre dataset ?**
+    Passez l'URL de votre CSV et le nom de la colonne cible à
+    :doc:`DataLoader <trainedml/loader>`, ou donnez directement un DataFrame
+    en mémoire à ``Trainer``.
+
+**Puis-je utiliser mes propres modèles ?**
+    Oui : tout estimateur scikit-learn se passe tel quel
+    (``Trainer(model=SVC())``), et un modèle maison s'intègre en héritant de
+    ``BaseModel``.
+
+Contribuer et licence
+---------------------
+
+Les contributions sont les bienvenues : issues et pull requests sur
+`GitHub <https://github.com/diamankayero/trainedml>`_. Le projet est
+distribué sous licence MIT.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Cœur du package
+   :hidden:
+
+   trainedml/trainer
+   trainedml/loader
+   trainedml/preprocessing
+   trainedml/tasks
+   trainedml/benchmark
+   trainedml/evaluation
+   trainedml/report
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Modèles
+   :hidden:
+
+   trainedml/models/knn
+   trainedml/models/logistic
+   trainedml/models/random_forest
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Exploration et visualisation
+   :hidden:
+
+   trainedml/visualization
+   trainedml/analyzer
+   trainedml/vizs
+   trainedml/heatmap
+   trainedml/histogram
+   trainedml/line
+   trainedml/distribution
+   trainedml/correlation
+   trainedml/missing
+   trainedml/outliers
+   trainedml/target
+   trainedml/boxplot
+   trainedml/bivariate
+   trainedml/normality
+   trainedml/multicollinearity
+   trainedml/profiling

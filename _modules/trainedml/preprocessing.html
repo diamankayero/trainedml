@@ -2,12 +2,13 @@
 <html lang="fr" data-accent-color="violet" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.preprocessing - trainedml 0.2.0</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.preprocessing - trainedml 0.2.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=192bdaf1" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,8 +26,8 @@
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
     <a class="sy-head-brand" href="../../index.html">
-      
-      
+      <img class="light-logo" src="../../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
       <strong>trainedml</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
@@ -55,37 +56,40 @@ data-aria-dark="Passer en mode automatique">
   <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
     <div class="sy-lside-inner md:sticky">
       <div class="sy-scrollbar p-6">
-        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">API</span></p>
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Cœur du package</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/trainer.html">Trainer (API principale)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/loader.html">DataLoader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/preprocessing.html">Prétraitement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/tasks.html">Détection de tâche</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/benchmark.html">Benchmark</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/evaluation.html">Evaluator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/report.html">Rapport EDA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/logistic.html">Régression logistique</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/random_forest.html">Random Forest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/visualization.html">Visualizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/analyzer.html">DataAnalyzer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/loader.html">DataLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/tasks.html">Détection de tâche</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/benchmark.html">Benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/evaluation.html">Evaluator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/report.html">Rapport EDA</a></li>
 </ul>
-</li>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Modèles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/random_forest.html">Random Forest</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Exploration et visualisation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/visualization.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/analyzer.html">DataAnalyzer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
 </ul>
 
         </div>
@@ -235,44 +239,42 @@ data-aria-dark="Passer en mode automatique">
 </span><span data-line="93"><span class="sd">        The wrapped model.</span>
 </span><span data-line="94"><span class="sd">    preprocessor : sklearn.compose.ColumnTransformer</span>
 </span><span data-line="95"><span class="sd">        The preprocessor, retrained on every call to :meth:`fit`.</span>
-</span><span data-line="96"><span class="sd">    task : str</span>
-</span><span data-line="97"><span class="sd">        Task type of the wrapped model (delegated).</span>
-</span><span data-line="98">
-</span><span data-line="99"><span class="sd">    Examples</span>
-</span><span data-line="100"><span class="sd">    --------</span>
-</span><span data-line="101"><span class="sd">    &gt;&gt;&gt; from trainedml.models import KNNModel</span>
-</span><span data-line="102"><span class="sd">    &gt;&gt;&gt; model = PreprocessedModel(KNNModel(n_neighbors=3))</span>
-</span><span data-line="103"><span class="sd">    &gt;&gt;&gt; model.fit(X_train, y_train)</span>
-</span><span data-line="104"><span class="sd">    &gt;&gt;&gt; preds = model.predict(X_test)</span>
-</span><span data-line="105"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="106">
-</span><span data-line="107">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
-</span><span data-line="108">        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
-</span><span data-line="109">        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">build_preprocessor</span><span class="p">()</span>
-</span><span data-line="110">
-</span><span data-line="111">    <span class="nd">@property</span>
-</span><span data-line="112">    <span class="k">def</span><span class="w"> </span><span class="nf">task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="113"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Task type of the wrapped model (&#39;classification&#39; or &#39;regression&#39;).&quot;&quot;&quot;</span>
-</span><span data-line="114">        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;task&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-</span><span data-line="115">
+</span><span data-line="96">
+</span><span data-line="97"><span class="sd">    Examples</span>
+</span><span data-line="98"><span class="sd">    --------</span>
+</span><span data-line="99"><span class="sd">    &gt;&gt;&gt; from trainedml.models import KNNModel</span>
+</span><span data-line="100"><span class="sd">    &gt;&gt;&gt; model = PreprocessedModel(KNNModel(n_neighbors=3))</span>
+</span><span data-line="101"><span class="sd">    &gt;&gt;&gt; model.fit(X_train, y_train)</span>
+</span><span data-line="102"><span class="sd">    &gt;&gt;&gt; preds = model.predict(X_test)</span>
+</span><span data-line="103"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="104">
+</span><span data-line="105">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+</span><span data-line="106">        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+</span><span data-line="107">        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">build_preprocessor</span><span class="p">()</span>
+</span><span data-line="108">
+</span><span data-line="109">    <span class="nd">@property</span>
+</span><span data-line="110">    <span class="k">def</span><span class="w"> </span><span class="nf">task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="111"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Task type of the wrapped model (&#39;classification&#39; or &#39;regression&#39;).&quot;&quot;&quot;</span>
+</span><span data-line="112">        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;task&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span data-line="113">
 <div class="viewcode-block" id="PreprocessedModel.fit">
 <a class="viewcode-back" href="../../trainedml/preprocessing.html#trainedml.preprocessing.PreprocessedModel.fit">[docs]</a>
-</span><span data-line="116">    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-</span><span data-line="117"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Fit the preprocessor then the model on (X, y).&quot;&quot;&quot;</span>
-</span><span data-line="118">        <span class="n">X_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</span><span data-line="119">        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</span><span data-line="120">        <span class="k">return</span> <span class="bp">self</span></div>
+</span><span data-line="114">    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+</span><span data-line="115"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Fit the preprocessor then the model on (X, y).&quot;&quot;&quot;</span>
+</span><span data-line="116">        <span class="n">X_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span><span data-line="117">        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span><span data-line="118">        <span class="k">return</span> <span class="bp">self</span></div>
 
-</span><span data-line="121">
+</span><span data-line="119">
 <div class="viewcode-block" id="PreprocessedModel.predict">
 <a class="viewcode-back" href="../../trainedml/preprocessing.html#trainedml.preprocessing.PreprocessedModel.predict">[docs]</a>
-</span><span data-line="122">    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-</span><span data-line="123"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Preprocess X then predict with the wrapped model.&quot;&quot;&quot;</span>
-</span><span data-line="124">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">))</span></div>
+</span><span data-line="120">    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+</span><span data-line="121"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Preprocess X then predict with the wrapped model.&quot;&quot;&quot;</span>
+</span><span data-line="122">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">))</span></div>
 
-</span><span data-line="125">
-</span><span data-line="126">    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="127">        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;PreprocessedModel(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">!r}</span><span class="s2">)&quot;</span></div>
+</span><span data-line="123">
+</span><span data-line="124">    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="125">        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;PreprocessedModel(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">!r}</span><span class="s2">)&quot;</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">

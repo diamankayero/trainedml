@@ -2,12 +2,13 @@
 <html lang="fr" data-accent-color="violet" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml - trainedml 0.2.0</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml - trainedml 0.2.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=192bdaf1" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,8 +26,8 @@
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
     <a class="sy-head-brand" href="../index.html">
-      
-      
+      <img class="light-logo" src="../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
+      <img class="dark-logo" src="../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
       <strong>trainedml</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
@@ -55,37 +56,40 @@ data-aria-dark="Passer en mode automatique">
   <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
     <div class="sy-lside-inner md:sticky">
       <div class="sy-scrollbar p-6">
-        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">API</span></p>
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Cœur du package</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">trainedml - API détaillée</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/trainer.html">Trainer (API principale)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/loader.html">DataLoader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/preprocessing.html">Prétraitement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/tasks.html">Détection de tâche</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/benchmark.html">Benchmark</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/evaluation.html">Evaluator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/report.html">Rapport EDA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/models/logistic.html">Régression logistique</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/models/random_forest.html">Random Forest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/visualization.html">Visualizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/analyzer.html">DataAnalyzer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/heatmap.html">Heatmap</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/histogram.html">Histogram</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/line.html">Line</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/correlation.html">Correlation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/missing.html">Missing Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/outliers.html">Outliers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/target.html">Target</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/bivariate.html">Bivariate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/normality.html">Normality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/loader.html">DataLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/tasks.html">Détection de tâche</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/benchmark.html">Benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/evaluation.html">Evaluator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/report.html">Rapport EDA</a></li>
 </ul>
-</li>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Modèles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/models/random_forest.html">Random Forest</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Exploration et visualisation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/visualization.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/analyzer.html">DataAnalyzer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/correlation.html">Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/missing.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/outliers.html">Outliers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/target.html">Target</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/boxplot.html">Boxplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/bivariate.html">Bivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/normality.html">Normality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainedml/profiling.html">Profiling</a></li>
 </ul>
 
         </div>
@@ -238,335 +242,333 @@ data-aria-dark="Passer en mode automatique">
 </span><span data-line="111"><span class="sd">        The preprocessor (None if ``preprocess=False``).</span>
 </span><span data-line="112"><span class="sd">    X_train, X_test, y_train, y_test : array-like</span>
 </span><span data-line="113"><span class="sd">        Train/test splits (not preprocessed).</span>
-</span><span data-line="114"><span class="sd">    task : str</span>
-</span><span data-line="115"><span class="sd">        Task type (&#39;classification&#39; or &#39;regression&#39;).</span>
-</span><span data-line="116"><span class="sd">    is_fitted : bool</span>
-</span><span data-line="117"><span class="sd">        Whether the model has been trained.</span>
-</span><span data-line="118">
-</span><span data-line="119"><span class="sd">    Examples</span>
-</span><span data-line="120"><span class="sd">    --------</span>
-</span><span data-line="121"><span class="sd">    Standard workflow:</span>
-</span><span data-line="122">
-</span><span data-line="123"><span class="sd">    &gt;&gt;&gt; trainer = Trainer(dataset=&quot;iris&quot;, model=&quot;knn&quot;)</span>
-</span><span data-line="124"><span class="sd">    &gt;&gt;&gt; trainer.fit()</span>
-</span><span data-line="125"><span class="sd">    &gt;&gt;&gt; print(trainer.evaluate())</span>
-</span><span data-line="126"><span class="sd">    &gt;&gt;&gt; preds = trainer.predict([[5.1, 3.5, 1.4, 0.2]])</span>
+</span><span data-line="114"><span class="sd">    is_fitted : bool</span>
+</span><span data-line="115"><span class="sd">        Whether the model has been trained.</span>
+</span><span data-line="116">
+</span><span data-line="117"><span class="sd">    Examples</span>
+</span><span data-line="118"><span class="sd">    --------</span>
+</span><span data-line="119"><span class="sd">    Standard workflow:</span>
+</span><span data-line="120">
+</span><span data-line="121"><span class="sd">    &gt;&gt;&gt; trainer = Trainer(dataset=&quot;iris&quot;, model=&quot;knn&quot;)</span>
+</span><span data-line="122"><span class="sd">    &gt;&gt;&gt; trainer.fit()</span>
+</span><span data-line="123"><span class="sd">    &gt;&gt;&gt; print(trainer.evaluate())</span>
+</span><span data-line="124"><span class="sd">    &gt;&gt;&gt; preds = trainer.predict([[5.1, 3.5, 1.4, 0.2]])</span>
+</span><span data-line="125">
+</span><span data-line="126"><span class="sd">    Hyperparameters and an arbitrary scikit-learn estimator:</span>
 </span><span data-line="127">
-</span><span data-line="128"><span class="sd">    Hyperparameters and an arbitrary scikit-learn estimator:</span>
-</span><span data-line="129">
-</span><span data-line="130"><span class="sd">    &gt;&gt;&gt; trainer = Trainer(dataset=&quot;wine&quot;, model=&quot;knn&quot;, model_params={&quot;n_neighbors&quot;: 7})</span>
-</span><span data-line="131"><span class="sd">    &gt;&gt;&gt; from sklearn.svm import SVC</span>
-</span><span data-line="132"><span class="sd">    &gt;&gt;&gt; trainer = Trainer(dataset=&quot;iris&quot;, model=SVC(kernel=&quot;rbf&quot;))</span>
+</span><span data-line="128"><span class="sd">    &gt;&gt;&gt; trainer = Trainer(dataset=&quot;wine&quot;, model=&quot;knn&quot;, model_params={&quot;n_neighbors&quot;: 7})</span>
+</span><span data-line="129"><span class="sd">    &gt;&gt;&gt; from sklearn.svm import SVC</span>
+</span><span data-line="130"><span class="sd">    &gt;&gt;&gt; trainer = Trainer(dataset=&quot;iris&quot;, model=SVC(kernel=&quot;rbf&quot;))</span>
+</span><span data-line="131">
+</span><span data-line="132"><span class="sd">    Varying the seed without recreating the Trainer:</span>
 </span><span data-line="133">
-</span><span data-line="134"><span class="sd">    Varying the seed without recreating the Trainer:</span>
-</span><span data-line="135">
-</span><span data-line="136"><span class="sd">    &gt;&gt;&gt; for s in range(5):</span>
-</span><span data-line="137"><span class="sd">    ...     print(trainer.fit(seed=s).evaluate())</span>
+</span><span data-line="134"><span class="sd">    &gt;&gt;&gt; for s in range(5):</span>
+</span><span data-line="135"><span class="sd">    ...     print(trainer.fit(seed=s).evaluate())</span>
+</span><span data-line="136">
+</span><span data-line="137"><span class="sd">    Save and reload:</span>
 </span><span data-line="138">
-</span><span data-line="139"><span class="sd">    Save and reload:</span>
-</span><span data-line="140">
-</span><span data-line="141"><span class="sd">    &gt;&gt;&gt; trainer.save(&quot;model.joblib&quot;)</span>
-</span><span data-line="142"><span class="sd">    &gt;&gt;&gt; restored = Trainer.load(&quot;model.joblib&quot;)</span>
-</span><span data-line="143"><span class="sd">    &gt;&gt;&gt; restored.predict([[5.1, 3.5, 1.4, 0.2]])</span>
-</span><span data-line="144"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="145">
-</span><span data-line="146">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random_forest&#39;</span><span class="p">,</span>
-</span><span data-line="147">                 <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="148">                 <span class="n">X</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;pd.DataFrame&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;pd.Series&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="149">                 <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
-</span><span data-line="150">                 <span class="n">model_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">preprocess</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="151">        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span>
-</span><span data-line="152">        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
-</span><span data-line="153">        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">target</span>
-</span><span data-line="154">        <span class="bp">self</span><span class="o">.</span><span class="n">_X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="o">=</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
-</span><span data-line="155">        <span class="bp">self</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="n">test_size</span>
-</span><span data-line="156">        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
-</span><span data-line="157">        <span class="bp">self</span><span class="o">.</span><span class="n">preprocess</span> <span class="o">=</span> <span class="n">preprocess</span>
-</span><span data-line="158">        <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">model_params</span> <span class="ow">or</span> <span class="p">{})</span>
-</span><span data-line="159">
-</span><span data-line="160">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-</span><span data-line="161">            <span class="k">if</span> <span class="n">model</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MODEL_MAP</span><span class="p">:</span>
-</span><span data-line="162">                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span data-line="163">                    <span class="sa">f</span><span class="s2">&quot;Unknown model: </span><span class="si">{</span><span class="n">model</span><span class="si">!r}</span><span class="s2">. Available: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">MODEL_MAP</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2"> &quot;</span>
-</span><span data-line="164">                    <span class="sa">f</span><span class="s2">&quot;(or pass a fit/predict estimator directly).&quot;</span>
-</span><span data-line="165">                <span class="p">)</span>
-</span><span data-line="166">            <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="n">model</span>
-</span><span data-line="167">            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">MODEL_MAP</span><span class="p">[</span><span class="n">model</span><span class="p">](</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">)</span>
-</span><span data-line="168">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="169">            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;fit&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;predict&quot;</span><span class="p">)):</span>
-</span><span data-line="170">                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-</span><span data-line="171">                    <span class="s2">&quot;`model` must be a trainedml model name or an object &quot;</span>
-</span><span data-line="172">                    <span class="s2">&quot;with fit and predict methods (e.g. a scikit-learn estimator).&quot;</span>
-</span><span data-line="173">                <span class="p">)</span>
-</span><span data-line="174">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">:</span>
-</span><span data-line="175">                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span data-line="176">                    <span class="s2">&quot;`model_params` can only be used with a model name; &quot;</span>
-</span><span data-line="177">                    <span class="s2">&quot;configure your estimator directly instead.&quot;</span>
-</span><span data-line="178">                <span class="p">)</span>
-</span><span data-line="179">            <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
-</span><span data-line="180">            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
-</span><span data-line="181">
-</span><span data-line="182">        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">build_preprocessor</span><span class="p">()</span> <span class="k">if</span> <span class="n">preprocess</span> <span class="k">else</span> <span class="kc">None</span>
-</span><span data-line="183">        <span class="bp">self</span><span class="o">.</span><span class="n">feature_names_</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="184">        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="185">        <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="186">        <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="187">        <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="188">        <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span data-line="189">        <span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="190">
-</span><span data-line="191">    <span class="nd">@property</span>
-</span><span data-line="192">    <span class="k">def</span><span class="w"> </span><span class="nf">task</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span data-line="193"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Task type of the model (&#39;classification&#39; or &#39;regression&#39;).&quot;&quot;&quot;</span>
-</span><span data-line="194">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="195">            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task</span>
-</span><span data-line="196">        <span class="k">return</span> <span class="n">detect_model_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">)</span>
-</span><span data-line="197">
+</span><span data-line="139"><span class="sd">    &gt;&gt;&gt; trainer.save(&quot;model.joblib&quot;)</span>
+</span><span data-line="140"><span class="sd">    &gt;&gt;&gt; restored = Trainer.load(&quot;model.joblib&quot;)</span>
+</span><span data-line="141"><span class="sd">    &gt;&gt;&gt; restored.predict([[5.1, 3.5, 1.4, 0.2]])</span>
+</span><span data-line="142"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="143">
+</span><span data-line="144">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random_forest&#39;</span><span class="p">,</span>
+</span><span data-line="145">                 <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="146">                 <span class="n">X</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;pd.DataFrame&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;pd.Series&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="147">                 <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
+</span><span data-line="148">                 <span class="n">model_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">preprocess</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="149">        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span>
+</span><span data-line="150">        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+</span><span data-line="151">        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">target</span>
+</span><span data-line="152">        <span class="bp">self</span><span class="o">.</span><span class="n">_X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="o">=</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+</span><span data-line="153">        <span class="bp">self</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="n">test_size</span>
+</span><span data-line="154">        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+</span><span data-line="155">        <span class="bp">self</span><span class="o">.</span><span class="n">preprocess</span> <span class="o">=</span> <span class="n">preprocess</span>
+</span><span data-line="156">        <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">model_params</span> <span class="ow">or</span> <span class="p">{})</span>
+</span><span data-line="157">
+</span><span data-line="158">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+</span><span data-line="159">            <span class="k">if</span> <span class="n">model</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MODEL_MAP</span><span class="p">:</span>
+</span><span data-line="160">                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span><span data-line="161">                    <span class="sa">f</span><span class="s2">&quot;Unknown model: </span><span class="si">{</span><span class="n">model</span><span class="si">!r}</span><span class="s2">. Available: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">MODEL_MAP</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2"> &quot;</span>
+</span><span data-line="162">                    <span class="sa">f</span><span class="s2">&quot;(or pass a fit/predict estimator directly).&quot;</span>
+</span><span data-line="163">                <span class="p">)</span>
+</span><span data-line="164">            <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="n">model</span>
+</span><span data-line="165">            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">MODEL_MAP</span><span class="p">[</span><span class="n">model</span><span class="p">](</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">)</span>
+</span><span data-line="166">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="167">            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;fit&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;predict&quot;</span><span class="p">)):</span>
+</span><span data-line="168">                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+</span><span data-line="169">                    <span class="s2">&quot;`model` must be a trainedml model name or an object &quot;</span>
+</span><span data-line="170">                    <span class="s2">&quot;with fit and predict methods (e.g. a scikit-learn estimator).&quot;</span>
+</span><span data-line="171">                <span class="p">)</span>
+</span><span data-line="172">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">:</span>
+</span><span data-line="173">                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span><span data-line="174">                    <span class="s2">&quot;`model_params` can only be used with a model name; &quot;</span>
+</span><span data-line="175">                    <span class="s2">&quot;configure your estimator directly instead.&quot;</span>
+</span><span data-line="176">                <span class="p">)</span>
+</span><span data-line="177">            <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+</span><span data-line="178">            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+</span><span data-line="179">
+</span><span data-line="180">        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">build_preprocessor</span><span class="p">()</span> <span class="k">if</span> <span class="n">preprocess</span> <span class="k">else</span> <span class="kc">None</span>
+</span><span data-line="181">        <span class="bp">self</span><span class="o">.</span><span class="n">feature_names_</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="182">        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="183">        <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="184">        <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="185">        <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="186">        <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span data-line="187">        <span class="bp">self</span><span class="o">.</span><span class="n">_task</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="188">
+</span><span data-line="189">    <span class="nd">@property</span>
+</span><span data-line="190">    <span class="k">def</span><span class="w"> </span><span class="nf">task</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="191"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Task type of the model (&#39;classification&#39; or &#39;regression&#39;).&quot;&quot;&quot;</span>
+</span><span data-line="192">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="193">            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task</span>
+</span><span data-line="194">        <span class="k">return</span> <span class="n">detect_model_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">)</span>
+</span><span data-line="195">
 <div class="viewcode-block" id="Trainer.load_data">
 <a class="viewcode-back" href="../trainedml/trainer.html#trainedml.Trainer.load_data">[docs]</a>
-</span><span data-line="198">    <span class="k">def</span><span class="w"> </span><span class="nf">load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="199">                  <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-</span><span data-line="200"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="201"><span class="sd">        Load the data, perform the train/test split, and store it on the object.</span>
-</span><span data-line="202">
-</span><span data-line="203"><span class="sd">        The split uses the package&#39;s own API (:meth:`DataLoader.split`):</span>
-</span><span data-line="204"><span class="sd">        there is never a need to call scikit-learn directly. The resulting</span>
-</span><span data-line="205"><span class="sd">        sets are available via the ``X_train``, ``X_test``, ``y_train``,</span>
-</span><span data-line="206"><span class="sd">        ``y_test`` attributes.</span>
-</span><span data-line="207">
-</span><span data-line="208"><span class="sd">        Parameters</span>
-</span><span data-line="209"><span class="sd">        ----------</span>
-</span><span data-line="210"><span class="sd">        test_size : float, optional</span>
-</span><span data-line="211"><span class="sd">            New test proportion. If provided, overrides the constructor&#39;s value.</span>
-</span><span data-line="212"><span class="sd">        seed : int, optional</span>
-</span><span data-line="213"><span class="sd">            New random seed. If provided, overrides the constructor&#39;s value,</span>
-</span><span data-line="214"><span class="sd">            which lets you vary the split without recreating the Trainer.</span>
-</span><span data-line="215">
-</span><span data-line="216"><span class="sd">        Returns</span>
-</span><span data-line="217"><span class="sd">        -------</span>
-</span><span data-line="218"><span class="sd">        tuple</span>
-</span><span data-line="219"><span class="sd">            (X_train, X_test, y_train, y_test)</span>
-</span><span data-line="220">
-</span><span data-line="221"><span class="sd">        Raises</span>
-</span><span data-line="222"><span class="sd">        ------</span>
-</span><span data-line="223"><span class="sd">        ValueError</span>
-</span><span data-line="224"><span class="sd">            If the dataset or target is not specified correctly.</span>
-</span><span data-line="225">
-</span><span data-line="226"><span class="sd">        Examples</span>
-</span><span data-line="227"><span class="sd">        --------</span>
-</span><span data-line="228"><span class="sd">        &gt;&gt;&gt; trainer = Trainer(dataset=&quot;iris&quot;, model=&quot;knn&quot;)</span>
-</span><span data-line="229"><span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test = trainer.load_data(seed=7)</span>
-</span><span data-line="230"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="231">        <span class="k">if</span> <span class="n">test_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="232">            <span class="bp">self</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="n">test_size</span>
-</span><span data-line="233">        <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="234">            <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
-</span><span data-line="235">        <span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
-</span><span data-line="236">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_X</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="237">            <span class="c1"># Data provided directly in memory (X=..., y=...)</span>
-</span><span data-line="238">            <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span>
-</span><span data-line="239">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="240">            <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
-</span><span data-line="241">        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
-</span><span data-line="242">            <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">test_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
-</span><span data-line="243">        <span class="c1"># A new split invalidates any previous training</span>
-</span><span data-line="244">        <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span data-line="245">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span></div>
+</span><span data-line="196">    <span class="k">def</span><span class="w"> </span><span class="nf">load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="197">                  <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="198"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="199"><span class="sd">        Load the data, perform the train/test split, and store it on the object.</span>
+</span><span data-line="200">
+</span><span data-line="201"><span class="sd">        The split uses the package&#39;s own API (:meth:`DataLoader.split`):</span>
+</span><span data-line="202"><span class="sd">        there is never a need to call scikit-learn directly. The resulting</span>
+</span><span data-line="203"><span class="sd">        sets are available via the ``X_train``, ``X_test``, ``y_train``,</span>
+</span><span data-line="204"><span class="sd">        ``y_test`` attributes.</span>
+</span><span data-line="205">
+</span><span data-line="206"><span class="sd">        Parameters</span>
+</span><span data-line="207"><span class="sd">        ----------</span>
+</span><span data-line="208"><span class="sd">        test_size : float, optional</span>
+</span><span data-line="209"><span class="sd">            New test proportion. If provided, overrides the constructor&#39;s value.</span>
+</span><span data-line="210"><span class="sd">        seed : int, optional</span>
+</span><span data-line="211"><span class="sd">            New random seed. If provided, overrides the constructor&#39;s value,</span>
+</span><span data-line="212"><span class="sd">            which lets you vary the split without recreating the Trainer.</span>
+</span><span data-line="213">
+</span><span data-line="214"><span class="sd">        Returns</span>
+</span><span data-line="215"><span class="sd">        -------</span>
+</span><span data-line="216"><span class="sd">        tuple</span>
+</span><span data-line="217"><span class="sd">            (X_train, X_test, y_train, y_test)</span>
+</span><span data-line="218">
+</span><span data-line="219"><span class="sd">        Raises</span>
+</span><span data-line="220"><span class="sd">        ------</span>
+</span><span data-line="221"><span class="sd">        ValueError</span>
+</span><span data-line="222"><span class="sd">            If the dataset or target is not specified correctly.</span>
+</span><span data-line="223">
+</span><span data-line="224"><span class="sd">        Examples</span>
+</span><span data-line="225"><span class="sd">        --------</span>
+</span><span data-line="226"><span class="sd">        &gt;&gt;&gt; trainer = Trainer(dataset=&quot;iris&quot;, model=&quot;knn&quot;)</span>
+</span><span data-line="227"><span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test = trainer.load_data(seed=7)</span>
+</span><span data-line="228"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="229">        <span class="k">if</span> <span class="n">test_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="230">            <span class="bp">self</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="n">test_size</span>
+</span><span data-line="231">        <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="232">            <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+</span><span data-line="233">        <span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">()</span>
+</span><span data-line="234">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_X</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="235">            <span class="c1"># Data provided directly in memory (X=..., y=...)</span>
+</span><span data-line="236">            <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span>
+</span><span data-line="237">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="238">            <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</span><span data-line="239">        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+</span><span data-line="240">            <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">test_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+</span><span data-line="241">        <span class="c1"># A new split invalidates any previous training</span>
+</span><span data-line="242">        <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span data-line="243">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span></div>
 
-</span><span data-line="246">
-</span><span data-line="247">    <span class="k">def</span><span class="w"> </span><span class="nf">_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">fit</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-</span><span data-line="248"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply the preprocessor (fit_transform on train, transform otherwise).&quot;&quot;&quot;</span>
-</span><span data-line="249">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="250">            <span class="k">return</span> <span class="n">X</span>
-</span><span data-line="251">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">if</span> <span class="n">fit</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</span><span data-line="252">
+</span><span data-line="244">
+</span><span data-line="245">    <span class="k">def</span><span class="w"> </span><span class="nf">_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">fit</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span data-line="246"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply the preprocessor (fit_transform on train, transform otherwise).&quot;&quot;&quot;</span>
+</span><span data-line="247">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="248">            <span class="k">return</span> <span class="n">X</span>
+</span><span data-line="249">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">if</span> <span class="n">fit</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span><span data-line="250">
 <div class="viewcode-block" id="Trainer.fit">
 <a class="viewcode-back" href="../trainedml/trainer.html#trainedml.Trainer.fit">[docs]</a>
-</span><span data-line="253">    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Trainer&quot;</span><span class="p">:</span>
-</span><span data-line="254"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="255"><span class="sd">        Fit the preprocessor (if enabled) then the model on the training data.</span>
-</span><span data-line="256"><span class="sd">        Loads the data first if needed.</span>
-</span><span data-line="257">
-</span><span data-line="258"><span class="sd">        Parameters</span>
-</span><span data-line="259"><span class="sd">        ----------</span>
-</span><span data-line="260"><span class="sd">        test_size : float, optional</span>
-</span><span data-line="261"><span class="sd">            If provided, the data is re-split with this proportion before training.</span>
-</span><span data-line="262"><span class="sd">        seed : int, optional</span>
-</span><span data-line="263"><span class="sd">            If provided, the data is re-split with this seed before training.</span>
-</span><span data-line="264"><span class="sd">            Useful to check a model&#39;s stability across splits:</span>
-</span><span data-line="265"><span class="sd">            ``for s in range(5): print(trainer.fit(seed=s).evaluate())``</span>
-</span><span data-line="266">
-</span><span data-line="267"><span class="sd">        Returns</span>
-</span><span data-line="268"><span class="sd">        -------</span>
-</span><span data-line="269"><span class="sd">        self : Trainer</span>
-</span><span data-line="270"><span class="sd">            The current instance (for chaining).</span>
-</span><span data-line="271"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="272">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">test_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="273">            <span class="bp">self</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-</span><span data-line="274">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="s2">&quot;columns&quot;</span><span class="p">):</span>
-</span><span data-line="275">            <span class="bp">self</span><span class="o">.</span><span class="n">feature_names_</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-</span><span data-line="276">        <span class="n">X_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="n">fit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span data-line="277">        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">)</span>
-</span><span data-line="278">        <span class="bp">self</span><span class="o">.</span><span class="n">_task</span> <span class="o">=</span> <span class="n">detect_model_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">)</span>
-</span><span data-line="279">        <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span data-line="280">        <span class="k">return</span> <span class="bp">self</span></div>
+</span><span data-line="251">    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Trainer&quot;</span><span class="p">:</span>
+</span><span data-line="252"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="253"><span class="sd">        Fit the preprocessor (if enabled) then the model on the training data.</span>
+</span><span data-line="254"><span class="sd">        Loads the data first if needed.</span>
+</span><span data-line="255">
+</span><span data-line="256"><span class="sd">        Parameters</span>
+</span><span data-line="257"><span class="sd">        ----------</span>
+</span><span data-line="258"><span class="sd">        test_size : float, optional</span>
+</span><span data-line="259"><span class="sd">            If provided, the data is re-split with this proportion before training.</span>
+</span><span data-line="260"><span class="sd">        seed : int, optional</span>
+</span><span data-line="261"><span class="sd">            If provided, the data is re-split with this seed before training.</span>
+</span><span data-line="262"><span class="sd">            Useful to check a model&#39;s stability across splits:</span>
+</span><span data-line="263"><span class="sd">            ``for s in range(5): print(trainer.fit(seed=s).evaluate())``</span>
+</span><span data-line="264">
+</span><span data-line="265"><span class="sd">        Returns</span>
+</span><span data-line="266"><span class="sd">        -------</span>
+</span><span data-line="267"><span class="sd">        self : Trainer</span>
+</span><span data-line="268"><span class="sd">            The current instance (for chaining).</span>
+</span><span data-line="269"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="270">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">test_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="271">            <span class="bp">self</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+</span><span data-line="272">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="s2">&quot;columns&quot;</span><span class="p">):</span>
+</span><span data-line="273">            <span class="bp">self</span><span class="o">.</span><span class="n">feature_names_</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</span><span data-line="274">        <span class="n">X_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="n">fit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span data-line="275">        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">)</span>
+</span><span data-line="276">        <span class="bp">self</span><span class="o">.</span><span class="n">_task</span> <span class="o">=</span> <span class="n">detect_model_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">)</span>
+</span><span data-line="277">        <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span data-line="278">        <span class="k">return</span> <span class="bp">self</span></div>
 
-</span><span data-line="281">
+</span><span data-line="279">
 <div class="viewcode-block" id="Trainer.evaluate">
 <a class="viewcode-back" href="../trainedml/trainer.html#trainedml.Trainer.evaluate">[docs]</a>
-</span><span data-line="282">    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-</span><span data-line="283"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="284"><span class="sd">        Evaluate the trained model on the test data, with metrics adapted</span>
-</span><span data-line="285"><span class="sd">        to the task: classification (accuracy, precision, recall, f1) or</span>
-</span><span data-line="286"><span class="sd">        regression (r2, mse, rmse, mae).</span>
-</span><span data-line="287">
-</span><span data-line="288"><span class="sd">        Returns</span>
-</span><span data-line="289"><span class="sd">        -------</span>
-</span><span data-line="290"><span class="sd">        dict</span>
-</span><span data-line="291"><span class="sd">            Dictionary of scores.</span>
-</span><span data-line="292">
-</span><span data-line="293"><span class="sd">        Raises</span>
-</span><span data-line="294"><span class="sd">        ------</span>
-</span><span data-line="295"><span class="sd">        RuntimeError</span>
-</span><span data-line="296"><span class="sd">            If the model has not been trained.</span>
-</span><span data-line="297"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="298">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted</span><span class="p">:</span>
-</span><span data-line="299">            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;The model must be trained before evaluation.&quot;</span><span class="p">)</span>
-</span><span data-line="300">        <span class="n">y_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">))</span>
-</span><span data-line="301">        <span class="k">return</span> <span class="n">Evaluator</span><span class="o">.</span><span class="n">evaluate_for</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span></div>
+</span><span data-line="280">    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+</span><span data-line="281"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="282"><span class="sd">        Evaluate the trained model on the test data, with metrics adapted</span>
+</span><span data-line="283"><span class="sd">        to the task: classification (accuracy, precision, recall, f1) or</span>
+</span><span data-line="284"><span class="sd">        regression (r2, mse, rmse, mae).</span>
+</span><span data-line="285">
+</span><span data-line="286"><span class="sd">        Returns</span>
+</span><span data-line="287"><span class="sd">        -------</span>
+</span><span data-line="288"><span class="sd">        dict</span>
+</span><span data-line="289"><span class="sd">            Dictionary of scores.</span>
+</span><span data-line="290">
+</span><span data-line="291"><span class="sd">        Raises</span>
+</span><span data-line="292"><span class="sd">        ------</span>
+</span><span data-line="293"><span class="sd">        RuntimeError</span>
+</span><span data-line="294"><span class="sd">            If the model has not been trained.</span>
+</span><span data-line="295"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="296">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted</span><span class="p">:</span>
+</span><span data-line="297">            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;The model must be trained before evaluation.&quot;</span><span class="p">)</span>
+</span><span data-line="298">        <span class="n">y_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_test</span><span class="p">))</span>
+</span><span data-line="299">        <span class="k">return</span> <span class="n">Evaluator</span><span class="o">.</span><span class="n">evaluate_for</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span></div>
 
-</span><span data-line="302">
-</span><span data-line="303">    <span class="k">def</span><span class="w"> </span><span class="nf">_as_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.DataFrame&quot;</span><span class="p">:</span>
-</span><span data-line="304"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert X to a DataFrame using the training columns when possible.&quot;&quot;&quot;</span>
-</span><span data-line="305">        <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</span><span data-line="306">        <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-</span><span data-line="307">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
-</span><span data-line="308">            <span class="k">return</span> <span class="n">X</span>
-</span><span data-line="309">        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</span><span data-line="310">        <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-</span><span data-line="311">            <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-</span><span data-line="312">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names_</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_names_</span><span class="p">):</span>
-</span><span data-line="313">            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_names_</span><span class="p">)</span>
-</span><span data-line="314">        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</span><span data-line="315">
+</span><span data-line="300">
+</span><span data-line="301">    <span class="k">def</span><span class="w"> </span><span class="nf">_as_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.DataFrame&quot;</span><span class="p">:</span>
+</span><span data-line="302"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert X to a DataFrame using the training columns when possible.&quot;&quot;&quot;</span>
+</span><span data-line="303">        <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span data-line="304">        <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="305">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+</span><span data-line="306">            <span class="k">return</span> <span class="n">X</span>
+</span><span data-line="307">        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span><span data-line="308">        <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span><span data-line="309">            <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span><span data-line="310">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names_</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_names_</span><span class="p">):</span>
+</span><span data-line="311">            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_names_</span><span class="p">)</span>
+</span><span data-line="312">        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span><span data-line="313">
 <div class="viewcode-block" id="Trainer.predict">
 <a class="viewcode-back" href="../trainedml/trainer.html#trainedml.Trainer.predict">[docs]</a>
-</span><span data-line="316">    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">:</span>
-</span><span data-line="317"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="318"><span class="sd">        Predict the target for new data X.</span>
-</span><span data-line="319">
-</span><span data-line="320"><span class="sd">        The preprocessing learned during training is applied automatically:</span>
-</span><span data-line="321"><span class="sd">        X must contain the same features (same columns) as the training data.</span>
-</span><span data-line="322">
-</span><span data-line="323"><span class="sd">        Parameters</span>
-</span><span data-line="324"><span class="sd">        ----------</span>
-</span><span data-line="325"><span class="sd">        X : array-like or pandas.DataFrame</span>
-</span><span data-line="326"><span class="sd">            Input data (same features as training).</span>
-</span><span data-line="327">
-</span><span data-line="328"><span class="sd">        Returns</span>
-</span><span data-line="329"><span class="sd">        -------</span>
-</span><span data-line="330"><span class="sd">        array</span>
-</span><span data-line="331"><span class="sd">            Model predictions.</span>
-</span><span data-line="332">
-</span><span data-line="333"><span class="sd">        Raises</span>
-</span><span data-line="334"><span class="sd">        ------</span>
-</span><span data-line="335"><span class="sd">        RuntimeError</span>
-</span><span data-line="336"><span class="sd">            If the model has not been trained.</span>
-</span><span data-line="337"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="338">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted</span><span class="p">:</span>
-</span><span data-line="339">            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;The model must be trained before prediction.&quot;</span><span class="p">)</span>
-</span><span data-line="340">        <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_as_frame</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</span><span data-line="341">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transform</span><span class="p">(</span><span class="n">X</span><span class="p">))</span></div>
+</span><span data-line="314">    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">:</span>
+</span><span data-line="315"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="316"><span class="sd">        Predict the target for new data X.</span>
+</span><span data-line="317">
+</span><span data-line="318"><span class="sd">        The preprocessing learned during training is applied automatically:</span>
+</span><span data-line="319"><span class="sd">        X must contain the same features (same columns) as the training data.</span>
+</span><span data-line="320">
+</span><span data-line="321"><span class="sd">        Parameters</span>
+</span><span data-line="322"><span class="sd">        ----------</span>
+</span><span data-line="323"><span class="sd">        X : array-like or pandas.DataFrame</span>
+</span><span data-line="324"><span class="sd">            Input data (same features as training).</span>
+</span><span data-line="325">
+</span><span data-line="326"><span class="sd">        Returns</span>
+</span><span data-line="327"><span class="sd">        -------</span>
+</span><span data-line="328"><span class="sd">        array</span>
+</span><span data-line="329"><span class="sd">            Model predictions.</span>
+</span><span data-line="330">
+</span><span data-line="331"><span class="sd">        Raises</span>
+</span><span data-line="332"><span class="sd">        ------</span>
+</span><span data-line="333"><span class="sd">        RuntimeError</span>
+</span><span data-line="334"><span class="sd">            If the model has not been trained.</span>
+</span><span data-line="335"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="336">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted</span><span class="p">:</span>
+</span><span data-line="337">            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;The model must be trained before prediction.&quot;</span><span class="p">)</span>
+</span><span data-line="338">        <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_as_frame</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span><span data-line="339">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transform</span><span class="p">(</span><span class="n">X</span><span class="p">))</span></div>
 
-</span><span data-line="342">
+</span><span data-line="340">
 <div class="viewcode-block" id="Trainer.save">
 <a class="viewcode-back" href="../trainedml/trainer.html#trainedml.Trainer.save">[docs]</a>
-</span><span data-line="343">    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Path&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="344"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="345"><span class="sd">        Save the trained model (and its preprocessor) to disk.</span>
-</span><span data-line="346">
-</span><span data-line="347"><span class="sd">        Parameters</span>
-</span><span data-line="348"><span class="sd">        ----------</span>
-</span><span data-line="349"><span class="sd">        path : str or pathlib.Path</span>
-</span><span data-line="350"><span class="sd">            Output file path (convention: ``.joblib`` extension).</span>
-</span><span data-line="351">
-</span><span data-line="352"><span class="sd">        Raises</span>
-</span><span data-line="353"><span class="sd">        ------</span>
-</span><span data-line="354"><span class="sd">        RuntimeError</span>
-</span><span data-line="355"><span class="sd">            If the model has not been trained.</span>
-</span><span data-line="356">
-</span><span data-line="357"><span class="sd">        Examples</span>
-</span><span data-line="358"><span class="sd">        --------</span>
-</span><span data-line="359"><span class="sd">        &gt;&gt;&gt; trainer.fit().save(&quot;model.joblib&quot;)</span>
-</span><span data-line="360"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="361">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted</span><span class="p">:</span>
-</span><span data-line="362">            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;The model must be trained before saving.&quot;</span><span class="p">)</span>
-</span><span data-line="363">        <span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
-</span><span data-line="364">        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-</span><span data-line="365">            <span class="s2">&quot;trainedml_version&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">,</span>
-</span><span data-line="366">            <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
-</span><span data-line="367">            <span class="s2">&quot;model_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span>
-</span><span data-line="368">            <span class="s2">&quot;model_params&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">,</span>
-</span><span data-line="369">            <span class="s2">&quot;preprocessor&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">,</span>
-</span><span data-line="370">            <span class="s2">&quot;feature_names&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names_</span><span class="p">,</span>
-</span><span data-line="371">            <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">,</span>
-</span><span data-line="372">        <span class="p">}</span>
-</span><span data-line="373">        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span></div>
+</span><span data-line="341">    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Path&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="342"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="343"><span class="sd">        Save the trained model (and its preprocessor) to disk.</span>
+</span><span data-line="344">
+</span><span data-line="345"><span class="sd">        Parameters</span>
+</span><span data-line="346"><span class="sd">        ----------</span>
+</span><span data-line="347"><span class="sd">        path : str or pathlib.Path</span>
+</span><span data-line="348"><span class="sd">            Output file path (convention: ``.joblib`` extension).</span>
+</span><span data-line="349">
+</span><span data-line="350"><span class="sd">        Raises</span>
+</span><span data-line="351"><span class="sd">        ------</span>
+</span><span data-line="352"><span class="sd">        RuntimeError</span>
+</span><span data-line="353"><span class="sd">            If the model has not been trained.</span>
+</span><span data-line="354">
+</span><span data-line="355"><span class="sd">        Examples</span>
+</span><span data-line="356"><span class="sd">        --------</span>
+</span><span data-line="357"><span class="sd">        &gt;&gt;&gt; trainer.fit().save(&quot;model.joblib&quot;)</span>
+</span><span data-line="358"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="359">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_fitted</span><span class="p">:</span>
+</span><span data-line="360">            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;The model must be trained before saving.&quot;</span><span class="p">)</span>
+</span><span data-line="361">        <span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+</span><span data-line="362">        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="363">            <span class="s2">&quot;trainedml_version&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">,</span>
+</span><span data-line="364">            <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+</span><span data-line="365">            <span class="s2">&quot;model_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span>
+</span><span data-line="366">            <span class="s2">&quot;model_params&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_params</span><span class="p">,</span>
+</span><span data-line="367">            <span class="s2">&quot;preprocessor&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">,</span>
+</span><span data-line="368">            <span class="s2">&quot;feature_names&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names_</span><span class="p">,</span>
+</span><span data-line="369">            <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">,</span>
+</span><span data-line="370">        <span class="p">}</span>
+</span><span data-line="371">        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span></div>
 
-</span><span data-line="374">
+</span><span data-line="372">
 <div class="viewcode-block" id="Trainer.load">
 <a class="viewcode-back" href="../trainedml/trainer.html#trainedml.Trainer.load">[docs]</a>
-</span><span data-line="375">    <span class="nd">@classmethod</span>
-</span><span data-line="376">    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Path&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;Trainer&quot;</span><span class="p">:</span>
-</span><span data-line="377"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="378"><span class="sd">        Reload a Trainer saved with :meth:`save`, ready to predict.</span>
-</span><span data-line="379">
-</span><span data-line="380"><span class="sd">        Parameters</span>
-</span><span data-line="381"><span class="sd">        ----------</span>
-</span><span data-line="382"><span class="sd">        path : str or pathlib.Path</span>
-</span><span data-line="383"><span class="sd">            Path to the saved file.</span>
-</span><span data-line="384">
-</span><span data-line="385"><span class="sd">        Returns</span>
-</span><span data-line="386"><span class="sd">        -------</span>
-</span><span data-line="387"><span class="sd">        Trainer</span>
-</span><span data-line="388"><span class="sd">            Instance ready for :meth:`predict` (the original data is not</span>
-</span><span data-line="389"><span class="sd">            reloaded; ``X_train`` etc. are None).</span>
-</span><span data-line="390">
-</span><span data-line="391"><span class="sd">        Examples</span>
-</span><span data-line="392"><span class="sd">        --------</span>
-</span><span data-line="393"><span class="sd">        &gt;&gt;&gt; restored = Trainer.load(&quot;model.joblib&quot;)</span>
-</span><span data-line="394"><span class="sd">        &gt;&gt;&gt; restored.predict([[5.1, 3.5, 1.4, 0.2]])</span>
-</span><span data-line="395"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="396">        <span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
-</span><span data-line="397">        <span class="n">payload</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</span><span data-line="398">        <span class="n">trainer</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
-</span><span data-line="399">        <span class="n">trainer</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="400">        <span class="n">trainer</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="401">        <span class="n">trainer</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="402">        <span class="c1"># Default values: the original data is not reloaded</span>
-</span><span data-line="403">        <span class="n">trainer</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span>
-</span><span data-line="404">        <span class="n">trainer</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">42</span>
-</span><span data-line="405">        <span class="n">trainer</span><span class="o">.</span><span class="n">preprocess</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;preprocessor&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-</span><span data-line="406">        <span class="n">trainer</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
-</span><span data-line="407">        <span class="n">trainer</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;model_name&quot;</span><span class="p">]</span>
-</span><span data-line="408">        <span class="n">trainer</span><span class="o">.</span><span class="n">model_params</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;model_params&quot;</span><span class="p">,</span> <span class="p">{})</span>
-</span><span data-line="409">        <span class="n">trainer</span><span class="o">.</span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;preprocessor&quot;</span><span class="p">]</span>
-</span><span data-line="410">        <span class="n">trainer</span><span class="o">.</span><span class="n">feature_names_</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feature_names&quot;</span><span class="p">)</span>
-</span><span data-line="411">        <span class="n">trainer</span><span class="o">.</span><span class="n">X_train</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">X_test</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">y_train</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="412">        <span class="n">trainer</span><span class="o">.</span><span class="n">_task</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;task&quot;</span><span class="p">)</span>
-</span><span data-line="413">        <span class="n">trainer</span><span class="o">.</span><span class="n">is_fitted</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span data-line="414">        <span class="k">return</span> <span class="n">trainer</span></div>
+</span><span data-line="373">    <span class="nd">@classmethod</span>
+</span><span data-line="374">    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Path&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;Trainer&quot;</span><span class="p">:</span>
+</span><span data-line="375"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="376"><span class="sd">        Reload a Trainer saved with :meth:`save`, ready to predict.</span>
+</span><span data-line="377">
+</span><span data-line="378"><span class="sd">        Parameters</span>
+</span><span data-line="379"><span class="sd">        ----------</span>
+</span><span data-line="380"><span class="sd">        path : str or pathlib.Path</span>
+</span><span data-line="381"><span class="sd">            Path to the saved file.</span>
+</span><span data-line="382">
+</span><span data-line="383"><span class="sd">        Returns</span>
+</span><span data-line="384"><span class="sd">        -------</span>
+</span><span data-line="385"><span class="sd">        Trainer</span>
+</span><span data-line="386"><span class="sd">            Instance ready for :meth:`predict` (the original data is not</span>
+</span><span data-line="387"><span class="sd">            reloaded; ``X_train`` etc. are None).</span>
+</span><span data-line="388">
+</span><span data-line="389"><span class="sd">        Examples</span>
+</span><span data-line="390"><span class="sd">        --------</span>
+</span><span data-line="391"><span class="sd">        &gt;&gt;&gt; restored = Trainer.load(&quot;model.joblib&quot;)</span>
+</span><span data-line="392"><span class="sd">        &gt;&gt;&gt; restored.predict([[5.1, 3.5, 1.4, 0.2]])</span>
+</span><span data-line="393"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="394">        <span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+</span><span data-line="395">        <span class="n">payload</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span><span data-line="396">        <span class="n">trainer</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+</span><span data-line="397">        <span class="n">trainer</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="398">        <span class="n">trainer</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="399">        <span class="n">trainer</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="400">        <span class="c1"># Default values: the original data is not reloaded</span>
+</span><span data-line="401">        <span class="n">trainer</span><span class="o">.</span><span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span>
+</span><span data-line="402">        <span class="n">trainer</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">42</span>
+</span><span data-line="403">        <span class="n">trainer</span><span class="o">.</span><span class="n">preprocess</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;preprocessor&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+</span><span data-line="404">        <span class="n">trainer</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+</span><span data-line="405">        <span class="n">trainer</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;model_name&quot;</span><span class="p">]</span>
+</span><span data-line="406">        <span class="n">trainer</span><span class="o">.</span><span class="n">model_params</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;model_params&quot;</span><span class="p">,</span> <span class="p">{})</span>
+</span><span data-line="407">        <span class="n">trainer</span><span class="o">.</span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;preprocessor&quot;</span><span class="p">]</span>
+</span><span data-line="408">        <span class="n">trainer</span><span class="o">.</span><span class="n">feature_names_</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feature_names&quot;</span><span class="p">)</span>
+</span><span data-line="409">        <span class="n">trainer</span><span class="o">.</span><span class="n">X_train</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">X_test</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">y_train</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="410">        <span class="n">trainer</span><span class="o">.</span><span class="n">_task</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;task&quot;</span><span class="p">)</span>
+</span><span data-line="411">        <span class="n">trainer</span><span class="o">.</span><span class="n">is_fitted</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span data-line="412">        <span class="k">return</span> <span class="n">trainer</span></div>
 </div>
 
-</span><span data-line="415">
-</span><span data-line="416">
-</span><span data-line="417"><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="418"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="419"><span class="sd">    CLI entry point of the trainedml package.</span>
-</span><span data-line="420"><span class="sd">    Launches the command-line interface (see src/trainedml/cli.py).</span>
-</span><span data-line="421"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="422">    <span class="kn">from</span><span class="w"> </span><span class="nn">.cli</span><span class="w"> </span><span class="kn">import</span> <span class="n">main</span> <span class="k">as</span> <span class="n">cli_main</span>
-</span><span data-line="423">    <span class="n">cli_main</span><span class="p">()</span>
+</span><span data-line="413">
+</span><span data-line="414">
+</span><span data-line="415"><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="416"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="417"><span class="sd">    CLI entry point of the trainedml package.</span>
+</span><span data-line="418"><span class="sd">    Launches the command-line interface (see src/trainedml/cli.py).</span>
+</span><span data-line="419"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="420">    <span class="kn">from</span><span class="w"> </span><span class="nn">.cli</span><span class="w"> </span><span class="kn">import</span> <span class="n">main</span> <span class="k">as</span> <span class="n">cli_main</span>
+</span><span data-line="421">    <span class="n">cli_main</span><span class="p">()</span>
 </span></pre></div>
         </article><button class="back-to-top" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

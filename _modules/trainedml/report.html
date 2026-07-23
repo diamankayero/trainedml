@@ -2,12 +2,13 @@
 <html lang="fr" data-accent-color="violet" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.report - trainedml 0.2.0</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.report - trainedml 0.2.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=192bdaf1" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,8 +26,8 @@
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
     <a class="sy-head-brand" href="../../index.html">
-      
-      
+      <img class="light-logo" src="../../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
       <strong>trainedml</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
@@ -55,37 +56,40 @@ data-aria-dark="Passer en mode automatique">
   <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
     <div class="sy-lside-inner md:sticky">
       <div class="sy-scrollbar p-6">
-        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">API</span></p>
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Cœur du package</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">trainedml - API détaillée</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/trainer.html">Trainer (API principale)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/loader.html">DataLoader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/preprocessing.html">Prétraitement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/tasks.html">Détection de tâche</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/benchmark.html">Benchmark</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/evaluation.html">Evaluator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/report.html">Rapport EDA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/logistic.html">Régression logistique</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/models/random_forest.html">Random Forest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/visualization.html">Visualizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/analyzer.html">DataAnalyzer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/loader.html">DataLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/tasks.html">Détection de tâche</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/benchmark.html">Benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/evaluation.html">Evaluator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/report.html">Rapport EDA</a></li>
 </ul>
-</li>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Modèles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/models/random_forest.html">Random Forest</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Exploration et visualisation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/visualization.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/analyzer.html">DataAnalyzer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
 </ul>
 
         </div>

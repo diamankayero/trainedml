@@ -2,12 +2,13 @@
 <html lang="fr" data-accent-color="violet" data-content_root="./">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml 0.2.0</title><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Recherche" href="search.html" /><link rel="next" title="trainedml - API détaillée" href="modules.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml 0.2.0</title><link rel="shortcut icon" href="_static/logo.svg"/><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Recherche" href="search.html" /><link rel="next" title="Trainer (API principale)" href="trainedml/trainer.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=2ceb65ce" />
     <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=192bdaf1" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,8 +26,8 @@
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
     <a class="sy-head-brand" href="#">
-      
-      
+      <img class="light-logo" src="_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
+      <img class="dark-logo" src="_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
       <strong>trainedml</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
@@ -55,37 +56,40 @@ data-aria-dark="Passer en mode automatique">
   <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
     <div class="sy-lside-inner md:sticky">
       <div class="sy-scrollbar p-6">
-        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">API</span></p>
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Cœur du package</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">trainedml - API détaillée</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/trainer.html">Trainer (API principale)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/loader.html">DataLoader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/preprocessing.html">Prétraitement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/tasks.html">Détection de tâche</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/benchmark.html">Benchmark</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/evaluation.html">Evaluator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/report.html">Rapport EDA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/models/logistic.html">Régression logistique</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/models/random_forest.html">Random Forest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/visualization.html">Visualizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/analyzer.html">DataAnalyzer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/vizs.html">Vizs (visualisations de base)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/heatmap.html">Heatmap</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/histogram.html">Histogram</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/line.html">Line</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/correlation.html">Correlation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/missing.html">Missing Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/outliers.html">Outliers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/target.html">Target</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/bivariate.html">Bivariate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/normality.html">Normality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/loader.html">DataLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/tasks.html">Détection de tâche</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/benchmark.html">Benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/evaluation.html">Evaluator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/report.html">Rapport EDA</a></li>
 </ul>
-</li>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Modèles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/models/random_forest.html">Random Forest</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Exploration et visualisation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/visualization.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/analyzer.html">DataAnalyzer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/distribution.html">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/correlation.html">Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/missing.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/outliers.html">Outliers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/target.html">Target</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/boxplot.html">Boxplot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/bivariate.html">Bivariate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/normality.html">Normality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainedml/profiling.html">Profiling</a></li>
 </ul>
 
         </div>
@@ -98,15 +102,12 @@ data-aria-dark="Passer en mode automatique">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>Sur cette page</h3><ul>
-<li><a class="reference internal" href="#">trainedml</a></li>
-<li><a class="reference internal" href="#guide-de-demarrage-rapide">Guide de démarrage rapide</a></li>
 <li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#utilisation-en-ligne-de-commande">Utilisation en ligne de commande</a></li>
-<li><a class="reference internal" href="#sections-de-la-documentation">Sections de la documentation</a></li>
-<li><a class="reference internal" href="#explications-mathematiques-des-methodes">Explications mathématiques des méthodes</a><ul>
-<li><a class="reference internal" href="#faq">FAQ</a></li>
-<li><a class="reference internal" href="#contribuer">Contribuer</a></li>
-<li><a class="reference internal" href="#licence">Licence</a></li>
+<li><a class="reference internal" href="#demarrage-rapide">D&#233;marrage rapide</a></li>
+<li><a class="reference internal" href="#fonctionnalites">Fonctionnalit&#233;s</a></li>
+<li><a class="reference internal" href="#ecosysteme">&#201;cosyst&#232;me</a></li>
+<li><a class="reference internal" href="#questions-frequentes">Questions fr&#233;quentes</a></li>
+<li><a class="reference internal" href="#contribuer-et-licence">Contribuer et licence</a><ul>
 </ul>
 </li>
 </ul>
@@ -137,19 +138,29 @@ data-aria-dark="Passer en mode automatique">
   <article class="yue" role="main">
           <section id="trainedml">
 <h1>trainedml<a class="headerlink" href="#trainedml" title="Lien vers cette rubrique">#</a></h1>
-<a class="reference external image-reference" href="https://www.python.org/"><img alt="Python Version" src="https://img.shields.io/badge/python-3.8+-blue.svg" />
+<a class="reference external image-reference" href="https://pypi.org/project/trainedml/"><img alt="Version PyPI" src="https://img.shields.io/pypi/v/trainedml.svg" />
 </a>
-<p><strong>trainedml</strong> est une bibliothèque Python modulaire pour l’apprentissage automatique supervisé, conçue pour l’enseignement, la recherche et le prototypage rapide.</p>
-<ul class="simple">
-<li><p>Chargement flexible de jeux de données publics ou personnalisés</p></li>
-<li><p>Modèles classiques (Random Forest, KNN, Régression Logistique)</p></li>
-<li><p>Visualisations intégrées (heatmap, histogramme, courbe)</p></li>
-<li><p>API simple pour l’intégration web/applications</p></li>
-<li><p>Documentation API complète et tests unitaires</p></li>
-</ul>
+<a class="reference external image-reference" href="https://pypi.org/project/trainedml/"><img alt="Versions Python" src="https://img.shields.io/pypi/pyversions/trainedml.svg" />
+</a>
+<a class="reference external image-reference" href="https://github.com/diamankayero/trainedml/actions"><img alt="CI" src="https://github.com/diamankayero/trainedml/actions/workflows/workflow.yml/badge.svg" />
+</a>
+<a class="reference external image-reference" href="https://github.com/diamankayero/trainedml/blob/main/LICENCE"><img alt="Licence MIT" src="https://img.shields.io/badge/licence-MIT-green.svg" />
+</a>
+<p><strong>Du CSV au comparatif de modèles et au rapport EDA en une ligne.</strong></p>
+<p>trainedml est une bibliothèque Python d’apprentissage automatique supervisé
+pensée pour l’enseignement, la recherche et le prototypage rapide : chargement
+de données, prétraitement automatique, entraînement, comparaison de modèles
+par validation croisée et exploration visuelle, le tout derrière une API
+unifiée et une CLI.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Lien vers cette rubrique">#</a></h2>
+<p>Le package est publié sur <a class="reference external" href="https://pypi.org/project/trainedml/">PyPI</a> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span>trainedml
+</span></pre></div>
+</div>
 </section>
-<section id="guide-de-demarrage-rapide">
-<h1>Guide de démarrage rapide<a class="headerlink" href="#guide-de-demarrage-rapide" title="Lien vers cette rubrique">#</a></h1>
+<section id="demarrage-rapide">
+<h2>Démarrage rapide<a class="headerlink" href="#demarrage-rapide" title="Lien vers cette rubrique">#</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trainer</span><span class="p">,</span> <span class="n">compare</span>
 </span><span data-line="2">
 </span><span data-line="3"><span class="c1"># Entraîner, évaluer, prédire</span>
@@ -166,84 +177,65 @@ data-aria-dark="Passer en mode automatique">
 </span><span data-line="14"><span class="nb">print</span><span class="p">(</span><span class="n">compare</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
 </span></pre></div>
 </div>
-</section>
-<section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Lien vers cette rubrique">#</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-</span><span data-line="2">pip<span class="w"> </span>install<span class="w"> </span>.
+<p>La même chose en ligne de commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">trainedml<span class="w"> </span>--dataset<span class="w"> </span>iris<span class="w"> </span>--model<span class="w"> </span>random_forest<span class="w"> </span>--show
+</span><span data-line="2">trainedml<span class="w"> </span>--dataset<span class="w"> </span>wine<span class="w"> </span>--benchmark<span class="w"> </span>--cv<span class="w"> </span><span class="m">5</span>
 </span></pre></div>
 </div>
 </section>
-<section id="utilisation-en-ligne-de-commande">
-<h1>Utilisation en ligne de commande<a class="headerlink" href="#utilisation-en-ligne-de-commande" title="Lien vers cette rubrique">#</a></h1>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">python<span class="w"> </span>-m<span class="w"> </span>trainedml<span class="w"> </span>--dataset<span class="w"> </span>iris<span class="w"> </span>--model<span class="w"> </span>random_forest<span class="w"> </span>--show
-</span></pre></div>
-</div>
-</section>
-<section id="sections-de-la-documentation">
-<h1>Sections de la documentation<a class="headerlink" href="#sections-de-la-documentation" title="Lien vers cette rubrique">#</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">API</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">trainedml - API détaillée</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/trainer.html">Trainer (API principale)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/loader.html">DataLoader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/preprocessing.html">Prétraitement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/tasks.html">Détection de tâche</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/benchmark.html">Benchmark</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/evaluation.html">Evaluator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/report.html">Rapport EDA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/models/logistic.html">Régression logistique</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/models/random_forest.html">Random Forest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/visualization.html">Visualizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/analyzer.html">DataAnalyzer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/vizs.html">Vizs (visualisations de base)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/heatmap.html">Heatmap</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/histogram.html">Histogram</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/line.html">Line</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/correlation.html">Correlation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/missing.html">Missing Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/outliers.html">Outliers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/target.html">Target</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/bivariate.html">Bivariate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/normality.html">Normality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trainedml/profiling.html">Profiling</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</section>
-<section id="explications-mathematiques-des-methodes">
-<h1>Explications mathématiques des méthodes<a class="headerlink" href="#explications-mathematiques-des-methodes" title="Lien vers cette rubrique">#</a></h1>
-<p class="rubric">Explications mathématiques des méthodes</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Les explications mathématiques détaillées pour chaque méthode sont disponibles dans la section API détaillée :</p>
+<section id="fonctionnalites">
+<h2>Fonctionnalités<a class="headerlink" href="#fonctionnalites" title="Lien vers cette rubrique">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="trainedml/models/knn.html"><span class="doc">k-Nearest Neighbors (kNN)</span></a></p></li>
-<li><p><a class="reference internal" href="trainedml/models/logistic.html"><span class="doc">Régression Logistique</span></a></p></li>
-<li><p><a class="reference internal" href="trainedml/models/random_forest.html"><span class="doc">Random Forest</span></a></p></li>
+<li><p><strong>Données</strong> : datasets intégrés (Iris, Wine…), CSV distants avec cache
+local, données en mémoire ; voir <a class="reference internal" href="trainedml/loader.html"><span class="doc">DataLoader</span></a>.</p></li>
+<li><p><strong>Prétraitement automatique</strong> : imputation, standardisation, encodage
+one-hot, sans fuite d’information en validation croisée ; voir
+<a class="reference internal" href="trainedml/preprocessing.html"><span class="doc">Prétraitement</span></a>.</p></li>
+<li><p><strong>Modèles</strong> : Random Forest, kNN, régression logistique, régresseurs, et
+n’importe quel estimateur scikit-learn ; voir <a class="reference internal" href="trainedml/trainer.html"><span class="doc">Trainer</span></a>.</p></li>
+<li><p><strong>Comparaison</strong> : benchmark de tous les modèles adaptés au dataset, avec
+validation croisée ; voir <a class="reference internal" href="trainedml/benchmark.html"><span class="doc">Benchmark</span></a>.</p></li>
+<li><p><strong>Exploration</strong> : statistiques descriptives, corrélations, valeurs
+manquantes, outliers, normalité, VIF, et rapport EDA HTML auto-contenu ;
+voir <a class="reference internal" href="trainedml/visualization.html"><span class="doc">Visualizer</span></a> et
+<a class="reference internal" href="trainedml/report.html"><span class="doc">Rapport EDA</span></a>.</p></li>
 </ul>
-<p>(voir aussi « modules » dans le menu de gauche)</p>
+</section>
+<section id="ecosysteme">
+<h2>Écosystème<a class="headerlink" href="#ecosysteme" title="Lien vers cette rubrique">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/diamankayero/trainedml">Code source sur GitHub</a></p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/trainedml/">Package sur PyPI</a></p></li>
+<li><p><a class="reference external" href="https://trainedml.onrender.com">Démo web interactive</a> : l’API du package
+exposée en HTTP, avec une page d’essai dans le navigateur</p></li>
+<li><p><a class="reference external" href="https://modelml.vercel.app">ModeLmL</a> : l’atelier web complet construit
+sur trainedml (dashboard, analyse, comparaison, prédiction)</p></li>
+</ul>
+</section>
+<section id="questions-frequentes">
+<h2>Questions fréquentes<a class="headerlink" href="#questions-frequentes" title="Lien vers cette rubrique">#</a></h2>
+<dl class="simple">
+<dt><strong>Comment charger mon propre dataset ?</strong></dt><dd><p>Passez l’URL de votre CSV et le nom de la colonne cible à
+<a class="reference internal" href="trainedml/loader.html"><span class="doc">DataLoader</span></a>, ou donnez directement un DataFrame
+en mémoire à <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>.</p>
+</dd>
+<dt><strong>Puis-je utiliser mes propres modèles ?</strong></dt><dd><p>Oui : tout estimateur scikit-learn se passe tel quel
+(<code class="docutils literal notranslate"><span class="pre">Trainer(model=SVC())</span></code>), et un modèle maison s’intègre en héritant de
+<code class="docutils literal notranslate"><span class="pre">BaseModel</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="contribuer-et-licence">
+<h2>Contribuer et licence<a class="headerlink" href="#contribuer-et-licence" title="Lien vers cette rubrique">#</a></h2>
+<p>Les contributions sont les bienvenues : issues et pull requests sur
+<a class="reference external" href="https://github.com/diamankayero/trainedml">GitHub</a>. Le projet est
+distribué sous licence MIT.</p>
+<div class="toctree-wrapper compound">
 </div>
-<section id="faq">
-<h2>FAQ<a class="headerlink" href="#faq" title="Lien vers cette rubrique">#</a></h2>
-<p><strong>Q : Comment ajouter un nouveau dataset ?</strong></p>
-<p>R : Utilisez la classe DataLoader avec l’URL de votre CSV et le nom de la colonne cible.</p>
-<p><strong>Q : Puis-je utiliser mes propres modèles ?</strong></p>
-<p>R : Oui, il suffit d’implémenter la classe BaseModel et de l’ajouter à MODEL_MAP.</p>
-</section>
-<section id="contribuer">
-<h2>Contribuer<a class="headerlink" href="#contribuer" title="Lien vers cette rubrique">#</a></h2>
-<p>Les contributions sont les bienvenues ! Merci de soumettre vos issues et pull requests sur GitHub.</p>
-</section>
-<section id="licence">
-<h2>Licence<a class="headerlink" href="#licence" title="Lien vers cette rubrique">#</a></h2>
-<p>Ce projet est distribué sous licence MIT.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 </section>
 
@@ -253,10 +245,10 @@ data-aria-dark="Passer en mode automatique">
   </svg>
   <span>Retour au sommet</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-next">
-    <a href="modules.html">
+    <a href="trainedml/trainer.html">
       <div class="page-info">
         <span>Suivant</span>
-        <div class="title">trainedml - API détaillée</div>
+        <div class="title">Trainer (API principale)</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>
