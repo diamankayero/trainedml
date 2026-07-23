@@ -103,15 +103,6 @@ class Benchmark:
     results : dict or None
         Results after running the benchmark.
 
-    Methods
-    -------
-    run(X_train, y_train, X_test, y_test, parallel=False, n_jobs=-1, show_progress=True)
-        Run the benchmark and return results.
-    summary()
-        Return a formatted summary of the results.
-    print_summary()
-        Print the summary to stdout.
-
     Examples
     --------
     >>> bench = Benchmark({'knn': KNNModel(), 'rf': RandomForestModel()})

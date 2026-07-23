@@ -23,6 +23,14 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
   été retirée de `pyproject.toml`.
 - Doc Sphinx : thème Shibuya (remplace sphinx_rtd_theme), version affichée
   lue depuis pyproject.toml, labels de section préfixés par document.
+- Page d'accueil de la doc refondue : installation depuis PyPI (l'ancienne
+  page documentait une installation depuis les sources), badges réels
+  (PyPI, Python, CI, licence), logo monogramme SVG, liens vers l'écosystème
+  (démo web, ModeLmL), et navigation latérale groupée en trois sections
+  (cœur, modèles, exploration) au lieu d'une liste plate de 26 pages.
+- Build de la doc sans aucun warning : sections Methods/Attributes
+  redondantes retirées des docstrings (elles dupliquaient les entrées
+  générées par autodoc).
 
 ### Corrigé
 - `Visualizer.multicollinearity()` ne transmet plus de `**kwargs` vers

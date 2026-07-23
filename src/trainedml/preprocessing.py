@@ -93,8 +93,6 @@ class PreprocessedModel:
         The wrapped model.
     preprocessor : sklearn.compose.ColumnTransformer
         The preprocessor, retrained on every call to :meth:`fit`.
-    task : str
-        Task type of the wrapped model (delegated).
 
     Examples
     --------

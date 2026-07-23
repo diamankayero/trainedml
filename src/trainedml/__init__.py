@@ -111,8 +111,6 @@ class Trainer:
         The preprocessor (None if ``preprocess=False``).
     X_train, X_test, y_train, y_test : array-like
         Train/test splits (not preprocessed).
-    task : str
-        Task type ('classification' or 'regression').
     is_fitted : bool
         Whether the model has been trained.
 

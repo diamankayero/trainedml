@@ -1,0 +1,5 @@
+/* Shibuya masque le nom du projet des qu'un logo est present ;
+   on veut le logo ET le nom dans le bandeau. */
+.sy-head-brand img + strong {
+    display: inline-block;
+}

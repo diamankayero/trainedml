@@ -38,8 +38,8 @@ class DataLoader:
     This class isolates data-access logic: other modules never need to
     know where the data comes from (URL, open data, local, etc.).
 
-    Main features
-    -------------
+    Features
+    --------
     - Automatic download and caching of public datasets (Iris, Wine, etc.)
     - CSV loading from a URL (with separator and hash handling)
     - Returns X (features) and y (target) ready to use for ML

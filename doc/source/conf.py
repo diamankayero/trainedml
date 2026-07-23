@@ -39,6 +39,9 @@ language = 'fr'
 html_theme = 'shibuya'
 html_title = f'trainedml {release}'
 html_static_path = ['_static']
+html_logo = '_static/logo.svg'
+html_favicon = '_static/logo.svg'
+html_css_files = ['custom.css']
 
 # -- Extension configuration ------------------------------------------------
 extensions += [
