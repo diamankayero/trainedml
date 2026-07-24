@@ -40,7 +40,36 @@
 
 ## Overview
 
-**trainedml** est un package Python modulaire pour entraîner, comparer et visualiser des modèles de machine learning sur des jeux de données classiques ou personnalisés : du CSV au comparatif de modèles et au rapport exploratoire, en une ligne. Il offre une API unifiée (`Trainer`, `compare()`), une interface en ligne de commande et une API web FastAPI avec page de démo.
+**trainedml** is a modular Python package to train, compare, and visualize machine learning models on classic or custom datasets: from a CSV to a model comparison and an exploratory report, in one line. It offers a unified API (`Trainer`, `compare()`), a command-line interface, and a FastAPI web API with a demo page.
+
+### Where trainedml fits
+
+trainedml sits between raw scikit-learn (full control, more boilerplate) and
+full AutoML frameworks (more automated, more opinionated, heavier). It
+targets teaching, prototyping, and small-to-medium projects where you want a
+one-line comparison and a real EDA report without giving up direct access to
+the underlying scikit-learn estimators.
+
+| | trainedml | scikit-learn | PyCaret | lazypredict |
+|---|---|---|---|---|
+| Model comparison in one line | ✅ `compare()` | ❌ manual loop | ✅ `compare_models()` | ✅ `LazyClassifier` |
+| Cross-validated comparison with std dev | ✅ | ❌ manual | ➖ (available per-model, not always shown in the comparison grid) | ❌ (single split) |
+| Self-contained HTML EDA report | ✅ `report()` | ❌ | ➖ (`setup(profile=True)`, via `ydata-profiling`) | ❌ |
+| Confusion matrix / ROC / feature importance | ✅ built in | ➖ (assemble yourself) | ✅ | ❌ |
+| Hyperparameter search (grid/random) | ✅ `grid_search()`/`random_search()` | ✅ (`GridSearchCV` directly) | ✅ (`tune_model()`) | ❌ |
+| Accepts any scikit-learn estimator directly | ✅ `Trainer(model=SVC())` | ✅ (it's the source) | ✅ `create_model(SVC())` | ❌ |
+| CLI included | ✅ | ❌ | ❌ | ❌ |
+| Dependency footprint | Light (scikit-learn, pandas, matplotlib, seaborn, statsmodels) | Lightest (itself) | Heavy (many optional backends) | Moderate (adds xgboost, lightgbm, pmdarima) |
+| Typical use case | Teaching, prototyping, small/medium projects | Full control, production pipelines | Fast end-to-end AutoML | Quick first-pass model ranking |
+
+*Comparison as of mid-2026, based on each project's public documentation;
+verify against their latest release before relying on it.*
+
+trainedml does not try to replace scikit-learn (it wraps and re-exposes it
+directly) or to out-automate PyCaret (no automatic feature engineering, no
+stacking/blending, no deployment tooling). The trade-off is intentional: a
+smaller surface, in plain scikit-learn terms, that stays easy to read,
+extend, and teach from.
 
 ---
 
@@ -254,13 +283,12 @@ trainedml/
 │   ├── report.py          # Self-contained HTML EDA report
 │   ├── analyzer.py        # Exploratory data analysis
 │   ├── cli.py             # CLI interface
-│   ├── figure.py          # Figure generation
 │   ├── visualization.py   # Visualization facade (Visualizer)
 │   ├── data/              # Data loading (offline built-ins + remote CSV)
 │   ├── models/            # ML models (KNN, LR, RF, regressors...)
 │   └── viz/               # Advanced visualizations
 ├── doc/                   # Sphinx documentation
-├── examples/              # Runnable examples, notebooks, and the doc's example gallery source
+├── examples/              # Example gallery source (also runnable as plain scripts)
 ├── tests/                 # Unit tests
 └── CHANGELOG.md
 

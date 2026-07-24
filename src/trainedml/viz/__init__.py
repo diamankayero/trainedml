@@ -8,20 +8,17 @@ from .vizs import Vizs
 from .heatmap import HeatmapViz
 from .histogram import HistogramViz
 from .line import LineViz
-from .distribution import DistributionViz
-from .correlation import CorrelationViz
 from .missing import MissingValuesViz
 from .outliers import OutliersViz
 from .target import TargetViz
-from .boxplot import BoxplotViz
-from .bivariate import BivariateViz
 from .normality import NormalityViz
 from .multicollinearity import MulticollinearityViz
-from .profiling import ProfilingViz
+from .confusion import plot_confusion_matrix
+from .roc import plot_roc_curve
 
 __all__ = [
-    "Vizs", "HeatmapViz", "HistogramViz", "LineViz", "DistributionViz",
-    "CorrelationViz", "MissingValuesViz", "OutliersViz", "TargetViz",
-    "BoxplotViz", "BivariateViz", "NormalityViz", "MulticollinearityViz",
-    "ProfilingViz",
+    "Vizs", "HeatmapViz", "HistogramViz", "LineViz",
+    "MissingValuesViz", "OutliersViz", "TargetViz",
+    "NormalityViz", "MulticollinearityViz",
+    "plot_confusion_matrix", "plot_roc_curve",
 ]

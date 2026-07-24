@@ -298,11 +298,70 @@ au rapport EDA en une ligne") et le rendre digne de confiance.
   pour chaque exemple). `examples/` n'a plus qu'une seule source de
   vérité : `01_bases/`, `02_donnees_et_modeles/`, `03_production/`.
 
+### Phase 7 : diagnostics, recherche d'hyperparamètres et consolidation (2026-07-24)
+
+- Diagnostics de classification : `Trainer.confusion_matrix()` (normalisable)
+  et `Trainer.roc_curve()` (binaire ou multiclasse en one-vs-rest, AUC par
+  classe), nouveaux modules `viz/confusion.py` et `viz/roc.py` (fonctions
+  pures, pas des `Vizs` : elles opèrent sur des prédictions, pas sur un
+  DataFrame de features).
+- `Trainer.feature_importances()` uniforme quel que soit le modèle : natif
+  (`feature_importances_` pour les arbres, `|coef_|` moyen pour le linéaire),
+  repli par importance de permutation sinon (KNN, SVM...). A fallu
+  introduire `Trainer._estimator`, propriété qui gère la dualité entre
+  modèle trainedml enveloppé (`trainer.model.model`) et estimateur externe
+  passé tel quel (`trainer.model` directement) : jusque-là seul le premier
+  cas était géré dans le code (ex. TP/galerie), le second plantait
+  silencieusement en usage réel.
+- Dataset intégré `diabetes` (régression), pendant offline de `iris`/`wine`.
+- `Trainer.grid_search()`/`random_search()` : construisent un
+  `sklearn.Pipeline(preprocessor, estimateur)` en interne pour que la CV
+  refasse le prétraitement à chaque pli (pas de fuite), puis réadoptent le
+  meilleur estimateur trouvé en respectant la même dualité wrapper/brut.
+- Détection de déséquilibre de classes (`trainedml.check_class_imbalance`,
+  seuil 3:1 par défaut) : avertissement `UserWarning` automatique dans
+  `Trainer.fit()` et `compare()`, avec piste de correction
+  (`class_weight="balanced"`, déjà supporté par random_forest/logistic).
+- **Consolidation des 4 couches de visualisation** (chantier identifié en
+  phase 5, réalisé ici). Audit d'abord : `DataAnalyzer` est la seule
+  implémentation réellement utilisée par `Visualizer` pour
+  distribution/corrélation/missing/outliers/target/boxplot/bivariate/
+  normalité/VIF/profiling ; neuf modules `viz/*.py` dupliquaient (avec des
+  formes de retour divergentes !) tout ou partie de ces analyses sans
+  jamais être appelés par `Visualizer`. Décision : retirer ce qui n'apportait
+  aucune valeur unique et n'était référencé nulle part
+  (`figure.py`, `viz/distribution.py`, `viz/correlation.py`,
+  `viz/boxplot.py`, `viz/bivariate.py`, `viz/profiling.py`), et pour les
+  modules qui ajoutaient une vraie capacité graphique en plus des stats de
+  `DataAnalyzer` (`OutliersViz`, `NormalityViz`, `MulticollinearityViz`,
+  `TargetViz`, déjà couverts par des tests mais inatteignables depuis
+  l'API publique), les brancher enfin sur `Visualizer` :
+  `plot_outliers()`, `plot_normality()`, `plot_multicollinearity()`,
+  `plot_target()`. `report.py` calcule maintenant ses statistiques via
+  `DataAnalyzer` au lieu d'une seconde implémentation indépendante
+  (`missing_summary`, `outlier_summary`, `normality_tests`, `vif_summary`).
+  Bug réel trouvé en consolidant : le rapport EDA n'a **jamais** affiché sa
+  carte de corrélation, `HeatmapViz.figure` est un `Axes` (seaborn) et non
+  un `Figure`, `.savefig()` échouait et l'erreur était avalée par le
+  mécanisme de tolérance aux pannes du rapport (`_safe_section`).
+- Douzième exemple de galerie (`plot_diagnostics.py`), extension de
+  `plot_hyperparametres.py` (grid_search/random_search) et de
+  `plot_choisir_son_modele.py` (classes déséquilibrées, avant/après
+  `class_weight="balanced"`), mention de `diabetes` dans
+  `plot_regression.py`.
+- Version passée à 0.3.0 (`pyproject.toml`, `__version__`) ; tableau
+  comparatif trainedml/scikit-learn/PyCaret/lazypredict ajouté au README,
+  chaque affirmation vérifiée contre la documentation publique de ces
+  projets avant publication (deux corrections faites en vérifiant :
+  lazypredict n'est pas "léger" en dépendances, xgboost/lightgbm/pmdarima
+  inclus ; PyCaret accepte bien un estimateur externe via
+  `create_model()`, pas seulement scikit-learn lui-même).
+
 ### Chantiers restants
 
-- Consolider les couches de visualisation (`figure.py`, `visualization.py`,
-  `analyzer.py`, `viz/`) autour de la façade `Visualizer`.
-- Ajouter d'autres datasets intégrés et d'autres visualisations (ROC, scatter).
+- Ajouter d'autres visualisations (scatter matrix, courbes d'apprentissage).
+- Créer et pousser le tag `v0.3.0` pour publier sur PyPI quand prêt (non
+  fait par prudence : action irréversible, à valider explicitement).
 
 ---
 

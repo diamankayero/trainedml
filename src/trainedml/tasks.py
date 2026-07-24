@@ -22,11 +22,18 @@ Example
 
 from __future__ import annotations
 
+import warnings
+from typing import Any, Dict, Optional
+
 import pandas as pd
 
 #: Maximum number of unique integer values for a target to be considered
 #: categorical (classification).
 MAX_UNIQUE_FOR_CLASSIFICATION = 20
+
+#: Default majority/minority count ratio above which classes are flagged
+#: as imbalanced by :func:`check_class_imbalance`.
+DEFAULT_IMBALANCE_THRESHOLD = 3.0
 
 
 def is_classification_target(y) -> bool:
@@ -119,3 +126,74 @@ def detect_model_task(model, y=None) -> str:
     if y is not None:
         return detect_task(y)
     return "classification"
+
+
+def check_class_imbalance(y, threshold: float = DEFAULT_IMBALANCE_THRESHOLD) -> Optional[Dict[str, Any]]:
+    """
+    Check whether classification classes are notably imbalanced.
+
+    Parameters
+    ----------
+    y : pandas.Series or array-like
+        Class labels.
+    threshold : float, default=3.0
+        Majority/minority count ratio above which classes are considered
+        imbalanced.
+
+    Returns
+    -------
+    dict or None
+        ``None`` if the classes are balanced (or if there are fewer than
+        two classes). Otherwise, a dict with ``ratio``, ``majority_class``,
+        ``majority_count``, ``minority_class``, ``minority_count``.
+
+    Examples
+    --------
+    >>> check_class_imbalance(pd.Series(["a"] * 90 + ["b"] * 10))
+    {'ratio': 9.0, 'majority_class': 'a', 'majority_count': 90, ...}
+    >>> check_class_imbalance(pd.Series(["a"] * 55 + ["b"] * 45)) is None
+    True
+    """
+    counts = pd.Series(y).value_counts()
+    if len(counts) < 2:
+        return None
+    ratio = counts.iloc[0] / counts.iloc[-1]
+    if ratio < threshold:
+        return None
+    return {
+        "ratio": float(ratio),
+        "majority_class": counts.index[0],
+        "majority_count": int(counts.iloc[0]),
+        "minority_class": counts.index[-1],
+        "minority_count": int(counts.iloc[-1]),
+    }
+
+
+def warn_if_imbalanced(y, threshold: float = DEFAULT_IMBALANCE_THRESHOLD) -> None:
+    """
+    Emit a ``UserWarning`` if the classes in ``y`` are notably imbalanced.
+
+    A no-op if the classes are balanced. Used internally by :class:`Trainer`
+    (on fit) and :func:`compare` so imbalance is flagged where it matters,
+    without changing any model's behavior.
+
+    Parameters
+    ----------
+    y : pandas.Series or array-like
+        Class labels.
+    threshold : float, default=3.0
+        Majority/minority count ratio above which classes are considered
+        imbalanced.
+    """
+    info = check_class_imbalance(y, threshold=threshold)
+    if info is None:
+        return
+    warnings.warn(
+        f"Imbalanced classes: {info['majority_class']!r} has {info['majority_count']} "
+        f"samples versus {info['minority_count']} for {info['minority_class']!r} "
+        f"(ratio {info['ratio']:.1f}:1). Accuracy alone can be misleading here: check "
+        f"precision/recall per class, and consider model_params={{'class_weight': 'balanced'}} "
+        f"for models that support it (random_forest, logistic).",
+        UserWarning,
+        stacklevel=3,
+    )

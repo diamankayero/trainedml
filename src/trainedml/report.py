@@ -41,8 +41,15 @@ img { max-width: 100%; height: auto; border: 1px solid #e0e0ea; border-radius: 6
 
 
 def _fig_to_html(fig) -> str:
-    """Convert a matplotlib figure into a self-contained base64 <img> tag."""
+    """
+    Convert a matplotlib figure into a self-contained base64 <img> tag.
+
+    Some Vizs subclasses store an Axes (not a Figure) on ``.figure`` (e.g.
+    ``HeatmapViz``, backed by seaborn): fall back to its parent Figure.
+    """
     import matplotlib.pyplot as plt
+    if not hasattr(fig, "savefig") and hasattr(fig, "get_figure"):
+        fig = fig.get_figure()
     buf = io.BytesIO()
     fig.savefig(buf, format="png", dpi=110, bbox_inches="tight")
     plt.close(fig)
@@ -89,10 +96,6 @@ def generate_report(data: pd.DataFrame, path: Optional[str] = None,
     """
     from .analyzer import DataAnalyzer
     from .viz.heatmap import HeatmapViz
-    from .viz.missing import missing_summary
-    from .viz.multicollinearity import vif_summary
-    from .viz.normality import normality_tests
-    from .viz.outliers import outlier_summary
 
     analyzer = DataAnalyzer(data)
     numeric = data.select_dtypes(include=[np.number])
@@ -115,9 +118,10 @@ def generate_report(data: pd.DataFrame, path: Optional[str] = None,
 
     # --- Missing values ---
     def missing():
-        miss = missing_summary(data).rename("missing values").to_frame()
-        miss["%"] = (miss["missing values"] / len(data) * 100).round(2)
-        return miss.to_html()
+        miss = analyzer.missing()
+        if miss.empty:
+            return '<p class="note">No missing values.</p>'
+        return miss.round(2).to_html()
     sections.append(_safe_section("Missing values", missing))
 
     # --- Correlation ---
@@ -137,19 +141,23 @@ def generate_report(data: pd.DataFrame, path: Optional[str] = None,
 
     # --- Outliers ---
     def outliers():
-        summary = outlier_summary(data)
-        return pd.DataFrame(summary).T.to_html()
+        summary = analyzer.outliers()
+        rows = {col: {"count": info["count"], "lower_bound": round(info["lower_bound"], 3),
+                      "upper_bound": round(info["upper_bound"], 3)}
+                for col, info in summary.items()}
+        return pd.DataFrame(rows).T.to_html()
     if not numeric.empty:
         sections.append(_safe_section("Outliers (IQR method)", outliers))
 
     # --- Normality ---
     def normality():
-        results = normality_tests(numeric, columns=list(numeric.columns))
+        results = analyzer.normality()
         rows = {}
         for col, res in results.items():
-            stat, pval = res["shapiro"]
-            rows[col] = {"shapiro_stat": round(float(stat), 4),
-                         "p_value": round(float(pval), 4),
+            stat = res["shapiro"]["statistic"]
+            pval = res["shapiro"]["p_value"]
+            rows[col] = {"shapiro_stat": round(stat, 4),
+                         "p_value": round(pval, 4),
                          "normal (alpha=5%)": "yes" if pval > 0.05 else "no"}
         return pd.DataFrame(rows).T.to_html()
     if not numeric.empty:
@@ -157,7 +165,7 @@ def generate_report(data: pd.DataFrame, path: Optional[str] = None,
 
     # --- Multicollinearity ---
     def vif():
-        return vif_summary(numeric).round(2).rename("VIF").to_frame().to_html()
+        return analyzer.multicollinearity().round(2).set_index("feature").to_html()
     if numeric.shape[1] >= 2:
         sections.append(_safe_section("Multicollinearity (VIF)", vif))
 

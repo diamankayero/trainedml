@@ -6,14 +6,36 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+## [0.3.0] - 2026-07-24
+
 ### Ajouté
 - Un README de documentation dans chaque dossier du projet ;
   DOC_UTILISATION.md restructuré avec journal du projet.
 - Galerie d'exemples dans la doc (Sphinx-Gallery, façon
-  scikit-learn/matplotlib) : onze scripts `examples/*/plot_*.py`, organisés
+  scikit-learn/matplotlib) : douze scripts `examples/*/plot_*.py`, organisés
   en trois sections (Bases, Données et modèles, Production), réellement
   exécutés au moment du build avec sorties et graphiques inclus, et
   téléchargeables en `.py` ou en notebook `.ipynb`.
+- `Trainer.confusion_matrix()` et `Trainer.roc_curve()` : diagnostics
+  visuels de classification (matrice de confusion normalisable, courbe
+  ROC/AUC binaire ou multiclasse en one-vs-rest).
+- `Trainer.feature_importances()` et `Trainer.plot_feature_importances()` :
+  importance des variables uniforme quel que soit le modèle (natif via
+  `feature_importances_`/`coef_`, repli par permutation sinon), y compris
+  pour un estimateur externe passé directement à `Trainer(model=...)`.
+- Dataset intégré `diabetes` (régression), pendant offline de `iris`/`wine`
+  pour la classification.
+- `Trainer.grid_search()` et `Trainer.random_search()` : recherche
+  d'hyperparamètres par validation croisée ; le `Trainer` est automatiquement
+  réentraîné avec la meilleure combinaison trouvée et prêt pour
+  `evaluate()`/`predict()`.
+- `trainedml.check_class_imbalance()` et avertissement automatique
+  (`Trainer.fit()`, `compare()`) quand les classes sont déséquilibrées, avec
+  piste de correction (`model_params={"class_weight": "balanced"}`).
+- `Visualizer.plot_outliers()`, `plot_normality()`, `plot_multicollinearity()`,
+  `plot_target()` : graphiques déjà testés (`OutliersViz`, `NormalityViz`,
+  `MulticollinearityViz`, `TargetViz`) mais jusqu'ici jamais exposés par la
+  façade publique.
 
 ### Modifié
 - La démo web (API FastAPI + page HTML/JS, déployée sur
@@ -41,14 +63,28 @@ adhère au [versionnement sémantique](https://semver.org/lang/fr/).
 - Build de la doc sans aucun warning : sections Methods/Attributes
   redondantes retirées des docstrings (elles dupliquaient les entrées
   générées par autodoc).
+- `report.py` calcule désormais toutes ses statistiques (missing, outliers,
+  normality, multicollinearity) via `DataAnalyzer` ; une implémentation
+  parallèle et divergente (formes de retour différentes pour la même
+  analyse) vivait jusque-là dans des fonctions `viz/*.py` indépendantes.
 
 ### Retiré
 - Les scripts historiques à plat `examples/quickstart.py`,
   `compare_models.py`, `exemple_regression.py`, `rapport_eda.py`, ainsi que
   `examples/notebooks/`, remplacés par la galerie d'exemples ci-dessus
   qu'ils recoupaient entièrement.
+- `figure.py` (mort : jamais importé nulle part dans le package) et
+  `viz/distribution.py`, `viz/correlation.py`, `viz/boxplot.py`,
+  `viz/bivariate.py`, `viz/profiling.py` (dupliquaient `DataAnalyzer` sans
+  jamais être appelés par `Visualizer`, avec des formes de retour
+  divergentes de surcroît).
 
 ### Corrigé
+- Le rapport EDA HTML n'affichait jamais la carte de corrélation :
+  `HeatmapViz.figure` est un `Axes` (seaborn), pas un `Figure`, et
+  `.savefig()` échouait à chaque génération de rapport, silencieusement
+  (l'erreur était avalée par le mécanisme de tolérance aux pannes du
+  rapport). Le bug existait depuis l'introduction du rapport HTML.
 - `Visualizer.multicollinearity()` ne transmet plus de `**kwargs` vers
   `DataAnalyzer.multicollinearity()`, qui n'en accepte pas.
 - `viz/boxplot.py` et `viz/correlation.py` : `from __future__ import

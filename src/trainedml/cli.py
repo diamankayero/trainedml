@@ -69,7 +69,7 @@ def main():
     # --- Argument parsing ---
     parser = argparse.ArgumentParser(description="trainedml: simple ML pipeline")
     parser.add_argument('--model', type=str, choices=MODEL_MAP.keys(), default='random_forest', help='Model type to use')
-    parser.add_argument('--dataset', type=str, default='iris', help='Dataset name (iris, wine)')
+    parser.add_argument('--dataset', type=str, default='iris', help='Dataset name (iris, wine, diabetes)')
     parser.add_argument('--url', type=str, default=None, help='URL of a remote CSV')
     parser.add_argument('--target', type=str, default=None, help='Target column name (if url)')
     parser.add_argument('--seed', type=int, default=42, help='Seed for the train/test split')

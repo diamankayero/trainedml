@@ -10,6 +10,9 @@ Visualization Features
 - Histograms
 - Line plots
 - Exploratory analyses (distribution, correlation, missing values, outliers, target, boxplots, bivariate, normality, multicollinearity, profiling)
+- Companion plots for outliers, normality, multicollinearity, and the
+  target's distribution (``plot_outliers``, ``plot_normality``,
+  ``plot_multicollinearity``, ``plot_target``)
 
 Examples
 --------
@@ -29,6 +32,10 @@ from matplotlib.figure import Figure
 from trainedml.viz.heatmap import HeatmapViz
 from trainedml.viz.histogram import HistogramViz
 from trainedml.viz.line import LineViz
+from trainedml.viz.outliers import OutliersViz
+from trainedml.viz.normality import NormalityViz
+from trainedml.viz.multicollinearity import MulticollinearityViz
+from trainedml.viz.target import TargetViz
 from trainedml.analyzer import DataAnalyzer
 
 
@@ -48,6 +55,8 @@ class Visualizer:
     - Line plots (any two columns)
     - Boxplots, bivariate plots, target analysis
     - Full exploratory analysis: distribution, missing values, outliers, normality, VIF, profiling
+    - Companion plots for outliers, normality (QQ-plots), multicollinearity
+      (VIF bar chart), and the target's distribution
     - All methods return matplotlib Figure or pandas objects for further customization
 
     Parameters
@@ -364,6 +373,27 @@ class Visualizer:
         """
         return self.analyzer.outliers(**kwargs)
 
+    def plot_outliers(self) -> Figure:
+        """
+        Boxplot grid highlighting outliers, one panel per numeric column.
+
+        A complement to :meth:`outliers` (which returns counts and bounds
+        as data): this draws the same IQR-based outliers visually.
+
+        Returns
+        -------
+        matplotlib.figure.Figure
+            The generated boxplot grid.
+
+        Examples
+        --------
+        >>> fig = viz.plot_outliers()
+        >>> fig.show()
+        """
+        viz = OutliersViz(self.data)
+        viz.vizs()
+        return viz.figure
+
     def target(self, target_column: str, **kwargs: Any) -> Dict[str, Any]:
         """
         Target variable analysis.
@@ -389,6 +419,32 @@ class Visualizer:
         >>> print(target)
         """
         return self.analyzer.target(target_column=target_column, **kwargs)
+
+    def plot_target(self, target_column: str) -> Figure:
+        """
+        Plot the target variable's distribution (bar chart for a categorical
+        target, histogram for a numeric one).
+
+        A complement to :meth:`target` (which returns counts as data).
+
+        Parameters
+        ----------
+        target_column : str
+            Name of the target column.
+
+        Returns
+        -------
+        matplotlib.figure.Figure
+            The generated distribution plot.
+
+        Examples
+        --------
+        >>> fig = viz.plot_target(target_column='species')
+        >>> fig.show()
+        """
+        viz = TargetViz(self.data, target_column=target_column)
+        viz.vizs()
+        return viz.figure
 
     def boxplot(self, columns: Union[str, List[str]] = 'all', by: Optional[str] = None,
                 **kwargs: Any) -> Figure:
@@ -474,6 +530,34 @@ class Visualizer:
         """
         return self.analyzer.normality(columns=columns, **kwargs)
 
+    def plot_normality(self, columns: Union[str, List[str]] = 'all') -> Figure:
+        """
+        QQ-plots (quantile-quantile against the normal distribution), one
+        panel per numeric column.
+
+        A complement to :meth:`normality` (which returns test statistics as
+        data): a QQ-plot makes departures from normality visually obvious
+        (curvature, heavy tails) in a way p-values alone do not.
+
+        Parameters
+        ----------
+        columns : 'all' or list, default='all'
+            Columns to plot.
+
+        Returns
+        -------
+        matplotlib.figure.Figure
+            The generated QQ-plot grid.
+
+        Examples
+        --------
+        >>> fig = viz.plot_normality(columns=['A', 'B'])
+        >>> fig.show()
+        """
+        viz = NormalityViz(self.data, columns=columns)
+        viz.vizs()
+        return viz.figure
+
     def multicollinearity(self) -> pd.DataFrame:
         """
         Multicollinearity analysis (VIF, etc.).
@@ -492,6 +576,27 @@ class Visualizer:
         >>> print(vif)
         """
         return self.analyzer.multicollinearity()
+
+    def plot_multicollinearity(self) -> Figure:
+        """
+        Bar chart of the Variance Inflation Factor (VIF) per feature.
+
+        A complement to :meth:`multicollinearity` (which returns the same
+        values as data).
+
+        Returns
+        -------
+        matplotlib.figure.Figure
+            The generated VIF bar chart.
+
+        Examples
+        --------
+        >>> fig = viz.plot_multicollinearity()
+        >>> fig.show()
+        """
+        viz = MulticollinearityViz(self.data)
+        viz.vizs()
+        return viz.figure
 
     def profiling(self, **kwargs: Any) -> Dict[str, Any]:
         """

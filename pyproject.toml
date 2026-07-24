@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "trainedml"
-version = "0.2.0"
+version = "0.3.0"
 description = "Modular ML framework: train, benchmark, and visualize models with a unified API and CLI"
 authors = [
   { name = "diamankayero", email = "diamanka.tck@gmail.com" },

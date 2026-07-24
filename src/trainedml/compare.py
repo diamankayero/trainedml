@@ -25,7 +25,7 @@ from .benchmark import Benchmark
 from .data.loader import DataLoader
 from .models import CLASSIFIER_MAP, REGRESSOR_MAP
 from .preprocessing import PreprocessedModel
-from .tasks import detect_task
+from .tasks import detect_task, warn_if_imbalanced
 
 
 def compare(
@@ -53,7 +53,7 @@ def compare(
     Parameters
     ----------
     dataset : str, optional
-        Name of a built-in dataset ("iris", "wine").
+        Name of a built-in dataset ("iris", "wine", "diabetes").
     url : str, optional
         URL of a remote CSV (requires ``target``).
     target : str, optional
@@ -109,8 +109,11 @@ def compare(
         loader = DataLoader()
         X, y = loader.load_dataset(name=dataset, url=url, target=target)
 
+    task = detect_task(y)
+    if task == "classification":
+        warn_if_imbalanced(y)
+
     if models is None:
-        task = detect_task(y)
         model_map = CLASSIFIER_MAP if task == "classification" else REGRESSOR_MAP
         models = {name: cls() for name, cls in model_map.items()}
 

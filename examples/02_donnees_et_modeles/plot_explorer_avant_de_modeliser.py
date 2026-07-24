@@ -29,13 +29,13 @@ print(f"Rapport généré : {len(html)} caractères de HTML auto-contenu.")
 # Deux variables corrélées à plus de 0.8 en valeur absolue apportent
 # largement la même information au modèle.
 
-viz.heatmap()
+viz.heatmap();
 
 # %%
 # Distribution des variables
 # -----------------------------
 
-viz.histogram(columns=["alcohol", "magnesium", "color_intensity"], legend=True)
+viz.histogram(columns=["alcohol", "magnesium", "color_intensity"], legend=True);
 
 # %%
 # Valeurs manquantes

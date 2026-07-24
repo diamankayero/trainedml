@@ -8,7 +8,7 @@ handling.
 
 Main features
 -------------
-- Built-in datasets loaded locally via scikit-learn (Iris, Wine) - no network required
+- Built-in datasets loaded locally via scikit-learn (Iris, Wine, Diabetes) - no network required
 - CSV loading from a URL with local pooch cache (separator and hash handled)
 - Returns X (features) and y (target) ready to use for ML
 - Train/test split via :meth:`DataLoader.split`
@@ -40,7 +40,7 @@ class DataLoader:
 
     Features
     --------
-    - Automatic download and caching of public datasets (Iris, Wine, etc.)
+    - Automatic download and caching of public datasets (Iris, Wine, Diabetes, etc.)
     - CSV loading from a URL (with separator and hash handling)
     - Returns X (features) and y (target) ready to use for ML
     - Can be extended to support other sources (INSEE, data.gouv.fr, etc.)
@@ -149,7 +149,7 @@ class DataLoader:
         Parameters
         ----------
         name : str, optional
-            Name of a known dataset ("iris", "wine", etc.).
+            Name of a known dataset ("iris", "wine", "diabetes", etc.).
         url : str, optional
             URL of a remote CSV to load.
         target : str, optional
@@ -216,6 +216,15 @@ class DataLoader:
             bunch = load_wine(as_frame=True)
             X = bunch.data
             y = bunch.target.rename("class")
+            return X, y
+        elif name == "diabetes":
+            # Diabetes dataset (regression), loaded locally via scikit-learn
+            # (no network required): the built-in counterpart to iris/wine
+            # for regression tasks.
+            from sklearn.datasets import load_diabetes
+            bunch = load_diabetes(as_frame=True)
+            X = bunch.data
+            y = bunch.target.rename("disease_progression")
             return X, y
         elif url is not None and target is not None:
             # Generic loading of a remote CSV

@@ -1,7 +1,7 @@
-Boxplot
-=======
+ROC curve
+=========
 
-.. automodule:: trainedml.viz.boxplot
+.. automodule:: trainedml.viz.roc
    :members:
    :undoc-members:
    :show-inheritance:

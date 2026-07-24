@@ -108,6 +108,110 @@ class TestTrainerPreprocessing(unittest.TestCase):
         self.assertGreater(trainer.evaluate()["accuracy"], 0.8)
 
 
+class TestTrainerDiagnostics(unittest.TestCase):
+    def test_feature_importances_native_tree(self):
+        trainer = Trainer(dataset="wine", model="random_forest")
+        trainer.fit()
+        importances = trainer.feature_importances()
+        self.assertEqual(len(importances), 13)
+        self.assertAlmostEqual(importances.sum(), 1.0, places=2)
+        self.assertTrue((importances.values[:-1] >= importances.values[1:]).all())
+
+    def test_feature_importances_native_coef(self):
+        trainer = Trainer(dataset="wine", model="logistic")
+        trainer.fit()
+        importances = trainer.feature_importances()
+        self.assertEqual(len(importances), 13)
+        self.assertTrue((importances >= 0).all())
+
+    def test_feature_importances_permutation_fallback(self):
+        """KNN n'a ni feature_importances_ ni coef_ : repli sur la permutation."""
+        trainer = Trainer(dataset="wine", model="knn")
+        trainer.fit()
+        importances = trainer.feature_importances()
+        self.assertEqual(len(importances), 13)
+        self.assertEqual(set(importances.index), set(trainer.feature_names_))
+
+    def test_feature_importances_before_fit_raises(self):
+        trainer = Trainer(dataset="wine", model="knn")
+        with self.assertRaises(RuntimeError):
+            trainer.feature_importances()
+
+    def test_confusion_matrix_returns_figure(self):
+        from matplotlib.figure import Figure
+        trainer = Trainer(dataset="iris", model="random_forest")
+        trainer.fit()
+        fig = trainer.confusion_matrix()
+        self.assertIsInstance(fig, Figure)
+
+    def test_confusion_matrix_regression_raises(self):
+        X, y = _regression_data()
+        trainer = Trainer(X=X, y=y, model="linear")
+        trainer.fit()
+        with self.assertRaises(ValueError):
+            trainer.confusion_matrix()
+
+    def test_roc_curve_binary(self):
+        from matplotlib.figure import Figure
+        X, y = _regression_data()
+        y_binary = (y > y.median()).astype(int)
+        trainer = Trainer(X=X, y=y_binary, model="logistic")
+        trainer.fit()
+        fig = trainer.roc_curve()
+        self.assertIsInstance(fig, Figure)
+
+    def test_roc_curve_multiclass(self):
+        from matplotlib.figure import Figure
+        trainer = Trainer(dataset="wine", model="random_forest")
+        trainer.fit()
+        fig = trainer.roc_curve()
+        self.assertIsInstance(fig, Figure)
+
+    def test_roc_curve_before_fit_raises(self):
+        trainer = Trainer(dataset="iris", model="knn")
+        with self.assertRaises(RuntimeError):
+            trainer.roc_curve()
+
+
+class TestTrainerHyperparameterSearch(unittest.TestCase):
+    def test_grid_search_updates_best_params_and_fits(self):
+        trainer = Trainer(dataset="wine", model="knn")
+        results = trainer.grid_search({"n_neighbors": [1, 3, 5, 7]}, cv=3)
+        self.assertEqual(len(results), 4)
+        self.assertIn("n_neighbors", trainer.best_params_)
+        self.assertIsNotNone(trainer.best_score_)
+        self.assertTrue(trainer.is_fitted)
+        self.assertIn("accuracy", trainer.evaluate())
+        self.assertEqual(trainer.model.model.n_neighbors, trainer.best_params_["n_neighbors"])
+
+    def test_grid_search_sorted_best_first(self):
+        trainer = Trainer(dataset="wine", model="knn")
+        results = trainer.grid_search({"n_neighbors": [1, 3, 5, 7]}, cv=3)
+        self.assertTrue((results["rank_test_score"].values[:-1] <= results["rank_test_score"].values[1:]).all())
+
+    def test_random_search_respects_n_iter(self):
+        trainer = Trainer(dataset="wine", model="random_forest")
+        results = trainer.random_search(
+            {"n_estimators": [50, 100, 150, 200], "max_depth": [None, 3, 5]},
+            n_iter=4, cv=3,
+        )
+        self.assertEqual(len(results), 4)
+        self.assertTrue(trainer.is_fitted)
+
+    def test_grid_search_raw_sklearn_estimator(self):
+        from sklearn.svm import SVC
+        trainer = Trainer(dataset="wine", model=SVC())
+        trainer.grid_search({"C": [0.1, 1, 10]}, cv=3)
+        self.assertIsInstance(trainer.model, SVC)
+        self.assertIn(trainer.model.C, [0.1, 1, 10])
+
+    def test_grid_search_preserves_preprocess_disabled(self):
+        trainer = Trainer(dataset="wine", model="knn", preprocess=False)
+        trainer.grid_search({"n_neighbors": [1, 3]}, cv=3)
+        self.assertIsNone(trainer.preprocessor)
+        self.assertTrue(trainer.is_fitted)
+
+
 class TestTrainerPersistence(unittest.TestCase):
     def test_save_load_roundtrip(self):
         trainer = Trainer(dataset="iris", model="knn")

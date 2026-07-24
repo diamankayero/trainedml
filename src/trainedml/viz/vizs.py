@@ -44,8 +44,9 @@ class Vizs(object):
         if not isinstance(data, pd.DataFrame):
             raise ValueError('data must be a pandas DataFrame')
         self._data = data
-        # Stores the generated output: usually a matplotlib Figure, but some
-        # subclasses (e.g. ProfilingViz) return a pandas DataFrame instead.
+        # Stores the generated output: usually a matplotlib Figure, though a
+        # few subclasses store an Axes instead (e.g. HeatmapViz, backed by
+        # seaborn).
         self._figure: Any = None
         self._save_path = save_path
 
@@ -55,7 +56,7 @@ class Vizs(object):
         Automatically calls save() if a save_path was set.
 
         Most subclasses return None and store their output on
-        ``self._figure`` instead; a few (e.g. HistogramViz, BoxplotViz)
+        ``self._figure`` instead; a few (e.g. HistogramViz, HeatmapViz)
         also return it directly, hence the ``Any`` return type here.
         """
         raise NotImplementedError('Subclasses must implement this method')

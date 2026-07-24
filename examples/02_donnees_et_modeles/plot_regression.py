@@ -50,3 +50,14 @@ for nom in ["linear", "ridge", "lasso", "random_forest_regressor", "knn_regresso
 # annule presque tous les coefficients. Un modèle n'est jamais bon "par
 # défaut" dans l'absolu, le TP 8 de la série pédagogique (voir le dépôt
 # trainedml-tp) creuse justement le réglage des hyperparamètres.
+
+# %%
+# Un dataset de régression intégré : diabetes
+# --------------------------------------------------
+# Comme ``iris``/``wine`` pour la classification, ``diabetes`` (scikit-learn,
+# aucun téléchargement) sert de jeu de données de régression prêt à l'emploi
+# pour prototyper sans dépendre d'un CSV distant.
+
+trainer_diabetes = Trainer(dataset="diabetes", model="random_forest_regressor", seed=42)
+trainer_diabetes.fit()
+print("\ndiabetes :", trainer_diabetes.evaluate())
