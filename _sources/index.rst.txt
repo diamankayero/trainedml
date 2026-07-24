@@ -154,13 +154,10 @@ distribué sous licence MIT.
    trainedml/heatmap
    trainedml/histogram
    trainedml/line
-   trainedml/distribution
-   trainedml/correlation
    trainedml/missing
    trainedml/outliers
    trainedml/target
-   trainedml/boxplot
-   trainedml/bivariate
    trainedml/normality
    trainedml/multicollinearity
-   trainedml/profiling
+   trainedml/confusion
+   trainedml/roc

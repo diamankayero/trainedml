@@ -18,13 +18,14 @@
 .. _sphx_glr_auto_examples_02_donnees_et_modeles_plot_hyperparametres.py:
 
 
-Hyperparamètres et modèles externes
-======================================
+Hyperparamètres : réglage manuel et recherche automatique
+=============================================================
 
-Affiner un modèle nommé avec ``model_params``, puis brancher un estimateur
-scikit-learn quelconque directement dans ``Trainer``.
+Affiner un modèle nommé avec ``model_params``, brancher un estimateur
+scikit-learn quelconque, puis laisser ``grid_search``/``random_search``
+chercher la meilleure combinaison par validation croisée.
 
-.. GENERATED FROM PYTHON SOURCE LINES 8-13
+.. GENERATED FROM PYTHON SOURCE LINES 9-14
 
 .. code-block:: Python
 
@@ -40,12 +41,12 @@ scikit-learn quelconque directement dans ``Trainer``.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-16
+.. GENERATED FROM PYTHON SOURCE LINES 15-17
 
 ``model_params`` avec un modèle nommé
 ------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-26
+.. GENERATED FROM PYTHON SOURCE LINES 17-27
 
 .. code-block:: Python
 
@@ -67,13 +68,13 @@ scikit-learn quelconque directement dans ``Trainer``.
 
  .. code-block:: none
 
-    n_estimators=10  : {'accuracy': 0.9722222222222222, 'precision': 0.9753086419753088, 'recall': 0.9722222222222222, 'f1': 0.9725248123940935}
+    n_estimators=10  : {'accuracy': 1.0, 'precision': 1.0, 'recall': 1.0, 'f1': 1.0}
     n_estimators=300 : {'accuracy': 1.0, 'precision': 1.0, 'recall': 1.0, 'f1': 1.0}
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 27-32
+.. GENERATED FROM PYTHON SOURCE LINES 28-33
 
 Un estimateur scikit-learn arbitraire
 ------------------------------------------
@@ -81,7 +82,7 @@ Aucun changement dans le reste du code : ``fit``, ``evaluate``,
 ``predict`` fonctionnent à l'identique, que le modèle soit nommé ou un
 estimateur passé directement.
 
-.. GENERATED FROM PYTHON SOURCE LINES 32-37
+.. GENERATED FROM PYTHON SOURCE LINES 33-38
 
 .. code-block:: Python
 
@@ -103,7 +104,7 @@ estimateur passé directement.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 38-43
+.. GENERATED FROM PYTHON SOURCE LINES 39-44
 
 ``model_params`` est incompatible avec un estimateur déjà construit
 --------------------------------------------------------------------------
@@ -111,7 +112,7 @@ Un objet déjà instancié porte déjà ses propres hyperparamètres :
 configurez-le directement (``SVC(C=2)``) plutôt que de passer
 ``model_params``.
 
-.. GENERATED FROM PYTHON SOURCE LINES 43-48
+.. GENERATED FROM PYTHON SOURCE LINES 44-50
 
 .. code-block:: Python
 
@@ -120,6 +121,7 @@ configurez-le directement (``SVC(C=2)``) plutôt que de passer
         Trainer(dataset="wine", model=SVC(), model_params={"C": 2}, seed=42)
     except ValueError as e:
         print(f"Erreur attendue : {e}")
+
 
 
 
@@ -133,10 +135,85 @@ configurez-le directement (``SVC(C=2)``) plutôt que de passer
 
 
 
+.. GENERATED FROM PYTHON SOURCE LINES 51-56
+
+Recherche exhaustive : grid_search
+---------------------------------------
+Essaie toutes les combinaisons du grillage et réentraîne automatiquement
+avec la meilleure trouvée : le Trainer est prêt pour ``evaluate()``/
+``predict()`` juste après.
+
+.. GENERATED FROM PYTHON SOURCE LINES 56-63
+
+.. code-block:: Python
+
+
+    trainer = Trainer(dataset="wine", model="knn", seed=42)
+    resultats = trainer.grid_search({"n_neighbors": [1, 3, 5, 7, 9]}, cv=5)
+    print(resultats)
+    print("Meilleurs paramètres :", trainer.best_params_)
+    print("Score CV associé :", round(trainer.best_score_, 3))
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+       param_n_neighbors  mean_test_score  ...  rank_test_score  mean_fit_time
+    0                  5         0.957882  ...                1       0.005776
+    1                  3         0.950739  ...                2       0.005782
+    2                  7         0.950739  ...                2       0.005862
+    3                  1         0.950493  ...                4       0.005929
+    4                  9         0.943842  ...                5       0.005907
+
+    [5 rows x 5 columns]
+    Meilleurs paramètres : {'n_neighbors': 5}
+    Score CV associé : 0.958
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 64-69
+
+Recherche aléatoire : random_search
+------------------------------------------
+Pour un espace de recherche trop grand à explorer entièrement,
+``random_search`` tire ``n_iter`` combinaisons au hasard plutôt que de
+toutes les essayer.
+
+.. GENERATED FROM PYTHON SOURCE LINES 69-77
+
+.. code-block:: Python
+
+
+    trainer_rf = Trainer(dataset="wine", model="random_forest", seed=42)
+    trainer_rf.random_search(
+        {"n_estimators": [50, 100, 200, 300], "max_depth": [None, 3, 5, 10]},
+        n_iter=6, cv=5,
+    )
+    print("Meilleurs paramètres (random_forest) :", trainer_rf.best_params_)
+    print(trainer_rf.evaluate())
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    Meilleurs paramètres (random_forest) : {'n_estimators': 50, 'max_depth': None}
+    {'accuracy': 1.0, 'precision': 1.0, 'recall': 1.0, 'f1': 1.0}
+
+
+
+
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.448 seconds)
+   **Total running time of the script:** (0 minutes 5.764 seconds)
 
 
 .. _sphx_glr_download_auto_examples_02_donnees_et_modeles_plot_hyperparametres.py:

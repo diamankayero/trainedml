@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Projet complet : de bout en bout - trainedml 0.2.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Trainer (API principale)" href="../../trainedml/trainer.html" /><link rel="prev" title="Sauvegarder et déployer" href="plot_sauvegarder_et_deployer.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Projet complet : de bout en bout - trainedml 0.3.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Trainer (API principale)" href="../../trainedml/trainer.html" /><link rel="prev" title="Sauvegarder et déployer" href="plot_sauvegarder_et_deployer.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../02_donnees_et_modeles/index.html">Données et modèles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_donnees_et_modeles/plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02_donnees_et_modeles/plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02_donnees_et_modeles/plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02_donnees_et_modeles/plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../02_donnees_et_modeles/plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -225,16 +223,19 @@ on la lit à côté de la baseline naïve et de precision/recall.</p>
 </span><span data-line="2"><span class="nb">print</span><span class="p">(</span><span class="n">resultats</span><span class="p">[[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;accuracy_std&quot;</span><span class="p">,</span> <span class="s2">&quot;precision&quot;</span><span class="p">,</span> <span class="s2">&quot;recall&quot;</span><span class="p">]])</span>
 </span></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">CV 5-fold:   0%|          | 0/3 [00:00&lt;?, ?model/s]
-</span><span data-line="2">CV 5-fold:  33%|███▎      | 1/3 [00:00&lt;00:00,  6.91model/s]
-</span><span data-line="3">CV 5-fold:  67%|██████▋   | 2/3 [00:00&lt;00:00,  5.50model/s]
-</span><span data-line="4">CV 5-fold: 100%|██████████| 3/3 [00:01&lt;00:00,  1.34model/s]
-</span><span data-line="5">CV 5-fold: 100%|██████████| 3/3 [00:01&lt;00:00,  1.69model/s]
-</span><span data-line="6">               accuracy  accuracy_std  precision    recall
-</span><span data-line="7">model
-</span><span data-line="8">random_forest  0.871176      0.015814   0.840042  0.871176
-</span><span data-line="9">logistic       0.841154      0.004895   0.802008  0.841154
-</span><span data-line="10">knn            0.829277      0.012792   0.792754  0.829277
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">/home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:41: UserWarning: Imbalanced classes: &#39;moyen&#39; has 1319 samples versus 63 for &#39;bas&#39; (ratio 20.9:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="2">  resultats = compare(X=X, y=y_classe, cv=5, seed=42)
+</span><span data-line="3">
+</span><span data-line="4">CV 5-fold:   0%|          | 0/3 [00:00&lt;?, ?model/s]
+</span><span data-line="5">CV 5-fold:  33%|███▎      | 1/3 [00:00&lt;00:00,  7.30model/s]
+</span><span data-line="6">CV 5-fold:  67%|██████▋   | 2/3 [00:00&lt;00:00,  6.25model/s]
+</span><span data-line="7">CV 5-fold: 100%|██████████| 3/3 [00:01&lt;00:00,  1.38model/s]
+</span><span data-line="8">CV 5-fold: 100%|██████████| 3/3 [00:01&lt;00:00,  1.75model/s]
+</span><span data-line="9">               accuracy  accuracy_std  precision    recall
+</span><span data-line="10">model
+</span><span data-line="11">random_forest  0.873678      0.011560   0.842109  0.873678
+</span><span data-line="12">logistic       0.841154      0.004895   0.802008  0.841154
+</span><span data-line="13">knn            0.829277      0.012792   0.792754  0.829277
 </span></pre></div>
 </div>
 </section>
@@ -252,7 +253,27 @@ performance vient du modèle et des données, pas du nombre d’arbres.</p>
 </span><span data-line="8">      <span class="sa">f</span><span class="s2">&quot;moyenne=</span><span class="si">{</span><span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (baseline=</span><span class="si">{</span><span class="n">baseline</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 </span></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">Score sur 10 graines : min=0.872 max=0.897 moyenne=0.884 (baseline=0.825)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">/home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: &#39;moyen&#39; has 1042 samples versus 50 for &#39;bas&#39; (ratio 20.8:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="2">  t.fit()
+</span><span data-line="3">/home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: &#39;moyen&#39; has 1045 samples versus 49 for &#39;bas&#39; (ratio 21.3:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="4">  t.fit()
+</span><span data-line="5">/home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: &#39;moyen&#39; has 1050 samples versus 53 for &#39;bas&#39; (ratio 19.8:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="6">  t.fit()
+</span><span data-line="7">/home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: &#39;moyen&#39; has 1050 samples versus 49 for &#39;bas&#39; (ratio 21.4:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="8">  t.fit()
+</span><span data-line="9">/home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: &#39;moyen&#39; has 1055 samples versus 50 for &#39;bas&#39; (ratio 21.1:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="10">  t.fit()
+</span><span data-line="11">/home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: &#39;moyen&#39; has 1052 samples versus 56 for &#39;bas&#39; (ratio 18.8:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="12">  t.fit()
+</span><span data-line="13">/home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: &#39;moyen&#39; has 1048 samples versus 50 for &#39;bas&#39; (ratio 21.0:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="14">  t.fit()
+</span><span data-line="15">/home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: &#39;moyen&#39; has 1050 samples versus 53 for &#39;bas&#39; (ratio 19.8:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="16">  t.fit()
+</span><span data-line="17">/home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: &#39;moyen&#39; has 1053 samples versus 49 for &#39;bas&#39; (ratio 21.5:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="18">  t.fit()
+</span><span data-line="19">/home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: &#39;moyen&#39; has 1047 samples versus 53 for &#39;bas&#39; (ratio 19.8:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="20">  t.fit()
+</span><span data-line="21">Score sur 10 graines : min=0.869 max=0.900 moyenne=0.889 (baseline=0.825)
 </span></pre></div>
 </div>
 </section>
@@ -268,10 +289,12 @@ performance vient du modèle et des données, pas du nombre d’arbres.</p>
 </span><span data-line="8"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prédictions sur un nouveau lot :&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">restaure</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))))</span>
 </span></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">Prédictions sur un nouveau lot : [&#39;moyen&#39;, &#39;moyen&#39;, &#39;moyen&#39;, &#39;moyen&#39;, &#39;moyen&#39;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">/home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:65: UserWarning: Imbalanced classes: &#39;moyen&#39; has 1057 samples versus 52 for &#39;bas&#39; (ratio 20.3:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="2">  trainer.fit()
+</span><span data-line="3">Prédictions sur un nouveau lot : [&#39;moyen&#39;, &#39;moyen&#39;, &#39;moyen&#39;, &#39;moyen&#39;, &#39;moyen&#39;]
 </span></pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 10.681 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 10.562 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-03-production-plot-projet-complet-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/20e76219242d621090b28a73b37c9bc9/plot_projet_complet.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_projet_complet.ipynb</span></code></a></p>
@@ -330,7 +353,7 @@ performance vient du modèle et des données, pas du nombre d’arbres.</p>
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>

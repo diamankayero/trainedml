@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.tasks - trainedml 0.2.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.tasks - trainedml 0.3.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../auto_examples/02_donnees_et_modeles/index.html">Données et modèles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/02_donnees_et_modeles/plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/02_donnees_et_modeles/plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/02_donnees_et_modeles/plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -193,111 +191,195 @@ data-aria-dark="Passer en mode automatique">
 </span><span data-line="22">
 </span><span data-line="23"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 </span><span data-line="24">
-</span><span data-line="25"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-</span><span data-line="26">
-</span><span data-line="27"><span class="c1">#: Maximum number of unique integer values for a target to be considered</span>
-</span><span data-line="28"><span class="c1">#: categorical (classification).</span>
-</span><span data-line="29"><span class="n">MAX_UNIQUE_FOR_CLASSIFICATION</span> <span class="o">=</span> <span class="mi">20</span>
-</span><span data-line="30">
-</span><span data-line="31">
+</span><span data-line="25"><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+</span><span data-line="26"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+</span><span data-line="27">
+</span><span data-line="28"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="29">
+</span><span data-line="30"><span class="c1">#: Maximum number of unique integer values for a target to be considered</span>
+</span><span data-line="31"><span class="c1">#: categorical (classification).</span>
+</span><span data-line="32"><span class="n">MAX_UNIQUE_FOR_CLASSIFICATION</span> <span class="o">=</span> <span class="mi">20</span>
+</span><span data-line="33">
+</span><span data-line="34"><span class="c1">#: Default majority/minority count ratio above which classes are flagged</span>
+</span><span data-line="35"><span class="c1">#: as imbalanced by :func:`check_class_imbalance`.</span>
+</span><span data-line="36"><span class="n">DEFAULT_IMBALANCE_THRESHOLD</span> <span class="o">=</span> <span class="mf">3.0</span>
+</span><span data-line="37">
+</span><span data-line="38">
 <div class="viewcode-block" id="is_classification_target">
 <a class="viewcode-back" href="../../trainedml/tasks.html#trainedml.tasks.is_classification_target">[docs]</a>
-</span><span data-line="32"><span class="k">def</span><span class="w"> </span><span class="nf">is_classification_target</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span data-line="33"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="34"><span class="sd">    Determine whether the target is categorical (classification) or numeric (regression).</span>
-</span><span data-line="35">
-</span><span data-line="36"><span class="sd">    Parameters</span>
-</span><span data-line="37"><span class="sd">    ----------</span>
-</span><span data-line="38"><span class="sd">    y : pandas.Series or array-like</span>
-</span><span data-line="39"><span class="sd">        Target column to analyze.</span>
-</span><span data-line="40">
-</span><span data-line="41"><span class="sd">    Returns</span>
-</span><span data-line="42"><span class="sd">    -------</span>
-</span><span data-line="43"><span class="sd">    bool</span>
-</span><span data-line="44"><span class="sd">        True if classification, False if regression.</span>
-</span><span data-line="45">
-</span><span data-line="46"><span class="sd">    Examples</span>
-</span><span data-line="47"><span class="sd">    --------</span>
-</span><span data-line="48"><span class="sd">    &gt;&gt;&gt; is_classification_target(pd.Series([&#39;cat&#39;, &#39;dog&#39;]))</span>
-</span><span data-line="49"><span class="sd">    True</span>
-</span><span data-line="50"><span class="sd">    &gt;&gt;&gt; is_classification_target(pd.Series([0.1, 2.7, 3.14]))</span>
-</span><span data-line="51"><span class="sd">    False</span>
-</span><span data-line="52"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="53">    <span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="k">else</span> <span class="n">y</span>
-</span><span data-line="54">    <span class="c1"># If it&#39;s not numeric (text, categorical, StringDtype...), it&#39;s classification</span>
-</span><span data-line="55">    <span class="k">if</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_numeric_dtype</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
-</span><span data-line="56">        <span class="k">return</span> <span class="kc">True</span>
-</span><span data-line="57">    <span class="c1"># If few unique values and integers, likely classification</span>
-</span><span data-line="58">    <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">MAX_UNIQUE_FOR_CLASSIFICATION</span> <span class="ow">and</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_integer_dtype</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
-</span><span data-line="59">        <span class="k">return</span> <span class="kc">True</span>
-</span><span data-line="60">    <span class="k">return</span> <span class="kc">False</span></div>
+</span><span data-line="39"><span class="k">def</span><span class="w"> </span><span class="nf">is_classification_target</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="40"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="41"><span class="sd">    Determine whether the target is categorical (classification) or numeric (regression).</span>
+</span><span data-line="42">
+</span><span data-line="43"><span class="sd">    Parameters</span>
+</span><span data-line="44"><span class="sd">    ----------</span>
+</span><span data-line="45"><span class="sd">    y : pandas.Series or array-like</span>
+</span><span data-line="46"><span class="sd">        Target column to analyze.</span>
+</span><span data-line="47">
+</span><span data-line="48"><span class="sd">    Returns</span>
+</span><span data-line="49"><span class="sd">    -------</span>
+</span><span data-line="50"><span class="sd">    bool</span>
+</span><span data-line="51"><span class="sd">        True if classification, False if regression.</span>
+</span><span data-line="52">
+</span><span data-line="53"><span class="sd">    Examples</span>
+</span><span data-line="54"><span class="sd">    --------</span>
+</span><span data-line="55"><span class="sd">    &gt;&gt;&gt; is_classification_target(pd.Series([&#39;cat&#39;, &#39;dog&#39;]))</span>
+</span><span data-line="56"><span class="sd">    True</span>
+</span><span data-line="57"><span class="sd">    &gt;&gt;&gt; is_classification_target(pd.Series([0.1, 2.7, 3.14]))</span>
+</span><span data-line="58"><span class="sd">    False</span>
+</span><span data-line="59"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="60">    <span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="k">else</span> <span class="n">y</span>
+</span><span data-line="61">    <span class="c1"># If it&#39;s not numeric (text, categorical, StringDtype...), it&#39;s classification</span>
+</span><span data-line="62">    <span class="k">if</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_numeric_dtype</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+</span><span data-line="63">        <span class="k">return</span> <span class="kc">True</span>
+</span><span data-line="64">    <span class="c1"># If few unique values and integers, likely classification</span>
+</span><span data-line="65">    <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">MAX_UNIQUE_FOR_CLASSIFICATION</span> <span class="ow">and</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_integer_dtype</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+</span><span data-line="66">        <span class="k">return</span> <span class="kc">True</span>
+</span><span data-line="67">    <span class="k">return</span> <span class="kc">False</span></div>
 
-</span><span data-line="61">
-</span><span data-line="62">
+</span><span data-line="68">
+</span><span data-line="69">
 <div class="viewcode-block" id="detect_task">
 <a class="viewcode-back" href="../../trainedml/tasks.html#trainedml.tasks.detect_task">[docs]</a>
-</span><span data-line="63"><span class="k">def</span><span class="w"> </span><span class="nf">detect_task</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span data-line="64"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="65"><span class="sd">    Return the task type associated with a target.</span>
-</span><span data-line="66">
-</span><span data-line="67"><span class="sd">    Parameters</span>
-</span><span data-line="68"><span class="sd">    ----------</span>
-</span><span data-line="69"><span class="sd">    y : pandas.Series or array-like</span>
-</span><span data-line="70"><span class="sd">        Target column to analyze.</span>
-</span><span data-line="71">
-</span><span data-line="72"><span class="sd">    Returns</span>
-</span><span data-line="73"><span class="sd">    -------</span>
-</span><span data-line="74"><span class="sd">    str</span>
-</span><span data-line="75"><span class="sd">        ``&#39;classification&#39;`` or ``&#39;regression&#39;``.</span>
-</span><span data-line="76">
-</span><span data-line="77"><span class="sd">    Examples</span>
-</span><span data-line="78"><span class="sd">    --------</span>
-</span><span data-line="79"><span class="sd">    &gt;&gt;&gt; detect_task(pd.Series([0, 1, 2, 0, 1]))</span>
-</span><span data-line="80"><span class="sd">    &#39;classification&#39;</span>
-</span><span data-line="81"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="82">    <span class="k">return</span> <span class="s2">&quot;classification&quot;</span> <span class="k">if</span> <span class="n">is_classification_target</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;regression&quot;</span></div>
-
+</span><span data-line="70"><span class="k">def</span><span class="w"> </span><span class="nf">detect_task</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="71"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="72"><span class="sd">    Return the task type associated with a target.</span>
+</span><span data-line="73">
+</span><span data-line="74"><span class="sd">    Parameters</span>
+</span><span data-line="75"><span class="sd">    ----------</span>
+</span><span data-line="76"><span class="sd">    y : pandas.Series or array-like</span>
+</span><span data-line="77"><span class="sd">        Target column to analyze.</span>
+</span><span data-line="78">
+</span><span data-line="79"><span class="sd">    Returns</span>
+</span><span data-line="80"><span class="sd">    -------</span>
+</span><span data-line="81"><span class="sd">    str</span>
+</span><span data-line="82"><span class="sd">        ``&#39;classification&#39;`` or ``&#39;regression&#39;``.</span>
 </span><span data-line="83">
-</span><span data-line="84">
+</span><span data-line="84"><span class="sd">    Examples</span>
+</span><span data-line="85"><span class="sd">    --------</span>
+</span><span data-line="86"><span class="sd">    &gt;&gt;&gt; detect_task(pd.Series([0, 1, 2, 0, 1]))</span>
+</span><span data-line="87"><span class="sd">    &#39;classification&#39;</span>
+</span><span data-line="88"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="89">    <span class="k">return</span> <span class="s2">&quot;classification&quot;</span> <span class="k">if</span> <span class="n">is_classification_target</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;regression&quot;</span></div>
+
+</span><span data-line="90">
+</span><span data-line="91">
 <div class="viewcode-block" id="detect_model_task">
 <a class="viewcode-back" href="../../trainedml/tasks.html#trainedml.tasks.detect_model_task">[docs]</a>
-</span><span data-line="85"><span class="k">def</span><span class="w"> </span><span class="nf">detect_model_task</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span data-line="86"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="87"><span class="sd">    Determine the task type of a model, whatever it is.</span>
-</span><span data-line="88">
-</span><span data-line="89"><span class="sd">    Priority order:</span>
-</span><span data-line="90">
-</span><span data-line="91"><span class="sd">    1. the model&#39;s ``task`` attribute (trainedml models, :class:`BaseModel`);</span>
-</span><span data-line="92"><span class="sd">    2. scikit-learn&#39;s ``is_classifier`` / ``is_regressor`` functions</span>
-</span><span data-line="93"><span class="sd">       (arbitrary sklearn estimators);</span>
-</span><span data-line="94"><span class="sd">    3. the heuristic on the ``y`` target, if provided.</span>
+</span><span data-line="92"><span class="k">def</span><span class="w"> </span><span class="nf">detect_model_task</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="93"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="94"><span class="sd">    Determine the task type of a model, whatever it is.</span>
 </span><span data-line="95">
-</span><span data-line="96"><span class="sd">    Parameters</span>
-</span><span data-line="97"><span class="sd">    ----------</span>
-</span><span data-line="98"><span class="sd">    model : object</span>
-</span><span data-line="99"><span class="sd">        trainedml model, scikit-learn estimator, or any fit/predict object.</span>
-</span><span data-line="100"><span class="sd">    y : array-like, optional</span>
-</span><span data-line="101"><span class="sd">        Target, used as a last resort for the heuristic.</span>
+</span><span data-line="96"><span class="sd">    Priority order:</span>
+</span><span data-line="97">
+</span><span data-line="98"><span class="sd">    1. the model&#39;s ``task`` attribute (trainedml models, :class:`BaseModel`);</span>
+</span><span data-line="99"><span class="sd">    2. scikit-learn&#39;s ``is_classifier`` / ``is_regressor`` functions</span>
+</span><span data-line="100"><span class="sd">       (arbitrary sklearn estimators);</span>
+</span><span data-line="101"><span class="sd">    3. the heuristic on the ``y`` target, if provided.</span>
 </span><span data-line="102">
-</span><span data-line="103"><span class="sd">    Returns</span>
-</span><span data-line="104"><span class="sd">    -------</span>
-</span><span data-line="105"><span class="sd">    str</span>
-</span><span data-line="106"><span class="sd">        ``&#39;classification&#39;`` or ``&#39;regression&#39;``.</span>
-</span><span data-line="107"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span data-line="108">    <span class="n">task</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;task&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-</span><span data-line="109">    <span class="k">if</span> <span class="n">task</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span> <span class="s2">&quot;regression&quot;</span><span class="p">):</span>
-</span><span data-line="110">        <span class="k">return</span> <span class="n">task</span>
-</span><span data-line="111">    <span class="k">try</span><span class="p">:</span>
-</span><span data-line="112">        <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_classifier</span><span class="p">,</span> <span class="n">is_regressor</span>
-</span><span data-line="113">        <span class="k">if</span> <span class="n">is_classifier</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
-</span><span data-line="114">            <span class="k">return</span> <span class="s2">&quot;classification&quot;</span>
-</span><span data-line="115">        <span class="k">if</span> <span class="n">is_regressor</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
-</span><span data-line="116">            <span class="k">return</span> <span class="s2">&quot;regression&quot;</span>
-</span><span data-line="117">    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-</span><span data-line="118">        <span class="k">pass</span>
-</span><span data-line="119">    <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="120">        <span class="k">return</span> <span class="n">detect_task</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-</span><span data-line="121">    <span class="k">return</span> <span class="s2">&quot;classification&quot;</span></div>
+</span><span data-line="103"><span class="sd">    Parameters</span>
+</span><span data-line="104"><span class="sd">    ----------</span>
+</span><span data-line="105"><span class="sd">    model : object</span>
+</span><span data-line="106"><span class="sd">        trainedml model, scikit-learn estimator, or any fit/predict object.</span>
+</span><span data-line="107"><span class="sd">    y : array-like, optional</span>
+</span><span data-line="108"><span class="sd">        Target, used as a last resort for the heuristic.</span>
+</span><span data-line="109">
+</span><span data-line="110"><span class="sd">    Returns</span>
+</span><span data-line="111"><span class="sd">    -------</span>
+</span><span data-line="112"><span class="sd">    str</span>
+</span><span data-line="113"><span class="sd">        ``&#39;classification&#39;`` or ``&#39;regression&#39;``.</span>
+</span><span data-line="114"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="115">    <span class="n">task</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;task&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span data-line="116">    <span class="k">if</span> <span class="n">task</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;classification&quot;</span><span class="p">,</span> <span class="s2">&quot;regression&quot;</span><span class="p">):</span>
+</span><span data-line="117">        <span class="k">return</span> <span class="n">task</span>
+</span><span data-line="118">    <span class="k">try</span><span class="p">:</span>
+</span><span data-line="119">        <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_classifier</span><span class="p">,</span> <span class="n">is_regressor</span>
+</span><span data-line="120">        <span class="k">if</span> <span class="n">is_classifier</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+</span><span data-line="121">            <span class="k">return</span> <span class="s2">&quot;classification&quot;</span>
+</span><span data-line="122">        <span class="k">if</span> <span class="n">is_regressor</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+</span><span data-line="123">            <span class="k">return</span> <span class="s2">&quot;regression&quot;</span>
+</span><span data-line="124">    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span><span data-line="125">        <span class="k">pass</span>
+</span><span data-line="126">    <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="127">        <span class="k">return</span> <span class="n">detect_task</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</span><span data-line="128">    <span class="k">return</span> <span class="s2">&quot;classification&quot;</span></div>
+
+</span><span data-line="129">
+</span><span data-line="130">
+<div class="viewcode-block" id="check_class_imbalance">
+<a class="viewcode-back" href="../../trainedml/tasks.html#trainedml.tasks.check_class_imbalance">[docs]</a>
+</span><span data-line="131"><span class="k">def</span><span class="w"> </span><span class="nf">check_class_imbalance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_IMBALANCE_THRESHOLD</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+</span><span data-line="132"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="133"><span class="sd">    Check whether classification classes are notably imbalanced.</span>
+</span><span data-line="134">
+</span><span data-line="135"><span class="sd">    Parameters</span>
+</span><span data-line="136"><span class="sd">    ----------</span>
+</span><span data-line="137"><span class="sd">    y : pandas.Series or array-like</span>
+</span><span data-line="138"><span class="sd">        Class labels.</span>
+</span><span data-line="139"><span class="sd">    threshold : float, default=3.0</span>
+</span><span data-line="140"><span class="sd">        Majority/minority count ratio above which classes are considered</span>
+</span><span data-line="141"><span class="sd">        imbalanced.</span>
+</span><span data-line="142">
+</span><span data-line="143"><span class="sd">    Returns</span>
+</span><span data-line="144"><span class="sd">    -------</span>
+</span><span data-line="145"><span class="sd">    dict or None</span>
+</span><span data-line="146"><span class="sd">        ``None`` if the classes are balanced (or if there are fewer than</span>
+</span><span data-line="147"><span class="sd">        two classes). Otherwise, a dict with ``ratio``, ``majority_class``,</span>
+</span><span data-line="148"><span class="sd">        ``majority_count``, ``minority_class``, ``minority_count``.</span>
+</span><span data-line="149">
+</span><span data-line="150"><span class="sd">    Examples</span>
+</span><span data-line="151"><span class="sd">    --------</span>
+</span><span data-line="152"><span class="sd">    &gt;&gt;&gt; check_class_imbalance(pd.Series([&quot;a&quot;] * 90 + [&quot;b&quot;] * 10))</span>
+</span><span data-line="153"><span class="sd">    {&#39;ratio&#39;: 9.0, &#39;majority_class&#39;: &#39;a&#39;, &#39;majority_count&#39;: 90, ...}</span>
+</span><span data-line="154"><span class="sd">    &gt;&gt;&gt; check_class_imbalance(pd.Series([&quot;a&quot;] * 55 + [&quot;b&quot;] * 45)) is None</span>
+</span><span data-line="155"><span class="sd">    True</span>
+</span><span data-line="156"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="157">    <span class="n">counts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</span><span data-line="158">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+</span><span data-line="159">        <span class="k">return</span> <span class="kc">None</span>
+</span><span data-line="160">    <span class="n">ratio</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">counts</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span><span data-line="161">    <span class="k">if</span> <span class="n">ratio</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+</span><span data-line="162">        <span class="k">return</span> <span class="kc">None</span>
+</span><span data-line="163">    <span class="k">return</span> <span class="p">{</span>
+</span><span data-line="164">        <span class="s2">&quot;ratio&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">ratio</span><span class="p">),</span>
+</span><span data-line="165">        <span class="s2">&quot;majority_class&quot;</span><span class="p">:</span> <span class="n">counts</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+</span><span data-line="166">        <span class="s2">&quot;majority_count&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+</span><span data-line="167">        <span class="s2">&quot;minority_class&quot;</span><span class="p">:</span> <span class="n">counts</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+</span><span data-line="168">        <span class="s2">&quot;minority_count&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+</span><span data-line="169">    <span class="p">}</span></div>
+
+</span><span data-line="170">
+</span><span data-line="171">
+<div class="viewcode-block" id="warn_if_imbalanced">
+<a class="viewcode-back" href="../../trainedml/tasks.html#trainedml.tasks.warn_if_imbalanced">[docs]</a>
+</span><span data-line="172"><span class="k">def</span><span class="w"> </span><span class="nf">warn_if_imbalanced</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_IMBALANCE_THRESHOLD</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="173"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="174"><span class="sd">    Emit a ``UserWarning`` if the classes in ``y`` are notably imbalanced.</span>
+</span><span data-line="175">
+</span><span data-line="176"><span class="sd">    A no-op if the classes are balanced. Used internally by :class:`Trainer`</span>
+</span><span data-line="177"><span class="sd">    (on fit) and :func:`compare` so imbalance is flagged where it matters,</span>
+</span><span data-line="178"><span class="sd">    without changing any model&#39;s behavior.</span>
+</span><span data-line="179">
+</span><span data-line="180"><span class="sd">    Parameters</span>
+</span><span data-line="181"><span class="sd">    ----------</span>
+</span><span data-line="182"><span class="sd">    y : pandas.Series or array-like</span>
+</span><span data-line="183"><span class="sd">        Class labels.</span>
+</span><span data-line="184"><span class="sd">    threshold : float, default=3.0</span>
+</span><span data-line="185"><span class="sd">        Majority/minority count ratio above which classes are considered</span>
+</span><span data-line="186"><span class="sd">        imbalanced.</span>
+</span><span data-line="187"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="188">    <span class="n">info</span> <span class="o">=</span> <span class="n">check_class_imbalance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+</span><span data-line="189">    <span class="k">if</span> <span class="n">info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="190">        <span class="k">return</span>
+</span><span data-line="191">    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+</span><span data-line="192">        <span class="sa">f</span><span class="s2">&quot;Imbalanced classes: </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;majority_class&#39;</span><span class="p">]</span><span class="si">!r}</span><span class="s2"> has </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;majority_count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
+</span><span data-line="193">        <span class="sa">f</span><span class="s2">&quot;samples versus </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;minority_count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;minority_class&#39;</span><span class="p">]</span><span class="si">!r}</span><span class="s2"> &quot;</span>
+</span><span data-line="194">        <span class="sa">f</span><span class="s2">&quot;(ratio </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;ratio&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">:1). Accuracy alone can be misleading here: check &quot;</span>
+</span><span data-line="195">        <span class="sa">f</span><span class="s2">&quot;precision/recall per class, and consider model_params=</span><span class="se">{{</span><span class="s2">&#39;class_weight&#39;: &#39;balanced&#39;</span><span class="se">}}</span><span class="s2"> &quot;</span>
+</span><span data-line="196">        <span class="sa">f</span><span class="s2">&quot;for models that support it (random_forest, logistic).&quot;</span><span class="p">,</span>
+</span><span data-line="197">        <span class="ne">UserWarning</span><span class="p">,</span>
+</span><span data-line="198">        <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+</span><span data-line="199">    <span class="p">)</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
@@ -329,7 +411,7 @@ data-aria-dark="Passer en mode automatique">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>

@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Comparer et choisir un modèle - trainedml 0.2.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Hyperparamètres et modèles externes" href="plot_hyperparametres.html" /><link rel="prev" title="Données et modèles" href="index.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Comparer et choisir un modèle - trainedml 0.3.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Hyperparamètres : réglage manuel et recherche automatique" href="plot_hyperparametres.html" /><link rel="prev" title="Charger des données distantes" href="plot_donnees_distantes.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Données et modèles</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -134,6 +132,7 @@ data-aria-dark="Passer en mode automatique">
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>Sur cette page</h3><ul>
 <li><a class="reference internal" href="#score-moyen-et-stabilite">Score moyen et stabilit&#233;</a></li>
 <li><a class="reference internal" href="#un-estimateur-scikit-learn-arbitraire">Un estimateur scikit-learn arbitraire</a></li>
+<li><a class="reference internal" href="#classes-desequilibrees-l-accuracy-peut-cacher-un-probleme">Classes d&#233;s&#233;quilibr&#233;es : l&#8217;accuracy peut cacher un probl&#232;me</a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -184,16 +183,15 @@ validation croisée, et renvoie un tableau trié prêt à lire.</p>
 </span></pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">CV 5-fold:   0%|          | 0/3 [00:00&lt;?, ?model/s]
-</span><span data-line="2">CV 5-fold:  67%|██████▋   | 2/3 [00:00&lt;00:00,  8.54model/s]
-</span><span data-line="3">CV 5-fold: 100%|██████████| 3/3 [00:00&lt;00:00,  2.64model/s]
-</span><span data-line="4">CV 5-fold: 100%|██████████| 3/3 [00:00&lt;00:00,  3.06model/s]
-</span><span data-line="5">               accuracy  precision    recall  ...    f1_std  fit_time  predict_time
-</span><span data-line="6">model                                         ...
-</span><span data-line="7">logistic       0.983333   0.984714  0.983333  ...  0.013602  0.011349      0.003018
-</span><span data-line="8">random_forest  0.983016   0.983521  0.983016  ...  0.022766  0.127481      0.011365
-</span><span data-line="9">knn            0.971746   0.974261  0.971746  ...  0.018356  0.006076      0.003491
-</span><span data-line="10">
-</span><span data-line="11">[3 rows x 10 columns]
+</span><span data-line="2">CV 5-fold:  67%|██████▋   | 2/3 [00:00&lt;00:00, 10.40model/s]
+</span><span data-line="3">CV 5-fold: 100%|██████████| 3/3 [00:00&lt;00:00,  3.52model/s]
+</span><span data-line="4">               accuracy  precision    recall  ...    f1_std  fit_time  predict_time
+</span><span data-line="5">model                                         ...
+</span><span data-line="6">random_forest  0.988730   0.989675  0.988730  ...  0.013759  0.114398      0.008991
+</span><span data-line="7">logistic       0.983333   0.984714  0.983333  ...  0.013602  0.008938      0.002575
+</span><span data-line="8">knn            0.971746   0.974261  0.971746  ...  0.018356  0.005287      0.003077
+</span><span data-line="9">
+</span><span data-line="10">[3 rows x 10 columns]
 </span></pre></div>
 </div>
 <section id="score-moyen-et-stabilite">
@@ -206,12 +204,12 @@ nettement supérieur aux autres est moins fiable qu’il n’y paraît.</p>
 </span><span data-line="3"><span class="nb">print</span><span class="p">(</span><span class="n">resultats</span><span class="p">[[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;accuracy_std&quot;</span><span class="p">,</span> <span class="s2">&quot;fit_time&quot;</span><span class="p">]])</span>
 </span></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">Meilleur score moyen : logistic (0.983)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">Meilleur score moyen : random_forest (0.989)
 </span><span data-line="2">               accuracy  accuracy_std  fit_time
 </span><span data-line="3">model
-</span><span data-line="4">logistic       0.983333      0.013608  0.011349
-</span><span data-line="5">random_forest  0.983016      0.022780  0.127481
-</span><span data-line="6">knn            0.971746      0.018074  0.006076
+</span><span data-line="4">random_forest  0.988730      0.013805  0.114398
+</span><span data-line="5">logistic       0.983333      0.013608  0.008938
+</span><span data-line="6">knn            0.971746      0.018074  0.005287
 </span></pre></div>
 </div>
 </section>
@@ -231,17 +229,61 @@ mélangeant modèles nommés trainedml et estimateurs scikit-learn.</p>
 </span></pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">CV 5-fold:   0%|          | 0/2 [00:00&lt;?, ?model/s]
-</span><span data-line="2">CV 5-fold: 100%|██████████| 2/2 [00:00&lt;00:00, 10.82model/s]
-</span><span data-line="3">CV 5-fold: 100%|██████████| 2/2 [00:00&lt;00:00, 10.81model/s]
+</span><span data-line="2">CV 5-fold: 100%|██████████| 2/2 [00:00&lt;00:00, 12.14model/s]
+</span><span data-line="3">CV 5-fold: 100%|██████████| 2/2 [00:00&lt;00:00, 12.13model/s]
 </span><span data-line="4">              accuracy  precision    recall  ...    f1_std  fit_time  predict_time
 </span><span data-line="5">model                                        ...
-</span><span data-line="6">svm_rbf       0.983333   0.984209  0.983333  ...  0.022228  0.006547      0.002433
-</span><span data-line="7">svm_lineaire  0.966349   0.969701  0.966349  ...  0.011477  0.006127      0.002311
+</span><span data-line="6">svm_rbf       0.983333   0.984209  0.983333  ...  0.022228  0.005858      0.002229
+</span><span data-line="7">svm_lineaire  0.966349   0.969701  0.966349  ...  0.011477  0.005850      0.002230
 </span><span data-line="8">
 </span><span data-line="9">[2 rows x 10 columns]
 </span></pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.194 seconds)</p>
+</section>
+<section id="classes-desequilibrees-l-accuracy-peut-cacher-un-probleme">
+<h2>Classes déséquilibrées : l’accuracy peut cacher un problème<a class="headerlink" href="#classes-desequilibrees-l-accuracy-peut-cacher-un-probleme" title="Lien vers cette rubrique">#</a></h2>
+<p>Sur un jeu de données où une classe est rare, <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>/<code class="docutils literal notranslate"><span class="pre">compare()</span></code>
+émettent un avertissement. Ici, la classe « rare » ne représente que 10 %
+des exemples.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span data-line="2"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trainer</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span data-line="7"><span class="n">n</span> <span class="o">=</span> <span class="mi">300</span>
+</span><span data-line="8"><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">),</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+</span><span data-line="9"><span class="n">score</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">b</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</span><span data-line="10"><span class="n">y_desequilibre</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">),</span> <span class="s2">&quot;rare&quot;</span><span class="p">,</span> <span class="s2">&quot;frequent&quot;</span><span class="p">))</span>
+</span><span data-line="11"><span class="n">X_desequilibre</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">b</span><span class="p">})</span>
+</span><span data-line="12">
+</span><span data-line="13"><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_desequilibre</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_desequilibre</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;logistic&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span><span data-line="14"><span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>  <span class="c1"># émet un UserWarning : classes déséquilibrées</span>
+</span><span data-line="15"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sans class_weight :&quot;</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</span></pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">/home/runner/work/trainedml/trainedml/examples/02_donnees_et_modeles/plot_choisir_son_modele.py:61: UserWarning: Imbalanced classes: &#39;frequent&#39; has 217 samples versus 23 for &#39;rare&#39; (ratio 9.4:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="2">  trainer.fit()  # émet un UserWarning : classes déséquilibrées
+</span><span data-line="3">Sans class_weight : {&#39;accuracy&#39;: 0.9666666666666667, &#39;precision&#39;: 0.9678787878787879, &#39;recall&#39;: 0.9666666666666667, &#39;f1&#39;: 0.9641975308641976}
+</span></pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">class_weight=&quot;balanced&quot;</span></code> (déjà supporté par random_forest et logistic
+via <code class="docutils literal notranslate"><span class="pre">model_params</span></code>) pénalise davantage les erreurs sur la classe rare :
+l’accuracy globale baisse, mais la classe rare est mieux détectée. Un vrai
+compromis, pas une amélioration gratuite : à activer quand rater un cas
+rare coûte plus cher qu’une fausse alerte (fraude, panne, diagnostic…).</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">trainer_pondere</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_desequilibre</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_desequilibre</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;logistic&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+</span><span data-line="2">                          <span class="n">model_params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;class_weight&quot;</span><span class="p">:</span> <span class="s2">&quot;balanced&quot;</span><span class="p">})</span>
+</span><span data-line="3"><span class="n">trainer_pondere</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span><span data-line="4"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Avec class_weight=&#39;balanced&#39; :&quot;</span><span class="p">,</span> <span class="n">trainer_pondere</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</span></pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">/home/runner/work/trainedml/trainedml/examples/02_donnees_et_modeles/plot_choisir_son_modele.py:73: UserWarning: Imbalanced classes: &#39;frequent&#39; has 217 samples versus 23 for &#39;rare&#39; (ratio 9.4:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="2">  trainer_pondere.fit()
+</span><span data-line="3">Avec class_weight=&#39;balanced&#39; : {&#39;accuracy&#39;: 0.9, &#39;precision&#39;: 0.9289424860853432, &#39;recall&#39;: 0.9, &#39;f1&#39;: 0.9091503267973856}
+</span></pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.091 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-02-donnees-et-modeles-plot-choisir-son-modele-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/19a6c35145d0e0105dc938facd171359/plot_choisir_son_modele.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_choisir_son_modele.ipynb</span></code></a></p>
@@ -263,16 +305,16 @@ mélangeant modèles nommés trainedml et estimateurs scikit-learn.</p>
   </svg>
   <span>Retour au sommet</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="index.html">
+    <a href="plot_donnees_distantes.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>Précédent</span><div class="title">Données et modèles</div></div>
+        <span>Précédent</span><div class="title">Charger des données distantes</div></div>
     </a>
   </div><div class="navigation-next">
     <a href="plot_hyperparametres.html">
       <div class="page-info">
         <span>Suivant</span>
-        <div class="title">Hyperparamètres et modèles externes</div>
+        <div class="title">Hyperparamètres : réglage manuel et recherche automatique</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>
@@ -300,7 +342,7 @@ mélangeant modèles nommés trainedml et estimateurs scikit-learn.</p>
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>

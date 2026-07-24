@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.viz.vizs - trainedml 0.2.0</title><link rel="shortcut icon" href="../../../_static/logo.svg"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Recherche" href="../../../search.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.viz.vizs - trainedml 0.3.0</title><link rel="shortcut icon" href="../../../_static/logo.svg"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Recherche" href="../../../search.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=e1a1ceaf" />
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/index.html">Données et modèles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -217,83 +215,84 @@ data-aria-dark="Passer en mode automatique">
 </span><span data-line="44">        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
 </span><span data-line="45">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;data must be a pandas DataFrame&#39;</span><span class="p">)</span>
 </span><span data-line="46">        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
-</span><span data-line="47">        <span class="c1"># Stores the generated output: usually a matplotlib Figure, but some</span>
-</span><span data-line="48">        <span class="c1"># subclasses (e.g. ProfilingViz) return a pandas DataFrame instead.</span>
-</span><span data-line="49">        <span class="bp">self</span><span class="o">.</span><span class="n">_figure</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="50">        <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span> <span class="o">=</span> <span class="n">save_path</span>
-</span><span data-line="51">
+</span><span data-line="47">        <span class="c1"># Stores the generated output: usually a matplotlib Figure, though a</span>
+</span><span data-line="48">        <span class="c1"># few subclasses store an Axes instead (e.g. HeatmapViz, backed by</span>
+</span><span data-line="49">        <span class="c1"># seaborn).</span>
+</span><span data-line="50">        <span class="bp">self</span><span class="o">.</span><span class="n">_figure</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="51">        <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span> <span class="o">=</span> <span class="n">save_path</span>
+</span><span data-line="52">
 <div class="viewcode-block" id="Vizs.vizs">
 <a class="viewcode-back" href="../../../trainedml/vizs.html#trainedml.viz.vizs.Vizs.vizs">[docs]</a>
-</span><span data-line="52">    <span class="k">def</span><span class="w"> </span><span class="nf">vizs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-</span><span data-line="53"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="54"><span class="sd">        Method to override in subclasses to generate the visualization.</span>
-</span><span data-line="55"><span class="sd">        Automatically calls save() if a save_path was set.</span>
-</span><span data-line="56">
-</span><span data-line="57"><span class="sd">        Most subclasses return None and store their output on</span>
-</span><span data-line="58"><span class="sd">        ``self._figure`` instead; a few (e.g. HistogramViz, BoxplotViz)</span>
-</span><span data-line="59"><span class="sd">        also return it directly, hence the ``Any`` return type here.</span>
-</span><span data-line="60"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="61">        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Subclasses must implement this method&#39;</span><span class="p">)</span></div>
+</span><span data-line="53">    <span class="k">def</span><span class="w"> </span><span class="nf">vizs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span data-line="54"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="55"><span class="sd">        Method to override in subclasses to generate the visualization.</span>
+</span><span data-line="56"><span class="sd">        Automatically calls save() if a save_path was set.</span>
+</span><span data-line="57">
+</span><span data-line="58"><span class="sd">        Most subclasses return None and store their output on</span>
+</span><span data-line="59"><span class="sd">        ``self._figure`` instead; a few (e.g. HistogramViz, HeatmapViz)</span>
+</span><span data-line="60"><span class="sd">        also return it directly, hence the ``Any`` return type here.</span>
+</span><span data-line="61"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="62">        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Subclasses must implement this method&#39;</span><span class="p">)</span></div>
 
-</span><span data-line="62">
+</span><span data-line="63">
 <div class="viewcode-block" id="Vizs.save">
 <a class="viewcode-back" href="../../../trainedml/vizs.html#trainedml.viz.vizs.Vizs.save">[docs]</a>
-</span><span data-line="63">    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dpi</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">150</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="64"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="65"><span class="sd">        Save the figure to a file.</span>
-</span><span data-line="66">
-</span><span data-line="67"><span class="sd">        Args:</span>
-</span><span data-line="68"><span class="sd">            path (str, optional): file path. If None, uses self._save_path</span>
-</span><span data-line="69"><span class="sd">            dpi (int): image resolution (default: 150)</span>
-</span><span data-line="70"><span class="sd">            **kwargs: extra arguments passed to plt.savefig()</span>
-</span><span data-line="71">
-</span><span data-line="72"><span class="sd">        Returns:</span>
-</span><span data-line="73"><span class="sd">            str: path to the saved file, or None on failure</span>
-</span><span data-line="74">
-</span><span data-line="75"><span class="sd">        Raises:</span>
-</span><span data-line="76"><span class="sd">            ValueError: if no path is specified and _save_path is None</span>
-</span><span data-line="77"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="78">        <span class="n">save_path</span> <span class="o">=</span> <span class="n">path</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span>
-</span><span data-line="79">
-</span><span data-line="80">        <span class="k">if</span> <span class="n">save_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="81">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No path specified. Pass &#39;path&#39; or set save_path at init time.&quot;</span><span class="p">)</span>
-</span><span data-line="82">
-</span><span data-line="83">        <span class="c1"># Create the parent directory if needed</span>
-</span><span data-line="84">        <span class="n">parent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
-</span><span data-line="85">        <span class="k">if</span> <span class="n">parent_dir</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">):</span>
-</span><span data-line="86">            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span data-line="87">
-</span><span data-line="88">        <span class="k">try</span><span class="p">:</span>
-</span><span data-line="89">            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span data-line="90">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Figure saved: </span><span class="si">{</span><span class="n">save_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span data-line="91">            <span class="k">return</span> <span class="n">save_path</span>
-</span><span data-line="92">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span data-line="93">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error while saving: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span data-line="94">            <span class="k">return</span> <span class="kc">None</span></div>
+</span><span data-line="64">    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dpi</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">150</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="65"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="66"><span class="sd">        Save the figure to a file.</span>
+</span><span data-line="67">
+</span><span data-line="68"><span class="sd">        Args:</span>
+</span><span data-line="69"><span class="sd">            path (str, optional): file path. If None, uses self._save_path</span>
+</span><span data-line="70"><span class="sd">            dpi (int): image resolution (default: 150)</span>
+</span><span data-line="71"><span class="sd">            **kwargs: extra arguments passed to plt.savefig()</span>
+</span><span data-line="72">
+</span><span data-line="73"><span class="sd">        Returns:</span>
+</span><span data-line="74"><span class="sd">            str: path to the saved file, or None on failure</span>
+</span><span data-line="75">
+</span><span data-line="76"><span class="sd">        Raises:</span>
+</span><span data-line="77"><span class="sd">            ValueError: if no path is specified and _save_path is None</span>
+</span><span data-line="78"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="79">        <span class="n">save_path</span> <span class="o">=</span> <span class="n">path</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span>
+</span><span data-line="80">
+</span><span data-line="81">        <span class="k">if</span> <span class="n">save_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="82">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No path specified. Pass &#39;path&#39; or set save_path at init time.&quot;</span><span class="p">)</span>
+</span><span data-line="83">
+</span><span data-line="84">        <span class="c1"># Create the parent directory if needed</span>
+</span><span data-line="85">        <span class="n">parent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
+</span><span data-line="86">        <span class="k">if</span> <span class="n">parent_dir</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">):</span>
+</span><span data-line="87">            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span data-line="88">
+</span><span data-line="89">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="90">            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span data-line="91">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Figure saved: </span><span class="si">{</span><span class="n">save_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="92">            <span class="k">return</span> <span class="n">save_path</span>
+</span><span data-line="93">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="94">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error while saving: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="95">            <span class="k">return</span> <span class="kc">None</span></div>
 
-</span><span data-line="95">
-</span><span data-line="96">    <span class="k">def</span><span class="w"> </span><span class="nf">_auto_save</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="97"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="98"><span class="sd">        Automatically save if a save_path was set.</span>
-</span><span data-line="99"><span class="sd">        Should be called at the end of vizs() in subclasses.</span>
-</span><span data-line="100"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="101">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span><span class="p">:</span>
-</span><span data-line="102">            <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</span><span data-line="103">
-</span><span data-line="104">    <span class="nd">@property</span>
-</span><span data-line="105">    <span class="k">def</span><span class="w"> </span><span class="nf">figure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-</span><span data-line="106"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the generated figure.&quot;&quot;&quot;</span>
-</span><span data-line="107">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_figure</span>
-</span><span data-line="108">
-</span><span data-line="109">    <span class="nd">@property</span>
-</span><span data-line="110">    <span class="k">def</span><span class="w"> </span><span class="nf">save_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="111"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the configured save path.&quot;&quot;&quot;</span>
-</span><span data-line="112">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span>
-</span><span data-line="113">
-</span><span data-line="114">    <span class="nd">@save_path</span><span class="o">.</span><span class="n">setter</span>
-</span><span data-line="115">    <span class="k">def</span><span class="w"> </span><span class="nf">save_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="116"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the save path.&quot;&quot;&quot;</span>
-</span><span data-line="117">        <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span> <span class="o">=</span> <span class="n">value</span></div>
+</span><span data-line="96">
+</span><span data-line="97">    <span class="k">def</span><span class="w"> </span><span class="nf">_auto_save</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="98"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="99"><span class="sd">        Automatically save if a save_path was set.</span>
+</span><span data-line="100"><span class="sd">        Should be called at the end of vizs() in subclasses.</span>
+</span><span data-line="101"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="102">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span><span class="p">:</span>
+</span><span data-line="103">            <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span data-line="104">
+</span><span data-line="105">    <span class="nd">@property</span>
+</span><span data-line="106">    <span class="k">def</span><span class="w"> </span><span class="nf">figure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span data-line="107"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the generated figure.&quot;&quot;&quot;</span>
+</span><span data-line="108">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_figure</span>
+</span><span data-line="109">
+</span><span data-line="110">    <span class="nd">@property</span>
+</span><span data-line="111">    <span class="k">def</span><span class="w"> </span><span class="nf">save_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="112"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the configured save path.&quot;&quot;&quot;</span>
+</span><span data-line="113">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span>
+</span><span data-line="114">
+</span><span data-line="115">    <span class="nd">@save_path</span><span class="o">.</span><span class="n">setter</span>
+</span><span data-line="116">    <span class="k">def</span><span class="w"> </span><span class="nf">save_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="117"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the save path.&quot;&quot;&quot;</span>
+</span><span data-line="118">        <span class="bp">self</span><span class="o">.</span><span class="n">_save_path</span> <span class="o">=</span> <span class="n">value</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
@@ -325,7 +324,7 @@ data-aria-dark="Passer en mode automatique">
     </div>
   </div>
 </footer>
-      <script src="../../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>

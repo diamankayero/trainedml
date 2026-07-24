@@ -49,7 +49,7 @@ RMSE, MAE), et comparer un modèle linéaire à un modèle non linéaire.
  .. code-block:: none
 
     task détecté : regression
-    {'r2': 0.5220332640953989, 'mse': 0.31235406250000003, 'rmse': 0.5588864486637692, 'mae': 0.42859374999999994}
+    {'r2': 0.5155729165110059, 'mse': 0.3165759375, 'rmse': 0.5626508131159147, 'mae': 0.43453125000000004}
 
 
 
@@ -80,7 +80,7 @@ quand le R² plafonne déjà autour de 0.5.
 
  .. code-block:: none
 
-    R² random_forest_regressor : 0.522
+    R² random_forest_regressor : 0.516
     R² linear                  : 0.403
 
 
@@ -100,7 +100,7 @@ Un R² autour de 0.5 sur ce type de cible n'est donc pas un échec.
 Modèles de régression disponibles
 --------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 43-53
+.. GENERATED FROM PYTHON SOURCE LINES 43-54
 
 .. code-block:: Python
 
@@ -118,6 +118,7 @@ Modèles de régression disponibles
 
 
 
+
 .. rst-class:: sphx-glr-script-out
 
  .. code-block:: none
@@ -125,8 +126,38 @@ Modèles de régression disponibles
     linear                    -> R²=0.403
     ridge                     -> R²=0.403
     lasso                     -> R²=-0.006
-    random_forest_regressor   -> R²=0.519
+    random_forest_regressor   -> R²=0.510
     knn_regressor             -> R²=0.335
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 55-60
+
+Un dataset de régression intégré : diabetes
+--------------------------------------------------
+Comme ``iris``/``wine`` pour la classification, ``diabetes`` (scikit-learn,
+aucun téléchargement) sert de jeu de données de régression prêt à l'emploi
+pour prototyper sans dépendre d'un CSV distant.
+
+.. GENERATED FROM PYTHON SOURCE LINES 60-64
+
+.. code-block:: Python
+
+
+    trainer_diabetes = Trainer(dataset="diabetes", model="random_forest_regressor", seed=42)
+    trainer_diabetes.fit()
+    print("\ndiabetes :", trainer_diabetes.evaluate())
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    diabetes : {'r2': 0.4427194190698045, 'mse': 2952.557084269663, 'rmse': 54.33743722581755, 'mae': 44.10235955056179}
 
 
 
@@ -134,7 +165,7 @@ Modèles de régression disponibles
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.167 seconds)
+   **Total running time of the script:** (0 minutes 1.392 seconds)
 
 
 .. _sphx_glr_download_auto_examples_02_donnees_et_modeles_plot_regression.py:

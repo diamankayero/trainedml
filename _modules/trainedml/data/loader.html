@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.data.loader - trainedml 0.2.0</title><link rel="shortcut icon" href="../../../_static/logo.svg"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Recherche" href="../../../search.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.data.loader - trainedml 0.3.0</title><link rel="shortcut icon" href="../../../_static/logo.svg"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Recherche" href="../../../search.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=e1a1ceaf" />
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/index.html">Données et modèles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -179,7 +177,7 @@ data-aria-dark="Passer en mode automatique">
 </span><span data-line="8">
 </span><span data-line="9"><span class="sd">Main features</span>
 </span><span data-line="10"><span class="sd">-------------</span>
-</span><span data-line="11"><span class="sd">- Built-in datasets loaded locally via scikit-learn (Iris, Wine) - no network required</span>
+</span><span data-line="11"><span class="sd">- Built-in datasets loaded locally via scikit-learn (Iris, Wine, Diabetes) - no network required</span>
 </span><span data-line="12"><span class="sd">- CSV loading from a URL with local pooch cache (separator and hash handled)</span>
 </span><span data-line="13"><span class="sd">- Returns X (features) and y (target) ready to use for ML</span>
 </span><span data-line="14"><span class="sd">- Train/test split via :meth:`DataLoader.split`</span>
@@ -213,7 +211,7 @@ data-aria-dark="Passer en mode automatique">
 </span><span data-line="40">
 </span><span data-line="41"><span class="sd">    Features</span>
 </span><span data-line="42"><span class="sd">    --------</span>
-</span><span data-line="43"><span class="sd">    - Automatic download and caching of public datasets (Iris, Wine, etc.)</span>
+</span><span data-line="43"><span class="sd">    - Automatic download and caching of public datasets (Iris, Wine, Diabetes, etc.)</span>
 </span><span data-line="44"><span class="sd">    - CSV loading from a URL (with separator and hash handling)</span>
 </span><span data-line="45"><span class="sd">    - Returns X (features) and y (target) ready to use for ML</span>
 </span><span data-line="46"><span class="sd">    - Can be extended to support other sources (INSEE, data.gouv.fr, etc.)</span>
@@ -327,7 +325,7 @@ data-aria-dark="Passer en mode automatique">
 </span><span data-line="149"><span class="sd">        Parameters</span>
 </span><span data-line="150"><span class="sd">        ----------</span>
 </span><span data-line="151"><span class="sd">        name : str, optional</span>
-</span><span data-line="152"><span class="sd">            Name of a known dataset (&quot;iris&quot;, &quot;wine&quot;, etc.).</span>
+</span><span data-line="152"><span class="sd">            Name of a known dataset (&quot;iris&quot;, &quot;wine&quot;, &quot;diabetes&quot;, etc.).</span>
 </span><span data-line="153"><span class="sd">        url : str, optional</span>
 </span><span data-line="154"><span class="sd">            URL of a remote CSV to load.</span>
 </span><span data-line="155"><span class="sd">        target : str, optional</span>
@@ -395,57 +393,66 @@ data-aria-dark="Passer en mode automatique">
 </span><span data-line="217">            <span class="n">X</span> <span class="o">=</span> <span class="n">bunch</span><span class="o">.</span><span class="n">data</span>
 </span><span data-line="218">            <span class="n">y</span> <span class="o">=</span> <span class="n">bunch</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span>
 </span><span data-line="219">            <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
-</span><span data-line="220">        <span class="k">elif</span> <span class="n">url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">target</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="221">            <span class="c1"># Generic loading of a remote CSV</span>
-</span><span data-line="222">            <span class="c1"># If the CSV is winequality, use sep=&#39;;&#39;</span>
-</span><span data-line="223">            <span class="n">sep_to_use</span> <span class="o">=</span> <span class="n">sep</span>
-</span><span data-line="224">            <span class="k">if</span> <span class="n">sep_to_use</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="225">                <span class="k">if</span> <span class="s2">&quot;winequality&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
-</span><span data-line="226">                    <span class="n">sep_to_use</span> <span class="o">=</span> <span class="s2">&quot;;&quot;</span>
-</span><span data-line="227">                <span class="k">else</span><span class="p">:</span>
-</span><span data-line="228">                    <span class="n">sep_to_use</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span>
-</span><span data-line="229">            <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_csv_from_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep_to_use</span><span class="p">)</span>
-</span><span data-line="230">            <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target</span><span class="p">])</span>
-</span><span data-line="231">            <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
-</span><span data-line="232">            <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
-</span><span data-line="233">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="234">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Specify a known dataset name or a url+target.&quot;</span><span class="p">)</span></div>
+</span><span data-line="220">        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;diabetes&quot;</span><span class="p">:</span>
+</span><span data-line="221">            <span class="c1"># Diabetes dataset (regression), loaded locally via scikit-learn</span>
+</span><span data-line="222">            <span class="c1"># (no network required): the built-in counterpart to iris/wine</span>
+</span><span data-line="223">            <span class="c1"># for regression tasks.</span>
+</span><span data-line="224">            <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_diabetes</span>
+</span><span data-line="225">            <span class="n">bunch</span> <span class="o">=</span> <span class="n">load_diabetes</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span data-line="226">            <span class="n">X</span> <span class="o">=</span> <span class="n">bunch</span><span class="o">.</span><span class="n">data</span>
+</span><span data-line="227">            <span class="n">y</span> <span class="o">=</span> <span class="n">bunch</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;disease_progression&quot;</span><span class="p">)</span>
+</span><span data-line="228">            <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+</span><span data-line="229">        <span class="k">elif</span> <span class="n">url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">target</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="230">            <span class="c1"># Generic loading of a remote CSV</span>
+</span><span data-line="231">            <span class="c1"># If the CSV is winequality, use sep=&#39;;&#39;</span>
+</span><span data-line="232">            <span class="n">sep_to_use</span> <span class="o">=</span> <span class="n">sep</span>
+</span><span data-line="233">            <span class="k">if</span> <span class="n">sep_to_use</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="234">                <span class="k">if</span> <span class="s2">&quot;winequality&quot;</span> <span class="ow">in</span> <span class="n">url</span><span class="p">:</span>
+</span><span data-line="235">                    <span class="n">sep_to_use</span> <span class="o">=</span> <span class="s2">&quot;;&quot;</span>
+</span><span data-line="236">                <span class="k">else</span><span class="p">:</span>
+</span><span data-line="237">                    <span class="n">sep_to_use</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span>
+</span><span data-line="238">            <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_csv_from_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep_to_use</span><span class="p">)</span>
+</span><span data-line="239">            <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target</span><span class="p">])</span>
+</span><span data-line="240">            <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
+</span><span data-line="241">            <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+</span><span data-line="242">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="243">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Specify a known dataset name or a url+target.&quot;</span><span class="p">)</span></div>
 
-</span><span data-line="235">
+</span><span data-line="244">
 <div class="viewcode-block" id="DataLoader.split">
 <a class="viewcode-back" href="../../../trainedml/loader.html#trainedml.data.loader.DataLoader.split">[docs]</a>
-</span><span data-line="236">    <span class="k">def</span><span class="w"> </span><span class="nf">split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
-</span><span data-line="237">              <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-</span><span data-line="238"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span data-line="239"><span class="sd">        Split the data into training and test sets.</span>
-</span><span data-line="240">
-</span><span data-line="241"><span class="sd">        Parameters</span>
-</span><span data-line="242"><span class="sd">        ----------</span>
-</span><span data-line="243"><span class="sd">        X : pd.DataFrame</span>
-</span><span data-line="244"><span class="sd">            Features.</span>
-</span><span data-line="245"><span class="sd">        y : pd.Series</span>
-</span><span data-line="246"><span class="sd">            Target.</span>
-</span><span data-line="247"><span class="sd">        test_size : float, default=0.2</span>
-</span><span data-line="248"><span class="sd">            Proportion of the test set.</span>
-</span><span data-line="249"><span class="sd">        random_state : int, default=42</span>
-</span><span data-line="250"><span class="sd">            Random seed for reproducibility.</span>
-</span><span data-line="251">
-</span><span data-line="252"><span class="sd">        Returns</span>
-</span><span data-line="253"><span class="sd">        -------</span>
-</span><span data-line="254"><span class="sd">        tuple</span>
-</span><span data-line="255"><span class="sd">            (X_train, X_test, y_train, y_test)</span>
-</span><span data-line="256">
-</span><span data-line="257"><span class="sd">        Examples</span>
-</span><span data-line="258"><span class="sd">        --------</span>
-</span><span data-line="259"><span class="sd">        &gt;&gt;&gt; loader = DataLoader()</span>
-</span><span data-line="260"><span class="sd">        &gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;iris&quot;)</span>
-</span><span data-line="261"><span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test = loader.split(X, y, test_size=0.2)</span>
-</span><span data-line="262"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span data-line="263">        <span class="k">return</span> <span class="n">_sklearn_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span></div>
+</span><span data-line="245">    <span class="k">def</span><span class="w"> </span><span class="nf">split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+</span><span data-line="246">              <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="247"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="248"><span class="sd">        Split the data into training and test sets.</span>
+</span><span data-line="249">
+</span><span data-line="250"><span class="sd">        Parameters</span>
+</span><span data-line="251"><span class="sd">        ----------</span>
+</span><span data-line="252"><span class="sd">        X : pd.DataFrame</span>
+</span><span data-line="253"><span class="sd">            Features.</span>
+</span><span data-line="254"><span class="sd">        y : pd.Series</span>
+</span><span data-line="255"><span class="sd">            Target.</span>
+</span><span data-line="256"><span class="sd">        test_size : float, default=0.2</span>
+</span><span data-line="257"><span class="sd">            Proportion of the test set.</span>
+</span><span data-line="258"><span class="sd">        random_state : int, default=42</span>
+</span><span data-line="259"><span class="sd">            Random seed for reproducibility.</span>
+</span><span data-line="260">
+</span><span data-line="261"><span class="sd">        Returns</span>
+</span><span data-line="262"><span class="sd">        -------</span>
+</span><span data-line="263"><span class="sd">        tuple</span>
+</span><span data-line="264"><span class="sd">            (X_train, X_test, y_train, y_test)</span>
+</span><span data-line="265">
+</span><span data-line="266"><span class="sd">        Examples</span>
+</span><span data-line="267"><span class="sd">        --------</span>
+</span><span data-line="268"><span class="sd">        &gt;&gt;&gt; loader = DataLoader()</span>
+</span><span data-line="269"><span class="sd">        &gt;&gt;&gt; X, y = loader.load_dataset(name=&quot;iris&quot;)</span>
+</span><span data-line="270"><span class="sd">        &gt;&gt;&gt; X_train, X_test, y_train, y_test = loader.split(X, y, test_size=0.2)</span>
+</span><span data-line="271"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="272">        <span class="k">return</span> <span class="n">_sklearn_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">test_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span></div>
 </div>
 
-</span><span data-line="264">
-</span><span data-line="265">    <span class="c1"># TODO: Add other methods here to load other public datasets (INSEE, data.gouv.fr, etc.)</span>
+</span><span data-line="273">
+</span><span data-line="274">    <span class="c1"># TODO: Add other methods here to load other public datasets (INSEE, data.gouv.fr, etc.)</span>
 </span></pre></div>
         </article><button class="back-to-top" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -476,7 +483,7 @@ data-aria-dark="Passer en mode automatique">
     </div>
   </div>
 </footer>
-      <script src="../../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>

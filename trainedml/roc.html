@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Distribution - trainedml 0.2.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="next" title="Correlation" href="correlation.html" /><link rel="prev" title="Line" href="line.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ROC curve - trainedml 0.3.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="prev" title="Confusion matrix" href="confusion.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -23,7 +23,7 @@
 }
 </style>
     
-  <meta property="og:type" content="website"/><meta property="og:title" content="Distribution"/>
+  <meta property="og:type" content="website"/><meta property="og:title" content="ROC curve"/>
     <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/index.html">Données et modèles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ROC curve</a></li>
 </ul>
 
         </div>
@@ -132,11 +130,7 @@ data-aria-dark="Passer en mode automatique">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>Sur cette page</h3><ul>
-<li><a class="reference internal" href="#trainedml.viz.distribution.DistributionViz"><code class="docutils literal notranslate"><span class="pre">DistributionViz</span></code></a><ul>
-<li><a class="reference internal" href="#trainedml.viz.distribution.DistributionViz.vizs"><code class="docutils literal notranslate"><span class="pre">DistributionViz.vizs()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#trainedml.viz.distribution.distribution_summary"><code class="docutils literal notranslate"><span class="pre">distribution_summary()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.viz.roc.plot_roc_curve"><code class="docutils literal notranslate"><span class="pre">plot_roc_curve()</span></code></a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -154,7 +148,7 @@ data-aria-dark="Passer en mode automatique">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">Distribution</strong>
+        <strong itemprop="name">ROC curve</strong>
         <meta itemprop="position" content="2" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -167,55 +161,56 @@ data-aria-dark="Passer en mode automatique">
 </div><div class="flex flex-col break-words justify-between">
       <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
   <article class="yue" role="main">
-          <section id="module-trainedml.viz.distribution">
-<span id="distribution"></span><h1>Distribution<a class="headerlink" href="#module-trainedml.viz.distribution" title="Lien vers cette rubrique">#</a></h1>
-<p>Distribution analysis utilities for trainedml.</p>
-<p>This module provides functions and classes for analyzing and visualizing the distribution
-of variables, including histograms and summary statistics.</p>
+          <section id="module-trainedml.viz.roc">
+<span id="roc-curve"></span><h1>ROC curve<a class="headerlink" href="#module-trainedml.viz.roc" title="Lien vers cette rubrique">#</a></h1>
+<p>ROC curve visualization for trainedml.</p>
+<p>This module provides a single function to plot ROC curves (and their AUC)
+for binary or multiclass classification, from true labels and predicted
+scores (probabilities or decision function values).</p>
 <p class="rubric">Exemples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.distribution</span><span class="w"> </span><span class="kn">import</span> <span class="n">distribution_summary</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">summary</span> <span class="o">=</span> <span class="n">distribution_summary</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.roc</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_roc_curve</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plot_roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></pre></div>
 </div>
-<dl class="py class">
-<dt class="sig sig-object py" id="trainedml.viz.distribution.DistributionViz">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.distribution.</span></span><span class="sig-name descname"><span class="pre">DistributionViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/distribution.html#DistributionViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.distribution.DistributionViz" title="Lien vers cette définition">#</a></dt>
-<dd><p>Bases : <a class="reference internal" href="vizs.html#trainedml.viz.vizs.Vizs" title="trainedml.viz.vizs.Vizs"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vizs</span></code></a></p>
-<p>Class to generate distribution histograms for each variable.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="trainedml.viz.distribution.DistributionViz.vizs">
-<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/distribution.html#DistributionViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.distribution.DistributionViz.vizs" title="Lien vers cette définition">#</a></dt>
-<dd><p>Method to override in subclasses to generate the visualization.
-Automatically calls save() if a save_path was set.</p>
-<p>Most subclasses return None and store their output on
-<code class="docutils literal notranslate"><span class="pre">self._figure</span></code> instead; a few (e.g. HistogramViz, BoxplotViz)
-also return it directly, hence the <code class="docutils literal notranslate"><span class="pre">Any</span></code> return type here.</p>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="py function">
-<dt class="sig sig-object py" id="trainedml.viz.distribution.distribution_summary">
-<span class="sig-prename descclassname"><span class="pre">trainedml.viz.distribution.</span></span><span class="sig-name descname"><span class="pre">distribution_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/distribution.html#distribution_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.distribution.distribution_summary" title="Lien vers cette définition">#</a></dt>
-<dd><p>Compute summary statistics for selected columns.</p>
+<dt class="sig sig-object py" id="trainedml.viz.roc.plot_roc_curve">
+<span class="sig-prename descclassname"><span class="pre">trainedml.viz.roc.</span></span><span class="sig-name descname"><span class="pre">plot_roc_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/roc.html#plot_roc_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.roc.plot_roc_curve" title="Lien vers cette définition">#</a></dt>
+<dd><p>Plot the ROC curve (Receiver Operating Characteristic) for binary or
+multiclass classification.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pandas.DataFrame</em>) – The dataset.</p></li>
-<li><p><strong>columns</strong> (<em>'all'</em><em> or </em><em>list</em><em>, </em><em>default='all'</em>) – Columns to summarize.</p></li>
+<li><p><strong>y_true</strong> (<em>array-like</em>) – True class labels.</p></li>
+<li><p><strong>y_score</strong> (<em>array-like</em>) – Predicted scores. For binary classification, a 1-D array of scores
+for the positive class (e.g. <code class="docutils literal notranslate"><span class="pre">predict_proba(X)[:,</span> <span class="pre">1]</span></code>). For
+multiclass, a 2-D array of shape <code class="docutils literal notranslate"><span class="pre">(n_samples,</span> <span class="pre">n_classes)</span></code> (e.g.
+the full output of <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code>): one curve is drawn per class
+using a one-vs-rest strategy.</p></li>
+<li><p><strong>class_names</strong> (<em>list</em><em>, </em><em>optional</em>) – Class names for the legend (multiclass only). Defaults to the
+sorted unique values of <code class="docutils literal notranslate"><span class="pre">y_true</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>Summary statistics (mean, std, min, max, etc.).</p>
+<dd class="field-even"><p>The generated ROC curve figure.</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pandas.DataFrame</p>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>ROC AUC quantifies how well the model ranks positive examples above
+negative ones, independently of any decision threshold: 0.5 is
+equivalent to random guessing, 1.0 is a perfect ranking.</p>
 <p class="rubric">Exemples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">summary</span> <span class="o">=</span> <span class="n">distribution_summary</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">])</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span>
+<p>Binary classification:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">proba</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plot_roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">proba</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Multiclass (one-vs-rest):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">proba</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plot_roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">proba</span><span class="p">)</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -228,18 +223,10 @@ also return it directly, hence the <code class="docutils literal notranslate"><s
   </svg>
   <span>Retour au sommet</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="line.html">
+    <a href="confusion.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>Précédent</span><div class="title">Line</div></div>
-    </a>
-  </div><div class="navigation-next">
-    <a href="correlation.html">
-      <div class="page-info">
-        <span>Suivant</span>
-        <div class="title">Correlation</div>
-      </div>
-      <i class="i-lucide chevron-right"></i>
+        <span>Précédent</span><div class="title">Confusion matrix</div></div>
     </a>
   </div></div></div>
     </div>
@@ -265,7 +252,7 @@ also return it directly, hence the <code class="docutils literal notranslate"><s
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/sg-tags.js?v=d80f6fa4"></script>

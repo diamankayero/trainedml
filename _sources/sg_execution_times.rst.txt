@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:19.818** total execution time for 11 files **from all galleries**:
+**00:26.313** total execution time for 12 files **from all galleries**:
 
 .. container::
 
@@ -33,35 +33,38 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_03_production_plot_projet_complet.py` (``../../examples/03_production/plot_projet_complet.py``)
-     - 00:10.681
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_02_donnees_et_modeles_plot_explorer_avant_de_modeliser.py` (``../../examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.py``)
-     - 00:02.763
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_01_bases_plot_premiers_pas.py` (``../../examples/01_bases/plot_premiers_pas.py``)
-     - 00:01.875
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_02_donnees_et_modeles_plot_choisir_son_modele.py` (``../../examples/02_donnees_et_modeles/plot_choisir_son_modele.py``)
-     - 00:01.194
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_02_donnees_et_modeles_plot_regression.py` (``../../examples/02_donnees_et_modeles/plot_regression.py``)
-     - 00:01.167
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_02_donnees_et_modeles_plot_donnees_distantes.py` (``../../examples/02_donnees_et_modeles/plot_donnees_distantes.py``)
-     - 00:00.923
+     - 00:10.562
      - 0.0
    * - :ref:`sphx_glr_auto_examples_02_donnees_et_modeles_plot_hyperparametres.py` (``../../examples/02_donnees_et_modeles/plot_hyperparametres.py``)
-     - 00:00.448
+     - 00:05.764
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_02_donnees_et_modeles_plot_explorer_avant_de_modeliser.py` (``../../examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.py``)
+     - 00:02.496
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_02_donnees_et_modeles_plot_donnees_distantes.py` (``../../examples/02_donnees_et_modeles/plot_donnees_distantes.py``)
+     - 00:02.129
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_01_bases_plot_premiers_pas.py` (``../../examples/01_bases/plot_premiers_pas.py``)
+     - 00:01.715
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_02_donnees_et_modeles_plot_regression.py` (``../../examples/02_donnees_et_modeles/plot_regression.py``)
+     - 00:01.392
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_02_donnees_et_modeles_plot_choisir_son_modele.py` (``../../examples/02_donnees_et_modeles/plot_choisir_son_modele.py``)
+     - 00:01.091
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_02_donnees_et_modeles_plot_diagnostics.py` (``../../examples/02_donnees_et_modeles/plot_diagnostics.py``)
+     - 00:00.476
      - 0.0
    * - :ref:`sphx_glr_auto_examples_02_donnees_et_modeles_plot_vos_donnees_en_memoire.py` (``../../examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire.py``)
-     - 00:00.291
+     - 00:00.262
      - 0.0
    * - :ref:`sphx_glr_auto_examples_03_production_plot_rigueur_et_reproductibilite.py` (``../../examples/03_production/plot_rigueur_et_reproductibilite.py``)
-     - 00:00.256
+     - 00:00.233
      - 0.0
    * - :ref:`sphx_glr_auto_examples_03_production_plot_sauvegarder_et_deployer.py` (``../../examples/03_production/plot_sauvegarder_et_deployer.py``)
-     - 00:00.202
+     - 00:00.175
      - 0.0
    * - :ref:`sphx_glr_auto_examples_01_bases_plot_decouper_son_dataset.py` (``../../examples/01_bases/plot_decouper_son_dataset.py``)
-     - 00:00.018
+     - 00:00.017
      - 0.0

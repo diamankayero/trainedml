@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Normality - trainedml 0.2.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="next" title="Multicollinearity" href="multicollinearity.html" /><link rel="prev" title="Bivariate" href="bivariate.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Normality - trainedml 0.3.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="next" title="Multicollinearity" href="multicollinearity.html" /><link rel="prev" title="Target" href="target.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/index.html">Données et modèles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bivariate.html">Bivariate</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -190,7 +188,7 @@ which shows a QQ-plot for each numeric variable.</p>
 <dd><p>Method to override in subclasses to generate the visualization.
 Automatically calls save() if a save_path was set.</p>
 <p>Most subclasses return None and store their output on
-<code class="docutils literal notranslate"><span class="pre">self._figure</span></code> instead; a few (e.g. HistogramViz, BoxplotViz)
+<code class="docutils literal notranslate"><span class="pre">self._figure</span></code> instead; a few (e.g. HistogramViz, HeatmapViz)
 also return it directly, hence the <code class="docutils literal notranslate"><span class="pre">Any</span></code> return type here.</p>
 </dd></dl>
 
@@ -229,10 +227,10 @@ also return it directly, hence the <code class="docutils literal notranslate"><s
   </svg>
   <span>Retour au sommet</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="bivariate.html">
+    <a href="target.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>Précédent</span><div class="title">Bivariate</div></div>
+        <span>Précédent</span><div class="title">Target</div></div>
     </a>
   </div><div class="navigation-next">
     <a href="multicollinearity.html">
@@ -266,7 +264,7 @@ also return it directly, hence the <code class="docutils literal notranslate"><s
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/sg-tags.js?v=d80f6fa4"></script>

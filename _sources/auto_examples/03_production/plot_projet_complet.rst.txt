@@ -115,10 +115,12 @@ on la lit à côté de la baseline naïve et de precision/recall.
 
  .. code-block:: none
 
-    CV 5-fold:   0%|          | 0/3 [00:00<?, ?model/s]    CV 5-fold:  33%|███▎      | 1/3 [00:00<00:00,  6.91model/s]    CV 5-fold:  67%|██████▋   | 2/3 [00:00<00:00,  5.50model/s]    CV 5-fold: 100%|██████████| 3/3 [00:01<00:00,  1.34model/s]    CV 5-fold: 100%|██████████| 3/3 [00:01<00:00,  1.69model/s]
+    /home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:41: UserWarning: Imbalanced classes: 'moyen' has 1319 samples versus 63 for 'bas' (ratio 20.9:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      resultats = compare(X=X, y=y_classe, cv=5, seed=42)
+    CV 5-fold:   0%|          | 0/3 [00:00<?, ?model/s]    CV 5-fold:  33%|███▎      | 1/3 [00:00<00:00,  7.30model/s]    CV 5-fold:  67%|██████▋   | 2/3 [00:00<00:00,  6.25model/s]    CV 5-fold: 100%|██████████| 3/3 [00:01<00:00,  1.38model/s]    CV 5-fold: 100%|██████████| 3/3 [00:01<00:00,  1.75model/s]
                    accuracy  accuracy_std  precision    recall
     model                                                     
-    random_forest  0.871176      0.015814   0.840042  0.871176
+    random_forest  0.873678      0.011560   0.842109  0.873678
     logistic       0.841154      0.004895   0.802008  0.841154
     knn            0.829277      0.012792   0.792754  0.829277
 
@@ -154,7 +156,27 @@ performance vient du modèle et des données, pas du nombre d'arbres.
 
  .. code-block:: none
 
-    Score sur 10 graines : min=0.872 max=0.897 moyenne=0.884 (baseline=0.825)
+    /home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: 'moyen' has 1042 samples versus 50 for 'bas' (ratio 20.8:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      t.fit()
+    /home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: 'moyen' has 1045 samples versus 49 for 'bas' (ratio 21.3:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      t.fit()
+    /home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: 'moyen' has 1050 samples versus 53 for 'bas' (ratio 19.8:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      t.fit()
+    /home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: 'moyen' has 1050 samples versus 49 for 'bas' (ratio 21.4:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      t.fit()
+    /home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: 'moyen' has 1055 samples versus 50 for 'bas' (ratio 21.1:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      t.fit()
+    /home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: 'moyen' has 1052 samples versus 56 for 'bas' (ratio 18.8:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      t.fit()
+    /home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: 'moyen' has 1048 samples versus 50 for 'bas' (ratio 21.0:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      t.fit()
+    /home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: 'moyen' has 1050 samples versus 53 for 'bas' (ratio 19.8:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      t.fit()
+    /home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: 'moyen' has 1053 samples versus 49 for 'bas' (ratio 21.5:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      t.fit()
+    /home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:54: UserWarning: Imbalanced classes: 'moyen' has 1047 samples versus 53 for 'bas' (ratio 19.8:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      t.fit()
+    Score sur 10 graines : min=0.869 max=0.900 moyenne=0.889 (baseline=0.825)
 
 
 
@@ -185,6 +207,8 @@ Sauvegarder pour la production
 
  .. code-block:: none
 
+    /home/runner/work/trainedml/trainedml/examples/03_production/plot_projet_complet.py:65: UserWarning: Imbalanced classes: 'moyen' has 1057 samples versus 52 for 'bas' (ratio 20.3:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      trainer.fit()
     Prédictions sur un nouveau lot : ['moyen', 'moyen', 'moyen', 'moyen', 'moyen']
 
 
@@ -193,7 +217,7 @@ Sauvegarder pour la production
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 10.681 seconds)
+   **Total running time of the script:** (0 minutes 10.562 seconds)
 
 
 .. _sphx_glr_download_auto_examples_03_production_plot_projet_complet.py:

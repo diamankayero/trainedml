@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hyperparamètres et modèles externes - trainedml 0.2.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Explorer avant de modéliser" href="plot_explorer_avant_de_modeliser.html" /><link rel="prev" title="Comparer et choisir un modèle" href="plot_choisir_son_modele.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hyperparamètres : réglage manuel et recherche automatique - trainedml 0.3.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Régression : estimer une note continue" href="plot_regression.html" /><link rel="prev" title="Comparer et choisir un modèle" href="plot_choisir_son_modele.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
@@ -23,7 +23,7 @@
 }
 </style>
     
-  <meta property="og:type" content="website"/><meta property="og:title" content="Hyperparamètres et modèles externes"/>
+  <meta property="og:type" content="website"/><meta property="og:title" content="Hyperparamètres : réglage manuel et recherche automatique"/>
     <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Données et modèles</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -135,6 +133,8 @@ data-aria-dark="Passer en mode automatique">
 <li><a class="reference internal" href="#model-params-avec-un-modele-nomme"><code class="docutils literal notranslate"><span class="pre">model_params</span></code> avec un mod&#232;le nomm&#233;</a></li>
 <li><a class="reference internal" href="#un-estimateur-scikit-learn-arbitraire">Un estimateur scikit-learn arbitraire</a></li>
 <li><a class="reference internal" href="#model-params-est-incompatible-avec-un-estimateur-deja-construit"><code class="docutils literal notranslate"><span class="pre">model_params</span></code> est incompatible avec un estimateur d&#233;j&#224; construit</a></li>
+<li><a class="reference internal" href="#recherche-exhaustive-grid-search">Recherche exhaustive : grid_search</a></li>
+<li><a class="reference internal" href="#recherche-aleatoire-random-search">Recherche al&#233;atoire : random_search</a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -156,7 +156,7 @@ data-aria-dark="Passer en mode automatique">
         <span>/</span>
         <meta itemprop="position" content="2" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">Hyperparamètres et modèles externes</strong>
+        <strong itemprop="name">Hyperparamètres : réglage manuel et recherche automatique</strong>
         <meta itemprop="position" content="3" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -174,10 +174,11 @@ data-aria-dark="Passer en mode automatique">
 <p><a class="reference internal" href="#sphx-glr-download-auto-examples-02-donnees-et-modeles-plot-hyperparametres-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code.</p>
 </div>
-<section class="sphx-glr-example-title" id="hyperparametres-et-modeles-externes">
-<span id="sphx-glr-auto-examples-02-donnees-et-modeles-plot-hyperparametres-py"></span><h1>Hyperparamètres et modèles externes<a class="headerlink" href="#hyperparametres-et-modeles-externes" title="Lien vers cette rubrique">#</a></h1>
-<p>Affiner un modèle nommé avec <code class="docutils literal notranslate"><span class="pre">model_params</span></code>, puis brancher un estimateur
-scikit-learn quelconque directement dans <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>.</p>
+<section class="sphx-glr-example-title" id="hyperparametres-reglage-manuel-et-recherche-automatique">
+<span id="sphx-glr-auto-examples-02-donnees-et-modeles-plot-hyperparametres-py"></span><h1>Hyperparamètres : réglage manuel et recherche automatique<a class="headerlink" href="#hyperparametres-reglage-manuel-et-recherche-automatique" title="Lien vers cette rubrique">#</a></h1>
+<p>Affiner un modèle nommé avec <code class="docutils literal notranslate"><span class="pre">model_params</span></code>, brancher un estimateur
+scikit-learn quelconque, puis laisser <code class="docutils literal notranslate"><span class="pre">grid_search</span></code>/<code class="docutils literal notranslate"><span class="pre">random_search</span></code>
+chercher la meilleure combinaison par validation croisée.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span>
 </span><span data-line="2">
 </span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trainer</span>
@@ -195,7 +196,7 @@ scikit-learn quelconque directement dans <code class="docutils literal notransla
 </span><span data-line="8"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n_estimators=300 :&quot;</span><span class="p">,</span> <span class="n">t_grand</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
 </span></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">n_estimators=10  : {&#39;accuracy&#39;: 0.9722222222222222, &#39;precision&#39;: 0.9753086419753088, &#39;recall&#39;: 0.9722222222222222, &#39;f1&#39;: 0.9725248123940935}
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">n_estimators=10  : {&#39;accuracy&#39;: 1.0, &#39;precision&#39;: 1.0, &#39;recall&#39;: 1.0, &#39;f1&#39;: 1.0}
 </span><span data-line="2">n_estimators=300 : {&#39;accuracy&#39;: 1.0, &#39;precision&#39;: 1.0, &#39;recall&#39;: 1.0, &#39;f1&#39;: 1.0}
 </span></pre></div>
 </div>
@@ -228,7 +229,51 @@ configurez-le directement (<code class="docutils literal notranslate"><span clas
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">Erreur attendue : `model_params` can only be used with a model name; configure your estimator directly instead.
 </span></pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.448 seconds)</p>
+</section>
+<section id="recherche-exhaustive-grid-search">
+<h2>Recherche exhaustive : grid_search<a class="headerlink" href="#recherche-exhaustive-grid-search" title="Lien vers cette rubrique">#</a></h2>
+<p>Essaie toutes les combinaisons du grillage et réentraîne automatiquement
+avec la meilleure trouvée : le Trainer est prêt pour <code class="docutils literal notranslate"><span class="pre">evaluate()</span></code>/
+<code class="docutils literal notranslate"><span class="pre">predict()</span></code> juste après.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;knn&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">resultats</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">grid_search</span><span class="p">({</span><span class="s2">&quot;n_neighbors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]},</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</span><span data-line="3"><span class="nb">print</span><span class="p">(</span><span class="n">resultats</span><span class="p">)</span>
+</span><span data-line="4"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Meilleurs paramètres :&quot;</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+</span><span data-line="5"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Score CV associé :&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">best_score_</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</span></pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">   param_n_neighbors  mean_test_score  ...  rank_test_score  mean_fit_time
+</span><span data-line="2">0                  5         0.957882  ...                1       0.005776
+</span><span data-line="3">1                  3         0.950739  ...                2       0.005782
+</span><span data-line="4">2                  7         0.950739  ...                2       0.005862
+</span><span data-line="5">3                  1         0.950493  ...                4       0.005929
+</span><span data-line="6">4                  9         0.943842  ...                5       0.005907
+</span><span data-line="7">
+</span><span data-line="8">[5 rows x 5 columns]
+</span><span data-line="9">Meilleurs paramètres : {&#39;n_neighbors&#39;: 5}
+</span><span data-line="10">Score CV associé : 0.958
+</span></pre></div>
+</div>
+</section>
+<section id="recherche-aleatoire-random-search">
+<h2>Recherche aléatoire : random_search<a class="headerlink" href="#recherche-aleatoire-random-search" title="Lien vers cette rubrique">#</a></h2>
+<p>Pour un espace de recherche trop grand à explorer entièrement,
+<code class="docutils literal notranslate"><span class="pre">random_search</span></code> tire <code class="docutils literal notranslate"><span class="pre">n_iter</span></code> combinaisons au hasard plutôt que de
+toutes les essayer.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">trainer_rf</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;random_forest&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">trainer_rf</span><span class="o">.</span><span class="n">random_search</span><span class="p">(</span>
+</span><span data-line="3">    <span class="p">{</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span> <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]},</span>
+</span><span data-line="4">    <span class="n">n_iter</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+</span><span data-line="5"><span class="p">)</span>
+</span><span data-line="6"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Meilleurs paramètres (random_forest) :&quot;</span><span class="p">,</span> <span class="n">trainer_rf</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+</span><span data-line="7"><span class="nb">print</span><span class="p">(</span><span class="n">trainer_rf</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</span></pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">Meilleurs paramètres (random_forest) : {&#39;n_estimators&#39;: 50, &#39;max_depth&#39;: None}
+</span><span data-line="2">{&#39;accuracy&#39;: 1.0, &#39;precision&#39;: 1.0, &#39;recall&#39;: 1.0, &#39;f1&#39;: 1.0}
+</span></pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 5.764 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-02-donnees-et-modeles-plot-hyperparametres-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/6f35fb72b6f34d4a5d62d5595d8e9ff6/plot_hyperparametres.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_hyperparametres.ipynb</span></code></a></p>
@@ -256,10 +301,10 @@ configurez-le directement (<code class="docutils literal notranslate"><span clas
         <span>Précédent</span><div class="title">Comparer et choisir un modèle</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="plot_explorer_avant_de_modeliser.html">
+    <a href="plot_regression.html">
       <div class="page-info">
         <span>Suivant</span>
-        <div class="title">Explorer avant de modéliser</div>
+        <div class="title">Régression : estimer une note continue</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>
@@ -287,7 +332,7 @@ configurez-le directement (<code class="docutils literal notranslate"><span clas
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>

@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Profiling - trainedml 0.2.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="prev" title="Multicollinearity" href="multicollinearity.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Confusion matrix - trainedml 0.3.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="next" title="ROC curve" href="roc.html" /><link rel="prev" title="Multicollinearity" href="multicollinearity.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -23,7 +23,7 @@
 }
 </style>
     
-  <meta property="og:type" content="website"/><meta property="og:title" content="Profiling"/>
+  <meta property="og:type" content="website"/><meta property="og:title" content="Confusion matrix"/>
     <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/index.html">Données et modèles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Profiling</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -132,11 +130,7 @@ data-aria-dark="Passer en mode automatique">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>Sur cette page</h3><ul>
-<li><a class="reference internal" href="#trainedml.viz.profiling.ProfilingViz"><code class="docutils literal notranslate"><span class="pre">ProfilingViz</span></code></a><ul>
-<li><a class="reference internal" href="#trainedml.viz.profiling.ProfilingViz.vizs"><code class="docutils literal notranslate"><span class="pre">ProfilingViz.vizs()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#trainedml.viz.profiling.profiling_report"><code class="docutils literal notranslate"><span class="pre">profiling_report()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.viz.confusion.plot_confusion_matrix"><code class="docutils literal notranslate"><span class="pre">plot_confusion_matrix()</span></code></a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -154,7 +148,7 @@ data-aria-dark="Passer en mode automatique">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">Profiling</strong>
+        <strong itemprop="name">Confusion matrix</strong>
         <meta itemprop="position" content="2" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -167,52 +161,44 @@ data-aria-dark="Passer en mode automatique">
 </div><div class="flex flex-col break-words justify-between">
       <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
   <article class="yue" role="main">
-          <section id="module-trainedml.viz.profiling">
-<span id="profiling"></span><h1>Profiling<a class="headerlink" href="#module-trainedml.viz.profiling" title="Lien vers cette rubrique">#</a></h1>
-<p>Profiling utilities for trainedml.</p>
-<p>This module provides functions for generating a global profiling report of a pandas DataFrame,
-including summary statistics, missing values, outliers, and correlation.</p>
+          <section id="module-trainedml.viz.confusion">
+<span id="confusion-matrix"></span><h1>Confusion matrix<a class="headerlink" href="#module-trainedml.viz.confusion" title="Lien vers cette rubrique">#</a></h1>
+<p>Confusion matrix visualization for trainedml.</p>
+<p>This module provides a single function to plot the confusion matrix of a
+classifier from true and predicted labels.</p>
 <p class="rubric">Exemples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.profiling</span><span class="w"> </span><span class="kn">import</span> <span class="n">profiling_report</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">profiling_report</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.viz.confusion</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_confusion_matrix</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plot_confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></pre></div>
 </div>
-<dl class="py class">
-<dt class="sig sig-object py" id="trainedml.viz.profiling.ProfilingViz">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">trainedml.viz.profiling.</span></span><span class="sig-name descname"><span class="pre">ProfilingViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/trainedml/viz/profiling.html#ProfilingViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.profiling.ProfilingViz" title="Lien vers cette définition">#</a></dt>
-<dd><p>Bases : <a class="reference internal" href="vizs.html#trainedml.viz.vizs.Vizs" title="trainedml.viz.vizs.Vizs"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vizs</span></code></a></p>
-<p>Class to generate an automatic profiling report.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="trainedml.viz.profiling.ProfilingViz.vizs">
-<span class="sig-name descname"><span class="pre">vizs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/profiling.html#ProfilingViz.vizs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.profiling.ProfilingViz.vizs" title="Lien vers cette définition">#</a></dt>
-<dd><p>Method to override in subclasses to generate the visualization.
-Automatically calls save() if a save_path was set.</p>
-<p>Most subclasses return None and store their output on
-<code class="docutils literal notranslate"><span class="pre">self._figure</span></code> instead; a few (e.g. HistogramViz, BoxplotViz)
-also return it directly, hence the <code class="docutils literal notranslate"><span class="pre">Any</span></code> return type here.</p>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="py function">
-<dt class="sig sig-object py" id="trainedml.viz.profiling.profiling_report">
-<span class="sig-prename descclassname"><span class="pre">trainedml.viz.profiling.</span></span><span class="sig-name descname"><span class="pre">profiling_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trainedml/viz/profiling.html#profiling_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.profiling.profiling_report" title="Lien vers cette définition">#</a></dt>
-<dd><p>Generate a profiling report for the dataset.</p>
+<dt class="sig sig-object py" id="trainedml.viz.confusion.plot_confusion_matrix">
+<span class="sig-prename descclassname"><span class="pre">trainedml.viz.confusion.</span></span><span class="sig-name descname"><span class="pre">plot_confusion_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Blues'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="../_modules/trainedml/viz/confusion.html#plot_confusion_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.viz.confusion.plot_confusion_matrix" title="Lien vers cette définition">#</a></dt>
+<dd><p>Plot the confusion matrix for a classification task.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>pandas.DataFrame</em>) – The dataset.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>array-like</em>) – True class labels.</p></li>
+<li><p><strong>y_pred</strong> (<em>array-like</em>) – Predicted class labels.</p></li>
+<li><p><strong>labels</strong> (<em>list</em><em>, </em><em>optional</em>) – Class labels to display, in order. Defaults to the sorted labels
+found in <code class="docutils literal notranslate"><span class="pre">y_true</span></code>/<code class="docutils literal notranslate"><span class="pre">y_pred</span></code>.</p></li>
+<li><p><strong>normalize</strong> (<em>{'true'</em><em>, </em><em>'pred'</em><em>, </em><em>'all'}</em><em>, </em><em>optional</em>) – Normalize the counts over the true labels (rows), the predicted
+labels (columns), or the whole matrix. <code class="docutils literal notranslate"><span class="pre">None</span></code> (default) shows raw
+counts.</p></li>
+<li><p><strong>cmap</strong> (<em>str</em><em>, </em><em>default='Blues'</em>) – Matplotlib colormap name.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>Profiling report (summary statistics, missing, outliers, correlation).</p>
+<dd class="field-even"><p>The generated confusion matrix figure.</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
 </dd>
 </dl>
 <p class="rubric">Exemples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">profiling_report</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plot_confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -229,6 +215,14 @@ also return it directly, hence the <code class="docutils literal notranslate"><s
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
         <span>Précédent</span><div class="title">Multicollinearity</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="roc.html">
+      <div class="page-info">
+        <span>Suivant</span>
+        <div class="title">ROC curve</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
     </a>
   </div></div></div>
     </div>
@@ -254,7 +248,7 @@ also return it directly, hence the <code class="docutils literal notranslate"><s
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/sg-tags.js?v=d80f6fa4"></script>

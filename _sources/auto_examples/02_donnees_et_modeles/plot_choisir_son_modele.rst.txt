@@ -42,12 +42,12 @@ validation croisée, et renvoie un tableau trié prêt à lire.
 
  .. code-block:: none
 
-    CV 5-fold:   0%|          | 0/3 [00:00<?, ?model/s]    CV 5-fold:  67%|██████▋   | 2/3 [00:00<00:00,  8.54model/s]    CV 5-fold: 100%|██████████| 3/3 [00:00<00:00,  2.64model/s]    CV 5-fold: 100%|██████████| 3/3 [00:00<00:00,  3.06model/s]
+    CV 5-fold:   0%|          | 0/3 [00:00<?, ?model/s]    CV 5-fold:  67%|██████▋   | 2/3 [00:00<00:00, 10.40model/s]    CV 5-fold: 100%|██████████| 3/3 [00:00<00:00,  3.52model/s]
                    accuracy  precision    recall  ...    f1_std  fit_time  predict_time
     model                                         ...                                  
-    logistic       0.983333   0.984714  0.983333  ...  0.013602  0.011349      0.003018
-    random_forest  0.983016   0.983521  0.983016  ...  0.022766  0.127481      0.011365
-    knn            0.971746   0.974261  0.971746  ...  0.018356  0.006076      0.003491
+    random_forest  0.988730   0.989675  0.988730  ...  0.013759  0.114398      0.008991
+    logistic       0.983333   0.984714  0.983333  ...  0.013602  0.008938      0.002575
+    knn            0.971746   0.974261  0.971746  ...  0.018356  0.005287      0.003077
 
     [3 rows x 10 columns]
 
@@ -80,12 +80,12 @@ nettement supérieur aux autres est moins fiable qu'il n'y paraît.
  .. code-block:: none
 
 
-    Meilleur score moyen : logistic (0.983)
+    Meilleur score moyen : random_forest (0.989)
                    accuracy  accuracy_std  fit_time
     model                                          
-    logistic       0.983333      0.013608  0.011349
-    random_forest  0.983016      0.022780  0.127481
-    knn            0.971746      0.018074  0.006076
+    random_forest  0.988730      0.013805  0.114398
+    logistic       0.983333      0.013608  0.008938
+    knn            0.971746      0.018074  0.005287
 
 
 
@@ -97,7 +97,7 @@ Un estimateur scikit-learn arbitraire
 ``compare()`` accepte aussi un dictionnaire ``models`` personnalisé,
 mélangeant modèles nommés trainedml et estimateurs scikit-learn.
 
-.. GENERATED FROM PYTHON SOURCE LINES 30-40
+.. GENERATED FROM PYTHON SOURCE LINES 30-41
 
 .. code-block:: Python
 
@@ -115,17 +115,94 @@ mélangeant modèles nommés trainedml et estimateurs scikit-learn.
 
 
 
+
 .. rst-class:: sphx-glr-script-out
 
  .. code-block:: none
 
-    CV 5-fold:   0%|          | 0/2 [00:00<?, ?model/s]    CV 5-fold: 100%|██████████| 2/2 [00:00<00:00, 10.82model/s]    CV 5-fold: 100%|██████████| 2/2 [00:00<00:00, 10.81model/s]
+    CV 5-fold:   0%|          | 0/2 [00:00<?, ?model/s]    CV 5-fold: 100%|██████████| 2/2 [00:00<00:00, 12.14model/s]    CV 5-fold: 100%|██████████| 2/2 [00:00<00:00, 12.13model/s]
                   accuracy  precision    recall  ...    f1_std  fit_time  predict_time
     model                                        ...                                  
-    svm_rbf       0.983333   0.984209  0.983333  ...  0.022228  0.006547      0.002433
-    svm_lineaire  0.966349   0.969701  0.966349  ...  0.011477  0.006127      0.002311
+    svm_rbf       0.983333   0.984209  0.983333  ...  0.022228  0.005858      0.002229
+    svm_lineaire  0.966349   0.969701  0.966349  ...  0.011477  0.005850      0.002230
 
     [2 rows x 10 columns]
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 42-47
+
+Classes déséquilibrées : l'accuracy peut cacher un problème
+------------------------------------------------------------------
+Sur un jeu de données où une classe est rare, ``Trainer``/``compare()``
+émettent un avertissement. Ici, la classe "rare" ne représente que 10 %
+des exemples.
+
+.. GENERATED FROM PYTHON SOURCE LINES 47-64
+
+.. code-block:: Python
+
+
+    import numpy as np
+    import pandas as pd
+
+    from trainedml import Trainer
+
+    rng = np.random.default_rng(0)
+    n = 300
+    a, b = rng.normal(size=n), rng.normal(size=n)
+    score = a + 0.5 * b + rng.normal(0, 0.5, n)
+    y_desequilibre = pd.Series(np.where(score > np.quantile(score, 0.90), "rare", "frequent"))
+    X_desequilibre = pd.DataFrame({"a": a, "b": b})
+
+    trainer = Trainer(X=X_desequilibre, y=y_desequilibre, model="logistic", seed=42)
+    trainer.fit()  # émet un UserWarning : classes déséquilibrées
+    print("Sans class_weight :", trainer.evaluate())
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /home/runner/work/trainedml/trainedml/examples/02_donnees_et_modeles/plot_choisir_son_modele.py:61: UserWarning: Imbalanced classes: 'frequent' has 217 samples versus 23 for 'rare' (ratio 9.4:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      trainer.fit()  # émet un UserWarning : classes déséquilibrées
+    Sans class_weight : {'accuracy': 0.9666666666666667, 'precision': 0.9678787878787879, 'recall': 0.9666666666666667, 'f1': 0.9641975308641976}
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 65-70
+
+``class_weight="balanced"`` (déjà supporté par random_forest et logistic
+via ``model_params``) pénalise davantage les erreurs sur la classe rare :
+l'accuracy globale baisse, mais la classe rare est mieux détectée. Un vrai
+compromis, pas une amélioration gratuite : à activer quand rater un cas
+rare coûte plus cher qu'une fausse alerte (fraude, panne, diagnostic...).
+
+.. GENERATED FROM PYTHON SOURCE LINES 70-75
+
+.. code-block:: Python
+
+
+    trainer_pondere = Trainer(X=X_desequilibre, y=y_desequilibre, model="logistic", seed=42,
+                              model_params={"class_weight": "balanced"})
+    trainer_pondere.fit()
+    print("Avec class_weight='balanced' :", trainer_pondere.evaluate())
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /home/runner/work/trainedml/trainedml/examples/02_donnees_et_modeles/plot_choisir_son_modele.py:73: UserWarning: Imbalanced classes: 'frequent' has 217 samples versus 23 for 'rare' (ratio 9.4:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      trainer_pondere.fit()
+    Avec class_weight='balanced' : {'accuracy': 0.9, 'precision': 0.9289424860853432, 'recall': 0.9, 'f1': 0.9091503267973856}
 
 
 
@@ -133,7 +210,7 @@ mélangeant modèles nommés trainedml et estimateurs scikit-learn.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.194 seconds)
+   **Total running time of the script:** (0 minutes 1.091 seconds)
 
 
 .. _sphx_glr_download_auto_examples_02_donnees_et_modeles_plot_choisir_son_modele.py:

@@ -20,35 +20,18 @@ modéliser, comparer et régler des modèles.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="compare() entraîne et évalue plusieurs modèles en une ligne, avec validation croisée, et renvoie un tableau trié prêt à lire.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Une fois un modèle entraîné, l&#x27;accuracy seule ne suffit pas : matrice de confusion, courbe ROC/AUC et importance des variables donnent une image bien plus complète de son comportement.">
 
 .. only:: html
 
-  .. image:: /auto_examples/02_donnees_et_modeles/images/thumb/sphx_glr_plot_choisir_son_modele_thumb.png
+  .. image:: /auto_examples/02_donnees_et_modeles/images/thumb/sphx_glr_plot_diagnostics_thumb.png
     :alt:
 
-  :doc:`/auto_examples/02_donnees_et_modeles/plot_choisir_son_modele`
+  :doc:`/auto_examples/02_donnees_et_modeles/plot_diagnostics`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Comparer et choisir un modèle</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Affiner un modèle nommé avec model_params, puis brancher un estimateur scikit-learn quelconque directement dans Trainer.">
-
-.. only:: html
-
-  .. image:: /auto_examples/02_donnees_et_modeles/images/thumb/sphx_glr_plot_hyperparametres_thumb.png
-    :alt:
-
-  :doc:`/auto_examples/02_donnees_et_modeles/plot_hyperparametres`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Hyperparamètres et modèles externes</div>
+      <div class="sphx-glr-thumbnail-title">Diagnostiquer un modèle de classification</div>
     </div>
 
 
@@ -83,6 +66,40 @@ modéliser, comparer et régler des modèles.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Charger des données distantes</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="compare() entraîne et évalue plusieurs modèles en une ligne, avec validation croisée, et renvoie un tableau trié prêt à lire.">
+
+.. only:: html
+
+  .. image:: /auto_examples/02_donnees_et_modeles/images/thumb/sphx_glr_plot_choisir_son_modele_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/02_donnees_et_modeles/plot_choisir_son_modele`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Comparer et choisir un modèle</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Affiner un modèle nommé avec model_params, brancher un estimateur scikit-learn quelconque, puis laisser grid_search/``random_search`` chercher la meilleure combinaison par validation croisée.">
+
+.. only:: html
+
+  .. image:: /auto_examples/02_donnees_et_modeles/images/thumb/sphx_glr_plot_hyperparametres_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/02_donnees_et_modeles/plot_hyperparametres`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Hyperparamètres : réglage manuel et recherche automatique</div>
     </div>
 
 
@@ -130,10 +147,11 @@ modéliser, comparer et régler des modèles.
 .. toctree::
    :hidden:
 
-   /auto_examples/02_donnees_et_modeles/plot_choisir_son_modele
-   /auto_examples/02_donnees_et_modeles/plot_hyperparametres
+   /auto_examples/02_donnees_et_modeles/plot_diagnostics
    /auto_examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser
    /auto_examples/02_donnees_et_modeles/plot_donnees_distantes
+   /auto_examples/02_donnees_et_modeles/plot_choisir_son_modele
+   /auto_examples/02_donnees_et_modeles/plot_hyperparametres
    /auto_examples/02_donnees_et_modeles/plot_regression
    /auto_examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire
 

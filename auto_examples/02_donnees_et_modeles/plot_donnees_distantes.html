@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Charger des données distantes - trainedml 0.2.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Régression : estimer une note continue" href="plot_regression.html" /><link rel="prev" title="Explorer avant de modéliser" href="plot_explorer_avant_de_modeliser.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Charger des données distantes - trainedml 0.3.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Comparer et choisir un modèle" href="plot_choisir_son_modele.html" /><link rel="prev" title="Explorer avant de modéliser" href="plot_explorer_avant_de_modeliser.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Données et modèles</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -194,10 +192,11 @@ colonne géante.</p>
 </span></pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">0.00B [00:00, ?B/s]
-</span><span data-line="2">0.00B [00:00, ?B/s]
+</span><span data-line="2">37.9kB [00:00, 212kB/s]
 </span><span data-line="3">0.00B [00:00, ?B/s]
-</span><span data-line="4">Colonnes : [&#39;fixed acidity&#39;, &#39;volatile acidity&#39;, &#39;citric acid&#39;, &#39;residual sugar&#39;, &#39;chlorides&#39;, &#39;free sulfur dioxide&#39;, &#39;total sulfur dioxide&#39;, &#39;density&#39;, &#39;pH&#39;, &#39;sulphates&#39;, &#39;alcohol&#39;]
-</span><span data-line="5">Forme : (1599, 11)
+</span><span data-line="4">0.00B [00:00, ?B/s]
+</span><span data-line="5">Colonnes : [&#39;fixed acidity&#39;, &#39;volatile acidity&#39;, &#39;citric acid&#39;, &#39;residual sugar&#39;, &#39;chlorides&#39;, &#39;free sulfur dioxide&#39;, &#39;total sulfur dioxide&#39;, &#39;density&#39;, &#39;pH&#39;, &#39;sulphates&#39;, &#39;alcohol&#39;]
+</span><span data-line="6">Forme : (1599, 11)
 </span></pre></div>
 </div>
 <section id="classification-ou-regression">
@@ -222,8 +221,10 @@ partir du nombre de valeurs distinctes.</p>
 </span><span data-line="6">7    199
 </span><span data-line="7">8     18
 </span><span data-line="8">Name: count, dtype: int64
-</span><span data-line="9">task détecté : classification
-</span><span data-line="10">{&#39;accuracy&#39;: 0.646875, &#39;precision&#39;: 0.6153527248236289, &#39;recall&#39;: 0.646875, &#39;f1&#39;: 0.6282701382581657}
+</span><span data-line="9">/home/runner/work/trainedml/trainedml/examples/02_donnees_et_modeles/plot_donnees_distantes.py:36: UserWarning: Imbalanced classes: np.int64(5) has 551 samples versus 9 for np.int64(3) (ratio 61.2:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={&#39;class_weight&#39;: &#39;balanced&#39;} for models that support it (random_forest, logistic).
+</span><span data-line="10">  trainer.fit()
+</span><span data-line="11">task détecté : classification
+</span><span data-line="12">{&#39;accuracy&#39;: 0.653125, &#39;precision&#39;: 0.6211030621775485, &#39;recall&#39;: 0.653125, &#39;f1&#39;: 0.6350029976019185}
 </span></pre></div>
 </div>
 </section>
@@ -235,13 +236,14 @@ partir du nombre de valeurs distinctes.</p>
 </span></pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">0.00B [00:00, ?B/s]
-</span><span data-line="2">161kB [00:00, 1.50MB/s]
-</span><span data-line="3">0.00B [00:00, ?B/s]
+</span><span data-line="2">37.9kB [00:00, 212kB/s]
+</span><span data-line="3">161kB [00:00, 488kB/s]
 </span><span data-line="4">0.00B [00:00, ?B/s]
-</span><span data-line="5">Échantillons rouges : 1599  -  blancs : 4898
+</span><span data-line="5">0.00B [00:00, ?B/s]
+</span><span data-line="6">Échantillons rouges : 1599  -  blancs : 4898
 </span></pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.923 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 2.129 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-02-donnees-et-modeles-plot-donnees-distantes-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/051f581987f9ffc24292dd5fe94bfbbb/plot_donnees_distantes.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_donnees_distantes.ipynb</span></code></a></p>
@@ -269,10 +271,10 @@ partir du nombre de valeurs distinctes.</p>
         <span>Précédent</span><div class="title">Explorer avant de modéliser</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="plot_regression.html">
+    <a href="plot_choisir_son_modele.html">
       <div class="page-info">
         <span>Suivant</span>
-        <div class="title">Régression : estimer une note continue</div>
+        <div class="title">Comparer et choisir un modèle</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>
@@ -300,7 +302,7 @@ partir du nombre de valeurs distinctes.</p>
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>

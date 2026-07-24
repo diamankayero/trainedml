@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Détection de tâche - trainedml 0.2.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="next" title="Benchmark" href="benchmark.html" /><link rel="prev" title="Prétraitement" href="preprocessing.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Détection de tâche - trainedml 0.3.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="next" title="Benchmark" href="benchmark.html" /><link rel="prev" title="Prétraitement" href="preprocessing.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/index.html">Données et modèles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -133,10 +131,13 @@ data-aria-dark="Passer en mode automatique">
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>Sur cette page</h3><ul>
 <li><a class="reference internal" href="#heuristic">Heuristic</a></li>
+<li><a class="reference internal" href="#trainedml.tasks.DEFAULT_IMBALANCE_THRESHOLD"><code class="docutils literal notranslate"><span class="pre">DEFAULT_IMBALANCE_THRESHOLD</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.tasks.MAX_UNIQUE_FOR_CLASSIFICATION"><code class="docutils literal notranslate"><span class="pre">MAX_UNIQUE_FOR_CLASSIFICATION</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.tasks.check_class_imbalance"><code class="docutils literal notranslate"><span class="pre">check_class_imbalance()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.tasks.detect_model_task"><code class="docutils literal notranslate"><span class="pre">detect_model_task()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.tasks.detect_task"><code class="docutils literal notranslate"><span class="pre">detect_task()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.tasks.is_classification_target"><code class="docutils literal notranslate"><span class="pre">is_classification_target()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.tasks.warn_if_imbalanced"><code class="docutils literal notranslate"><span class="pre">warn_if_imbalanced()</span></code></a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -190,10 +191,47 @@ corresponds to a classification or a regression task.</p>
 </div>
 </section>
 <dl class="py data">
+<dt class="sig sig-object py" id="trainedml.tasks.DEFAULT_IMBALANCE_THRESHOLD">
+<span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_IMBALANCE_THRESHOLD</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3.0</span></span><a class="headerlink" href="#trainedml.tasks.DEFAULT_IMBALANCE_THRESHOLD" title="Lien vers cette définition">#</a></dt>
+<dd><p>Default majority/minority count ratio above which classes are flagged
+as imbalanced by <a class="reference internal" href="#trainedml.tasks.check_class_imbalance" title="trainedml.tasks.check_class_imbalance"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_class_imbalance()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py data">
 <dt class="sig sig-object py" id="trainedml.tasks.MAX_UNIQUE_FOR_CLASSIFICATION">
 <span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">MAX_UNIQUE_FOR_CLASSIFICATION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20</span></span><a class="headerlink" href="#trainedml.tasks.MAX_UNIQUE_FOR_CLASSIFICATION" title="Lien vers cette définition">#</a></dt>
 <dd><p>Maximum number of unique integer values for a target to be considered
 categorical (classification).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trainedml.tasks.check_class_imbalance">
+<span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">check_class_imbalance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml/tasks.html#check_class_imbalance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.tasks.check_class_imbalance" title="Lien vers cette définition">#</a></dt>
+<dd><p>Check whether classification classes are notably imbalanced.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>pandas.Series</em><em> or </em><em>array-like</em>) – Class labels.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em><em>, </em><em>default=3.0</em>) – Majority/minority count ratio above which classes are considered
+imbalanced.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code> if the classes are balanced (or if there are fewer than
+two classes). Otherwise, a dict with <code class="docutils literal notranslate"><span class="pre">ratio</span></code>, <code class="docutils literal notranslate"><span class="pre">majority_class</span></code>,
+<code class="docutils literal notranslate"><span class="pre">majority_count</span></code>, <code class="docutils literal notranslate"><span class="pre">minority_class</span></code>, <code class="docutils literal notranslate"><span class="pre">minority_count</span></code>.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict or None</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">check_class_imbalance</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">90</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">))</span>
+</span><span data-line="2"><span class="go">{&#39;ratio&#39;: 9.0, &#39;majority_class&#39;: &#39;a&#39;, &#39;majority_count&#39;: 90, ...}</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">check_class_imbalance</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">55</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">45</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">None</span>
+</span><span data-line="4"><span class="go">True</span>
+</span></pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -269,6 +307,24 @@ categorical (classification).</p>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="trainedml.tasks.warn_if_imbalanced">
+<span class="sig-prename descclassname"><span class="pre">trainedml.tasks.</span></span><span class="sig-name descname"><span class="pre">warn_if_imbalanced</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/trainedml/tasks.html#warn_if_imbalanced"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.tasks.warn_if_imbalanced" title="Lien vers cette définition">#</a></dt>
+<dd><p>Emit a <code class="docutils literal notranslate"><span class="pre">UserWarning</span></code> if the classes in <code class="docutils literal notranslate"><span class="pre">y</span></code> are notably imbalanced.</p>
+<p>A no-op if the classes are balanced. Used internally by <code class="xref py py-class docutils literal notranslate"><span class="pre">Trainer</span></code>
+(on fit) and <code class="xref py py-func docutils literal notranslate"><span class="pre">compare()</span></code> so imbalance is flagged where it matters,
+without changing any model’s behavior.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>pandas.Series</em><em> or </em><em>array-like</em>) – Class labels.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em><em>, </em><em>default=3.0</em>) – Majority/minority count ratio above which classes are considered
+imbalanced.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
         </article><button class="back-to-top" type="button">
@@ -314,7 +370,7 @@ categorical (classification).</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/sg-tags.js?v=d80f6fa4"></script>

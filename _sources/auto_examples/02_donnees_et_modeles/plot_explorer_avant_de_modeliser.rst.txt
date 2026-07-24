@@ -62,17 +62,12 @@ un ``path`` pour l'écrire sur disque, ou récupérez directement le HTML.
 
 
 
-.. image-sg:: /auto_examples/02_donnees_et_modeles/images/sphx_glr_plot_explorer_avant_de_modeliser_001.png
-   :alt: Correlation matrix (pearson)
-   :srcset: /auto_examples/02_donnees_et_modeles/images/sphx_glr_plot_explorer_avant_de_modeliser_001.png
-   :class: sphx-glr-single-img
-
 
 .. rst-class:: sphx-glr-script-out
 
  .. code-block:: none
 
-    Rapport généré : 273338 caractères de HTML auto-contenu.
+    Rapport généré : 434560 caractères de HTML auto-contenu.
 
 
 
@@ -89,14 +84,14 @@ largement la même information au modèle.
 .. code-block:: Python
 
 
-    viz.heatmap()
+    viz.heatmap();
 
 
 
 
-.. image-sg:: /auto_examples/02_donnees_et_modeles/images/sphx_glr_plot_explorer_avant_de_modeliser_002.png
+.. image-sg:: /auto_examples/02_donnees_et_modeles/images/sphx_glr_plot_explorer_avant_de_modeliser_001.png
    :alt: Correlation matrix (pearson)
-   :srcset: /auto_examples/02_donnees_et_modeles/images/sphx_glr_plot_explorer_avant_de_modeliser_002.png
+   :srcset: /auto_examples/02_donnees_et_modeles/images/sphx_glr_plot_explorer_avant_de_modeliser_001.png
    :class: sphx-glr-single-img
 
 
@@ -119,14 +114,14 @@ Distribution des variables
 .. code-block:: Python
 
 
-    viz.histogram(columns=["alcohol", "magnesium", "color_intensity"], legend=True)
+    viz.histogram(columns=["alcohol", "magnesium", "color_intensity"], legend=True);
 
 
 
 
-.. image-sg:: /auto_examples/02_donnees_et_modeles/images/sphx_glr_plot_explorer_avant_de_modeliser_003.png
+.. image-sg:: /auto_examples/02_donnees_et_modeles/images/sphx_glr_plot_explorer_avant_de_modeliser_002.png
    :alt: Histogram
-   :srcset: /auto_examples/02_donnees_et_modeles/images/sphx_glr_plot_explorer_avant_de_modeliser_003.png
+   :srcset: /auto_examples/02_donnees_et_modeles/images/sphx_glr_plot_explorer_avant_de_modeliser_002.png
    :class: sphx-glr-single-img
 
 
@@ -244,7 +239,7 @@ manuel de 10.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 2.763 seconds)
+   **Total running time of the script:** (0 minutes 2.496 seconds)
 
 
 .. _sphx_glr_download_auto_examples_02_donnees_et_modeles_plot_explorer_avant_de_modeliser.py:

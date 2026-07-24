@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr" data-accent-color="grass" data-content_root="../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>trainedml.viz.roc - trainedml 0.3.0</title><link rel="shortcut icon" href="../../../_static/logo.svg"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Recherche" href="../../../search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=192bdaf1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="trainedml.viz.roc"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../../index.html">
+      <img class="light-logo" src="../../../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../../_static/logo.svg" alt="trainedml" height="28" loading="lazy" />
+      <strong>trainedml</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Recherche" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/diamankayero/trainedml" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Passer en mode clair"
+data-aria-light="Passer en mode sombre"
+data-aria-dark="Passer en mode automatique">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Exemples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/01_bases/index.html">Bases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/01_bases/plot_premiers_pas.html">Premiers pas : entraîner et évaluer un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/01_bases/plot_decouper_son_dataset.html">Découper son dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/index.html">Données et modèles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_regression.html">Régression : estimer une note continue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/03_production/index.html">Production</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/03_production/plot_rigueur_et_reproductibilite.html">Rigueur et reproductibilité</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/03_production/plot_sauvegarder_et_deployer.html">Sauvegarder et déployer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/03_production/plot_projet_complet.html">Projet complet : de bout en bout</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Cœur du package</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/trainer.html">Trainer (API principale)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/loader.html">DataLoader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/preprocessing.html">Prétraitement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/tasks.html">Détection de tâche</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/benchmark.html">Benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/evaluation.html">Evaluator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/report.html">Rapport EDA</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Modèles</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/models/knn.html">k-Nearest Neighbors (kNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/models/logistic.html">Régression logistique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/models/random_forest.html">Random Forest</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Exploration et visualisation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/visualization.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/analyzer.html">DataAnalyzer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/vizs.html">Vizs (visualisations de base)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/missing.html">Missing Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/outliers.html">Outliers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/target.html">Target</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/normality.html">Normality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/multicollinearity.html">Multicollinearity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../trainedml/roc.html">ROC curve</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../index.html"><span itemprop="name">trainedml</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">Code du module</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../trainedml.html"><span itemprop="name">trainedml</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">trainedml.viz.roc</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <h1>Code source de trainedml.viz.roc</h1><div class="highlight"><pre>
+<span></span><span data-line="1"><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="2"><span class="sd">ROC curve visualization for trainedml.</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="sd">This module provides a single function to plot ROC curves (and their AUC)</span>
+</span><span data-line="5"><span class="sd">for binary or multiclass classification, from true labels and predicted</span>
+</span><span data-line="6"><span class="sd">scores (probabilities or decision function values).</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="sd">Examples</span>
+</span><span data-line="9"><span class="sd">--------</span>
+</span><span data-line="10"><span class="sd">&gt;&gt;&gt; from trainedml.viz.roc import plot_roc_curve</span>
+</span><span data-line="11"><span class="sd">&gt;&gt;&gt; fig = plot_roc_curve(y_test, y_proba)</span>
+</span><span data-line="12"><span class="sd">&gt;&gt;&gt; fig.show()</span>
+</span><span data-line="13"><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="14">
+</span><span data-line="15"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+</span><span data-line="16">
+</span><span data-line="17"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+</span><span data-line="18">
+</span><span data-line="19"><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span data-line="20"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="21"><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.figure</span><span class="w"> </span><span class="kn">import</span> <span class="n">Figure</span>
+</span><span data-line="22"><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">auc</span><span class="p">,</span> <span class="n">roc_curve</span>
+</span><span data-line="23"><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">label_binarize</span>
+</span><span data-line="24">
+</span><span data-line="25">
+<div class="viewcode-block" id="plot_roc_curve">
+<a class="viewcode-back" href="../../../trainedml/roc.html#trainedml.viz.roc.plot_roc_curve">[docs]</a>
+</span><span data-line="26"><span class="k">def</span><span class="w"> </span><span class="nf">plot_roc_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">y_score</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">class_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Figure</span><span class="p">:</span>
+</span><span data-line="27"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="28"><span class="sd">    Plot the ROC curve (Receiver Operating Characteristic) for binary or</span>
+</span><span data-line="29"><span class="sd">    multiclass classification.</span>
+</span><span data-line="30">
+</span><span data-line="31"><span class="sd">    Parameters</span>
+</span><span data-line="32"><span class="sd">    ----------</span>
+</span><span data-line="33"><span class="sd">    y_true : array-like</span>
+</span><span data-line="34"><span class="sd">        True class labels.</span>
+</span><span data-line="35"><span class="sd">    y_score : array-like</span>
+</span><span data-line="36"><span class="sd">        Predicted scores. For binary classification, a 1-D array of scores</span>
+</span><span data-line="37"><span class="sd">        for the positive class (e.g. ``predict_proba(X)[:, 1]``). For</span>
+</span><span data-line="38"><span class="sd">        multiclass, a 2-D array of shape ``(n_samples, n_classes)`` (e.g.</span>
+</span><span data-line="39"><span class="sd">        the full output of ``predict_proba``): one curve is drawn per class</span>
+</span><span data-line="40"><span class="sd">        using a one-vs-rest strategy.</span>
+</span><span data-line="41"><span class="sd">    class_names : list, optional</span>
+</span><span data-line="42"><span class="sd">        Class names for the legend (multiclass only). Defaults to the</span>
+</span><span data-line="43"><span class="sd">        sorted unique values of ``y_true``.</span>
+</span><span data-line="44">
+</span><span data-line="45"><span class="sd">    Returns</span>
+</span><span data-line="46"><span class="sd">    -------</span>
+</span><span data-line="47"><span class="sd">    matplotlib.figure.Figure</span>
+</span><span data-line="48"><span class="sd">        The generated ROC curve figure.</span>
+</span><span data-line="49">
+</span><span data-line="50"><span class="sd">    Notes</span>
+</span><span data-line="51"><span class="sd">    -----</span>
+</span><span data-line="52"><span class="sd">    ROC AUC quantifies how well the model ranks positive examples above</span>
+</span><span data-line="53"><span class="sd">    negative ones, independently of any decision threshold: 0.5 is</span>
+</span><span data-line="54"><span class="sd">    equivalent to random guessing, 1.0 is a perfect ranking.</span>
+</span><span data-line="55">
+</span><span data-line="56"><span class="sd">    Examples</span>
+</span><span data-line="57"><span class="sd">    --------</span>
+</span><span data-line="58"><span class="sd">    Binary classification:</span>
+</span><span data-line="59">
+</span><span data-line="60"><span class="sd">    &gt;&gt;&gt; proba = trainer.model.model.predict_proba(X_test)[:, 1]</span>
+</span><span data-line="61"><span class="sd">    &gt;&gt;&gt; fig = plot_roc_curve(y_test, proba)</span>
+</span><span data-line="62">
+</span><span data-line="63"><span class="sd">    Multiclass (one-vs-rest):</span>
+</span><span data-line="64">
+</span><span data-line="65"><span class="sd">    &gt;&gt;&gt; proba = trainer.model.model.predict_proba(X_test)</span>
+</span><span data-line="66"><span class="sd">    &gt;&gt;&gt; fig = plot_roc_curve(y_test, proba)</span>
+</span><span data-line="67"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="68">    <span class="n">y_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_score</span><span class="p">)</span>
+</span><span data-line="69">    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</span><span data-line="70">
+</span><span data-line="71">    <span class="k">if</span> <span class="n">y_score</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span><span data-line="72">        <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_score</span><span class="p">)</span>
+</span><span data-line="73">        <span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+</span><span data-line="74">        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;ROC (AUC = </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span><span data-line="75">    <span class="k">else</span><span class="p">:</span>
+</span><span data-line="76">        <span class="n">classes</span> <span class="o">=</span> <span class="n">class_names</span> <span class="k">if</span> <span class="n">class_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">y_true</span><span class="p">))</span>
+</span><span data-line="77">        <span class="n">y_bin</span> <span class="o">=</span> <span class="n">label_binarize</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
+</span><span data-line="78">        <span class="k">if</span> <span class="n">y_bin</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+</span><span data-line="79">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span><span data-line="80">                <span class="sa">f</span><span class="s2">&quot;y_score has </span><span class="si">{</span><span class="n">y_score</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columns but </span><span class="si">{</span><span class="n">y_bin</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> classes &quot;</span>
+</span><span data-line="81">                <span class="sa">f</span><span class="s2">&quot;were found in y_true; pass class_names to disambiguate the order.&quot;</span>
+</span><span data-line="82">            <span class="p">)</span>
+</span><span data-line="83">        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">class_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">classes</span><span class="p">):</span>
+</span><span data-line="84">            <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_bin</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">y_score</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+</span><span data-line="85">            <span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+</span><span data-line="86">            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2"> (AUC = </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span><span data-line="87">
+</span><span data-line="88">    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Chance level (AUC = 0.5)&quot;</span><span class="p">)</span>
+</span><span data-line="89">    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;False positive rate&quot;</span><span class="p">)</span>
+</span><span data-line="90">    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;True positive rate&quot;</span><span class="p">)</span>
+</span><span data-line="91">    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;ROC curve&quot;</span><span class="p">)</span>
+</span><span data-line="92">    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+</span><span data-line="93">    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span data-line="94">    <span class="k">return</span> <span class="n">fig</span></div>
+
+</span></pre></div>
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Retour au sommet</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Yéro Diamanka</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/diamankayero/trainedml" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../../../_static/documentation_options.js?v=6ad53a97"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
+      <script src="../../../_static/translations.js?v=e6b791cb"></script>
+      <script src="../../../_static/shibuya.js?v=50760d75"></script></body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Régression : estimer une note continue - trainedml 0.2.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Vos données en mémoire" href="plot_vos_donnees_en_memoire.html" /><link rel="prev" title="Charger des données distantes" href="plot_donnees_distantes.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Régression : estimer une note continue - trainedml 0.3.0</title><link rel="shortcut icon" href="../../_static/logo.svg"/><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Recherche" href="../../search.html" /><link rel="next" title="Vos données en mémoire" href="plot_vos_donnees_en_memoire.html" /><link rel="prev" title="Hyperparamètres : réglage manuel et recherche automatique" href="plot_hyperparametres.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Données et modèles</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../trainedml/multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../trainedml/profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainedml/roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -135,6 +133,7 @@ data-aria-dark="Passer en mode automatique">
 <li><a class="reference internal" href="#modele-lineaire-contre-modele-non-lineaire">Mod&#232;le lin&#233;aire contre mod&#232;le non lin&#233;aire</a></li>
 <li><a class="reference internal" href="#interpreter-un-r2-modeste">Interpr&#233;ter un R&#178; modeste</a></li>
 <li><a class="reference internal" href="#modeles-de-regression-disponibles">Mod&#232;les de r&#233;gression disponibles</a></li>
+<li><a class="reference internal" href="#un-dataset-de-regression-integre-diabetes">Un dataset de r&#233;gression int&#233;gr&#233; : diabetes</a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -191,7 +190,7 @@ RMSE, MAE), et comparer un modèle linéaire à un modèle non linéaire.</p>
 </span></pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">task détecté : regression
-</span><span data-line="2">{&#39;r2&#39;: 0.5220332640953989, &#39;mse&#39;: 0.31235406250000003, &#39;rmse&#39;: 0.5588864486637692, &#39;mae&#39;: 0.42859374999999994}
+</span><span data-line="2">{&#39;r2&#39;: 0.5155729165110059, &#39;mse&#39;: 0.3165759375, &#39;rmse&#39;: 0.5626508131159147, &#39;mae&#39;: 0.43453125000000004}
 </span></pre></div>
 </div>
 <section id="modele-lineaire-contre-modele-non-lineaire">
@@ -205,7 +204,7 @@ quand le R² plafonne déjà autour de 0.5.</p>
 </span><span data-line="4"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R² linear                  : </span><span class="si">{</span><span class="n">trainer_lin</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()[</span><span class="s1">&#39;r2&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">R² random_forest_regressor : 0.522
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">R² random_forest_regressor : 0.516
 </span><span data-line="2">R² linear                  : 0.403
 </span></pre></div>
 </div>
@@ -233,11 +232,25 @@ Un R² autour de 0.5 sur ce type de cible n’est donc pas un échec.</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">linear                    -&gt; R²=0.403
 </span><span data-line="2">ridge                     -&gt; R²=0.403
 </span><span data-line="3">lasso                     -&gt; R²=-0.006
-</span><span data-line="4">random_forest_regressor   -&gt; R²=0.519
+</span><span data-line="4">random_forest_regressor   -&gt; R²=0.510
 </span><span data-line="5">knn_regressor             -&gt; R²=0.335
 </span></pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.167 seconds)</p>
+</section>
+<section id="un-dataset-de-regression-integre-diabetes">
+<h2>Un dataset de régression intégré : diabetes<a class="headerlink" href="#un-dataset-de-regression-integre-diabetes" title="Lien vers cette rubrique">#</a></h2>
+<p>Comme <code class="docutils literal notranslate"><span class="pre">iris</span></code>/<code class="docutils literal notranslate"><span class="pre">wine</span></code> pour la classification, <code class="docutils literal notranslate"><span class="pre">diabetes</span></code> (scikit-learn,
+aucun téléchargement) sert de jeu de données de régression prêt à l’emploi
+pour prototyper sans dépendre d’un CSV distant.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">trainer_diabetes</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;diabetes&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;random_forest_regressor&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">trainer_diabetes</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span><span data-line="3"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">diabetes :&quot;</span><span class="p">,</span> <span class="n">trainer_diabetes</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</span></pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">diabetes : {&#39;r2&#39;: 0.4427194190698045, &#39;mse&#39;: 2952.557084269663, &#39;rmse&#39;: 54.33743722581755, &#39;mae&#39;: 44.10235955056179}
+</span></pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.392 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-02-donnees-et-modeles-plot-regression-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/26fda0700b4c49023fbc045ae67e5069/plot_regression.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_regression.ipynb</span></code></a></p>
@@ -259,10 +272,10 @@ Un R² autour de 0.5 sur ce type de cible n’est donc pas un échec.</p>
   </svg>
   <span>Retour au sommet</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="plot_donnees_distantes.html">
+    <a href="plot_hyperparametres.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>Précédent</span><div class="title">Charger des données distantes</div></div>
+        <span>Précédent</span><div class="title">Hyperparamètres : réglage manuel et recherche automatique</div></div>
     </a>
   </div><div class="navigation-next">
     <a href="plot_vos_donnees_en_memoire.html">
@@ -296,7 +309,7 @@ Un R² autour de 0.5 sur ce type de cible n’est donc pas un échec.</p>
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>

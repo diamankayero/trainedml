@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:11.139** total execution time for 3 files **from auto_examples/03_production**:
+**00:10.970** total execution time for 3 files **from auto_examples/03_production**:
 
 .. container::
 
@@ -33,11 +33,11 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_03_production_plot_projet_complet.py` (``plot_projet_complet.py``)
-     - 00:10.681
+     - 00:10.562
      - 0.0
    * - :ref:`sphx_glr_auto_examples_03_production_plot_rigueur_et_reproductibilite.py` (``plot_rigueur_et_reproductibilite.py``)
-     - 00:00.256
+     - 00:00.233
      - 0.0
    * - :ref:`sphx_glr_auto_examples_03_production_plot_sauvegarder_et_deployer.py` (``plot_sauvegarder_et_deployer.py``)
-     - 00:00.202
+     - 00:00.175
      - 0.0

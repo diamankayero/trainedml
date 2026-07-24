@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Trainer (API principale) - trainedml 0.2.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="next" title="DataLoader" href="loader.html" /><link rel="prev" title="Projet complet : de bout en bout" href="../auto_examples/03_production/plot_projet_complet.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Trainer (API principale) - trainedml 0.3.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="next" title="DataLoader" href="loader.html" /><link rel="prev" title="Projet complet : de bout en bout" href="../auto_examples/03_production/plot_projet_complet.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/index.html">Données et modèles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -137,11 +135,19 @@ data-aria-dark="Passer en mode automatique">
 <li><a class="reference internal" href="#trainedml.Trainer.model"><code class="docutils literal notranslate"><span class="pre">Trainer.model</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.Trainer.preprocessor"><code class="docutils literal notranslate"><span class="pre">Trainer.preprocessor</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.Trainer.is_fitted"><code class="docutils literal notranslate"><span class="pre">Trainer.is_fitted</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.Trainer.best_params_"><code class="docutils literal notranslate"><span class="pre">Trainer.best_params_</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.Trainer.best_score_"><code class="docutils literal notranslate"><span class="pre">Trainer.best_score_</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.Trainer.confusion_matrix"><code class="docutils literal notranslate"><span class="pre">Trainer.confusion_matrix()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.Trainer.evaluate"><code class="docutils literal notranslate"><span class="pre">Trainer.evaluate()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.Trainer.feature_importances"><code class="docutils literal notranslate"><span class="pre">Trainer.feature_importances()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.Trainer.fit"><code class="docutils literal notranslate"><span class="pre">Trainer.fit()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.Trainer.grid_search"><code class="docutils literal notranslate"><span class="pre">Trainer.grid_search()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.Trainer.load"><code class="docutils literal notranslate"><span class="pre">Trainer.load()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.Trainer.load_data"><code class="docutils literal notranslate"><span class="pre">Trainer.load_data()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.Trainer.plot_feature_importances"><code class="docutils literal notranslate"><span class="pre">Trainer.plot_feature_importances()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.Trainer.predict"><code class="docutils literal notranslate"><span class="pre">Trainer.predict()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.Trainer.random_search"><code class="docutils literal notranslate"><span class="pre">Trainer.random_search()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.Trainer.roc_curve"><code class="docutils literal notranslate"><span class="pre">Trainer.roc_curve()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.Trainer.save"><code class="docutils literal notranslate"><span class="pre">Trainer.save()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.Trainer.task"><code class="docutils literal notranslate"><span class="pre">Trainer.task</span></code></a></li>
 </ul>
@@ -189,7 +195,7 @@ one line.</p>
 <h2>Main features<a class="headerlink" href="#main-features" title="Lien vers cette rubrique">#</a></h2>
 <ul class="simple">
 <li><p>High-level API to train, evaluate, and predict with an ML model</p></li>
-<li><p>Supports built-in datasets (Iris, Wine) or remote CSV files</p></li>
+<li><p>Supports built-in datasets (Iris, Wine, Diabetes) or remote CSV files</p></li>
 <li><p>Automatic preprocessing (imputation, standardization, one-hot encoding)</p></li>
 <li><p>Automatic train/test split, seed can vary without recreating the object</p></li>
 <li><p>Handles trainedml models (KNN, Logistic, Random Forest, regressors…)
@@ -222,7 +228,7 @@ Python script.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dataset</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of a built-in dataset (« iris », « wine »).</p></li>
+<li><p><strong>dataset</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of a built-in dataset (« iris », « wine », « diabetes »).</p></li>
 <li><p><strong>model</strong> (<em>str</em><em> or </em><em>object</em><em>, </em><em>default='random_forest'</em>) – Name of a trainedml model (« random_forest », « knn », « logistic »,
 « linear », « ridge », « lasso », …) <strong>or</strong> any estimator that has
 <code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">predict</span></code> methods (for example a scikit-learn
@@ -286,6 +292,29 @@ columns). The preprocessor is fit on the training set only.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trainedml.Trainer.best_params_">
+<span class="sig-name descname"><span class="pre">best_params_</span></span><a class="headerlink" href="#trainedml.Trainer.best_params_" title="Lien vers cette définition">#</a></dt>
+<dd><p>Best hyperparameters found by <a class="reference internal" href="#trainedml.Trainer.grid_search" title="trainedml.Trainer.grid_search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">grid_search()</span></code></a> or
+<a class="reference internal" href="#trainedml.Trainer.random_search" title="trainedml.Trainer.random_search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">random_search()</span></code></a> (<code class="docutils literal notranslate"><span class="pre">None</span></code> until one of them is called).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trainedml.Trainer.best_score_">
+<span class="sig-name descname"><span class="pre">best_score_</span></span><a class="headerlink" href="#trainedml.Trainer.best_score_" title="Lien vers cette définition">#</a></dt>
+<dd><p>Cross-validated score of <code class="docutils literal notranslate"><span class="pre">best_params_</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float or None</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p class="rubric">Exemples</p>
 <p>Standard workflow:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;iris&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;knn&quot;</span><span class="p">)</span>
@@ -312,6 +341,35 @@ columns). The preprocessor is fit on the training set only.</p></li>
 </span></pre></div>
 </div>
 <dl class="py method">
+<dt class="sig sig-object py" id="trainedml.Trainer.confusion_matrix">
+<span class="sig-name descname"><span class="pre">confusion_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.confusion_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.confusion_matrix" title="Lien vers cette définition">#</a></dt>
+<dd><p>Plot the confusion matrix of the trained model on the test set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>normalize</strong> (<em>{'true'</em><em>, </em><em>'pred'</em><em>, </em><em>'all'}</em><em>, </em><em>optional</em>) – Normalize counts over true labels (rows), predicted labels
+(columns), or the whole matrix. <code class="docutils literal notranslate"><span class="pre">None</span></code> (default) shows raw
+counts.</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>The generated confusion matrix figure.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>RuntimeError</strong> – If the model has not been trained.</p></li>
+<li><p><strong>ValueError</strong> – If the task is not classification.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="trainedml.Trainer.evaluate">
 <span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.evaluate" title="Lien vers cette définition">#</a></dt>
 <dd><p>Evaluate the trained model on the test data, with metrics adapted
@@ -328,6 +386,35 @@ regression (r2, mse, rmse, mae).</p>
 <dd class="field-odd"><p><strong>RuntimeError</strong> – If the model has not been trained.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.Trainer.feature_importances">
+<span class="sig-name descname"><span class="pre">feature_importances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pd.Series</span></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.feature_importances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.feature_importances" title="Lien vers cette définition">#</a></dt>
+<dd><p>Feature importance, sorted from most to least important.</p>
+<p>Uses the estimator’s native attribute when available
+(<code class="docutils literal notranslate"><span class="pre">feature_importances_</span></code> for tree-based models, the mean absolute
+<code class="docutils literal notranslate"><span class="pre">coef_</span></code> for linear models), and falls back to permutation
+importance otherwise (works for any model, including KNN and SVM,
+but is slower since it re-scores the model many times on the test
+set).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Importance per feature, indexed by feature name and sorted
+descending.</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.Series</p>
+</dd>
+<dt class="field-odd">Lève<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – If the model has not been trained.</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;random_forest&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">feature_importances</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</span></pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -351,6 +438,44 @@ Useful to check a model’s stability across splits:
 <dd class="field-odd"><p><a class="reference internal" href="#trainedml.Trainer" title="trainedml.Trainer">Trainer</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.Trainer.grid_search">
+<span class="sig-name descname"><span class="pre">grid_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param_grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pd.DataFrame</span></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.grid_search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.grid_search" title="Lien vers cette définition">#</a></dt>
+<dd><p>Exhaustively search hyperparameters by cross-validated grid search.</p>
+<p>Every combination of <code class="docutils literal notranslate"><span class="pre">param_grid</span></code> is tried; the model is
+re-trained on the full training set with the best combination found
+(and <code class="docutils literal notranslate"><span class="pre">self.model_params</span></code>, <code class="docutils literal notranslate"><span class="pre">self.best_params_</span></code>, <code class="docutils literal notranslate"><span class="pre">self.best_score_</span></code>
+are updated), so the <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> is immediately ready for
+<a class="reference internal" href="#trainedml.Trainer.evaluate" title="trainedml.Trainer.evaluate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">evaluate()</span></code></a> / <a class="reference internal" href="#trainedml.Trainer.predict" title="trainedml.Trainer.predict"><code class="xref py py-meth docutils literal notranslate"><span class="pre">predict()</span></code></a> afterward.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>param_grid</strong> (<em>dict</em>) – <code class="docutils literal notranslate"><span class="pre">{hyperparameter_name:</span> <span class="pre">[values</span> <span class="pre">to</span> <span class="pre">try]}</span></code>, using the same bare
+parameter names as <code class="docutils literal notranslate"><span class="pre">model_params</span></code> (no <code class="docutils literal notranslate"><span class="pre">model__</span></code> prefix
+needed).</p></li>
+<li><p><strong>cv</strong> (<em>int</em><em>, </em><em>default=5</em>) – Number of cross-validation folds.</p></li>
+<li><p><strong>scoring</strong> (<em>str</em><em>, </em><em>optional</em>) – A scikit-learn scoring name (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;f1_macro&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;r2&quot;</span></code>).
+Defaults to the estimator’s own scorer (accuracy for
+classification, R² for regression).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>One row per combination tried, sorted by rank (best first):
+the parameters, mean/std test score, and mean fit time.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;knn&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">grid_search</span><span class="p">({</span><span class="s2">&quot;n_neighbors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]})</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">evaluate</span><span class="p">())</span>
+</span></pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -410,6 +535,27 @@ which lets you vary the split without recreating the Trainer.</p></li>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="trainedml.Trainer.plot_feature_importances">
+<span class="sig-name descname"><span class="pre">plot_feature_importances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.plot_feature_importances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.plot_feature_importances" title="Lien vers cette définition">#</a></dt>
+<dd><p>Bar chart of <a class="reference internal" href="#trainedml.Trainer.feature_importances" title="trainedml.Trainer.feature_importances"><code class="xref py py-meth docutils literal notranslate"><span class="pre">feature_importances()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>top_n</strong> (<em>int</em><em>, </em><em>optional</em>) – If given, only the <code class="docutils literal notranslate"><span class="pre">top_n</span></code> most important features are shown.</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>The generated bar chart.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span><span class="o">.</span><span class="n">plot_feature_importances</span><span class="p">(</span><span class="n">top_n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="trainedml.Trainer.predict">
 <span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">np.ndarray</span></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.predict" title="Lien vers cette définition">#</a></dt>
 <dd><p>Predict the target for new data X.</p>
@@ -429,6 +575,75 @@ X must contain the same features (same columns) as the training data.</p>
 <dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.Trainer.random_search">
+<span class="sig-name descname"><span class="pre">random_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param_distributions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pd.DataFrame</span></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.random_search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.random_search" title="Lien vers cette définition">#</a></dt>
+<dd><p>Search hyperparameters by cross-validated random sampling.</p>
+<p>Draws <code class="docutils literal notranslate"><span class="pre">n_iter</span></code> random combinations from <code class="docutils literal notranslate"><span class="pre">param_distributions</span></code>
+instead of trying every combination: a practical middle ground when
+<a class="reference internal" href="#trainedml.Trainer.grid_search" title="trainedml.Trainer.grid_search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">grid_search()</span></code></a>”s exhaustive search would be too slow (many
+hyperparameters, or wide ranges). The model is re-trained on the
+full training set with the best combination found, exactly like
+<a class="reference internal" href="#trainedml.Trainer.grid_search" title="trainedml.Trainer.grid_search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">grid_search()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>param_distributions</strong> (<em>dict</em>) – <code class="docutils literal notranslate"><span class="pre">{hyperparameter_name:</span> <span class="pre">values</span> <span class="pre">or</span> <span class="pre">a</span> <span class="pre">scipy.stats</span> <span class="pre">distribution}</span></code>,
+same bare parameter names as <code class="docutils literal notranslate"><span class="pre">model_params</span></code>.</p></li>
+<li><p><strong>n_iter</strong> (<em>int</em><em>, </em><em>default=20</em>) – Number of random combinations to try.</p></li>
+<li><p><strong>cv</strong> (<em>int</em><em>, </em><em>default=5</em>) – Number of cross-validation folds.</p></li>
+<li><p><strong>scoring</strong> (<em>str</em><em>, </em><em>optional</em>) – A scikit-learn scoring name. Defaults to the estimator’s own
+scorer.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – Random seed for sampling combinations. Defaults to the
+<code class="docutils literal notranslate"><span class="pre">Trainer</span></code>’s own <code class="docutils literal notranslate"><span class="pre">seed</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>One row per combination tried, sorted by rank (best first).</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="s2">&quot;wine&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;random_forest&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">random_search</span><span class="p">(</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="p">{</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]},</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="n">n_iter</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+</span><span data-line="5"><span class="gp">... </span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.Trainer.roc_curve">
+<span class="sig-name descname"><span class="pre">roc_curve</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="../_modules/trainedml.html#Trainer.roc_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.Trainer.roc_curve" title="Lien vers cette définition">#</a></dt>
+<dd><p>Plot the ROC curve (and AUC) of the trained model on the test set.</p>
+<p>Binary classification draws a single curve; multiclass draws one
+curve per class using a one-vs-rest strategy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The generated ROC curve figure.</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>matplotlib.figure.Figure</p>
+</dd>
+<dt class="field-odd">Lève<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>RuntimeError</strong> – If the model has not been trained.</p></li>
+<li><p><strong>ValueError</strong> – If the task is not classification.</p></li>
+<li><p><strong>AttributeError</strong> – If the estimator exposes neither <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> nor
+    <code class="docutils literal notranslate"><span class="pre">decision_function</span></code> (needed to rank predictions).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">trainer</span><span class="o">.</span><span class="n">roc_curve</span><span class="p">()</span>
+</span></pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -469,7 +684,7 @@ information leakage.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dataset</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of a built-in dataset (« iris », « wine »).</p></li>
+<li><p><strong>dataset</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of a built-in dataset (« iris », « wine », « diabetes »).</p></li>
 <li><p><strong>url</strong> (<em>str</em><em>, </em><em>optional</em>) – URL of a remote CSV (requires <code class="docutils literal notranslate"><span class="pre">target</span></code>).</p></li>
 <li><p><strong>target</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the target column (if <code class="docutils literal notranslate"><span class="pre">url</span></code>).</p></li>
 <li><p><strong>X</strong> (<em>pandas.DataFrame</em><em> or </em><em>array-like</em><em>, </em><em>optional</em>) – Features provided directly in memory (alternative to dataset/url).</p></li>
@@ -558,7 +773,7 @@ suited to the detected task.</p></li>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/sg-tags.js?v=d80f6fa4"></script>

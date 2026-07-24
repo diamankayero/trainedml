@@ -2,7 +2,7 @@
 <html lang="fr" data-accent-color="grass" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Visualizer - trainedml 0.2.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="next" title="DataAnalyzer" href="analyzer.html" /><link rel="prev" title="Random Forest" href="models/random_forest.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Visualizer - trainedml 0.3.0</title><link rel="shortcut icon" href="../_static/logo.svg"/><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Recherche" href="../search.html" /><link rel="next" title="DataAnalyzer" href="analyzer.html" /><link rel="prev" title="Random Forest" href="models/random_forest.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -71,10 +71,11 @@ data-aria-dark="Passer en mode automatique">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/index.html">Données et modèles</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres et modèles externes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_diagnostics.html">Diagnostiquer un modèle de classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_explorer_avant_de_modeliser.html">Explorer avant de modéliser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_donnees_distantes.html">Charger des données distantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_choisir_son_modele.html">Comparer et choisir un modèle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_hyperparametres.html">Hyperparamètres : réglage manuel et recherche automatique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_regression.html">Régression : estimer une note continue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/02_donnees_et_modeles/plot_vos_donnees_en_memoire.html">Vos données en mémoire</a></li>
 </ul>
@@ -110,16 +111,13 @@ data-aria-dark="Passer en mode automatique">
 <li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="distribution.html">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="correlation.html">Correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="missing.html">Missing Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="outliers.html">Outliers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="target.html">Target</a></li>
-<li class="toctree-l1"><a class="reference internal" href="boxplot.html">Boxplot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bivariate.html">Bivariate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="normality.html">Normality</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multicollinearity.html">Multicollinearity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="profiling.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confusion.html">Confusion matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roc.html">ROC curve</a></li>
 </ul>
 
         </div>
@@ -148,6 +146,10 @@ data-aria-dark="Passer en mode automatique">
 <li><a class="reference internal" href="#trainedml.visualization.Visualizer.multicollinearity"><code class="docutils literal notranslate"><span class="pre">Visualizer.multicollinearity()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.visualization.Visualizer.normality"><code class="docutils literal notranslate"><span class="pre">Visualizer.normality()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.visualization.Visualizer.outliers"><code class="docutils literal notranslate"><span class="pre">Visualizer.outliers()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.visualization.Visualizer.plot_multicollinearity"><code class="docutils literal notranslate"><span class="pre">Visualizer.plot_multicollinearity()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.visualization.Visualizer.plot_normality"><code class="docutils literal notranslate"><span class="pre">Visualizer.plot_normality()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.visualization.Visualizer.plot_outliers"><code class="docutils literal notranslate"><span class="pre">Visualizer.plot_outliers()</span></code></a></li>
+<li><a class="reference internal" href="#trainedml.visualization.Visualizer.plot_target"><code class="docutils literal notranslate"><span class="pre">Visualizer.plot_target()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.visualization.Visualizer.profiling"><code class="docutils literal notranslate"><span class="pre">Visualizer.profiling()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.visualization.Visualizer.report"><code class="docutils literal notranslate"><span class="pre">Visualizer.report()</span></code></a></li>
 <li><a class="reference internal" href="#trainedml.visualization.Visualizer.target"><code class="docutils literal notranslate"><span class="pre">Visualizer.target()</span></code></a></li>
@@ -195,6 +197,9 @@ various types of plots and exploratory data analyses from a pandas DataFrame.</p
 <li><p>Histograms</p></li>
 <li><p>Line plots</p></li>
 <li><p>Exploratory analyses (distribution, correlation, missing values, outliers, target, boxplots, bivariate, normality, multicollinearity, profiling)</p></li>
+<li><p>Companion plots for outliers, normality, multicollinearity, and the
+target’s distribution (<code class="docutils literal notranslate"><span class="pre">plot_outliers</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_normality</span></code>,
+<code class="docutils literal notranslate"><span class="pre">plot_multicollinearity</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_target</span></code>)</p></li>
 </ul>
 <p class="rubric">Exemples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">trainedml.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">Visualizer</span>
@@ -221,6 +226,8 @@ clarity, flexibility, and extensibility.</p>
 <li><p>Line plots (any two columns)</p></li>
 <li><p>Boxplots, bivariate plots, target analysis</p></li>
 <li><p>Full exploratory analysis: distribution, missing values, outliers, normality, VIF, profiling</p></li>
+<li><p>Companion plots for outliers, normality (QQ-plots), multicollinearity
+(VIF bar chart), and the target’s distribution</p></li>
 <li><p>All methods return matplotlib Figure or pandas objects for further customization</p></li>
 </ul>
 <dl class="field-list simple">
@@ -633,6 +640,98 @@ Returns a dictionary with outlier values per column.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.plot_multicollinearity">
+<span class="sig-name descname"><span class="pre">plot_multicollinearity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="../_modules/trainedml/visualization.html#Visualizer.plot_multicollinearity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.plot_multicollinearity" title="Lien vers cette définition">#</a></dt>
+<dd><p>Bar chart of the Variance Inflation Factor (VIF) per feature.</p>
+<p>A complement to <a class="reference internal" href="#trainedml.visualization.Visualizer.multicollinearity" title="trainedml.visualization.Visualizer.multicollinearity"><code class="xref py py-meth docutils literal notranslate"><span class="pre">multicollinearity()</span></code></a> (which returns the same
+values as data).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The generated VIF bar chart.</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">plot_multicollinearity</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.plot_normality">
+<span class="sig-name descname"><span class="pre">plot_normality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="../_modules/trainedml/visualization.html#Visualizer.plot_normality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.plot_normality" title="Lien vers cette définition">#</a></dt>
+<dd><p>QQ-plots (quantile-quantile against the normal distribution), one
+panel per numeric column.</p>
+<p>A complement to <a class="reference internal" href="#trainedml.visualization.Visualizer.normality" title="trainedml.visualization.Visualizer.normality"><code class="xref py py-meth docutils literal notranslate"><span class="pre">normality()</span></code></a> (which returns test statistics as
+data): a QQ-plot makes departures from normality visually obvious
+(curvature, heavy tails) in a way p-values alone do not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>columns</strong> (<em>'all'</em><em> or </em><em>list</em><em>, </em><em>default='all'</em>) – Columns to plot.</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>The generated QQ-plot grid.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">plot_normality</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">])</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.plot_outliers">
+<span class="sig-name descname"><span class="pre">plot_outliers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="../_modules/trainedml/visualization.html#Visualizer.plot_outliers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.plot_outliers" title="Lien vers cette définition">#</a></dt>
+<dd><p>Boxplot grid highlighting outliers, one panel per numeric column.</p>
+<p>A complement to <a class="reference internal" href="#trainedml.visualization.Visualizer.outliers" title="trainedml.visualization.Visualizer.outliers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">outliers()</span></code></a> (which returns counts and bounds
+as data): this draws the same IQR-based outliers visually.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The generated boxplot grid.</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">plot_outliers</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="trainedml.visualization.Visualizer.plot_target">
+<span class="sig-name descname"><span class="pre">plot_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Figure</span></span></span><a class="reference internal" href="../_modules/trainedml/visualization.html#Visualizer.plot_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.plot_target" title="Lien vers cette définition">#</a></dt>
+<dd><p>Plot the target variable’s distribution (bar chart for a categorical
+target, histogram for a numeric one).</p>
+<p>A complement to <a class="reference internal" href="#trainedml.visualization.Visualizer.target" title="trainedml.visualization.Visualizer.target"><code class="xref py py-meth docutils literal notranslate"><span class="pre">target()</span></code></a> (which returns counts as data).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>target_column</strong> (<em>str</em>) – Name of the target column.</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>The generated distribution plot.</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+<p class="rubric">Exemples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">plot_target</span><span class="p">(</span><span class="n">target_column</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="trainedml.visualization.Visualizer.profiling">
 <span class="sig-name descname"><span class="pre">profiling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/trainedml/visualization.html#Visualizer.profiling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trainedml.visualization.Visualizer.profiling" title="Lien vers cette définition">#</a></dt>
 <dd><p>Automatic profiling (global report).</p>
@@ -757,7 +856,7 @@ Returns a dictionary with summary statistics and plots.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="../_static/documentation_options.js?v=6ad53a97"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/sg-tags.js?v=d80f6fa4"></script>

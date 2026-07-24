@@ -66,7 +66,7 @@ colonne géante.
 
  .. code-block:: none
 
-    0.00B [00:00, ?B/s]    0.00B [00:00, ?B/s]    0.00B [00:00, ?B/s]
+    0.00B [00:00, ?B/s]    37.9kB [00:00, 212kB/s]    0.00B [00:00, ?B/s]        0.00B [00:00, ?B/s]
     Colonnes : ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar', 'chlorides', 'free sulfur dioxide', 'total sulfur dioxide', 'density', 'pH', 'sulphates', 'alcohol']
     Forme : (1599, 11)
 
@@ -110,8 +110,10 @@ partir du nombre de valeurs distinctes.
     7    199
     8     18
     Name: count, dtype: int64
+    /home/runner/work/trainedml/trainedml/examples/02_donnees_et_modeles/plot_donnees_distantes.py:36: UserWarning: Imbalanced classes: np.int64(5) has 551 samples versus 9 for np.int64(3) (ratio 61.2:1). Accuracy alone can be misleading here: check precision/recall per class, and consider model_params={'class_weight': 'balanced'} for models that support it (random_forest, logistic).
+      trainer.fit()
     task détecté : classification
-    {'accuracy': 0.646875, 'precision': 0.6153527248236289, 'recall': 0.646875, 'f1': 0.6282701382581657}
+    {'accuracy': 0.653125, 'precision': 0.6211030621775485, 'recall': 0.653125, 'f1': 0.6350029976019185}
 
 
 
@@ -137,7 +139,7 @@ Comparer avec un second fichier
 
  .. code-block:: none
 
-    0.00B [00:00, ?B/s]    161kB [00:00, 1.50MB/s]    0.00B [00:00, ?B/s]        0.00B [00:00, ?B/s]
+    0.00B [00:00, ?B/s]    37.9kB [00:00, 212kB/s]    161kB [00:00, 488kB/s]     0.00B [00:00, ?B/s]       0.00B [00:00, ?B/s]
     Échantillons rouges : 1599  -  blancs : 4898
 
 
@@ -146,7 +148,7 @@ Comparer avec un second fichier
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.923 seconds)
+   **Total running time of the script:** (0 minutes 2.129 seconds)
 
 
 .. _sphx_glr_download_auto_examples_02_donnees_et_modeles_plot_donnees_distantes.py:
